@@ -1,9 +1,9 @@
+import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LabeledInputField<T> extends StatelessWidget {
+class LabeledInputField<T> extends StatefulWidget {
   final TextEditingController _controller;
   final EdgeInsets padding;
   final String? hint;
@@ -49,78 +49,77 @@ class LabeledInputField<T> extends StatelessWidget {
   });
 
   @override
+  _LabeledInputFieldState<T> createState() => _LabeledInputFieldState<T>();
+}
+
+class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
+  FocusNode focusNode = FocusNode();
+  bool hasFocus = false;
+
+  @override
+  void initState() {
+    focusNode.addListener(() {
+      setState(() {
+        hasFocus = focusNode.hasFocus;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: widget.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              spaceBig,
-              0,
-              spaceBig,
-              spaceSmall,
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: hasFocus ? grease : borderColor,
+              ),
+              borderRadius: BorderRadius.circular(6),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? white
-                        : textContentColor,
-                  ),
+            padding: const EdgeInsets.all(spaceSmall),
+            child: TextField(
+              controller: widget._controller,
+              obscureText: widget.isPassword,
+              keyboardType: widget.inputType,
+              maxLength: widget.maxLength,
+              minLines: widget.minLines,
+              maxLines: widget.minLines,
+              style: widget.style ?? TextStyle(color: textContentColor),
+              textAlign: widget.textAlign,
+              textInputAction: widget.textInputAction,
+              textCapitalization: widget.textCapitalization,
+              autocorrect: widget.autocorrect,
+              focusNode: focusNode,
+              decoration: InputDecoration(
+                isDense: true,
+                counter: SizedBox(),
+                prefix: widget.prefix,
+                suffixIcon: widget.suffix,
+                enabled: widget.isEnabled,
+                labelText: widget.label,
+                labelStyle: context.styleCaption.copyWith(
+                  color: grease.withOpacity(0.5),
                 ),
-                SizedBox(
-                  width: spaceSmall,
-                ),
-                showOptionalLabel
-                    ? Text(
-                        "txt_optional".tr(),
-                        style: TextStyle(
-                            fontSize: textSizeCaption,
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? white
-                                    : borderColor),
-                      )
-                    : SizedBox(),
-              ],
-            ),
-          ),
-          TextField(
-            controller: _controller,
-            obscureText: isPassword,
-            keyboardType: inputType,
-            maxLength: maxLength,
-            minLines: minLines,
-            maxLines: minLines,
-            style: style ?? TextStyle(color: textContentColor),
-            textAlign: textAlign,
-            textInputAction: textInputAction,
-            textCapitalization: textCapitalization,
-            autocorrect: autocorrect,
-            focusNode: focusNode,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: spaceBig),
-              counter: SizedBox(),
-              prefix: prefix,
-              suffixIcon: suffix,
-              filled: true,
-              fillColor: inputColor,
-              enabled: isEnabled,
-              labelText: label,
-              hintText: hint,
-              hintMaxLines: 4,
-              errorText: error,
-              errorMaxLines: 4,
-              border: createBorder(transparent),
-              enabledBorder: createBorder(transparent),
-              focusedBorder: createBorder(grease),
-              errorBorder: createBorder(red),
+                hintText: widget.hint,
+                hintMaxLines: 4,
+                errorText: widget.error,
+                errorMaxLines: 4,
+                contentPadding: EdgeInsets.zero,
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                // errorBorder: createBorder(red),
+              ),
             ),
           ),
         ],
@@ -128,7 +127,7 @@ class LabeledInputField<T> extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder createBorder(Color color) {
+  InputBorder createBorder(Color color) {
     return OutlineInputBorder(
       borderSide: BorderSide(color: color),
       borderRadius: const BorderRadius.all(Radius.circular(30)),

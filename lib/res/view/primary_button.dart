@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:amirta_mobile/res/resources.dart';
+import 'package:amirta_mobile/my_material.dart';
 
 class PrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -24,13 +23,18 @@ class PrimaryButton extends StatelessWidget {
         child: TextButton(
           onPressed: isEnabled ? onPressed : null,
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(StadiumBorder()),
-            backgroundColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.disabled)) {
-                return grey;
-              }
-              return red;
-            }),
+            padding: MaterialStateProperty.all(EdgeInsets.zero),
+            // shape: MaterialStateProperty.all(
+            //   RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(buttonRadius),
+            //   ),
+            // ),
+            // backgroundColor: MaterialStateProperty.resolveWith((states) {
+            //   if (states.contains(MaterialState.disabled)) {
+            //     return grey;
+            //   }
+            //   return red;
+            // }),
             foregroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
                 return darkerGrey;
@@ -38,13 +42,31 @@ class PrimaryButton extends StatelessWidget {
               return white;
             }),
           ),
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: white,
-                  letterSpacing: buttonTextLetterSpacing,
+          child: Ink(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(buttonRadius),
+              color: isEnabled ? null : inputDisabledColor,
+              gradient: isEnabled == false
+                  ? null
+                  : LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        gradientTop,
+                        gradientBottom,
+                      ],
+                    ),
+            ),
+            child: Container(
+              width: double.infinity,
+              height: buttonDefaultHeight,
+              child: Center(
+                child: Text(
+                  text,
+                  style: context.styleButton,
                 ),
+              ),
+            ),
           ),
         ),
       ),

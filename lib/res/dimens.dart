@@ -17,7 +17,7 @@ const textSizeOverline = 8.0;
 
 const double buttonBottomHeight = 60.0;
 const double buttonDefaultHeight = 48.0;
-const double buttonRadius = 9.0;
+const double buttonRadius = 6.0;
 const double buttonTextLetterSpacing = 1.1;
 const double buttonHorizontalPadding = 16.0;
 const double buttonVerticalPadding = 8.0;
@@ -32,6 +32,7 @@ const double cardRadius = 20.0;
 
 const double spaceTiny = 5.0;
 const double spaceSmall = 8.0;
+const double spaceNormal = 12.0;
 const double spaceMedium = 16.0;
 const double spaceBig = 24.0;
 const double spaceHuge = 32.0;

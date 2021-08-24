@@ -6,6 +6,8 @@ import 'package:amirta_mobile/res/colors.dart';
 
 const TextTheme customTextTheme = TextTheme(
   headline1: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: textSizeHeadline1,
     inherit: true,
     color: grease,
   ),
@@ -72,13 +74,6 @@ const TextTheme customTextTheme = TextTheme(
     inherit: true,
     height: 1.333,
   ),
-  button: TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: textSizeBody1,
-    color: white,
-    inherit: true,
-    height: 1.25,
-  ),
   overline: TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: textSizeOverline,
@@ -86,5 +81,13 @@ const TextTheme customTextTheme = TextTheme(
     color: grease,
     height: 1.25,
     letterSpacing: 0,
+  ),
+  button: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: textSizeBody1,
+    color: white,
+    inherit: true,
+    height: 1.25,
+    letterSpacing: buttonTextLetterSpacing,
   ),
 );

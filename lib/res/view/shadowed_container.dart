@@ -10,6 +10,7 @@ class ShadowedContainer extends StatelessWidget {
   final EdgeInsets padding;
   final EdgeInsets margin;
   final double borderRadius;
+  final BorderRadius? borderRadiusObject;
   final double? height;
   final double? width;
   final bool hideShadow;
@@ -24,6 +25,7 @@ class ShadowedContainer extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
     this.borderRadius = 0,
+    this.borderRadiusObject,
     this.height,
     this.width,
     this.hideShadow = false,
@@ -37,7 +39,7 @@ class ShadowedContainer extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: borderRadiusObject ?? BorderRadius.circular(borderRadius),
         color: backgroundColor,
         boxShadow: hideShadow
             ? []

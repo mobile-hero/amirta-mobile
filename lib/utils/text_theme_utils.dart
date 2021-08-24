@@ -36,4 +36,12 @@ extension TextThemeHelper on BuildContext {
   TextStyle get styleHeadline5 {
     return Theme.of(this).textTheme.headline5!;
   }
+  
+  TextStyle get styleHeadline4 {
+    return Theme.of(this).textTheme.headline4!;
+  }
+  
+  TextStyle get styleHeadline1 {
+    return Theme.of(this).textTheme.headline1!;
+  }
 }

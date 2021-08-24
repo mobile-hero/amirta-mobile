@@ -5,6 +5,7 @@ const black = Colors.black;
 const transparent = Colors.transparent;
 
 const egyptian = Color(0xFF3736A5);
+const egyptian2 = Color(0xFF2A2971);
 const waterfall = Color(0xFF81D6C6);
 const forest = Color(0xFF48A368);
 const grease = Color(0xFF393858);
@@ -27,16 +28,15 @@ const lightGrey = Color(0xFFF4F4F4);
 const accentColor = Color(0xFF5C6170);
 
 const gradientTop = egyptian;
-const gradientBottom = grease;
-
-const statusGreen = Color(0xFF17C925);
+const gradientBottom = egyptian2;
 
 Color shadowBoxColor = Color(0x7090B01F);
+Color backgroundColor = Color(0xFFF9FAFF);
 const textTitleColor = Color(0xFF7E7E7E);
 const textContentColor = Color(0xFF5C5E62);
 const textItalicColor = Color(0xFF4A90E2);
-const inputDisabledColor = Color(0xFFECEFF4);
+const inputDisabledColor = Color(0xFFD3D3DD);
 const inputColor = Color(0xFFF5F5F5);
-const borderColor = Color(0xFFC4C4C4);
+const borderColor = Color(0xFFC5C5E5);
 const buttonOutlineColor = Color(0xFFACACAC);
 const darkBackground = Color(0xFF2F302F);

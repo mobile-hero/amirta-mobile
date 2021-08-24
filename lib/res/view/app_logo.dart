@@ -26,6 +26,7 @@ class AppLogo extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       child: SvgPicture.asset(
         imageRes('logo_amirta_alt.svg'),
+        color: white,
       ),
     );
   }
