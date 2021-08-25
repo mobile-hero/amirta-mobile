@@ -4,6 +4,7 @@ import 'package:amirta_mobile/ui/main/main_screen.dart';
 import 'package:amirta_mobile/ui/notification/notification_screen.dart';
 import 'package:amirta_mobile/ui/profile/profile_screen.dart';
 import 'package:amirta_mobile/ui/splash/splash_screen.dart';
+import 'package:amirta_mobile/ui/water/water_form_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'my_material.dart';
@@ -38,8 +39,9 @@ class MyApp extends StatelessWidget {
         '/main': (context) => MainScreen(),
         '/notification': (context) => NotificationScreen(),
         '/profile': (context) => ProfileScreen(),
+        '/water': (context) => WaterFormScreen(),
       },
-      initialRoute: "/home",
+      initialRoute: "/water",
     );
   }
 }

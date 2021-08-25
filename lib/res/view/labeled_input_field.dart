@@ -12,6 +12,7 @@ class LabeledInputField<T> extends StatefulWidget {
   final bool isPassword;
   final TextInputType inputType;
   final bool isEnabled;
+  final bool readOnly;
   final Widget? prefix;
   final Widget? suffix;
   final int? maxLength;
@@ -24,6 +25,7 @@ class LabeledInputField<T> extends StatefulWidget {
   final bool autocorrect;
   final bool showOptionalLabel;
   final FocusNode? focusNode;
+  final VoidCallback? onTap;
 
   const LabeledInputField(
     this._controller, {
@@ -34,6 +36,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.isPassword = false,
     this.inputType = TextInputType.text,
     this.isEnabled = true,
+    this.readOnly = false,
     this.prefix,
     this.suffix,
     this.maxLength,
@@ -46,6 +49,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.autocorrect = false,
     this.showOptionalLabel = false,
     this.focusNode,
+    this.onTap,
   });
 
   @override
@@ -101,6 +105,8 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                 textInputAction: widget.textInputAction,
                 textCapitalization: widget.textCapitalization,
                 autocorrect: widget.autocorrect,
+                readOnly: widget.readOnly,
+                onTap: widget.onTap,
                 focusNode: focusNode,
                 decoration: InputDecoration(
                   isDense: true,
