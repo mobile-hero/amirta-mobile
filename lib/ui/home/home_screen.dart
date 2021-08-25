@@ -25,32 +25,42 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network(
-                          "https://img.icons8.com/bubbles/2x/user.png",
-                          width: 80,
-                          height: 80,
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/profile');
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            "https://img.icons8.com/bubbles/2x/user.png",
+                            width: 80,
+                            height: 80,
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Muhammad Ikhsan",
-                              style: context.styleBody2.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: white,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/profile');
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Muhammad Ikhsan",
+                                style: context.styleBody2.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "1234567890",
-                              style: context.styleBody2.copyWith(
-                                color: white.withOpacity(0.5),
+                              Text(
+                                "1234567890",
+                                style: context.styleBody2.copyWith(
+                                  color: white.withOpacity(0.5),
+                                ),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       IconButton(
@@ -60,7 +70,9 @@ class HomeScreen extends StatelessWidget {
                           width: imgSizeNormal,
                           color: white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/notification');
+                        },
                       ),
                     ],
                   ),

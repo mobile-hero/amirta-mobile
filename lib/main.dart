@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/ui/home/home_screen.dart';
 import 'package:amirta_mobile/ui/login/login_screen.dart';
 import 'package:amirta_mobile/ui/main/main_screen.dart';
+import 'package:amirta_mobile/ui/notification/notification_screen.dart';
+import 'package:amirta_mobile/ui/profile/profile_screen.dart';
 import 'package:amirta_mobile/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/home': (context) => HomeScreen(),
         '/main': (context) => MainScreen(),
+        '/notification': (context) => NotificationScreen(),
+        '/profile': (context) => ProfileScreen(),
       },
       initialRoute: "/home",
     );

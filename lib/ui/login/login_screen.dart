@@ -2,7 +2,22 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/res/view/shadowed_container.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final nrkController = TextEditingController();
+  final passwordController = TextEditingController();
+  
+  @override
+  void dispose() {
+    nrkController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +51,16 @@ class LoginPage extends StatelessWidget {
                     height: spaceMedium,
                   ),
                   LabeledInputField(
-                    TextEditingController(),
+                    nrkController,
                     label: "NRK",
                   ),
                   LabeledInputField(
-                    TextEditingController(),
+                    passwordController,
                     label: "Password",
+                    isPassword: true,
                   ),
                   PrimaryButton(
-                      () {},
+                    () {},
                     "Submit",
                   ),
                   const SizedBox(

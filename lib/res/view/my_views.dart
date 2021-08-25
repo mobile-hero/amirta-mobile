@@ -8,3 +8,4 @@ export 'primary_button.dart';
 export 'bottom_ellipse_clipper.dart';
 export 'bottom_ellipse_painter.dart';
 export 'shadowed_container.dart';
+export 'logout_button.dart';
