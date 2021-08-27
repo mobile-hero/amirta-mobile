@@ -23,17 +23,6 @@ class ImageButton extends StatelessWidget {
           onPressed: isEnabled ? onPressed : null,
           style: ButtonStyle(
             padding: MaterialStateProperty.all(EdgeInsets.zero),
-            // shape: MaterialStateProperty.all(
-            //   RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(buttonRadius),
-            //   ),
-            // ),
-            // backgroundColor: MaterialStateProperty.resolveWith((states) {
-            //   if (states.contains(MaterialState.disabled)) {
-            //     return grey;
-            //   }
-            //   return red;
-            // }),
             foregroundColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.disabled)) {
                 return darkerGrey;

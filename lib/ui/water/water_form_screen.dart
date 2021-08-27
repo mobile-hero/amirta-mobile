@@ -1,4 +1,7 @@
 import 'package:amirta_mobile/my_material.dart';
+import 'package:amirta_mobile/ui/bottomsheet/rounded_bottomsheet.dart';
+import 'package:amirta_mobile/ui/water/water_appbar.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class WaterFormScreen extends StatefulWidget {
   @override
@@ -13,26 +16,19 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
   final lantaiController = TextEditingController();
   final numberController = TextEditingController();
 
+  final PagingController<int, String> pagingController =
+      PagingController(firstPageKey: 0);
+
+  @override
+  void initState() {
+    pagingController.appendLastPage(['1', '2', '3', '4', '5', '6']);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              imageRes('ic_air_topbar.png'),
-              height: 20,
-              width: 20,
-            ),
-            const SizedBox(
-              width: spaceNormal,
-            ),
-            Text('Air'),
-          ],
-        ),
-        centerTitle: true,
-      ),
+      appBar: WaterAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(spaceMedium),
         child: Column(
@@ -71,6 +67,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
             Row(
               children: [
                 Expanded(
+                  flex: 2,
                   child: LabeledInputField(
                     monthController,
                     label: "Bulan",
@@ -80,6 +77,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                   width: spaceNormal,
                 ),
                 Expanded(
+                  flex: 2,
                   child: LabeledInputField(
                     yearController,
                     label: "Tahun",
@@ -88,9 +86,12 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                 const SizedBox(
                   width: spaceNormal,
                 ),
-                ImageButton(
-                  () {},
-                  Icon(Icons.cloud_download_outlined),
+                Expanded(
+                  flex: 1,
+                  child: ImageButton(
+                    () {},
+                    Icon(Icons.cloud_download_outlined),
+                  ),
                 ),
               ],
             ),
@@ -109,6 +110,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                       Icons.keyboard_arrow_down,
                       color: egyptian,
                     ),
+                    suffixConstraints: BoxConstraints(
+                      minHeight: 20,
+                    ),
                     onTap: () {},
                   ),
                 ),
@@ -124,7 +128,26 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                       Icons.keyboard_arrow_down,
                       color: egyptian,
                     ),
-                    onTap: () {},
+                    suffixConstraints: BoxConstraints(
+                      minHeight: 20,
+                    ),
+                    onTap: () {
+                      context.showScrollableBottomSheet(
+                        builder: (context, scrollController) {
+                          return PagedListView<int, String>(
+                            scrollController: scrollController,
+                            pagingController: pagingController,
+                            builderDelegate: PagedChildBuilderDelegate(
+                              itemBuilder: (context, item, position) {
+                                return ListTile(
+                                  title: Text(item),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -139,7 +162,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
               ],
             ),
             PrimaryButton(
-              () {},
+              () {
+                Navigator.pushNamed(context, '/water/search_result');
+              },
               'Cari',
             ),
             Row(
@@ -186,3 +211,5 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
     );
   }
 }
+
+

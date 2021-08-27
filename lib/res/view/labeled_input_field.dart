@@ -15,6 +15,7 @@ class LabeledInputField<T> extends StatefulWidget {
   final bool readOnly;
   final Widget? prefix;
   final Widget? suffix;
+  final BoxConstraints? suffixConstraints;
   final int? maxLength;
   final double textSize;
   final TextStyle? style;
@@ -39,6 +40,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.readOnly = false,
     this.prefix,
     this.suffix,
+      this.suffixConstraints,
     this.maxLength,
     this.minLines = 1,
     this.textSize = textSizeBody1,
@@ -126,6 +128,7 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
+                  suffixIconConstraints: widget.suffixConstraints
                   // errorBorder: createBorder(red),
                 ),
               ),
