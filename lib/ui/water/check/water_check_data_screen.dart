@@ -35,7 +35,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                 children: [
                   Container(
                     color: egyptian,
-                    height: 200,
+                    height: 250,
                   ),
                   Container(
                     padding: const EdgeInsets.all(spaceMedium),
@@ -194,6 +194,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
             noItemsFoundIndicatorBuilder: (context) {
               return Center(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.asset(
                       imageRes('ic_tidak_ada_data_air.png'),
