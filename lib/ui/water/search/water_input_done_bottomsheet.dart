@@ -31,8 +31,9 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Kondisi Meteran',
-                    value: isConditionGood ? 'Baik' : 'Rusak',
+                    title: 'txt_indicator_condition'.tr(),
+                    value:
+                    isConditionGood ? 'txt_good'.tr() : 'txt_broken'.tr(),
                   ),
                 ),
                 CupertinoSwitch(
@@ -53,7 +54,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
             SizedBox(
               width: double.infinity,
               child: TitleValueBox(
-                title: 'Angka Meter Air',
+                title: 'txt_number_water_meter'.tr(),
                 value: '00305',
               ),
             ),
@@ -65,13 +66,13 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Nama',
+                    title: 'txt_name'.tr(),
                     value: 'Asniar',
                   ),
                 ),
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Rusun',
+                    title: 'txt_rusun'.tr(),
                     value: 'Rusun Karang Anyar',
                   ),
                 ),
@@ -85,13 +86,13 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Blok',
+                    title: 'txt_blok'.tr(),
                     value: 'Blok G',
                   ),
                 ),
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Lantai',
+                    title: 'txt_lantai'.tr(),
                     value: '8',
                   ),
                 ),
@@ -105,7 +106,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Nomor',
+                    title: 'txt_nomor'.tr(),
                     value: '150',
                   ),
                 ),
@@ -114,7 +115,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Status',
+                        'txt_status'.tr(),
                         style: context.styleCaption,
                       ),
                       StatusChip(done: true),
@@ -129,18 +130,18 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
             SizedBox(
               width: double.infinity,
               child: Text(
-                'Catatan (opsional)',
+                'txt_notes'.tr(),
                 style: context.styleCaption,
               ),
             ),
             LabeledInputField(
               noteController,
-              label: 'Tulis catatan disini',
+              label: 'hint_notes'.tr(),
             ),
             SizedBox(
               width: double.infinity,
               child: Text(
-                'Foto Meteran',
+                'txt_photo_meter'.tr(),
                 style: context.styleCaption,
               ),
             ),
@@ -165,7 +166,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                       width: spaceNormal,
                     ),
                     Text(
-                      'Foto Meteran Listrik',
+                      'txt_photo_electric_meter'.tr(),
                       style: context.styleCaption,
                     ),
                   ],
@@ -179,7 +180,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
               () {
                 Navigator.pop(context);
               },
-              'Simpan Data',
+              'btn_save_data'.tr(),
             ),
           ],
         ),

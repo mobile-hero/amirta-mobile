@@ -1,6 +1,5 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
-import 'package:amirta_mobile/ui/water/search/water_input_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/search/water_input_done_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:amirta_mobile/ui/water/water_customer_item.dart';
@@ -48,7 +47,7 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
           },
           noItemsFoundIndicatorBuilder: (context) {
             return Center(
-              child: Text('Tidak ada item ditemukan'),
+              child: Text('txt_no_item_found'.tr()),
             );
           },
         ),

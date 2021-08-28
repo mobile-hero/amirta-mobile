@@ -40,11 +40,11 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Input Data\nAir',
+                        'txt_input_air'.tr(),
                         style: context.styleHeadline4,
                       ),
                       Text(
-                        'Input angka pada meteran Air',
+                        'txt_input_air_desc'.tr(),
                         style: context.styleBody1,
                       ),
                     ],
@@ -70,7 +70,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                   flex: 2,
                   child: LabeledInputField(
                     monthController,
-                    label: "Bulan",
+                    label: "txt_bulan".tr(),
                   ),
                 ),
                 const SizedBox(
@@ -80,7 +80,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                   flex: 2,
                   child: LabeledInputField(
                     yearController,
-                    label: "Tahun",
+                    label: "txt_tahun".tr(),
                   ),
                 ),
                 const SizedBox(
@@ -97,14 +97,14 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
             ),
             LabeledInputField(
               rusunController,
-              label: "Rusun",
+              label: "txt_rusun".tr(),
             ),
             Row(
               children: [
                 Expanded(
                   child: LabeledInputField(
                     blokController,
-                    label: "Blok",
+                    label: "txt_blok".tr(),
                     readOnly: true,
                     suffix: Icon(
                       Icons.keyboard_arrow_down,
@@ -122,7 +122,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                 Expanded(
                   child: LabeledInputField(
                     lantaiController,
-                    label: "Lantai",
+                    label: "txt_lantai".tr(),
                     readOnly: true,
                     suffix: Icon(
                       Icons.keyboard_arrow_down,
@@ -156,7 +156,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                 Expanded(
                   child: LabeledInputField(
                     numberController,
-                    label: "Nomor",
+                    label: "txt_nomor".tr(),
                   ),
                 ),
               ],
@@ -165,7 +165,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
               () {
                 Navigator.pushNamed(context, '/water/search_result');
               },
-              'Cari',
+              'btn_search'.tr(),
             ),
             Row(
               children: [
@@ -178,7 +178,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                   width: spaceNormal,
                 ),
                 Text(
-                  'atau',
+                  'txt_or'.tr(),
                   style: context.styleBody1,
                 ),
                 const SizedBox(
@@ -195,15 +195,17 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
               height: spaceNormal,
             ),
             Text(
-              'Jika Anda ingin melihat data meter Air, klik tombol dibawah.',
+              'txt_check_data_notice'.tr(),
               style: context.styleBody1,
             ),
             const SizedBox(
               height: spaceNormal,
             ),
             PrimaryButton(
-              () {},
-              'Lihat Data',
+              () {
+                Navigator.pushNamed(context, '/water/check');
+              },
+              'btn_check_data'.tr(),
             ),
           ],
         ),

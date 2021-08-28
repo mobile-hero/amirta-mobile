@@ -31,8 +31,9 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Kondisi Meteran',
-                    value: isConditionGood ? 'Baik' : 'Rusak',
+                    title: 'txt_indicator_condition'.tr(),
+                    value:
+                        isConditionGood ? 'txt_good'.tr() : 'txt_broken'.tr(),
                   ),
                 ),
                 CupertinoSwitch(
@@ -55,13 +56,13 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Nama',
+                    title: 'txt_name'.tr(),
                     value: 'Asniar',
                   ),
                 ),
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Rusun',
+                    title: 'txt_rusun'.tr(),
                     value: 'Rusun Karang Anyar',
                   ),
                 ),
@@ -75,13 +76,13 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Blok',
+                    title: 'txt_blok'.tr(),
                     value: 'Blok G',
                   ),
                 ),
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Lantai',
+                    title: 'txt_lantai'.tr(),
                     value: '8',
                   ),
                 ),
@@ -95,7 +96,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
               children: [
                 Expanded(
                   child: TitleValueBox(
-                    title: 'Nomor',
+                    title: 'txt_nomor'.tr(),
                     value: '150',
                   ),
                 ),
@@ -104,7 +105,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Status',
+                        'txt_status'.tr(),
                         style: context.styleCaption,
                       ),
                       StatusChip(done: false),
@@ -119,20 +120,20 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
             SizedBox(
               width: double.infinity,
               child: Text(
-                'Catatan (opsional)',
+                'txt_notes'.tr(),
                 style: context.styleCaption,
               ),
             ),
             LabeledInputField(
               noteController,
-              label: 'Tulis catatan disini',
+              label: 'hint_notes'.tr(),
             ),
             Row(
               children: [
                 Expanded(
                   child: LabeledInputField(
-                    noteController,
-                    label: 'Input Angka Meter Air',
+                    numberController,
+                    label: 'txt_input_water_meter'.tr(),
                   ),
                 ),
                 const SizedBox(
@@ -154,10 +155,10 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
               ],
             ),
             PrimaryButton(
-                () {
+              () {
                 Navigator.pop(context);
               },
-              'Simpan Data',
+              'btn_save_data'.tr(),
             ),
           ],
         ),

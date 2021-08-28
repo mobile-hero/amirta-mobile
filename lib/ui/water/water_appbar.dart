@@ -21,6 +21,7 @@ class WaterAppBar extends StatelessWidget with PreferredSizeWidget {
         ],
       ),
       centerTitle: true,
+      elevation: 0.0,
     );
   }
 

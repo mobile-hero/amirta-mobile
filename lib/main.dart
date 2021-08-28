@@ -4,14 +4,53 @@ import 'package:amirta_mobile/ui/main/main_screen.dart';
 import 'package:amirta_mobile/ui/notification/notification_screen.dart';
 import 'package:amirta_mobile/ui/profile/profile_screen.dart';
 import 'package:amirta_mobile/ui/splash/splash_screen.dart';
+import 'package:amirta_mobile/ui/water/check/water_check_data_screen.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_screen.dart';
 import 'package:amirta_mobile/ui/water/water_form_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'my_material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(BaseConfiguration(child: MyApp()));
+}
+
+class BaseConfiguration extends StatelessWidget {
+  final Widget child;
+  
+  BaseConfiguration({required this.child});
+  
+  final locales = [Locale("id", "ID")];
+  
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<SharedPreferences>(
+      future: SharedPreferences.getInstance(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return EasyLocalization(
+            child: child,
+            supportedLocales: locales,
+            startLocale: locales.first,
+            fallbackLocale: locales.first,
+            path: 'res/localization',
+          );
+        }
+        
+        return Container(
+          color: darkBackground,
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(red),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +59,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: ThemeData(
         fontFamily: 'Poppins',
         textTheme: customTextTheme,
@@ -42,6 +84,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => ProfileScreen(),
         '/water': (context) => WaterFormScreen(),
         '/water/search_result': (context) => WaterSearchResultScreen(),
+        '/water/check': (context) => WaterCheckDataScreen(),
       },
       initialRoute: "/water",
     );
