@@ -68,6 +68,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                     child: LabeledInputField(
                                       monthController,
                                       label: "txt_bulan".tr(),
+                                      padding: EdgeInsets.zero,
                                     ),
                                   ),
                                   const SizedBox(
@@ -77,6 +78,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                     child: LabeledInputField(
                                       yearController,
                                       label: "txt_tahun".tr(),
+                                      padding: EdgeInsets.zero,
                                     ),
                                   ),
                                 ],
@@ -117,7 +119,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                 ],
                               ),
                               const SizedBox(
-                                height: spaceNormal,
+                                height: spaceTiny,
                               ),
                               PrimaryButton(
                                 () {},
