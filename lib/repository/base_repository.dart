@@ -1,7 +1,6 @@
 import 'package:amirta_mobile/data/error_message.dart';
 import 'package:amirta_mobile/data/simple_response.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/repository/account_local_repository.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -71,11 +70,11 @@ abstract class BaseRepository {
             return Future.error(ErrorMessage(
               messages: {ErrorMessage.keyMessage: "msg_session_expired".tr()},
               shouldRelogin: true,
-              errorCode: 30002,
+              errorCode: "30002",
             ));
           } else {
             return Future.error(ErrorMessage(
-                messages: {}, shouldRelogin: false, errorCode: 30002));
+                messages: {}, shouldRelogin: false, errorCode: "30002"));
           }
         } else {
           return _handleOtherErrorCodes(data);

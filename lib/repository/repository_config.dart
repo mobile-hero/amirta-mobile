@@ -13,6 +13,7 @@ class RepositoryConfig {
   String? token;
   String? pid;
   String? version;
+  String? deviceId;
 
   RepositoryConfig setToken(String token) {
     this.token = token;
@@ -23,8 +24,14 @@ class RepositoryConfig {
     this.pid = pid;
     return this;
   }
+
   RepositoryConfig setVersion(String version) {
     this.version = version;
+    return this;
+  }
+  
+  RepositoryConfig setDeviceId(String deviceId) {
+    this.deviceId = deviceId;
     return this;
   }
 
