@@ -89,8 +89,8 @@ class AppProvider {
   }
 }
 
-extension StarvoProviderHelper on BuildContext {
-  AppProvider starvoProvider() {
+extension AppProviderHelper on BuildContext {
+  AppProvider appProvider() {
     return Provider.of<AppProvider>(this, listen: false);
   }
 }

@@ -47,7 +47,7 @@ class RepositoryConfig {
       options.headers["version"] = version;
       handler.next(options);
     }));
-    // interceptors.add(logInterceptor);
+    interceptors.add(logInterceptor);
   }
 
   static RepositoryConfig staging() =>

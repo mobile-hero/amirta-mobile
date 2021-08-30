@@ -5,6 +5,7 @@ import 'package:amirta_mobile/res/view/bottom_ellipse_container.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = context.appProvider().user;
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -47,14 +48,14 @@ class HomeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Muhammad Ikhsan",
+                                user?.name ?? "-",
                                 style: context.styleBody2.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: white,
                                 ),
                               ),
                               Text(
-                                "1234567890",
+                                user?.userId ?? "-",
                                 style: context.styleBody2.copyWith(
                                   color: white.withOpacity(0.5),
                                 ),

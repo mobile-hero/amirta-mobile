@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -7,26 +10,61 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final FirebaseMessaging messaging = FirebaseMessaging.instance;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      Future.delayed(Duration(seconds: 2)).then((value) {
-        Navigator.pushNamed(context, "/login");
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GradientView(
-        child: Center(
-          child: AppLogo(
-            logoSize: AppLogoSize.big,
+      body: Column(
+        children: [
+          Expanded(
+            child: GradientView(
+              child: Center(
+                child: AppLogo(
+                  logoSize: AppLogoSize.big,
+                ),
+              ),
+            ),
           ),
-        ),
+          FutureBuilder(
+            future: messaging.requestPermission(
+              alert: true,
+              announcement: false,
+              badge: true,
+              carPlay: false,
+              criticalAlert: false,
+              provisional: false,
+              sound: true,
+            ),
+            builder: (context, snapshot) {
+              return FutureBuilder<int>(
+                future: context.appProvider().setupAll(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    startOpeningPage(snapshot.data);
+                  }
+                  return SizedBox();
+                },
+              );
+            },
+          ),
+        ],
       ),
     );
+  }
+
+  void startOpeningPage(int? result) {
+    Future.microtask(() {
+      if (result == 0) {
+        Navigator.pushNamed(context, "/login");
+      } else {
+        Navigator.pushNamed(context, "/main");
+      }
+    });
   }
 }

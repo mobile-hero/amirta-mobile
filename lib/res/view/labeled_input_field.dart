@@ -102,7 +102,9 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                 maxLength: widget.maxLength,
                 minLines: widget.minLines,
                 maxLines: widget.minLines,
-                style: widget.style ?? TextStyle(color: textContentColor),
+                style: widget.style ?? context.styleBody1.copyWith(
+                  color: grease.withOpacity(widget.isEnabled ? 1.0 : 0.7),
+                ),
                 textAlign: widget.textAlign,
                 textInputAction: widget.textInputAction,
                 textCapitalization: widget.textCapitalization,

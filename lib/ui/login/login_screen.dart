@@ -1,6 +1,8 @@
+import 'package:amirta_mobile/bloc/login/login_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/res/view/shadowed_container.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final nrkController = TextEditingController();
   final passwordController = TextEditingController();
-  
+
   @override
   void dispose() {
     nrkController.dispose();
@@ -20,56 +22,91 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GradientView(
-        child: Column(
-          children: [
-            Expanded(
-              child: AppLogo(
-                logoSize: AppLogoSize.big,
-              ),
-            ),
-            ShadowedContainer(
-              shadowColor: null,
-              borderRadiusObject: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              padding: const EdgeInsets.all(spaceBig),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocProvider(
+      create: (context) {
+        return LoginBloc(
+          context.appProvider().accountRepository,
+          context.appProvider().accountLocalRepository,
+        );
+      },
+      child: Scaffold(
+        body: GradientView(
+          child: BlocConsumer<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state is LoginSuccess) {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/main',
+                  (route) => false,
+                );
+              }
+              if (state is LoginError) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Login Gagal dilakukan.\nSilakan coba lagi'),
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Column(
                 children: [
-                  Text(
-                    "Selamat Datang!",
-                    style: context.styleHeadline5,
+                  Expanded(
+                    child: AppLogo(
+                      logoSize: AppLogoSize.big,
+                    ),
                   ),
-                  Text(
-                    "Silakan Login Menggunakan NRK",
-                    style: context.styleBody1,
-                  ),
-                  const SizedBox(
-                    height: spaceMedium,
-                  ),
-                  LabeledInputField(
-                    nrkController,
-                    label: "NRK",
-                  ),
-                  LabeledInputField(
-                    passwordController,
-                    label: "Password",
-                    isPassword: true,
-                  ),
-                  PrimaryButton(
-                    () {},
-                    "Submit",
-                  ),
-                  const SizedBox(
-                    height: spaceMedium,
+                  ShadowedContainer(
+                    shadowColor: null,
+                    borderRadiusObject: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    padding: const EdgeInsets.all(spaceBig),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Selamat Datang!",
+                          style: context.styleHeadline5,
+                        ),
+                        Text(
+                          "Silakan Login Menggunakan NRK",
+                          style: context.styleBody1,
+                        ),
+                        const SizedBox(
+                          height: spaceMedium,
+                        ),
+                        LabeledInputField(
+                          nrkController,
+                          label: "NRK",
+                        ),
+                        LabeledInputField(
+                          passwordController,
+                          label: "Password",
+                          isPassword: true,
+                        ),
+                        PrimaryButton(
+                          () {
+                            context.read<LoginBloc>().add(LoginNow(
+                                  nrkController.text,
+                                  passwordController.text,
+                                ));
+                          },
+                          "Submit",
+                          isLoading: state is LoginLoading,
+                        ),
+                        const SizedBox(
+                          height: spaceMedium,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
-              ),
-            ),
-          ],
+              );
+            },
+          ),
         ),
       ),
     );

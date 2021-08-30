@@ -14,10 +14,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   
   @override
   void initState() {
-    nrkController.text = '1234567890';
-    nameController.text = 'Muhammad Ikhsan';
-    emailController.text = 'mail@gmail.com';
-    roleController.text = 'Anggota';
+    final user = context.appProvider().user;
+    nrkController.text = user?.userId ?? '-';
+    nameController.text = user?.name ?? '-';
+    emailController.text = user?.emailAddress ?? '-';
+    roleController.text = user?.loginType == 0 ? 'Anggota' : '-';
     super.initState();
   }
 
@@ -42,14 +43,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Text(
-                  "Muhammad Ikhsan",
+                  nameController.text,
                   style: context.styleBody2.copyWith(
                     fontWeight: FontWeight.bold,
                     color: white,
                   ),
                 ),
                 Text(
-                  "1234567890",
+                  nrkController.text,
                   style: context.styleBody2.copyWith(
                     color: white.withOpacity(0.5),
                   ),
@@ -74,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             LabeledInputField(
               nameController,
               label: "Nama",
-              isEnabled: false,
+              isEnabled: true,
             ),
             LabeledInputField(
               emailController,
@@ -96,7 +97,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               "Simpan",
             ),
             LogoutButton(
-              () {
+              () async {
+                await context.appProvider().clearData();
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   '/login',

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amirta_mobile/bloc/app_provider.dart';
 import 'package:amirta_mobile/event_bus.dart';
 import 'package:amirta_mobile/repository/account_local_repository_impl.dart';
@@ -14,16 +16,23 @@ import 'package:amirta_mobile/ui/water/search/water_search_result_screen.dart';
 import 'package:amirta_mobile/ui/water/water_form_screen.dart';
 import 'package:device_info/device_info.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'my_material.dart';
 
 void main() {
-  runApp(BaseConfiguration(child: MyApp()));
+  runApp(
+    BaseConfiguration(
+      child: MyApp(),
+    ),
+  );
 }
 
 class BaseConfiguration extends StatelessWidget {
@@ -49,12 +58,12 @@ class BaseConfiguration extends StatelessWidget {
         }
 
         return Container(
-          color: darkBackground,
+          color: borderColor,
           width: double.infinity,
           height: double.infinity,
           child: Center(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(red),
+              valueColor: AlwaysStoppedAnimation<Color>(egyptian),
             ),
           ),
         );
@@ -110,76 +119,76 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _setupFirebaseMessage() {
-    // FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-    //   print('Got a message whilst in the foreground!');
-    //   print('Message data: ${message.data}');
-    //
-    //   if (message.notification != null) {
-    //     if (message.data.containsKey("click_action")) {
-    //       if (message.data["click_action"] == "payment_success") {
-    //         eventBus.fire(NotificationTopupEvent());
-    //       } else {
-    //         eventBus.fire(CheckUnreadNotificationEvent());
-    //       }
-    //     }
-    //     print('Message also contained a notification: ${message.notification}');
-    //     AndroidNotificationDetails androidPlatformChannelSpecifics =
-    //         AndroidNotificationDetails(
-    //       'starvo-notification',
-    //       'Starvo',
-    //       'Channel notifikasi Starvo',
-    //       importance: Importance.max,
-    //       priority: Priority.high,
-    //       showWhen: false,
-    //       icon: "ic_app_notification",
-    //       color: red,
-    //       styleInformation:
-    //           BigTextStyleInformation(message.notification?.body ?? "-"),
-    //     );
-    //     NotificationDetails platformChannelSpecifics = NotificationDetails(
-    //       android: androidPlatformChannelSpecifics,
-    //     );
-    //     await flutterLocalNotificationsPlugin.show(
-    //       0,
-    //       message.notification?.title,
-    //       message.notification?.body,
-    //       platformChannelSpecifics,
-    //       payload: jsonEncode(message.data),
-    //     );
-    //   }
-    // });
-    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-    //   selectNotification(jsonEncode(message.data));
-    // });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        if (message.data.containsKey("click_action")) {
+          if (message.data["click_action"] == "payment_success") {
+            eventBus.fire(NotificationTopupEvent());
+          } else {
+            eventBus.fire(CheckUnreadNotificationEvent());
+          }
+        }
+        print('Message also contained a notification: ${message.notification}');
+        AndroidNotificationDetails androidPlatformChannelSpecifics =
+            AndroidNotificationDetails(
+          'amirta-notification',
+          'Amirta',
+          'Channel notifikasi Amirta',
+          importance: Importance.max,
+          priority: Priority.high,
+          showWhen: false,
+          icon: "ic_app_notification",
+          color: red,
+          styleInformation:
+              BigTextStyleInformation(message.notification?.body ?? "-"),
+        );
+        NotificationDetails platformChannelSpecifics = NotificationDetails(
+          android: androidPlatformChannelSpecifics,
+        );
+        await flutterLocalNotificationsPlugin.show(
+          0,
+          message.notification?.title,
+          message.notification?.body,
+          platformChannelSpecifics,
+          payload: jsonEncode(message.data),
+        );
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      selectNotification(jsonEncode(message.data));
+    });
   }
 
   Future selectNotification(String? payload) async {
-    // if (payload != null) {
-    //   debugPrint('notification payload: $payload');
-    //   Map<String, dynamic> json = jsonDecode(payload);
-    //   if (json.containsKey("click_action")) {
-    //     final action = json["click_action"] as String;
-    //     switch (action) {
-    //       case "payment_success":
-    //       case "invoice_expired":
-    //       case "charging_complete":
-    //         _navigatorKey.currentState?.push(MaterialPageRoute(
-    //           builder: (context) => TrxHistoryPage(),
-    //           settings: RouteSettings(name: TransactionHistory().routeName),
-    //         ));
-    //         break;
-    //       case "charging_start":
-    //       case "charging_incomplete":
-    //       case "charging_stop":
-    //       case "charging_requested":
-    //         _navigatorKey.currentState?.pushReplacement(MaterialPageRoute(
-    //           builder: (context) => HomePage(),
-    //           settings: RouteSettings(name: Home().routeName),
-    //         ));
-    //         break;
-    //     }
-    //   }
-    // }
+    if (payload != null) {
+      debugPrint('notification payload: $payload');
+      Map<String, dynamic> json = jsonDecode(payload);
+      if (json.containsKey("click_action")) {
+        final action = json["click_action"] as String;
+        switch (action) {
+          case "payment_success":
+          case "invoice_expired":
+          case "charging_complete":
+            // _navigatorKey.currentState?.push(MaterialPageRoute(
+            //   builder: (context) => TrxHistoryPage(),
+            //   settings: RouteSettings(name: TransactionHistory().routeName),
+            // ));
+            break;
+          case "charging_start":
+          case "charging_incomplete":
+          case "charging_stop":
+          case "charging_requested":
+            // _navigatorKey.currentState?.pushReplacement(MaterialPageRoute(
+            //   builder: (context) => HomePage(),
+            //   settings: RouteSettings(name: Home().routeName),
+            // ));
+            break;
+        }
+      }
+    }
   }
 
   Future onDidReceiveLocalNotification(
@@ -214,18 +223,49 @@ class _MyAppState extends State<MyApp> {
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Provider<AppProvider>(
-            create: (_) {
-              final accountLocal = AccountLocalRepositoryImpl(snapshot.data!);
-              return AppProvider(
-                dio: dio,
-                repositoryConfig: repositoryConfig,
-                deviceInfo: DeviceInfoPlugin(),
-                accountRepository: AccountRepositoryImpl(dio, repositoryConfig),
-                accountLocalRepository: accountLocal,
+          final accountLocal = AccountLocalRepositoryImpl(snapshot.data!);
+          return FutureBuilder<PackageInfo>(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final info = snapshot.data!;
+                repositoryConfig.setVersion(info.version);
+                return Provider<AppProvider>(
+                  create: (_) {
+                    return AppProvider(
+                      dio: dio,
+                      repositoryConfig: repositoryConfig,
+                      deviceInfo: DeviceInfoPlugin(),
+                      accountRepository:
+                          AccountRepositoryImpl(dio, repositoryConfig),
+                      accountLocalRepository: accountLocal,
+                    );
+                  },
+                  child: FutureBuilder(
+                    future: Firebase.initializeApp(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return _initApp();
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                );
+              }
+
+              return Container(
+                color: borderColor,
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(egyptian),
+                  ),
+                ),
               );
             },
-            child: _initApp(),
           );
         }
 
@@ -263,7 +303,7 @@ class _MyAppState extends State<MyApp> {
         splashColor: forest,
       ),
       routes: <String, WidgetBuilder>{
-        // '/': (context) => SplashScreen(),
+        '/splash': (context) => SplashScreen(),
         '/login': (context) => LoginPage(),
         '/home': (context) => HomeScreen(),
         '/main': (context) => MainScreen(),
@@ -273,7 +313,7 @@ class _MyAppState extends State<MyApp> {
         '/water/search_result': (context) => WaterSearchResultScreen(),
         '/water/check': (context) => WaterCheckDataScreen(),
       },
-      initialRoute: "/login",
+      initialRoute: "/splash",
     );
   }
 }
