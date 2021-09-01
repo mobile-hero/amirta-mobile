@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amirta_mobile/bloc/app_provider.dart';
 import 'package:amirta_mobile/data/account/login_write.dart';
 import 'package:amirta_mobile/repository/account_local_repository.dart';
 import 'package:amirta_mobile/repository/account_repository.dart';
@@ -12,9 +13,9 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AccountRepository accountRepository;
-  final AccountLocalRepository localRepository;
+  final AppProvider appProvider;
 
-  LoginBloc(this.accountRepository, this.localRepository)
+  LoginBloc(this.accountRepository, this.appProvider)
       : super(LoginInitial());
 
   @override
@@ -32,7 +33,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           loginId: "",
           name: "",
         ));
-        await localRepository.saveUser(response.data);
+        await appProvider.setUser(response.data);
         yield LoginSuccess();
       } catch (e) {
         yield LoginError();

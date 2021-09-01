@@ -1,4 +1,4 @@
-import 'package:amirta_mobile/data/reference/rusun_lite.dart';
+import 'package:amirta_mobile/data/rusun/rusun_lite.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';

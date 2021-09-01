@@ -1,4 +1,4 @@
-import 'package:amirta_mobile/data/reference/rusun.dart';
+import 'package:amirta_mobile/data/rusun/rusun.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rusun_response.g.dart';

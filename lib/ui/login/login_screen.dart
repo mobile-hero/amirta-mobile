@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
       create: (context) {
         return LoginBloc(
           context.appProvider().accountRepository,
-          context.appProvider().accountLocalRepository,
+          context.appProvider(),
         );
       },
       child: Scaffold(
