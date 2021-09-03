@@ -1,13 +1,23 @@
+import 'dart:io';
+
+import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 
 class WaterInputBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
+  final Rusun rusun;
+  final RusunBlok rusunBlok;
+  final RusunUnit rusunUnit;
 
   const WaterInputBottomSheet({
     required this.scrollController,
+    required this.rusun,
+    required this.rusunBlok,
+    required this.rusunUnit,
   });
 
   @override
@@ -18,6 +28,17 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
   bool isConditionGood = true;
   final noteController = TextEditingController();
   final numberController = TextEditingController();
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? seletedImage;
+
+  @override
+  void dispose() {
+    isConditionGood = widget.rusunUnit.pdamMeterStatus == 0;
+    noteController.dispose();
+    numberController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +78,13 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                 Expanded(
                   child: TitleValueBox(
                     title: 'txt_name'.tr(),
-                    value: 'Asniar',
+                    value: widget.rusunUnit.residentName ?? "-",
                   ),
                 ),
                 Expanded(
                   child: TitleValueBox(
                     title: 'txt_rusun'.tr(),
-                    value: 'Rusun Karang Anyar',
+                    value: widget.rusun.name,
                   ),
                 ),
               ],
@@ -77,13 +98,13 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                 Expanded(
                   child: TitleValueBox(
                     title: 'txt_blok'.tr(),
-                    value: 'Blok G',
+                    value: widget.rusunUnit.buildingName,
                   ),
                 ),
                 Expanded(
                   child: TitleValueBox(
                     title: 'txt_lantai'.tr(),
-                    value: '8',
+                    value: widget.rusunUnit.floor.toString(),
                   ),
                 ),
               ],
@@ -97,7 +118,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                 Expanded(
                   child: TitleValueBox(
                     title: 'txt_nomor'.tr(),
-                    value: '150',
+                    value: widget.rusunUnit.unitNumber,
                   ),
                 ),
                 Expanded(
@@ -139,19 +160,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                 const SizedBox(
                   width: spaceNormal,
                 ),
-                SizedBox(
-                  height: buttonDefaultHeight,
-                  width: buttonDefaultHeight,
-                  child: DottedBorder(
-                    radius: Radius.circular(buttonRadius),
-                    borderType: BorderType.RRect,
-                    padding: const EdgeInsets.all(spaceNormal),
-                    color: borderColor,
-                    child: Image.asset(
-                      imageRes('ic_camera.png'),
-                    ),
-                  ),
-                ),
+                _createImagePickerButton(context),
               ],
             ),
             PrimaryButton(
@@ -162,6 +171,56 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _createImagePickerButton(BuildContext context) {
+    final size = buttonDefaultHeight + spaceSmall;
+    return SizedBox(
+      height: size,
+      width: size,
+      child: Builder(
+        builder: (context) {
+          if (seletedImage != null) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(buttonRadius),
+              child: Image.file(
+                File(seletedImage!.path),
+                fit: BoxFit.cover,
+              ),
+            );
+          }
+          return DottedBorder(
+            radius: Radius.circular(buttonRadius),
+            borderType: BorderType.RRect,
+            color: borderColor,
+            child: SizedBox(
+              height: size,
+              width: size,
+              child: InkWell(
+                onTap: () async {
+                  final result = await _picker.pickImage(
+                    source: ImageSource.camera,
+                  );
+                  if (result != null) {
+                    final path = result.path;
+                    print(path);
+                    setState(() {
+                      seletedImage = result;
+                    });
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(spaceNormal),
+                  child: Image.asset(
+                    imageRes('ic_camera.png'),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

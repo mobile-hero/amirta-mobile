@@ -27,7 +27,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'my_material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     BaseConfiguration(
       child: MyApp(),
@@ -72,13 +75,13 @@ class BaseConfiguration extends StatelessWidget {
   }
 }
 
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // If you're going to use other Firebase services in the background, such as Firestore,
-//   // make sure you call `initializeApp` before using other Firebase services.
-//   await Firebase.initializeApp();
-//
-//   print("Handling a background message: ${message.messageId}");
-// }
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -236,9 +239,16 @@ class _MyAppState extends State<MyApp> {
                       dio: dio,
                       repositoryConfig: repositoryConfig,
                       deviceInfo: DeviceInfoPlugin(),
+                      accountLocalRepository: accountLocal,
                       accountRepository:
                           AccountRepositoryImpl(dio, repositoryConfig),
-                      accountLocalRepository: accountLocal,
+                      rusunRepository:
+                          RusunRepositoryImpl(dio, repositoryConfig),
+                      fcmRepository: FcmRepositoryImpl(dio, repositoryConfig),
+                      pengaduanRepository:
+                          PengaduanRepositoryImpl(dio, repositoryConfig),
+                      uploadImageRepository:
+                          UploadImageRepositoryImpl(dio, repositoryConfig),
                     );
                   },
                   child: FutureBuilder(

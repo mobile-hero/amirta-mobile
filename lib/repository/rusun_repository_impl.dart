@@ -1,4 +1,4 @@
-import 'package:amirta_mobile/data/rusun/reference_export.dart';
+import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/data/simple_response.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
 import 'package:amirta_mobile/repository/rusun_repository.dart';
@@ -20,17 +20,17 @@ class RusunRepositoryImpl extends RusunRepository {
         : response;
   }
 
-  Future<RusunUnitResponse> getUnit(
-    int rusunId,
-    int buildingId,
+  Future<RusunUnitResponse> getUnit({
+    required int rusunId,
+    required int buildingId,
     int? floor,
     int? meterType,
     int? month,
     int? year,
     bool? isReported,
-    int page,
-    int limit,
-  ) async {
+    required int page,
+    required int limit,
+  }) async {
     final Map<String, dynamic> query = {
       "rusun_id": rusunId,
       "building_id": buildingId,
@@ -44,7 +44,7 @@ class RusunRepositoryImpl extends RusunRepository {
             "month": month,
             "year": year,
           });
-    final response = await get("/buildings", query: query);
+    final response = await get("/units", query: query);
     return (isResult(response))
         ? RusunUnitResponse.fromJson(response)
         : response;

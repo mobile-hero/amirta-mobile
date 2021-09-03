@@ -11,7 +11,7 @@ class RepositoryConfig {
   RepositoryConfig(this.baseUrl);
 
   String? token;
-  String? pid;
+  int? pid;
   String? version;
   String? deviceId;
 
@@ -20,7 +20,7 @@ class RepositoryConfig {
     return this;
   }
 
-  RepositoryConfig setPid(String pid) {
+  RepositoryConfig setPid(int pid) {
     this.pid = pid;
     return this;
   }
@@ -51,8 +51,8 @@ class RepositoryConfig {
   }
 
   static RepositoryConfig staging() =>
-      RepositoryConfig("https://amirtadev-sirukim.jakarta.go.id/");
+      RepositoryConfig("https://amirtadev-sirukim.jakarta.go.id");
 
   static RepositoryConfig production() =>
-      RepositoryConfig("https://amirta-sirukim.jakarta.go.id/");
+      RepositoryConfig("https://amirta-sirukim.jakarta.go.id");
 }

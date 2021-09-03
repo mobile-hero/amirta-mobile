@@ -11,7 +11,8 @@ class WaterInputDoneBottomSheet extends StatefulWidget {
   });
 
   @override
-  _WaterInputDoneBottomSheetState createState() => _WaterInputDoneBottomSheetState();
+  _WaterInputDoneBottomSheetState createState() =>
+      _WaterInputDoneBottomSheetState();
 }
 
 class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
@@ -33,7 +34,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                   child: TitleValueBox(
                     title: 'txt_indicator_condition'.tr(),
                     value:
-                    isConditionGood ? 'txt_good'.tr() : 'txt_broken'.tr(),
+                        isConditionGood ? 'txt_good'.tr() : 'txt_broken'.tr(),
                   ),
                 ),
                 CupertinoSwitch(

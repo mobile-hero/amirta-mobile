@@ -1,5 +1,9 @@
+import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/my_material.dart';
+import 'package:amirta_mobile/ui/bottomsheet/blok_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/rounded_bottomsheet.dart';
+import 'package:amirta_mobile/ui/bottomsheet/rusun_bottomsheet.dart';
+import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -19,6 +23,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
   final PagingController<int, String> pagingController =
       PagingController(firstPageKey: 0);
 
+  Rusun? selectedRusun;
+  RusunBlok? selectedBlok;
+
   @override
   void initState() {
     pagingController.appendLastPage(['1', '2', '3', '4', '5', '6']);
@@ -28,7 +35,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WaterAppBar(),
+      appBar: WaterAppBar(
+        enableLeading: false,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(spaceMedium),
         child: Column(
@@ -98,6 +107,21 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
             LabeledInputField(
               rusunController,
               label: "txt_rusun".tr(),
+              readOnly: true,
+              onTap: () async {
+                final result = await context.showScrollableBottomSheet<Rusun>(
+                  builder: (context, scrollController) {
+                    return RusunBottomSheet(scrollController);
+                  },
+                );
+                if (result != null) {
+                  setState(() {
+                    rusunController.text = result.name;
+                    selectedRusun = result;
+                  });
+                  print(result.toJson());
+                }
+              },
             ),
             Row(
               children: [
@@ -113,7 +137,25 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                     suffixConstraints: BoxConstraints(
                       minHeight: 20,
                     ),
-                    onTap: () {},
+                    isEnabled: selectedRusun != null,
+                    onTap: () async {
+                      final result =
+                          await context.showScrollableBottomSheet<RusunBlok>(
+                        builder: (context, scrollController) {
+                          return BlokBottomSheet(
+                            scrollController,
+                            selectedRusun!.id,
+                          );
+                        },
+                      );
+                      if (result != null) {
+                        setState(() {
+                          blokController.text = result.displayName;
+                          selectedBlok = result;
+                        });
+                        print(result.toJson());
+                      }
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -131,22 +173,17 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                     suffixConstraints: BoxConstraints(
                       minHeight: 20,
                     ),
-                    onTap: () {
-                      context.showScrollableBottomSheet(
+                    isEnabled: selectedBlok != null,
+                    onTap: () async {
+                      final result =
+                          await context.showScrollableBottomSheet<Rusun>(
                         builder: (context, scrollController) {
-                          return PagedListView<int, String>(
-                            scrollController: scrollController,
-                            pagingController: pagingController,
-                            builderDelegate: PagedChildBuilderDelegate(
-                              itemBuilder: (context, item, position) {
-                                return ListTile(
-                                  title: Text(item),
-                                );
-                              },
-                            ),
-                          );
+                          return RusunBottomSheet(scrollController);
                         },
                       );
+                      if (result != null) {
+                        print(result.toJson());
+                      }
                     },
                   ),
                 ),
@@ -163,9 +200,19 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
             ),
             PrimaryButton(
               () {
-                Navigator.pushNamed(context, '/water/search_result');
+                Navigator.pushNamed(
+                  context,
+                  '/water/search_result',
+                  arguments: WaterSearchResultArgument(
+                    selectedRusun!,
+                    selectedBlok!,
+                    null,
+                    null,
+                  ),
+                );
               },
               'btn_search'.tr(),
+              isEnabled: selectedRusun != null && selectedBlok != null,
             ),
             Row(
               children: [
@@ -203,9 +250,19 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
             ),
             PrimaryButton(
               () {
-                Navigator.pushNamed(context, '/water/check');
+                Navigator.pushNamed(
+                  context,
+                  '/water/check',
+                  arguments: WaterSearchResultArgument(
+                    selectedRusun!,
+                    selectedBlok!,
+                    null,
+                    null,
+                  ),
+                );
               },
               'btn_check_data'.tr(),
+              isEnabled: selectedRusun != null && selectedBlok != null,
             ),
           ],
         ),
@@ -213,5 +270,3 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
     );
   }
 }
-
-

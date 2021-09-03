@@ -37,9 +37,9 @@ class RusunUnit {
   final String code;
   final String unitNumber;
   final String unitStatus;
-  final String residentName;
-  final String mobilePhoneNumber;
-  final String emailAddress;
+  final String? residentName;
+  final String? mobilePhoneNumber;
+  final String? emailAddress;
   final String plnNumber;
   final String pdamNumber;
   final int plnMeterStatus;

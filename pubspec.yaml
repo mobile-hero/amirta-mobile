@@ -34,7 +34,7 @@ dependencies:
   shared_preferences: ^2.0.6
   package_info: ^2.0.0
   permission_handler: ^8.1.4
-  image_picker: ^0.8.3+2
+  image_picker: ^0.8.4
   image_cropper: ^1.4.1
   flutter_image_compress: ^1.0.0
   location: ^4.1.1
@@ -42,6 +42,7 @@ dependencies:
   whatsapp_unilink: ^2.0.0
   email_validator: ^2.0.1
   cached_network_image: ^3.0.0
+  hive: ^2.0.4
 
   cupertino_icons: ^1.0.2
   flutter_typeahead: ^3.1.1

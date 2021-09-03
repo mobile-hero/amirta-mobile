@@ -27,6 +27,7 @@ class LabeledInputField<T> extends StatefulWidget {
   final bool showOptionalLabel;
   final FocusNode? focusNode;
   final VoidCallback? onTap;
+  final ValueChanged<String>? onChanged;
 
   const LabeledInputField(
     this._controller, {
@@ -40,7 +41,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.readOnly = false,
     this.prefix,
     this.suffix,
-      this.suffixConstraints,
+    this.suffixConstraints,
     this.maxLength,
     this.minLines = 1,
     this.textSize = textSizeBody1,
@@ -52,6 +53,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.showOptionalLabel = false,
     this.focusNode,
     this.onTap,
+    this.onChanged,
   });
 
   @override
@@ -88,7 +90,11 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
           Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: hasFocus ? grease : borderColor,
+                color: !widget.isEnabled
+                    ? inputDisabledColor
+                    : hasFocus
+                        ? grease
+                        : borderColor,
               ),
               borderRadius: BorderRadius.circular(6),
             ),
@@ -102,9 +108,10 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                 maxLength: widget.maxLength,
                 minLines: widget.minLines,
                 maxLines: widget.minLines,
-                style: widget.style ?? context.styleBody1.copyWith(
-                  color: grease.withOpacity(widget.isEnabled ? 1.0 : 0.7),
-                ),
+                style: widget.style ??
+                    context.styleBody1.copyWith(
+                      color: grease.withOpacity(widget.isEnabled ? 1.0 : 0.7),
+                    ),
                 textAlign: widget.textAlign,
                 textInputAction: widget.textInputAction,
                 textCapitalization: widget.textCapitalization,
@@ -112,27 +119,28 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                 readOnly: widget.readOnly,
                 onTap: widget.onTap,
                 focusNode: focusNode,
+                onChanged: widget.onChanged,
                 decoration: InputDecoration(
-                  isDense: true,
-                  counter: SizedBox(),
-                  prefix: widget.prefix,
-                  suffixIcon: widget.suffix,
-                  enabled: widget.isEnabled,
-                  labelText: widget.label,
-                  labelStyle: context.styleCaption.copyWith(
-                    color: grease.withOpacity(0.5),
-                  ),
-                  hintText: widget.hint,
-                  hintMaxLines: 4,
-                  errorText: widget.error,
-                  errorMaxLines: 4,
-                  contentPadding: EdgeInsets.zero,
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  suffixIconConstraints: widget.suffixConstraints
-                  // errorBorder: createBorder(red),
-                ),
+                    isDense: true,
+                    counter: SizedBox(),
+                    prefix: widget.prefix,
+                    suffixIcon: widget.suffix,
+                    enabled: widget.isEnabled,
+                    labelText: widget.label,
+                    labelStyle: context.styleCaption.copyWith(
+                      color: grease.withOpacity(0.5),
+                    ),
+                    hintText: widget.hint,
+                    hintMaxLines: 4,
+                    errorText: widget.error,
+                    errorMaxLines: 4,
+                    contentPadding: EdgeInsets.zero,
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    suffixIconConstraints: widget.suffixConstraints
+                    // errorBorder: createBorder(red),
+                    ),
               ),
             ),
           ),

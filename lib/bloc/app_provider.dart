@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:amirta_mobile/data/account/profile.dart';
-import 'package:amirta_mobile/repository/account_local_repository.dart';
-import 'package:amirta_mobile/repository/account_repository.dart';
-import 'package:amirta_mobile/repository/repository_config.dart';
+import 'package:amirta_mobile/repository/repository.dart';
 import 'package:device_info/device_info.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +13,10 @@ class AppProvider {
   final DeviceInfoPlugin deviceInfo;
   final AccountLocalRepository accountLocalRepository;
   final AccountRepository accountRepository;
+  final RusunRepository rusunRepository;
+  final PengaduanRepository pengaduanRepository;
+  final UploadImageRepository uploadImageRepository;
+  final FcmRepository fcmRepository;
 
   AppProvider({
     required this.dio,
@@ -22,6 +24,10 @@ class AppProvider {
     required this.deviceInfo,
     required this.accountLocalRepository,
     required this.accountRepository,
+    required this.rusunRepository,
+    required this.pengaduanRepository,
+    required this.uploadImageRepository,
+    required this.fcmRepository,
   }) {
     dio.interceptors.addAll(repositoryConfig.interceptors);
   }
@@ -38,7 +44,7 @@ class AppProvider {
     await accountLocalRepository.saveUser(user);
     return setupAll();
   }
-  
+
   setVersion(String version) async {
     _version = version;
     repositoryConfig.setVersion(version);
@@ -62,6 +68,7 @@ class AppProvider {
     if (user != null) {
       _user = user;
       repositoryConfig.setToken(user.sessid!);
+      repositoryConfig.setPid(user.pid);
     }
   }
 

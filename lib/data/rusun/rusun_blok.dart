@@ -19,4 +19,6 @@ class RusunBlok {
   factory RusunBlok.fromJson(Map<String, dynamic> json) => _$RusunBlokFromJson(json);
   
   Map<String, dynamic> toJson() => _$RusunBlokToJson(this);
+  
+  String get displayName => "$buildingType $name";
 }

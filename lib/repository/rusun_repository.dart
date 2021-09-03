@@ -1,4 +1,4 @@
-import 'package:amirta_mobile/data/rusun/reference_export.dart';
+import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/data/simple_response.dart';
 import 'package:amirta_mobile/repository/base_repository.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
@@ -11,17 +11,17 @@ abstract class RusunRepository extends BaseRepository {
 
   Future<RusunBlokResponse> getBlok(int rusunId);
 
-  Future<RusunUnitResponse> getUnit(
-    int rusunId,
-    int buildingId,
+  Future<RusunUnitResponse> getUnit({
+    required int rusunId,
+    required int buildingId,
     int? floor,
     int? meterType,
     int? month,
     int? year,
     bool? isReported,
-    int page,
-    int limit,
-  );
+    required int page,
+    required int limit,
+  });
 
   Future<RusunUnitDetailResponse> getUnitInfoById(
     int id,
