@@ -22,7 +22,7 @@ class WaterCustomerItem extends StatelessWidget {
           onTap: onTap,
           child: ShadowedContainer(
             padding: const EdgeInsets.all(spaceNormal),
-            borderRadius: buttonRadius,
+            borderRadius: 10.0,
             child: Row(
               children: [
                 Container(
@@ -33,7 +33,7 @@ class WaterCustomerItem extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: azure,
-                    borderRadius: BorderRadius.circular(buttonRadius),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
                 const SizedBox(
