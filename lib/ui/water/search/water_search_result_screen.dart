@@ -27,16 +27,18 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
           args.rusun.id,
           args.blok.id,
           args.lantai,
-          args.month ?? 1,
-          args.year ?? 2021,
+          args.number,
+          args.month,
+          args.year,
         );
       },
       child: Scaffold(
         appBar: WaterAppBar(),
         body: BlocBuilder<RusunUnitBloc, RusunUnitState>(
           builder: (context, state) {
-            final pagingController =
-                context.read<RusunUnitBloc>().pagingController;
+            final bloc = context.read<RusunUnitBloc>();
+            final pagingController = bloc.pagingController;
+            final values = bloc.values;
             return PagedListView<int, RusunUnit>(
               padding: const EdgeInsets.all(spaceMedium),
               pagingController: pagingController,
@@ -45,7 +47,11 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                   return WaterCustomerItem(
                     customerName: item.residentName ?? "-",
                     locationName: item.buildingName,
-                    inputDone: (position % 2) == 0,
+                    inputDone: bloc.local
+                        ? values
+                            .firstWhere((e) => e.unitId == item.id)
+                            .inputDone
+                        : item.inputDone,
                     onTap: () {
                       context.showScrollableBottomSheet(
                         builder: (context, scrollController) {

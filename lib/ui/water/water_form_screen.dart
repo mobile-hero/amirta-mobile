@@ -8,7 +8,6 @@ import 'package:amirta_mobile/ui/bottomsheet/rusun_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class WaterFormScreen extends StatefulWidget {
   @override
@@ -23,16 +22,20 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
   final lantaiController = TextEditingController();
   final numberController = TextEditingController();
 
-  final PagingController<int, String> pagingController =
-      PagingController(firstPageKey: 0);
-
   Rusun? selectedRusun;
   RusunBlok? selectedBlok;
   int? selectedLantai;
+  late int selectedMonth;
+  late int selectedYear;
 
   @override
   void initState() {
-    pagingController.appendLastPage(['1', '2', '3', '4', '5', '6']);
+    final dateTime = DateTime.now();
+    selectedMonth = dateTime.month;
+    selectedYear = dateTime.year;
+    monthController.text =
+        DateFormat.MMMM().format(DateTime(selectedYear, selectedMonth));
+    yearController.text = selectedYear.toString();
     super.initState();
   }
 
@@ -158,12 +161,8 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               final result = await context
                                   .showScrollableBottomSheet<RusunBlok>(
                                 builder: (context, scrollController) {
-                                  return BlokBottomSheet(
-                                    scrollController,
-                                    selectedRusun!.id,
-                                    9,
-                                    2021
-                                  );
+                                  return BlokBottomSheet(scrollController,
+                                      selectedRusun!.id, 9, 2021);
                                 },
                               );
                               if (result != null) {
@@ -226,12 +225,12 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           context,
                           '/water/search_result',
                           arguments: WaterSearchResultArgument(
+                            selectedMonth,
+                            selectedYear,
                             selectedRusun!,
                             selectedBlok!,
                             selectedLantai,
                             numberController.text.trim(),
-                            9,
-                            2021
                           ),
                         );
                       },
@@ -278,12 +277,12 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           context,
                           '/water/check',
                           arguments: WaterSearchResultArgument(
+                            9,
+                            2021,
                             selectedRusun!,
                             selectedBlok!,
                             selectedLantai,
                             numberController.text.trim(),
-                            9,
-                            2021
                           ),
                         );
                       },

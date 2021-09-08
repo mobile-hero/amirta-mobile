@@ -8,3 +8,4 @@ export 'rusun_response.dart';
 export 'rusun_unit.dart';
 export 'rusun_unit_detail_response.dart';
 export 'rusun_unit_response.dart';
+export 'rusun_unit_value.dart';

@@ -16,6 +16,7 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
   final int rusunId;
   final int buildingId;
   final int? floor;
+  final String? code;
   final int month;
   final int year;
 
@@ -24,14 +25,15 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
     this.rusunId,
     this.buildingId,
     this.floor,
+    this.code,
     this.month,
     this.year,
   ) : super(RusunUnitInitial()) {
     pagingController.addPageRequestListener((pageKey) {
       if (pageKey == 0) {
-        add(LoadUnit(rusunId, buildingId, 1, floor));
+        add(LoadUnit(rusunId, buildingId, 1, floor, code));
       } else {
-        add(LoadUnit(rusunId, buildingId, pageKey ~/ limit, floor));
+        add(LoadUnit(rusunId, buildingId, pageKey ~/ limit, floor, code));
       }
     });
     pagingController.refresh();
@@ -41,6 +43,8 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
       PagingController(firstPageKey: 0);
 
   final limit = 20;
+  bool local = false;
+  List<RusunUnitValue> values = [];
 
   @override
   Stream<RusunUnitState> mapEventToState(
@@ -55,23 +59,46 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
     try {
       yield RusunUnitLoading();
       final store = await openStore();
+
+      // get rusun unit value
       final box = store.box<RusunUnit>();
-      Condition<RusunUnit> queryCondition = RusunUnit_.rusunId
-          .equals(event.rusunId)
-          .and(RusunUnit_.buildingId.equals(event.buildingId));
+      Condition<RusunUnit> queryCondition =
+          RusunUnit_.rusunId.equals(event.rusunId) &
+              RusunUnit_.buildingId.equals(event.buildingId);
       if (event.floor != null) {
         queryCondition =
             queryCondition.and(RusunUnit_.floor.equals(event.floor!));
       }
       final result = box.query(queryCondition).build().find();
       print(result);
-      store.close();
       if (result.isNotEmpty) {
+        // get existing unit value
+        local = true;
+        final box = store.box<RusunUnitValue>();
+        Condition<RusunUnitValue> queryCondition =
+            RusunUnitValue_.rusunId.equals(event.rusunId) &
+                RusunUnitValue_.buildingId.equals(buildingId) &
+                RusunUnitValue_.month.equals(month) &
+                RusunUnitValue_.year.equals(year);
+        if (event.floor != null) {
+          queryCondition =
+              queryCondition.and(RusunUnitValue_.floor.equals(event.floor!));
+        }
+        if (event.code != null) {
+          queryCondition =
+              queryCondition.and(RusunUnitValue_.code.equals(event.code!));
+        }
+        values = box.query(queryCondition).build().find();
+
         pagingController.appendLastPage(result);
+        store.close();
+
         yield RusunUnitSuccess(result);
         return;
       }
+      store.close();
 
+      // online unit fallback
       final response = await rusunRepository.getUnit(
         rusunId: event.rusunId,
         buildingId: event.buildingId,

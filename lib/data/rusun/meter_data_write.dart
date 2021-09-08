@@ -1,8 +1,11 @@
+import 'package:amirta_mobile/objectbox.g.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
 part 'meter_data_write.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
+@Entity()
 class MeterDataWrite {
   MeterDataWrite({
     required this.rusunId,
@@ -16,6 +19,8 @@ class MeterDataWrite {
     required this.image,
   });
 
+  @Id()
+  int? id;
   final int rusunId;
   final int buildingId;
   final int unitId;

@@ -8,6 +8,13 @@ class LoadUnit extends RusunUnitEvent {
   final int buildingId;
   final int page;
   final int? floor;
-  
-  LoadUnit(this.rusunId, this.buildingId, this.page, this.floor);
+  final String? code;
+
+  LoadUnit(
+    this.rusunId,
+    this.buildingId,
+    this.page,
+    this.floor,
+    this.code,
+  );
 }
