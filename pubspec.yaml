@@ -42,7 +42,8 @@ dependencies:
   whatsapp_unilink: ^2.0.0
   email_validator: ^2.0.1
   cached_network_image: ^3.0.0
-  hive: ^2.0.4
+  objectbox: ^1.2.0
+  objectbox_flutter_libs: any
   mime: ^1.0.0
 
   cupertino_icons: ^1.0.2
@@ -83,6 +84,7 @@ dev_dependencies:
 
   build_runner: ^2.0.6
   built_value_generator: ^8.0.4
+  objectbox_generator: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

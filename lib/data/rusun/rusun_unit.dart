@@ -1,8 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
 part 'rusun_unit.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
+@Entity()
 class RusunUnit {
   RusunUnit({
     required this.id,
@@ -28,6 +30,7 @@ class RusunUnit {
     required this.meterPostDtime,
   });
 
+  @Id(assignable: true)
   final int id;
   final int rusunId;
   final String rusunName;

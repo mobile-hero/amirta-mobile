@@ -1,8 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
 part 'rusun_blok.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
+@Entity()
 class RusunBlok {
   RusunBlok({
     required this.id,
@@ -11,6 +13,7 @@ class RusunBlok {
     required this.buildingType,
   });
 
+  @Id(assignable: true)
   final int id;
   final String code;
   final String name;

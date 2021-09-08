@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:amirta_mobile/data/rusun/rusun_export.dart';
+import 'package:amirta_mobile/objectbox.g.dart';
 import 'package:amirta_mobile/repository/repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -13,8 +14,11 @@ part 'rusun_blok_state.dart';
 class RusunBlokBloc extends Bloc<RusunBlokEvent, RusunBlokState> {
   final RusunRepository rusunRepository;
   final int rusunId;
+  final int month;
+  final int year;
 
-  RusunBlokBloc(this.rusunRepository, this.rusunId) : super(RusunBlokInitial()) {
+  RusunBlokBloc(this.rusunRepository, this.rusunId, this.month, this.year)
+      : super(RusunBlokInitial()) {
     add(LoadBlok(rusunId));
   }
 
@@ -33,9 +37,19 @@ class RusunBlokBloc extends Bloc<RusunBlokEvent, RusunBlokState> {
   Stream<RusunBlokState> getBlok(LoadBlok event) async* {
     try {
       yield RusunBlokLoading();
+      final store = await openStore();
+      final box = store.box<RusunBlok>();
+      final result = box.getAll();
+      store.close();
+      if (result.isNotEmpty) {
+        pagingController.appendLastPage(result);
+        yield RusunBlokSuccess(result);
+        return;
+      }
+
       final response = await rusunRepository.getBlok(event.rusunId);
       pagingController.appendLastPage(response.data);
-      yield RusunBlokSuccess(response);
+      yield RusunBlokSuccess(response.data);
     } catch (e) {
       yield RusunBlokError();
     }

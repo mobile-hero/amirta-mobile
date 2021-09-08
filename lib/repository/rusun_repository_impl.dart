@@ -22,7 +22,7 @@ class RusunRepositoryImpl extends RusunRepository {
 
   Future<RusunUnitResponse> getUnit({
     required int rusunId,
-    required int buildingId,
+    int? buildingId,
     int? floor,
     int? meterType,
     int? month,

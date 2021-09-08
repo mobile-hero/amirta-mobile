@@ -8,7 +8,7 @@ class RusunUnitInitial extends RusunUnitState {}
 class RusunUnitLoading extends RusunUnitState {}
 
 class RusunUnitSuccess extends RusunUnitState {
-  final RusunUnitResponse result;
+  final List<RusunUnit> result;
 
   RusunUnitSuccess(this.result);
 }

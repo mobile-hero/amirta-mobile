@@ -13,7 +13,7 @@ abstract class RusunRepository extends BaseRepository {
 
   Future<RusunUnitResponse> getUnit({
     required int rusunId,
-    required int buildingId,
+    int? buildingId,
     int? floor,
     int? meterType,
     int? month,

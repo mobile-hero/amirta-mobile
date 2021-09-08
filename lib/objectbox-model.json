@@ -1,0 +1,225 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:637958275601113998",
+      "lastPropertyId": "11:7686325688583640166",
+      "name": "Rusun",
+      "properties": [
+        {
+          "id": "1:6221644265905247867",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:4079141346030310400",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "3:2731498046996582473",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:5330497378187944097",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "5:1764760859091668583",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "6:3389076873180224269",
+          "name": "city",
+          "type": 9
+        },
+        {
+          "id": "7:3447222099127561424",
+          "name": "district",
+          "type": 9
+        },
+        {
+          "id": "8:2266651004810905192",
+          "name": "village",
+          "type": 9
+        },
+        {
+          "id": "9:5462701243520572379",
+          "name": "latlng",
+          "type": 9
+        },
+        {
+          "id": "10:3983953441795420873",
+          "name": "photo",
+          "type": 9
+        },
+        {
+          "id": "11:7686325688583640166",
+          "name": "uprsName",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:413495204756433647",
+      "lastPropertyId": "4:6116122970362296288",
+      "name": "RusunBlok",
+      "properties": [
+        {
+          "id": "1:3176702115557724618",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:6177480518583890833",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "3:5622049350469973981",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:6116122970362296288",
+          "name": "buildingType",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6905296704192597529",
+      "lastPropertyId": "21:4138015969463550944",
+      "name": "RusunUnit",
+      "properties": [
+        {
+          "id": "1:4467267258172130392",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:5786620336739077977",
+          "name": "rusunId",
+          "type": 6
+        },
+        {
+          "id": "3:845578301719856563",
+          "name": "rusunName",
+          "type": 9
+        },
+        {
+          "id": "4:7271281740928290810",
+          "name": "buildingId",
+          "type": 6
+        },
+        {
+          "id": "5:4111998397964108529",
+          "name": "buildingName",
+          "type": 9
+        },
+        {
+          "id": "6:4199645836403145799",
+          "name": "floor",
+          "type": 6
+        },
+        {
+          "id": "7:6177771399799661631",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "8:2999121148151709008",
+          "name": "unitNumber",
+          "type": 9
+        },
+        {
+          "id": "9:9075765735910472928",
+          "name": "unitStatus",
+          "type": 9
+        },
+        {
+          "id": "10:923180786610821057",
+          "name": "residentName",
+          "type": 9
+        },
+        {
+          "id": "11:7585412134031530407",
+          "name": "mobilePhoneNumber",
+          "type": 9
+        },
+        {
+          "id": "12:9164646451410839529",
+          "name": "emailAddress",
+          "type": 9
+        },
+        {
+          "id": "13:3628895845095836351",
+          "name": "plnNumber",
+          "type": 9
+        },
+        {
+          "id": "14:5825085078702075201",
+          "name": "pdamNumber",
+          "type": 9
+        },
+        {
+          "id": "15:1431715780009829303",
+          "name": "plnMeterStatus",
+          "type": 6
+        },
+        {
+          "id": "16:958097385903357646",
+          "name": "pdamMeterStatus",
+          "type": 6
+        },
+        {
+          "id": "17:8488833098370710388",
+          "name": "plnMeterStatusName",
+          "type": 9
+        },
+        {
+          "id": "18:3574387769730681745",
+          "name": "pdamMeterStatusName",
+          "type": 9
+        },
+        {
+          "id": "19:9098392792203504725",
+          "name": "firstMeterValue",
+          "type": 8
+        },
+        {
+          "id": "20:8577778974178748961",
+          "name": "lastMeterValue",
+          "type": 8
+        },
+        {
+          "id": "21:4138015969463550944",
+          "name": "meterPostDtime",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:6905296704192597529",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

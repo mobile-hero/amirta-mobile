@@ -6,8 +6,10 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class RusunBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
+  final int month;
+  final int year;
 
-  RusunBottomSheet(this.scrollController);
+  RusunBottomSheet(this.scrollController, this.month, this.year);
 
   @override
   _RusunBottomSheetState createState() => _RusunBottomSheetState();
@@ -20,7 +22,11 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return RusunBloc(context.appProvider().rusunRepository);
+        return RusunBloc(
+          context.appProvider().rusunRepository,
+          widget.month,
+          widget.year,
+        );
       },
       child: BlocBuilder<RusunBloc, RusunState>(
         builder: (context, state) {

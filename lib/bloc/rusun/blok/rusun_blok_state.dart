@@ -8,7 +8,7 @@ class RusunBlokInitial extends RusunBlokState {}
 class RusunBlokLoading extends RusunBlokState {}
 
 class RusunBlokSuccess extends RusunBlokState {
-  final RusunBlokResponse result;
+  final List<RusunBlok> result;
 
   RusunBlokSuccess(this.result);
 }
