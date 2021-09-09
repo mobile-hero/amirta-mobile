@@ -61,9 +61,17 @@ class _SplashScreenState extends State<SplashScreen> {
   void startOpeningPage(int? result) {
     Future.microtask(() {
       if (result == 0) {
-        Navigator.pushNamed(context, "/login");
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          "/login",
+          (route) => false,
+        );
       } else {
-        Navigator.pushNamed(context, "/main");
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          "/main",
+          (route) => false,
+        );
       }
     });
   }

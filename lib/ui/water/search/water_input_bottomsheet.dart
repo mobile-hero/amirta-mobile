@@ -15,12 +15,16 @@ class WaterInputBottomSheet extends StatefulWidget {
   final Rusun rusun;
   final RusunBlok rusunBlok;
   final RusunUnit rusunUnit;
+  final int month;
+  final int year;
 
   const WaterInputBottomSheet({
     required this.scrollController,
     required this.rusun,
     required this.rusunBlok,
     required this.rusunUnit,
+    required this.month,
+    required this.year,
   });
 
   @override
@@ -108,7 +112,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                           });
                         },
                         activeColor: waterfall,
-                        // inactiveTrackColor: carrot,
+                        trackColor: carrot,
                       ),
                     ],
                   ),
@@ -127,7 +131,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                       Expanded(
                         child: TitleValueBox(
                           title: 'txt_rusun'.tr(),
-                          value: widget.rusun.name,
+                          value: widget.rusunUnit.rusunName,
                         ),
                       ),
                     ],
@@ -218,7 +222,6 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                   BlocConsumer<UploadBloc, UploadState>(
                     listener: (context, uploadState) {
                       if (uploadState is UploadSuccess) {
-                        final dateTime = DateTime.now();
                         context.read<WaterAddReportBloc>().add(
                               AddReport(
                                 isConditionGood,
@@ -226,8 +229,8 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                   rusunId: widget.rusunUnit.rusunId,
                                   buildingId: widget.rusunUnit.buildingId,
                                   unitId: widget.rusunUnit.id,
-                                  month: dateTime.month,
-                                  year: dateTime.year.toString(),
+                                  month: widget.month,
+                                  year: widget.year.toString(),
                                   meterType: 1,
                                   meterValue:
                                       double.parse(numberController.text),

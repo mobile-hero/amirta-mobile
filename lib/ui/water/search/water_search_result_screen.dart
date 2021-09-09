@@ -3,6 +3,7 @@ import 'package:amirta_mobile/data/rusun/rusun_unit.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/water/search/water_input_bottomsheet.dart';
+import 'package:amirta_mobile/ui/water/search/water_input_done_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:amirta_mobile/ui/water/water_customer_item.dart';
@@ -56,12 +57,25 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                     onTap: () {
                       context.showScrollableBottomSheet(
                         builder: (context, scrollController) {
-                          return WaterInputBottomSheet(
-                            scrollController: scrollController,
-                            rusun: args.rusun,
-                            rusunBlok: args.blok,
-                            rusunUnit: item,
-                          );
+                          if (item.lastMeterValue != null) {
+                            return WaterInputDoneBottomSheet(
+                              scrollController: scrollController,
+                              rusun: args.rusun,
+                              rusunBlok: args.blok,
+                              rusunUnit: item,
+                              month: args.month,
+                              year: args.year,
+                            );
+                          } else {
+                            return WaterInputBottomSheet(
+                              scrollController: scrollController,
+                              rusun: args.rusun,
+                              rusunBlok: args.blok,
+                              rusunUnit: item,
+                              month: args.month,
+                              year: args.year,
+                            );
+                          }
                         },
                       );
                     },

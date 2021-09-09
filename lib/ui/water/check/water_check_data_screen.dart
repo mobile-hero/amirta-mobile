@@ -185,9 +185,10 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                 onTap: () {
                   context.showScrollableBottomSheet(
                     builder: (context, scrollController) {
-                      return WaterInputDoneBottomSheet(
+                      return SizedBox();
+                      /*return WaterInputDoneBottomSheet(
                         scrollController: scrollController,
-                      );
+                      );*/
                     },
                   );
                 },
