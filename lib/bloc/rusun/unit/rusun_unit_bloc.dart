@@ -57,17 +57,20 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
 
   Stream<RusunUnitState> getUnit(LoadUnit event) async* {
     try {
-      yield RusunUnitLoading();
       final store = await openStore();
+      yield RusunUnitLoading();
 
       // get rusun unit value
       final box = store.box<RusunUnit>();
-      Condition<RusunUnit> queryCondition =
-          RusunUnit_.rusunId.equals(event.rusunId) &
-              RusunUnit_.buildingId.equals(event.buildingId);
+      Condition<RusunUnit> queryCondition = RusunUnit_.rusunId.equals(rusunId) &
+          RusunUnit_.buildingId.equals(buildingId);
       if (event.floor != null) {
         queryCondition =
             queryCondition.and(RusunUnit_.floor.equals(event.floor!));
+      }
+      if (event.code != null && event.code!.isNotEmpty) {
+        queryCondition =
+            queryCondition.and(RusunUnit_.code.equals(event.code!));
       }
       final result = box.query(queryCondition).build().find();
       print(result);
@@ -76,7 +79,7 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
         local = true;
         final box = store.box<RusunUnitValue>();
         Condition<RusunUnitValue> queryCondition =
-            RusunUnitValue_.rusunId.equals(event.rusunId) &
+            RusunUnitValue_.rusunId.equals(rusunId) &
                 RusunUnitValue_.buildingId.equals(buildingId) &
                 RusunUnitValue_.month.equals(month) &
                 RusunUnitValue_.year.equals(year);
@@ -84,11 +87,12 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
           queryCondition =
               queryCondition.and(RusunUnitValue_.floor.equals(event.floor!));
         }
-        if (event.code != null) {
+        if (event.code != null && event.code!.isNotEmpty) {
           queryCondition =
               queryCondition.and(RusunUnitValue_.code.equals(event.code!));
         }
         values = box.query(queryCondition).build().find();
+        print(values.map((e) => e.toJson()));
 
         pagingController.appendLastPage(result);
         store.close();

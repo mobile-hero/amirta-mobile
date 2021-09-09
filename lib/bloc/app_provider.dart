@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:amirta_mobile/data/account/profile.dart';
 import 'package:amirta_mobile/repository/repository.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info/device_info.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class AppProvider {
   final Dio dio;
   final RepositoryConfig repositoryConfig;
   final DeviceInfoPlugin deviceInfo;
+  final Connectivity connectivity;
   final AccountLocalRepository accountLocalRepository;
   final AccountRepository accountRepository;
   final RusunRepository rusunRepository;
@@ -22,6 +24,7 @@ class AppProvider {
     required this.dio,
     required this.repositoryConfig,
     required this.deviceInfo,
+    required this.connectivity,
     required this.accountLocalRepository,
     required this.accountRepository,
     required this.rusunRepository,
@@ -63,8 +66,8 @@ class AppProvider {
     repositoryConfig.setDeviceId(deviceId);
   }
 
-  _setupHeaderToken() {
-    final user = accountLocalRepository.getUser();
+  _setupHeaderToken() async {
+    final user = await accountLocalRepository.getUser();
     if (user != null) {
       _user = user;
       repositoryConfig.setToken(user.sessid!);

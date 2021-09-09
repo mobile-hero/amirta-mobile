@@ -9,4 +9,10 @@ class WaterAddReportLoading extends WaterAddReportState {}
 
 class WaterAddReportSuccess extends WaterAddReportState {}
 
-class WaterAddReportError extends WaterAddReportState {}
+class WaterAddReportSuccessLocal extends WaterAddReportState {}
+
+class WaterAddReportError extends WaterAddReportState {
+  final String errorMessage;
+
+  WaterAddReportError(this.errorMessage);
+}

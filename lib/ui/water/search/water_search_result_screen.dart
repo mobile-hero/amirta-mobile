@@ -44,8 +44,9 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
               pagingController: pagingController,
               builderDelegate: PagedChildBuilderDelegate(
                 itemBuilder: (context, item, position) {
+                  print(item.id);
                   return WaterCustomerItem(
-                    customerName: item.residentName ?? "-",
+                    customerName: item.residentName,
                     locationName: item.buildingName,
                     inputDone: bloc.local
                         ? values

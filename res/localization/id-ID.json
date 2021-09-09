@@ -32,5 +32,6 @@
   "txt_water_data_desc": "Berikut adalah data Meteran Air tahun 2021",
   "btn_show": "Tampilkan",
   "txt_list_data": "List Data",
-  "txt_data_not_found": "Data tidak ditemukan"
+  "txt_data_not_found": "Data tidak ditemukan",
+  "txt_data_saved": "Data Berhasil Disimpan"
 }

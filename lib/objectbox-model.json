@@ -338,17 +338,23 @@
         {
           "id": "2:3456476591173797315",
           "name": "rusunId",
-          "type": 6
+          "type": 6,
+          "flags": 8,
+          "indexId": "11:4384752781278384513"
         },
         {
           "id": "3:7983308573714078669",
           "name": "buildingId",
-          "type": 6
+          "type": 6,
+          "flags": 8,
+          "indexId": "12:2595682310021010378"
         },
         {
           "id": "4:6138121611622046812",
           "name": "unitId",
-          "type": 6
+          "type": 6,
+          "flags": 8,
+          "indexId": "13:345099013392797071"
         },
         {
           "id": "5:6151774607788103137",
@@ -382,10 +388,39 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "6:2594516701243142554",
+      "lastPropertyId": "4:2065393477755301091",
+      "name": "MeterStatusWrite",
+      "properties": [
+        {
+          "id": "1:3435648221409240982",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4477873923616849240",
+          "name": "unitId",
+          "type": 6
+        },
+        {
+          "id": "3:3321019788917712877",
+          "name": "meterType",
+          "type": 6
+        },
+        {
+          "id": "4:2065393477755301091",
+          "name": "status",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:7180620432326266397",
-  "lastIndexId": "10:8231485393352350736",
+  "lastEntityId": "6:2594516701243142554",
+  "lastIndexId": "13:345099013392797071",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

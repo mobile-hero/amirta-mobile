@@ -14,6 +14,7 @@ import 'package:amirta_mobile/ui/splash/splash_screen.dart';
 import 'package:amirta_mobile/ui/water/check/water_check_data_screen.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_screen.dart';
 import 'package:amirta_mobile/ui/water/water_form_screen.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info/device_info.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -222,60 +224,41 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SharedPreferences>(
-      future: SharedPreferences.getInstance(),
+    return FutureBuilder<PackageInfo>(
+      future: PackageInfo.fromPlatform(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final accountLocal = AccountLocalRepositoryImpl(snapshot.data!);
-          return FutureBuilder<PackageInfo>(
-            future: PackageInfo.fromPlatform(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final info = snapshot.data!;
-                repositoryConfig.setVersion(info.version);
-                return Provider<AppProvider>(
-                  create: (_) {
-                    return AppProvider(
-                      dio: dio,
-                      repositoryConfig: repositoryConfig,
-                      deviceInfo: DeviceInfoPlugin(),
-                      accountLocalRepository: accountLocal,
-                      accountRepository:
-                          AccountRepositoryImpl(dio, repositoryConfig),
-                      rusunRepository:
-                          RusunRepositoryImpl(dio, repositoryConfig),
-                      fcmRepository: FcmRepositoryImpl(dio, repositoryConfig),
-                      pengaduanRepository:
-                          PengaduanRepositoryImpl(dio, repositoryConfig),
-                      uploadImageRepository:
-                          UploadImageRepositoryImpl(dio, repositoryConfig),
-                    );
-                  },
-                  child: FutureBuilder(
-                    future: Firebase.initializeApp(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return _initApp();
-                      }
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  ),
-                );
-              }
-
-              return Container(
-                color: borderColor,
-                width: double.infinity,
-                height: double.infinity,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(egyptian),
-                  ),
-                ),
+          final info = snapshot.data!;
+          repositoryConfig.setVersion(info.version);
+          return Provider<AppProvider>(
+            create: (_) {
+              return AppProvider(
+                dio: dio,
+                repositoryConfig: repositoryConfig,
+                deviceInfo: DeviceInfoPlugin(),
+                connectivity: Connectivity(),
+                accountLocalRepository:
+                    AccountLocalRepositoryImpl(FlutterSecureStorage()),
+                accountRepository: AccountRepositoryImpl(dio, repositoryConfig),
+                rusunRepository: RusunRepositoryImpl(dio, repositoryConfig),
+                fcmRepository: FcmRepositoryImpl(dio, repositoryConfig),
+                pengaduanRepository:
+                    PengaduanRepositoryImpl(dio, repositoryConfig),
+                uploadImageRepository:
+                    UploadImageRepositoryImpl(dio, repositoryConfig),
               );
             },
+            child: FutureBuilder(
+              future: Firebase.initializeApp(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return _initApp();
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
           );
         }
 

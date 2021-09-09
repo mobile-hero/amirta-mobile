@@ -1,14 +1,14 @@
 import 'package:amirta_mobile/data/account/profile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class AccountLocalRepository {
-  final SharedPreferences prefs;
+  final FlutterSecureStorage prefs;
 
   AccountLocalRepository(this.prefs);
-  
-  Future<bool> deleteAll();
 
-  Profile? getUser();
-  
-  Future<bool> saveUser(Profile user);
+  Future<void> deleteAll();
+
+  Future<Profile?> getUser();
+
+  Future<void> saveUser(Profile user);
 }

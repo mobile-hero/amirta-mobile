@@ -9,7 +9,9 @@
     
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="Amirta">
+        android:label="Amirta"
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/my_backup_rules">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

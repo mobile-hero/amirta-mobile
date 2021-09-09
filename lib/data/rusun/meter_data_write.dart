@@ -21,8 +21,11 @@ class MeterDataWrite {
 
   @Id()
   int? id;
+  @Index()
   final int rusunId;
+  @Index()
   final int buildingId;
+  @Index()
   final int unitId;
   final int month;
   final String year;

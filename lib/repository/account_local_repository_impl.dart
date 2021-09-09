@@ -2,25 +2,25 @@ import 'dart:convert';
 
 import 'package:amirta_mobile/data/account/profile.dart';
 import 'package:amirta_mobile/repository/account_local_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AccountLocalRepositoryImpl extends AccountLocalRepository {
-  AccountLocalRepositoryImpl(SharedPreferences prefs) : super(prefs);
+  AccountLocalRepositoryImpl(FlutterSecureStorage prefs) : super(prefs);
 
   @override
-  Future<bool> deleteAll() async {
-    return prefs.clear();
+  Future<void> deleteAll() async {
+    return prefs.deleteAll();
   }
 
-  Profile? getUser() {
-    if (prefs.containsKey("user")) {
-      final json = prefs.getString("user")!;
-      return Profile.fromJson(jsonDecode(json));
+  Future<Profile?> getUser() async {
+    if (await prefs.containsKey(key: "user")) {
+      final json = await prefs.read(key: "user");
+      return Profile.fromJson(jsonDecode(json!));
     }
     return null;
   }
 
-  Future<bool> saveUser(Profile user) {
-    return prefs.setString("user", jsonEncode(user.toJson()));
+  Future<void> saveUser(Profile user) {
+    return prefs.write(key: "user", value: jsonEncode(user.toJson()));
   }
 }

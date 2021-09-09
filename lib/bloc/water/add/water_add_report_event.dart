@@ -5,6 +5,10 @@ abstract class WaterAddReportEvent {}
 
 class AddReport extends WaterAddReportEvent {
   final MeterDataWrite dataWrite;
+  final bool meterCondition;
 
-  AddReport(this.dataWrite);
+  AddReport(
+    this.meterCondition,
+    this.dataWrite,
+  );
 }

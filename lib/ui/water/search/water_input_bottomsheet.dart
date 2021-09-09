@@ -55,7 +55,10 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
       providers: [
         BlocProvider(
           create: (context) {
-            return WaterAddReportBloc(context.appProvider().rusunRepository);
+            return WaterAddReportBloc(
+              context.appProvider().rusunRepository,
+              context.appProvider().connectivity,
+            );
           },
         ),
         BlocProvider(
@@ -67,7 +70,17 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
       child: BlocConsumer<WaterAddReportBloc, WaterAddReportState>(
         listener: (context, state) {
           if (state is WaterAddReportSuccess) {
+            context.showCustomToast(
+              type: CustomToastType.success,
+              message: "txt_data_saved".tr(),
+            );
             Navigator.pop(context);
+          }
+          if (state is WaterAddReportError) {
+            context.showCustomToast(
+              type: CustomToastType.error,
+              message: state.errorMessage,
+            );
           }
         },
         builder: (context, state) {
@@ -207,17 +220,21 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                       if (uploadState is UploadSuccess) {
                         final dateTime = DateTime.now();
                         context.read<WaterAddReportBloc>().add(
-                              AddReport(MeterDataWrite(
-                                rusunId: widget.rusunUnit.rusunId,
-                                buildingId: widget.rusunUnit.buildingId,
-                                unitId: widget.rusunUnit.id,
-                                month: dateTime.month,
-                                year: dateTime.year.toString(),
-                                meterType: 1,
-                                meterValue: double.parse(numberController.text),
-                                notes: noteController.text,
-                                image: uploadState.url,
-                              )),
+                              AddReport(
+                                isConditionGood,
+                                MeterDataWrite(
+                                  rusunId: widget.rusunUnit.rusunId,
+                                  buildingId: widget.rusunUnit.buildingId,
+                                  unitId: widget.rusunUnit.id,
+                                  month: dateTime.month,
+                                  year: dateTime.year.toString(),
+                                  meterType: 1,
+                                  meterValue:
+                                      double.parse(numberController.text),
+                                  notes: noteController.text,
+                                  image: uploadState.url,
+                                ),
+                              ),
                             );
                       }
                     },

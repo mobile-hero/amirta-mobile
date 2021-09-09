@@ -1,7 +1,7 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class WaterCustomerItem extends StatelessWidget {
-  final String customerName;
+  final String? customerName;
   final String locationName;
   final bool inputDone;
   final VoidCallback onTap;
@@ -11,7 +11,6 @@ class WaterCustomerItem extends StatelessWidget {
     required this.locationName,
     required this.inputDone,
     required this.onTap,
-    
   });
 
   @override
@@ -44,9 +43,10 @@ class WaterCustomerItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        customerName,
+                        customerName ?? "Belum Ada Penghuni",
                         style: context.styleBody1.copyWith(
                           fontWeight: FontWeight.bold,
+                          color: customerName != null ? grease : orange,
                         ),
                       ),
                       Text(

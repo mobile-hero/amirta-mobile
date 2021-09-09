@@ -15,4 +15,6 @@ class SimpleResponse {
   factory SimpleResponse.fromJson(Map<String, dynamic> json) => _$SimpleResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$SimpleResponseToJson(this);
+  
+  bool get requestSuccess => responsecode == '00';
 }
