@@ -1,23 +1,24 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class LantaiBottomSheet extends StatefulWidget {
+class TahunBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
 
-  LantaiBottomSheet(this.scrollController);
+  TahunBottomSheet(this.scrollController);
 
   @override
-  _LantaiBottomSheetState createState() => _LantaiBottomSheetState();
+  _TahunBottomSheetState createState() => _TahunBottomSheetState();
 }
 
-class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
-  final keywordController = TextEditingController();
+class _TahunBottomSheetState extends State<TahunBottomSheet> {
   final PagingController<int, int> pagingController =
       PagingController(firstPageKey: 0);
 
   @override
   void initState() {
-    pagingController.appendLastPage(List.generate(22, (index) => index - 1));
+    final year = DateTime.now().year;
+    pagingController.appendLastPage(
+        List.generate(2021 - year + 1, (index) => index + 2021));
     super.initState();
   }
 
@@ -37,7 +38,7 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Lantai',
+                      'Tahun',
                       style: context.styleBody1.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,18 +56,6 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                   ),
                 ],
               ),
-              /*LabeledInputField(
-                keywordController,
-                label: 'Nama Blok/Tower',
-                suffix: Icon(
-                  Icons.search,
-                  color: egyptian,
-                ),
-                suffixConstraints: BoxConstraints(
-                  minHeight: 20,
-                ),
-                onChanged: (value) {},
-              ),*/
             ],
           ),
         ),
@@ -77,13 +66,12 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
             builderDelegate: PagedChildBuilderDelegate(
               itemBuilder: (context, item, position) {
                 return ListTile(
-                  dense: true,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: spaceBig,
-                    vertical: 0,
+                    vertical: spaceSmall,
                   ),
                   title: Text(
-                    item == -1 ? "Semua Lantai" : "Lantai $item",
+                    item.toString(),
                     style: context.styleBody1,
                   ),
                   onTap: () {

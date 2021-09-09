@@ -12,17 +12,15 @@ import 'package:image_picker/image_picker.dart';
 
 class WaterInputBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
-  final Rusun rusun;
-  final RusunBlok rusunBlok;
   final RusunUnit rusunUnit;
+  final int meterStatus;
   final int month;
   final int year;
-
+  
   const WaterInputBottomSheet({
     required this.scrollController,
-    required this.rusun,
-    required this.rusunBlok,
     required this.rusunUnit,
+    required this.meterStatus,
     required this.month,
     required this.year,
   });
@@ -38,19 +36,22 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
 
   final ImagePicker _picker = ImagePicker();
   XFile? selectedImage;
+  
+  @override
+  void initState() {
+    isConditionGood = widget.meterStatus == 0;
+    super.initState();
+  }
 
   @override
   void dispose() {
-    isConditionGood = widget.rusunUnit.pdamMeterStatus == 0;
     noteController.dispose();
     numberController.dispose();
     super.dispose();
   }
 
   bool get enableSaveButton {
-    return noteController.text.trim().isNotEmpty &&
-        numberController.text.trim().isNotEmpty &&
-        selectedImage != null;
+    return numberController.text.trim().isNotEmpty && selectedImage != null;
   }
 
   @override
@@ -234,7 +235,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                   meterType: 1,
                                   meterValue:
                                       double.parse(numberController.text),
-                                  notes: noteController.text,
+                                  notes: noteController.text.trim(),
                                   image: uploadState.url,
                                 ),
                               ),

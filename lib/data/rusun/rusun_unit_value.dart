@@ -42,11 +42,11 @@ class RusunUnitValue {
   final String unitStatus;
   final String plnNumber;
   final String pdamNumber;
-  final int plnMeterStatus;
-  final int pdamMeterStatus;
+  int plnMeterStatus;
+  int pdamMeterStatus;
   final double? firstMeterValue;
-  final double? lastMeterValue;
-  final DateTime? meterPostDtime;
+  double? lastMeterValue;
+  DateTime? meterPostDtime;
   final int month;
   final int year;
 

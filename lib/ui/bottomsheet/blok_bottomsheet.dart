@@ -7,10 +7,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class BlokBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
   final int rusunId;
-  final int month;
-  final int year;
 
-  BlokBottomSheet(this.scrollController, this.rusunId, this.month, this.year);
+  BlokBottomSheet(this.scrollController, this.rusunId);
 
   @override
   _BlokBottomSheetState createState() => _BlokBottomSheetState();
@@ -26,8 +24,6 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
         return RusunBlokBloc(
           context.appProvider().rusunRepository,
           widget.rusunId,
-          widget.month,
-          widget.year,
         );
       },
       child: BlocBuilder<RusunBlokBloc, RusunBlokState>(
@@ -88,6 +84,7 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
                   builderDelegate: PagedChildBuilderDelegate(
                     itemBuilder: (context, item, position) {
                       return ListTile(
+                        dense: true,
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: spaceBig,
                           vertical: spaceSmall,

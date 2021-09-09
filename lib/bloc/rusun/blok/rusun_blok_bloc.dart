@@ -14,10 +14,8 @@ part 'rusun_blok_state.dart';
 class RusunBlokBloc extends Bloc<RusunBlokEvent, RusunBlokState> {
   final RusunRepository rusunRepository;
   final int rusunId;
-  final int month;
-  final int year;
 
-  RusunBlokBloc(this.rusunRepository, this.rusunId, this.month, this.year)
+  RusunBlokBloc(this.rusunRepository, this.rusunId)
       : super(RusunBlokInitial()) {
     add(LoadBlok(rusunId));
   }

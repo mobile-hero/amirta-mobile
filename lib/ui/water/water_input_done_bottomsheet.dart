@@ -12,17 +12,17 @@ import 'package:image_picker/image_picker.dart';
 
 class WaterInputDoneBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
-  final Rusun rusun;
-  final RusunBlok rusunBlok;
   final RusunUnit rusunUnit;
+  final int meterStatus;
+  final double lastMeterValue;
   final int month;
   final int year;
 
   const WaterInputDoneBottomSheet({
     required this.scrollController,
-    required this.rusun,
-    required this.rusunBlok,
     required this.rusunUnit,
+    required this.meterStatus,
+    required this.lastMeterValue,
     required this.month,
     required this.year,
   });
@@ -41,15 +41,20 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
   XFile? selectedImage;
 
   @override
+  void initState() {
+    isConditionGood = widget.meterStatus == 0;
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    isConditionGood = widget.rusunUnit.pdamMeterStatus == 0;
     noteController.dispose();
     numberController.dispose();
     super.dispose();
   }
 
   bool get enableSaveButton {
-    return noteController.text.trim().isNotEmpty && selectedImage != null;
+    return selectedImage != null;
   }
 
   @override
@@ -121,9 +126,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                   width: double.infinity,
                   child: TitleValueBox(
                     title: 'txt_number_water_meter'.tr(),
-                    value:
-                        widget.rusunUnit.lastMeterValue?.toStringAsFixed(0) ??
-                            "0",
+                    value: widget.lastMeterValue.toStringAsFixed(0),
                   ),
                 ),
                 const SizedBox(
@@ -238,8 +241,8 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                                 month: widget.month,
                                 year: widget.year.toString(),
                                 meterType: 1,
-                                meterValue: widget.rusunUnit.lastMeterValue!,
-                                notes: noteController.text,
+                                meterValue: widget.lastMeterValue,
+                                notes: noteController.text.trim(),
                                 image: uploadState.url,
                               ),
                             ),

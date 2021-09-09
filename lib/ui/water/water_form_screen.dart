@@ -2,9 +2,11 @@ import 'package:amirta_mobile/bloc/rusun/download_rusun_bloc.dart';
 import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/bottomsheet/blok_bottomsheet.dart';
+import 'package:amirta_mobile/ui/bottomsheet/bulan_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/lantai_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/rounded_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/rusun_bottomsheet.dart';
+import 'package:amirta_mobile/ui/bottomsheet/tahun_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,13 +30,15 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
   late int selectedMonth;
   late int selectedYear;
 
+  final dateFormat = DateFormat.MMMM('id');
+
   @override
   void initState() {
     final dateTime = DateTime.now();
     selectedMonth = dateTime.month;
     selectedYear = dateTime.year;
     monthController.text =
-        DateFormat.MMMM().format(DateTime(selectedYear, selectedMonth));
+        dateFormat.format(DateTime(selectedYear, selectedMonth));
     yearController.text = selectedYear.toString();
     super.initState();
   }
@@ -94,6 +98,23 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           child: LabeledInputField(
                             monthController,
                             label: "txt_bulan".tr(),
+                            readOnly: true,
+                            onTap: () async {
+                              final result =
+                                  await context.showScrollableBottomSheet<int>(
+                                builder: (context, scrollController) {
+                                  return BulanBottomSheet(
+                                      scrollController, selectedYear);
+                                },
+                              );
+                              if (result != null) {
+                                setState(() {
+                                  monthController.text = dateFormat
+                                      .format(DateTime(selectedYear, result));
+                                  selectedMonth = result;
+                                });
+                              }
+                            },
                           ),
                         ),
                         const SizedBox(
@@ -104,6 +125,21 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           child: LabeledInputField(
                             yearController,
                             label: "txt_tahun".tr(),
+                            readOnly: true,
+                            onTap: () async {
+                              final result =
+                                  await context.showScrollableBottomSheet<int>(
+                                builder: (context, scrollController) {
+                                  return TahunBottomSheet(scrollController);
+                                },
+                              );
+                              if (result != null) {
+                                setState(() {
+                                  yearController.text = result.toString();
+                                  selectedYear = result;
+                                });
+                              }
+                            },
                           ),
                         ),
                         const SizedBox(
@@ -114,7 +150,10 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           child: ImageButton(
                             () {
                               context.read<DownloadRusunBloc>().add(
-                                    DownloadWaterData(9, 2021),
+                                    DownloadWaterData(
+                                      selectedMonth,
+                                      selectedYear,
+                                    ),
                                   );
                             },
                             Icon(Icons.cloud_download_outlined),
@@ -133,10 +172,13 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                             return RusunBottomSheet(scrollController, 9, 10);
                           },
                         );
-                        if (result != null) {
+                        if (result != null && result != selectedRusun) {
                           setState(() {
                             rusunController.text = result.name;
                             selectedRusun = result;
+
+                            blokController.text = "";
+                            selectedBlok = null;
                           });
                           print(result.toJson());
                         }
@@ -161,14 +203,19 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               final result = await context
                                   .showScrollableBottomSheet<RusunBlok>(
                                 builder: (context, scrollController) {
-                                  return BlokBottomSheet(scrollController,
-                                      selectedRusun!.id, 9, 2021);
+                                  return BlokBottomSheet(
+                                    scrollController,
+                                    selectedRusun!.id,
+                                  );
                                 },
                               );
-                              if (result != null) {
+                              if (result != null && result != selectedBlok) {
                                 setState(() {
                                   blokController.text = result.displayName;
                                   selectedBlok = result;
+
+                                  lantaiController.text = "";
+                                  selectedLantai = null;
                                 });
                                 print(result.toJson());
                               }
@@ -200,7 +247,8 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               );
                               if (result != null) {
                                 setState(() {
-                                  lantaiController.text = "Lt. $result";
+                                  lantaiController.text =
+                                      result == -1 ? "Semua" : "Lt. $result";
                                   selectedLantai = result;
                                 });
                               }
@@ -276,18 +324,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                         Navigator.pushNamed(
                           context,
                           '/water/check',
-                          arguments: WaterSearchResultArgument(
-                            9,
-                            2021,
-                            selectedRusun!,
-                            selectedBlok!,
-                            selectedLantai,
-                            numberController.text.trim(),
-                          ),
                         );
                       },
                       'btn_check_data'.tr(),
-                      isEnabled: selectedRusun != null && selectedBlok != null,
                     ),
                   ],
                 ),

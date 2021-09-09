@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:amirta_mobile/data/rusun/meter_data_write.dart';
-import 'package:amirta_mobile/data/rusun/meter_status_write.dart';
+import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/objectbox.g.dart';
 import 'package:amirta_mobile/repository/repository.dart';
 import 'package:amirta_mobile/utils/connectivity_result_utils.dart';
@@ -49,7 +48,7 @@ class WaterAddReportBloc
       final statusBox = store.box<MeterStatusWrite>();
       final statusWrite = MeterStatusWrite(
         unitId: dataWrite.unitId,
-        meterType: 1,
+        meterType: dataWrite.meterType,
         status: event.meterCondition ? 0 : 1,
       );
       final statusExisting = statusBox
@@ -64,11 +63,25 @@ class WaterAddReportBloc
         final statusResponse =
             await rusunRepository.changeMeterStatus(statusWrite);
         final response = await rusunRepository.addMeterData(dataWrite);
-        
+
         dataBox.remove(dataId);
         statusBox.remove(statusId);
 
-        if (response.requestSuccess) {
+        final unitBox = store.box<RusunUnitValue>();
+        final result = unitBox.query(
+          RusunUnitValue_.unitId.equals(event.dataWrite.unitId) &
+              RusunUnitValue_.month.equals(event.dataWrite.month) &
+              RusunUnitValue_.year.equals(int.parse(event.dataWrite.year)),
+        ).build().findFirst();
+        
+        if (result != null) {
+          result.pdamMeterStatus = statusWrite.status;
+          result.lastMeterValue = event.dataWrite.meterValue;
+          result.meterPostDtime = DateTime.now();
+          unitBox.put(result);
+        }
+
+        if (statusResponse.requestSuccess && response.requestSuccess) {
           yield WaterAddReportSuccess();
         } else {
           yield WaterAddReportError(response.responsemessage);
