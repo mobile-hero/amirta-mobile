@@ -22,10 +22,10 @@ class _BulanBottomSheetState extends State<BulanBottomSheet> {
     final dateTime = DateTime.now();
     int totalMonth = 12;
     if (dateTime.year == widget.year) {
-      totalMonth = dateTime.month;
+      totalMonth = dateTime.month + 1;
     }
-    pagingController
-        .appendLastPage(List.generate(totalMonth, (index) => index + 1));
+    pagingController.appendLastPage(
+        List.generate(totalMonth, (index) => index + 1).reversed.toList());
     super.initState();
   }
 

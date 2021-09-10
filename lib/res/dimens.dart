@@ -26,7 +26,7 @@ const EdgeInsets buttonDefaultPadding =
 
 /*  Card */
 
-const double cardRadius = 20.0;
+const double cardRadius = 10.0;
 
 /* Space */
 

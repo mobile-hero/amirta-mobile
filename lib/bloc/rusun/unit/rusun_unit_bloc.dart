@@ -77,7 +77,6 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
       yield RusunUnitLoading();
 
       // get existing unit value
-      local = true;
       final box = store.box<RusunUnitValue>();
       Condition<RusunUnitValue> queryCondition =
           RusunUnitValue_.rusunId.equals(event.rusunId) &
@@ -93,7 +92,7 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
             queryCondition.and(RusunUnitValue_.code.equals(event.code!));
       }
       values = box.query(queryCondition).build().find();
-
+      print(values);
       if (values.isNotEmpty) {
         // get existing unit value
         local = true;
@@ -111,6 +110,7 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
               queryCondition.and(RusunUnit_.code.equals(event.code!));
         }
         final result = box.query(queryCondition).build().find();
+        print(result);
         pagingController.appendLastPage(result);
         store.close();
 

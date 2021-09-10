@@ -58,9 +58,10 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                     customerName: item.residentName,
                     locationName: item.buildingName,
                     inputDone: bloc.local && values.isNotEmpty
-                        ? values
-                            .firstWhere((e) => e.unitId == item.id)
-                            .inputDone
+                        ? values.firstWhere((e) {
+                            print("values: ${e.unitId}; list: ${item.id}");
+                            return e.unitId == item.id;
+                          }).inputDone
                         : item.inputDone,
                     onTap: () {
                       context.showScrollableBottomSheet(

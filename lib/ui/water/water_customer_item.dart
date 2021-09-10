@@ -21,7 +21,7 @@ class WaterCustomerItem extends StatelessWidget {
           onTap: onTap,
           child: ShadowedContainer(
             padding: const EdgeInsets.all(spaceNormal),
-            borderRadius: 10.0,
+            borderRadius: cardRadius,
             child: Row(
               children: [
                 Container(

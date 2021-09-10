@@ -33,5 +33,7 @@
   "btn_show": "Tampilkan",
   "txt_list_data": "List Data",
   "txt_data_not_found": "Data tidak ditemukan",
-  "txt_data_saved": "Data Berhasil Disimpan"
+  "txt_data_saved": "Data Berhasil Disimpan",
+  "----Pengaduan-----": "",
+  "txt_no_more_complaint": "Anda telah melihat semua pengaduan"
 }
