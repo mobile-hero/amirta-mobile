@@ -56,18 +56,21 @@ class ComplaintBottomSheetContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
+              flex: 3,
               child: TitleValueBox(
                 title: 'txt_blok'.tr(),
                 value: 'Blok A',
               ),
             ),
             Expanded(
+              flex: 3,
               child: TitleValueBox(
                 title: 'txt_lantai'.tr(),
                 value: '2',
               ),
             ),
             Expanded(
+              flex: 2,
               child: TitleValueBox(
                 title: 'txt_nomor'.tr(),
                 value: '150',
@@ -82,18 +85,21 @@ class ComplaintBottomSheetContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
+              flex: 3,
               child: TitleValueBox(
                 title: 'txt_name'.tr(),
                 value: 'Halim Baskoro',
               ),
             ),
             Expanded(
+              flex: 3,
               child: TitleValueBox(
                 title: 'txt_phone_num'.tr(),
                 value: '081223703990',
               ),
             ),
             Expanded(
+              flex: 2,
               child: TitleValueBox(
                 title: 'txt_time'.tr(),
                 value: '10-01-2021',
