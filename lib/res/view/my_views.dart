@@ -9,6 +9,7 @@ export 'labeled_input_field.dart';
 export 'logout_button.dart';
 export 'my_progress_indicator.dart';
 export 'primary_button.dart';
+export 'secondary_button.dart';
 export 'shadowed_container.dart';
 export 'status_chip.dart';
 export 'title_value_box.dart';

@@ -1,5 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
+import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_completed_bottomsheet.dart';
+import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_inprocess_bottomsheet.dart';
+import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_rejected_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -77,14 +80,48 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                   _contentView(
                     inProcessController,
                     ComplaintCustomerItemType.neutral,
+                    () async {
+                      final result =
+                          await context.showScrollableBottomSheet<int>(
+                        builder: (context, scrollController) {
+                          return ComplaintInProcessBottomSheet(
+                              scrollController);
+                        },
+                      );
+                      if (result != null) {
+                        setState(() {});
+                      }
+                    },
                   ),
                   _contentView(
                     rejectedController,
                     ComplaintCustomerItemType.rejected,
+                    () async {
+                      final result =
+                          await context.showScrollableBottomSheet<int>(
+                        builder: (context, scrollController) {
+                          return ComplaintRejectedBottomSheet(scrollController);
+                        },
+                      );
+                      if (result != null) {
+                        setState(() {});
+                      }
+                    },
                   ),
                   _contentView(
                     completedController,
                     ComplaintCustomerItemType.completed,
+                    () async {
+                      final result =
+                        await context.showScrollableBottomSheet<int>(
+                        builder: (context, scrollController) {
+                          return ComplaintCompletedBottomSheet(scrollController);
+                        },
+                      );
+                      if (result != null) {
+                        setState(() {});
+                      }
+                    },
                   ),
                 ],
               ),
@@ -98,6 +135,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
   Widget _contentView(
     PagingController pagingController,
     ComplaintCustomerItemType type,
+    VoidCallback onTap,
   ) {
     return PagedListView(
       padding: const EdgeInsets.all(spaceMedium),
@@ -106,6 +144,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
         itemBuilder: (context, item, position) {
           return ComplaintCustomerItem(
             type: type,
+            onTap: onTap,
           );
         },
         noMoreItemsIndicatorBuilder: (context) {

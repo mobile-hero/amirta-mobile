@@ -295,7 +295,7 @@ class _MyAppState extends State<MyApp> {
         appBarTheme: AppBarTheme(
           backgroundColor: egyptian,
         ),
-        splashColor: forest,
+        splashColor: waterfall,
       ),
       routes: <String, WidgetBuilder>{
         '/splash': (context) => SplashScreen(),

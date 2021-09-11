@@ -1,4 +1,5 @@
 import 'package:amirta_mobile/my_material.dart';
+import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_detail_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_appbar.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -41,7 +42,20 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
         pagingController: pagingController,
         builderDelegate: PagedChildBuilderDelegate(
           itemBuilder: (context, item, position) {
-            return ComplaintCustomerItem();
+            return ComplaintCustomerItem(
+              onTap: () async {
+                final result =
+                  await context.showScrollableBottomSheet<int>(
+                  builder: (context, scrollController) {
+                    return ComplaintDetailBottomSheet(scrollController);
+                  },
+                );
+                if (result != null) {
+                  setState(() {
+                  });
+                }
+              },
+            );
           },
           noMoreItemsIndicatorBuilder: (context) {
             return Padding(
