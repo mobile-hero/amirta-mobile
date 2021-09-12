@@ -56,6 +56,65 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
         body: BlocConsumer<DownloadRusunBloc, DownloadRusunState>(
             listener: (context, state) {},
             builder: (context, state) {
+              if (state is DownloadRusunLoading) {
+                return Padding(
+                  padding: const EdgeInsets.all(spaceMedium),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'txt_input_air'.tr(),
+                                  style: context.styleHeadline4,
+                                ),
+                                Text(
+                                  'txt_input_air_desc'.tr(),
+                                  style: context.styleBody1,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(spaceMedium),
+                            child: Image.asset(
+                              imageRes('ic_air_bg.png'),
+                              color: egyptian.withOpacity(0.3),
+                              width: imgSizeMedium,
+                              height: imgSizeMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: spaceNormal,
+                      ),
+                      Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              MyProgressIndicator(
+                                height: 100,
+                              ),
+                              const SizedBox(
+                                height: spaceBig,
+                              ),
+                              Text(
+                                "Mengunduh data",
+                                style: context.styleHeadline5,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return SingleChildScrollView(
                 padding: const EdgeInsets.all(spaceMedium),
                 child: Column(
