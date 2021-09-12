@@ -52,10 +52,16 @@
   "txt_swipe_to_complete": "Swipe untuk menyelesaikan",
   "txt_create_complaint_desc": "Harap mengisi laporan peyelesaian Pengaduan",
   "txt_min_report_photo": "Minimal foto yang yang dilampirkan adalah 3 foto",
+  "txt_sure_set_complaint_complete": "Apakah Anda yakin telah menyelesaikan pengaduan ini?",
+  "txt_set_complaint_complete_1": "Selamat, Anda telah menyelesaikan Pengaduan Pada halaman berikutnya, Anda akan membuat ",
+  "txt_set_complaint_complete_2": "Laporan Pengaduan",
   "btn_take_action": "Tindak Lanjut",
   "btn_reject": "Tolak",
   "btn_confirm": "Konfirmasi",
   "btn_cancel": "Batal",
   "btn_close": "Tutup",
-  "btn_create_report": "Buat Laporan"
+  "btn_create_report": "Buat Laporan",
+  "btn_yes": "Yes",
+  "btn_not": "No",
+  "btn_next": "Selanjutnya"
 }

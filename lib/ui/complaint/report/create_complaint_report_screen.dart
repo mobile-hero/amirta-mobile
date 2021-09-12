@@ -31,6 +31,7 @@ class _CreateComplaintReportScreenState
         title: Text('Laporan Pengaduan'),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.all(spaceMedium),
         child: Column(
           children: [
             Center(
@@ -72,7 +73,13 @@ class _CreateComplaintReportScreenState
                 style: context.styleCaption,
               ),
             ),
+            const SizedBox(
+              height: spaceNormal,
+            ),
             _createImagePickerButton(context),
+            const SizedBox(
+              height: spaceNormal,
+            ),
             Center(
               child: Text(
                 'txt_min_report_photo'.tr(),
@@ -83,7 +90,9 @@ class _CreateComplaintReportScreenState
               height: spaceHuge,
             ),
             PrimaryButton(
-              () {},
+              () {
+                Navigator.pop(context);
+              },
               'btn_create_report'.tr(),
             ),
           ],
@@ -101,49 +110,54 @@ class _CreateComplaintReportScreenState
         builder: (context) {
           if (images.isNotEmpty) {
             return ListView.builder(
+              scrollDirection: Axis.horizontal,
               itemCount: images.length + 1,
               itemBuilder: (context, position) {
-                if (position <= images.length) {
+                if (position < images.length) {
                   return Padding(
                     padding: const EdgeInsets.only(right: spaceNormal),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(buttonRadius),
-                          child: Image.file(
-                            File(images[position].path),
-                            fit: BoxFit.cover,
-                            height: size,
-                            width: size,
+                    child: SizedBox(
+                      height: size,
+                      width: size,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(buttonRadius),
+                            child: Image.file(
+                              File(images[position].path),
+                              fit: BoxFit.cover,
+                              height: size,
+                              width: size,
+                            ),
                           ),
-                        ),
-                        Transform.translate(
-                          offset: Offset(5, -5),
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  images.removeAt(position);
-                                });
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(spaceTiny),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: white),
-                                  color: darkBackground,
-                                ),
-                                child: Icon(
-                                  Icons.clear,
-                                  color: white,
-                                  size: 10,
+                          Transform.translate(
+                            offset: Offset(5, -5),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    images.removeAt(position);
+                                  });
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(spaceTiny),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: white),
+                                    color: darkBackground,
+                                  ),
+                                  child: Icon(
+                                    Icons.clear,
+                                    color: white,
+                                    size: 10,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 }

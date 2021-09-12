@@ -82,14 +82,17 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                     ComplaintCustomerItemType.neutral,
                     () async {
                       final result =
-                          await context.showScrollableBottomSheet<int>(
+                          await context.showScrollableBottomSheet<bool>(
                         builder: (context, scrollController) {
                           return ComplaintInProcessBottomSheet(
                               scrollController);
                         },
                       );
                       if (result != null) {
-                        setState(() {});
+                        Navigator.pushNamed(
+                          context,
+                          '/complaint/set-complete',
+                        );
                       }
                     },
                   ),
@@ -113,9 +116,10 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                     ComplaintCustomerItemType.completed,
                     () async {
                       final result =
-                        await context.showScrollableBottomSheet<int>(
+                          await context.showScrollableBottomSheet<int>(
                         builder: (context, scrollController) {
-                          return ComplaintCompletedBottomSheet(scrollController);
+                          return ComplaintCompletedBottomSheet(
+                              scrollController);
                         },
                       );
                       if (result != null) {

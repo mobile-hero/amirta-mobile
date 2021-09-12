@@ -1,7 +1,6 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 
 class ComplaintRejectedBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
@@ -67,7 +66,9 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
               height: spaceHuge,
             ),
             PrimaryButton(
-                () {},
+              () {
+                Navigator.pop(context);
+              },
               "btn_close".tr(),
             ),
           ],

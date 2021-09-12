@@ -7,6 +7,8 @@ import 'package:amirta_mobile/repository/repository_config.dart';
 import 'package:amirta_mobile/repository/repository_impl.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_screen.dart';
 import 'package:amirta_mobile/ui/complaint/history/complaint_history_screen.dart';
+import 'package:amirta_mobile/ui/complaint/report/complaint_set_complete_screen.dart';
+import 'package:amirta_mobile/ui/complaint/report/create_complaint_report_screen.dart';
 import 'package:amirta_mobile/ui/home/home_screen.dart';
 import 'package:amirta_mobile/ui/login/login_screen.dart';
 import 'package:amirta_mobile/ui/main/main_screen.dart';
@@ -309,6 +311,8 @@ class _MyAppState extends State<MyApp> {
         '/water/check': (context) => WaterCheckDataScreen(),
         '/complaint': (context) => ComplaintScreen(),
         '/complaint/history': (context) => ComplaintHistoryScreen(),
+        '/complaint/set-complete': (context) => ComplaintSetCompleteScreen(),
+        '/complaint/create-report': (context) => CreateComplaintReportScreen(),
       },
       initialRoute: "/splash",
     );

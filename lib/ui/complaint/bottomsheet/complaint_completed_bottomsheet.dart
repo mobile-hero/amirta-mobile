@@ -1,7 +1,6 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 
 class ComplaintCompletedBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
@@ -9,7 +8,7 @@ class ComplaintCompletedBottomSheet extends StatelessWidget {
   const ComplaintCompletedBottomSheet(this.scrollController);
 
   final image =
-    'https://cdn11.bigcommerce.com/s-gobnp3073t/images/stencil/1280x1280/products/3864/12342/apigjlste__34068.1609247181.jpg?c=2';
+      'https://cdn11.bigcommerce.com/s-gobnp3073t/images/stencil/1280x1280/products/3864/12342/apigjlste__34068.1609247181.jpg?c=2';
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +112,9 @@ class ComplaintCompletedBottomSheet extends StatelessWidget {
               height: spaceHuge,
             ),
             PrimaryButton(
-                () {},
+              () {
+                Navigator.pop(context);
+              },
               "btn_close".tr(),
             ),
           ],

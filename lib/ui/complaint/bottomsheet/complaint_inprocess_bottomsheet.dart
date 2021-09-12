@@ -1,12 +1,14 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
+import 'package:amirta_mobile/ui/complaint/dialog/complaint_set_complete_dialog.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 class ComplaintInProcessBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
+  final GlobalKey<SlideActionState> slideKey = GlobalKey();
 
-  const ComplaintInProcessBottomSheet(this.scrollController);
+  ComplaintInProcessBottomSheet(this.scrollController);
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
               height: spaceHuge,
             ),
             SlideAction(
+              key: slideKey,
               height: 52,
               elevation: 0,
               outerColor: egyptian2,
@@ -77,7 +80,19 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
                 color: white,
               ),
               sliderButtonIconPadding: spaceTiny,
-              onSubmit: () {},
+              onSubmit: () async {
+                final result = await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return ComplaintSetCompleteDialog();
+                  },
+                );
+                if (result != null) {
+                  Navigator.pop(context, true);
+                } else {
+                  slideKey.currentState?.reset();
+                }
+              },
             ),
           ],
         ),
