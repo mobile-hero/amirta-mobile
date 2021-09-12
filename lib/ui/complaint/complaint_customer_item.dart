@@ -5,11 +5,11 @@ enum ComplaintCustomerItemType { neutral, rejected, completed }
 
 class ComplaintCustomerItem extends StatelessWidget {
   final ComplaintCustomerItemType type;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const ComplaintCustomerItem({
     this.type = ComplaintCustomerItemType.neutral,
-    required this.onTap,
+    this.onTap,
   });
 
   Color _getBorderColor() {

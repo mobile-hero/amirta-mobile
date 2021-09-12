@@ -45,13 +45,17 @@
   "txt_rejection_note": "Catatan Tolak Pengaduan",
   "txt_report_note": "Catatan Laporan",
   "txt_on_duty_photos": "Foto Lapangan",
+  "txt_accident_photos": "Foto Kejadian",
   "txt_complaint_in_process": "Dalam Process Penanganan",
   "txt_complaint_rejected": "Pengaduan Ditolak",
   "txt_complaint_completed": "Pengaduan Selesai",
   "txt_swipe_to_complete": "Swipe untuk menyelesaikan",
+  "txt_create_complaint_desc": "Harap mengisi laporan peyelesaian Pengaduan",
+  "txt_min_report_photo": "Minimal foto yang yang dilampirkan adalah 3 foto",
   "btn_take_action": "Tindak Lanjut",
   "btn_reject": "Tolak",
   "btn_confirm": "Konfirmasi",
   "btn_cancel": "Batal",
-  "btn_close": "Tutup"
+  "btn_close": "Tutup",
+  "btn_create_report": "Buat Laporan"
 }
