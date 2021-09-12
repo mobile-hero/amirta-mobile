@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
+import 'package:amirta_mobile/ui/complaint/dialog/complaint_accept_dialog.dart';
+import 'package:amirta_mobile/ui/complaint/dialog/complaint_reject_dialog.dart';
 
 class ComplaintDetailBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
@@ -24,7 +26,17 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
               children: [
                 Expanded(
                   child: PrimaryButton(
-                    () {},
+                    () async {
+                      final result = await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ComplaintAcceptDialog();
+                        },
+                      );
+                      if (result != null) {
+                        Navigator.pop(context);
+                      }
+                    },
                     "btn_take_action".tr(),
                   ),
                 ),
@@ -33,7 +45,17 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                 ),
                 Expanded(
                   child: SecondaryButton(
-                    () {},
+                    () async {
+                      final result = await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ComplaintRejectDialog();
+                        },
+                      );
+                      if (result != null) {
+                        Navigator.pop(context);
+                      }
+                    },
                     "btn_reject".tr(),
                   ),
                 ),

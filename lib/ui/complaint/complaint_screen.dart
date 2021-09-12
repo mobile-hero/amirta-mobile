@@ -44,15 +44,13 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
           itemBuilder: (context, item, position) {
             return ComplaintCustomerItem(
               onTap: () async {
-                final result =
-                  await context.showScrollableBottomSheet<int>(
+                final result = await context.showScrollableBottomSheet<int>(
                   builder: (context, scrollController) {
                     return ComplaintDetailBottomSheet(scrollController);
                   },
                 );
                 if (result != null) {
-                  setState(() {
-                  });
+                  setState(() {});
                 }
               },
             );
