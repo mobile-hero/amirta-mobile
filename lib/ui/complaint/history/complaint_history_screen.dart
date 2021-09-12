@@ -80,6 +80,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                   _contentView(
                     inProcessController,
                     ComplaintCustomerItemType.neutral,
+                    "txt_no_complaint_in_process".tr(),
                     () async {
                       final result =
                           await context.showScrollableBottomSheet<bool>(
@@ -99,6 +100,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                   _contentView(
                     rejectedController,
                     ComplaintCustomerItemType.rejected,
+                    "txt_no_complaint_rejected".tr(),
                     () async {
                       final result =
                           await context.showScrollableBottomSheet<int>(
@@ -114,6 +116,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                   _contentView(
                     completedController,
                     ComplaintCustomerItemType.completed,
+                    "txt_no_complaint_completed".tr(),
                     () async {
                       final result =
                           await context.showScrollableBottomSheet<int>(
@@ -139,6 +142,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
   Widget _contentView(
     PagingController pagingController,
     ComplaintCustomerItemType type,
+    String emptyMessage,
     VoidCallback onTap,
   ) {
     return PagedListView(
@@ -151,12 +155,12 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
             onTap: onTap,
           );
         },
-        noMoreItemsIndicatorBuilder: (context) {
+        noItemsFoundIndicatorBuilder: (context) {
           return Padding(
             padding: const EdgeInsets.all(spaceNormal),
             child: Center(
               child: Text(
-                'txt_no_more_complaint'.tr(),
+                emptyMessage,
                 style: context.styleCaption,
               ),
             ),

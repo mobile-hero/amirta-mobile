@@ -13,6 +13,8 @@ class _LoginPageState extends State<LoginPage> {
   final nrkController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool passwordVisible = false;
+
   @override
   void dispose() {
     nrkController.dispose();
@@ -85,7 +87,23 @@ class _LoginPageState extends State<LoginPage> {
                         LabeledInputField(
                           passwordController,
                           label: "Password",
-                          isPassword: true,
+                          isPassword: !passwordVisible,
+                          suffix: InkWell(
+                            child: Icon(
+                              passwordVisible
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: egyptian,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            },
+                          ),
+                          suffixConstraints: BoxConstraints(
+                            maxHeight: 20,
+                          ),
                         ),
                         PrimaryButton(
                           () {
