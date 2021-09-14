@@ -66,6 +66,7 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                   user?.userId ?? "-",
                                   style: context.styleBody2.copyWith(
+                                    fontWeight: FontWeight.w600,
                                     color: white.withOpacity(0.5),
                                   ),
                                 ),
@@ -103,10 +104,9 @@ class HomeScreen extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Image.asset(
-                                    imageRes('ic_panik_main_menu.png'),
+                                    imageRes('ic_panik_info_harian.png'),
                                     height: 30,
                                     width: 30,
-                                    scale: 5,
                                   ),
                                   const SizedBox(
                                     width: spaceMedium,
@@ -171,10 +171,9 @@ class HomeScreen extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         Image.asset(
-                                          imageRes('ic_panik_main_menu.png'),
+                                          imageRes('ic_pengaduan_info_harian.png'),
                                           height: 30,
                                           width: 30,
-                                          scale: 5,
                                         ),
                                         const SizedBox(
                                           width: spaceMedium,
@@ -216,10 +215,9 @@ class HomeScreen extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         Image.asset(
-                                          imageRes('ic_panik_main_menu.png'),
+                                          imageRes('ic_air_info_harian.png'),
                                           height: 30,
                                           width: 30,
-                                          scale: 5,
                                         ),
                                         const SizedBox(
                                           width: spaceMedium,
@@ -278,7 +276,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     briefItem(
                       context: context,
-                      image: 'ic_pengaduan_info_harian.png',
+                      image: 'ic_panik_info_harian.png',
                       title: 'Siti Zubaedah',
                       subtitle: 'Jatinegara Barat',
                       date: '13:44',
@@ -288,7 +286,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     briefItem(
                       context: context,
-                      image: 'ic_pengaduan_info_harian.png',
+                      image: 'ic_air_info_harian.png',
                       title: 'Jatinegara Kaum',
                       subtitle: 'Blok D Nomor 177',
                       date: '10:00',
@@ -324,9 +322,8 @@ class HomeScreen extends StatelessWidget {
       children: [
         Image.asset(
           imageRes(image),
-          height: 30,
-          width: 30,
-          scale: 5,
+          height: 40,
+          width: 40,
         ),
         const SizedBox(
           width: spaceMedium,
