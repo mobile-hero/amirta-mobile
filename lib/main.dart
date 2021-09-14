@@ -13,6 +13,11 @@ import 'package:amirta_mobile/ui/home/home_screen.dart';
 import 'package:amirta_mobile/ui/login/login_screen.dart';
 import 'package:amirta_mobile/ui/main/main_screen.dart';
 import 'package:amirta_mobile/ui/notification/notification_screen.dart';
+import 'package:amirta_mobile/ui/password/change/change_password_screen.dart';
+import 'package:amirta_mobile/ui/password/change/change_password_success_screen.dart';
+import 'package:amirta_mobile/ui/password/email/email_password_screen.dart';
+import 'package:amirta_mobile/ui/password/email/email_password_success_screen.dart';
+import 'package:amirta_mobile/ui/password/reset/reset_password_screen.dart';
 import 'package:amirta_mobile/ui/profile/profile_screen.dart';
 import 'package:amirta_mobile/ui/splash/splash_screen.dart';
 import 'package:amirta_mobile/ui/water/check/water_check_data_screen.dart';
@@ -305,6 +310,11 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => HomeScreen(),
         '/main': (context) => MainScreen(),
         '/notification': (context) => NotificationScreen(),
+        '/password/change': (context) => ChangePasswordScreen(),
+        '/password/change/success': (context) => ChangePasswordSuccessScreen(),
+        '/password/email': (context) => EmailPasswordScreen(),
+        '/password/email/success': (context) => EmailPasswordSuccessScreen(),
+        '/password/reset': (context) => ResetPasswordScreen(),
         '/profile': (context) => ProfileScreen(),
         '/water': (context) => WaterFormScreen(),
         '/water/search_result': (context) => WaterSearchResultScreen(),

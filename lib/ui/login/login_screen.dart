@@ -2,6 +2,7 @@ import 'package:amirta_mobile/bloc/login/login_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/res/view/shadowed_container.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,10 +16,21 @@ class _LoginPageState extends State<LoginPage> {
 
   bool passwordVisible = false;
 
+  late final resetPassGesture = TapGestureRecognizer();
+
+  @override
+  void initState() {
+    resetPassGesture.onTap = () {
+      Navigator.pushNamed(context, '/password/email');
+    };
+    super.initState();
+  }
+
   @override
   void dispose() {
     nrkController.dispose();
     passwordController.dispose();
+    resetPassGesture.dispose();
     super.dispose();
   }
 
@@ -46,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Login Gagal dilakukan.\nSilakan coba lagi'),
+                    content: Text('txt_login_error'.tr()),
                   ),
                 );
               }
@@ -70,11 +82,11 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Selamat Datang!",
+                          "txt_welcome".tr(),
                           style: context.styleHeadline5,
                         ),
                         Text(
-                          "Silakan Login Menggunakan NRK",
+                          "txt_login_nrk".tr(),
                           style: context.styleBody1,
                         ),
                         const SizedBox(
@@ -82,11 +94,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         LabeledInputField(
                           nrkController,
-                          label: "NRK",
+                          label: "txt_nrk".tr(),
                         ),
                         LabeledInputField(
                           passwordController,
-                          label: "Password",
+                          label: "txt_password".tr(),
                           isPassword: !passwordVisible,
                           suffix: InkWell(
                             child: Icon(
@@ -112,8 +124,34 @@ class _LoginPageState extends State<LoginPage> {
                                   passwordController.text,
                                 ));
                           },
-                          "Submit",
+                          "btn_submit".tr(),
                           isLoading: state is LoginLoading,
+                        ),
+                        const SizedBox(
+                          height: spaceMedium,
+                        ),
+                        Center(
+                          child: Text.rich(
+                            TextSpan(
+                              style: context.styleBody1.copyWith(
+                                color: grease,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: "txt_forgot_password_1".tr(),
+                                ),
+                                TextSpan(
+                                  text: "txt_forgot_password_2".tr(),
+                                  style: TextStyle(
+                                    color: egyptian,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: resetPassGesture,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: spaceMedium,

@@ -74,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
   }) {
     return BottomNavigationBarItem(
       icon: Padding(
-        padding: const EdgeInsets.only(bottom: spaceTiny),
+        padding: const EdgeInsets.only(bottom: 3),
         child: ImageIcon(
           AssetImage(imageRes(icon)),
           color: grease.withOpacity(0.7),
@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       activeIcon: Padding(
-        padding: const EdgeInsets.only(bottom: spaceTiny),
+        padding: const EdgeInsets.only(bottom: 3),
         child: ImageIcon(
           AssetImage(imageRes(selectedIcon)),
           size: 20,

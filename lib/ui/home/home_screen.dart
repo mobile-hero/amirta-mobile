@@ -58,14 +58,14 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   user?.name ?? "-",
-                                  style: context.styleBody2.copyWith(
+                                  style: context.styleBody1.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: white,
                                   ),
                                 ),
                                 Text(
                                   user?.userId ?? "-",
-                                  style: context.styleBody2.copyWith(
+                                  style: context.styleBody1.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: white.withOpacity(0.5),
                                   ),
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                                         Text(
                                           'Halim Baskoro',
                                           style:
-                                              context.styleHeadline6.copyWith(
+                                              context.styleBody1.copyWith(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -265,14 +265,18 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Text(
                       'Info Harian',
-                      style: context.styleHeadline6,
+                      style: context.styleBody1.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       'Periksa pembaruan dari setiap menu',
-                      style: context.styleBody1,
+                      style: context.styleCaption.copyWith(
+                        color: grease.withOpacity(0.5),
+                      ),
                     ),
                     const SizedBox(
-                      height: spaceMedium,
+                      height: spaceBig,
                     ),
                     briefItem(
                       context: context,
@@ -282,7 +286,7 @@ class HomeScreen extends StatelessWidget {
                       date: '13:44',
                     ),
                     const SizedBox(
-                      height: spaceNormal,
+                      height: spaceMedium,
                     ),
                     briefItem(
                       context: context,
@@ -292,7 +296,7 @@ class HomeScreen extends StatelessWidget {
                       date: '10:00',
                     ),
                     const SizedBox(
-                      height: spaceNormal,
+                      height: spaceMedium,
                     ),
                     briefItem(
                       context: context,
@@ -334,20 +338,20 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: context.styleHeadline6.copyWith(
+                style: context.styleBody1.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 subtitle,
-                style: context.styleBody1,
+                style: context.styleCaption,
               ),
             ],
           ),
         ),
         Text(
           date,
-          style: context.styleBody1,
+          style: context.styleCaption,
         ),
       ],
     );
