@@ -41,4 +41,12 @@ class AccountRepositoryImpl extends AccountRepository {
     final response = await post("/setup_account", edit.toJson());
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
+
+  @override
+  Future<DashboardResponse> dashboard() async {
+    final response = await get("/dashboard");
+    return (isResult(response))
+        ? DashboardResponse.fromJson(response)
+        : response;
+  }
 }

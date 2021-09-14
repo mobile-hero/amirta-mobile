@@ -69,7 +69,7 @@
     },
     {
       "id": "2:413495204756433647",
-      "lastPropertyId": "4:6116122970362296288",
+      "lastPropertyId": "5:8523716826838183877",
       "name": "RusunBlok",
       "properties": [
         {
@@ -92,6 +92,13 @@
           "id": "4:6116122970362296288",
           "name": "buildingType",
           "type": 9
+        },
+        {
+          "id": "5:8523716826838183877",
+          "name": "rusunId",
+          "type": 6,
+          "flags": 8,
+          "indexId": "14:7490654062298954293"
         }
       ],
       "relations": []
@@ -420,7 +427,7 @@
     }
   ],
   "lastEntityId": "6:2594516701243142554",
-  "lastIndexId": "13:345099013392797071",
+  "lastIndexId": "14:7490654062298954293",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

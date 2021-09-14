@@ -3,12 +3,14 @@ import 'package:amirta_mobile/my_material.dart';
 class WaterCustomerItem extends StatelessWidget {
   final String? customerName;
   final String locationName;
+  final String number;
   final bool inputDone;
   final VoidCallback onTap;
 
   const WaterCustomerItem({
     required this.customerName,
     required this.locationName,
+    required this.number,
     required this.inputDone,
     required this.onTap,
   });
@@ -50,7 +52,7 @@ class WaterCustomerItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        locationName,
+                        "$locationName-$number",
                         style: context.styleCaption,
                       ),
                     ],

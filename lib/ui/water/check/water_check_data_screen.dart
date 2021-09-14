@@ -180,7 +180,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                               builder:
                                                   (context, scrollController) {
                                                 return RusunBottomSheet(
-                                                    scrollController, 9, 10);
+                                                    scrollController);
                                               },
                                             );
                                             if (result != null &&
@@ -357,6 +357,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                   return WaterCustomerItem(
                     customerName: item.residentName,
                     locationName: item.buildingName,
+                    number: item.unitNumber,
                     inputDone: inputDone,
                     onTap: () {
                       context.showScrollableBottomSheet(

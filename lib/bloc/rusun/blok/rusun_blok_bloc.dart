@@ -37,7 +37,12 @@ class RusunBlokBloc extends Bloc<RusunBlokEvent, RusunBlokState> {
       yield RusunBlokLoading();
       final store = await openStore();
       final box = store.box<RusunBlok>();
-      final result = box.getAll();
+      final result = box
+          .query(
+            RusunBlok_.rusunId.equals(rusunId),
+          )
+          .build()
+          .find();
       store.close();
       if (result.isNotEmpty) {
         pagingController.appendLastPage(result);

@@ -13,11 +13,8 @@ part 'rusun_state.dart';
 
 class RusunBloc extends Bloc<RusunEvent, RusunState> {
   final RusunRepository rusunRepository;
-  final int month;
-  final int year;
 
-  RusunBloc(this.rusunRepository, this.month, this.year)
-      : super(RusunInitial()) {
+  RusunBloc(this.rusunRepository) : super(RusunInitial()) {
     add(LoadRusun());
   }
 

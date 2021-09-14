@@ -6,10 +6,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class RusunBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
-  final int month;
-  final int year;
 
-  RusunBottomSheet(this.scrollController, this.month, this.year);
+  RusunBottomSheet(this.scrollController);
 
   @override
   _RusunBottomSheetState createState() => _RusunBottomSheetState();
@@ -22,11 +20,7 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return RusunBloc(
-          context.appProvider().rusunRepository,
-          widget.month,
-          widget.year,
-        );
+        return RusunBloc(context.appProvider().rusunRepository);
       },
       child: BlocBuilder<RusunBloc, RusunState>(
         builder: (context, state) {
@@ -104,11 +98,20 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
                                   ),
                                 ),
                               )
-                            : SizedBox(),
-                        subtitle: Text(
-                          item.name,
-                          style: context.styleBody1,
-                        ),
+                            : Text(
+                                item.name,
+                                style: context.styleBody1,
+                              ),
+                        subtitle: position == 0 ||
+                                (pagingController.itemList!.length > 1 &&
+                                    pagingController
+                                            .itemList![position - 1].city !=
+                                        item.city)
+                            ? Text(
+                                item.name,
+                                style: context.styleBody1,
+                              )
+                            : null,
                         onTap: () {
                           Navigator.pop(context, item);
                         },

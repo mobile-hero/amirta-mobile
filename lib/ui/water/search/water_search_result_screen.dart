@@ -33,13 +33,6 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
           args.month,
           args.year,
         );
-        bloc.add(LoadUnit(
-          args.rusun.id,
-          args.blok.id,
-          1,
-          args.lantai,
-          args.number,
-        ));
         return bloc;
       },
       child: Scaffold(
@@ -57,6 +50,7 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                   return WaterCustomerItem(
                     customerName: item.residentName,
                     locationName: item.buildingName,
+                    number: item.unitNumber,
                     inputDone: bloc.local && values.isNotEmpty
                         ? values.firstWhere((e) {
                             print("values: ${e.unitId}; list: ${item.id}");

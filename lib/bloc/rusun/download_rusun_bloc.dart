@@ -60,6 +60,9 @@ class DownloadRusunBloc extends Bloc<DownloadRusunEvent, DownloadRusunState> {
 
       for (final rusun in rusunResponse.data) {
         final blokResponse = await rusunRepository.getBlok(rusun.id);
+        blokResponse.data.forEach((e) {
+          e.rusunId = rusun.id;
+        });
         blokBox.putMany(blokResponse.data);
 
         final unitResponse = await rusunRepository.getUnit(

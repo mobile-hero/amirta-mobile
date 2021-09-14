@@ -83,13 +83,13 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
               RusunUnitValue_.buildingId.equals(event.buildingId) &
               RusunUnitValue_.month.equals(month) &
               RusunUnitValue_.year.equals(year);
-      if (event.floor != null) {
+      if (event.floor != null && event.floor != -1) {
         queryCondition =
             queryCondition.and(RusunUnitValue_.floor.equals(event.floor!));
       }
       if (event.code != null && event.code!.isNotEmpty) {
         queryCondition =
-            queryCondition.and(RusunUnitValue_.code.equals(event.code!));
+            queryCondition.and(RusunUnitValue_.unitNumber.equals(event.code!));
       }
       values = box.query(queryCondition).build().find();
       print(values);
@@ -101,13 +101,13 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
         Condition<RusunUnit> queryCondition =
             RusunUnit_.rusunId.equals(event.rusunId) &
                 RusunUnit_.buildingId.equals(event.buildingId);
-        if (event.floor != null) {
+        if (event.floor != null && event.floor != -1) {
           queryCondition =
               queryCondition.and(RusunUnit_.floor.equals(event.floor!));
         }
         if (event.code != null && event.code!.isNotEmpty) {
           queryCondition =
-              queryCondition.and(RusunUnit_.code.equals(event.code!));
+              queryCondition.and(RusunUnit_.unitNumber.equals(event.code!));
         }
         final result = box.query(queryCondition).build().find();
         print(result);

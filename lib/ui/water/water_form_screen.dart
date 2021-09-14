@@ -104,7 +104,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                 height: spaceBig,
                               ),
                               Text(
-                                "Mengunduh data",
+                                "btn_downloading_data".tr(),
                                 style: context.styleHeadline5,
                               )
                             ],
@@ -222,13 +222,13 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                     ),
                     LabeledInputField(
                       rusunController,
-                      label: "txt_rusun".tr(),
+                      label: "txt_rusun".tr() + " *",
                       readOnly: true,
                       onTap: () async {
                         final result =
                             await context.showScrollableBottomSheet<Rusun>(
                           builder: (context, scrollController) {
-                            return RusunBottomSheet(scrollController, 9, 10);
+                            return RusunBottomSheet(scrollController);
                           },
                         );
                         if (result != null && result != selectedRusun) {
@@ -238,6 +238,11 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
 
                             blokController.text = "";
                             selectedBlok = null;
+
+                            lantaiController.text = "";
+                            selectedLantai = null;
+                            
+                            numberController.text = "";
                           });
                           print(result.toJson());
                         }
@@ -248,7 +253,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                         Expanded(
                           child: LabeledInputField(
                             blokController,
-                            label: "txt_blok".tr(),
+                            label: "txt_blok".tr() + " *",
                             readOnly: true,
                             suffix: Icon(
                               Icons.keyboard_arrow_down,
@@ -275,6 +280,8 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
 
                                   lantaiController.text = "";
                                   selectedLantai = null;
+
+                                  numberController.text = "";
                                 });
                                 print(result.toJson());
                               }
@@ -309,6 +316,8 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                   lantaiController.text =
                                       result == -1 ? "Semua" : "Lt. $result";
                                   selectedLantai = result;
+
+                                  numberController.text = "";
                                 });
                               }
                             },
@@ -321,7 +330,6 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           child: LabeledInputField(
                             numberController,
                             label: "txt_nomor".tr(),
-                            inputType: TextInputType.number,
                           ),
                         ),
                       ],
@@ -344,48 +352,55 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                       'btn_search'.tr(),
                       isEnabled: selectedRusun != null && selectedBlok != null,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: egyptian.withOpacity(0.5),
+                    Visibility(
+                      visible: false,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Divider(
+                                  color: egyptian.withOpacity(0.5),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: spaceNormal,
+                              ),
+                              Text(
+                                'txt_or'.tr(),
+                                style: context.styleBody1,
+                              ),
+                              const SizedBox(
+                                width: spaceNormal,
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  color: egyptian.withOpacity(0.5),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          width: spaceNormal,
-                        ),
-                        Text(
-                          'txt_or'.tr(),
-                          style: context.styleBody1,
-                        ),
-                        const SizedBox(
-                          width: spaceNormal,
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: egyptian.withOpacity(0.5),
+                          const SizedBox(
+                            height: spaceNormal,
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: spaceNormal,
-                    ),
-                    Text(
-                      'txt_check_data_notice'.tr(),
-                      style: context.styleBody1,
-                    ),
-                    const SizedBox(
-                      height: spaceNormal,
-                    ),
-                    PrimaryButton(
-                      () {
-                        Navigator.pushNamed(
-                          context,
-                          '/water/check',
-                        );
-                      },
-                      'btn_check_data'.tr(),
+                          Text(
+                            'txt_check_data_notice'.tr(),
+                            style: context.styleBody1,
+                          ),
+                          const SizedBox(
+                            height: spaceNormal,
+                          ),
+                          PrimaryButton(
+                              () {
+                              Navigator.pushNamed(
+                                context,
+                                '/water/check',
+                              );
+                            },
+                            'btn_check_data'.tr(),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

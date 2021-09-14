@@ -68,6 +68,7 @@ class AppProvider {
 
   _setupHeaderToken() async {
     final user = await accountLocalRepository.getUser();
+    print(user);
     if (user != null) {
       _user = user;
       repositoryConfig.setToken(user.sessid!);

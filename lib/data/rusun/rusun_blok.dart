@@ -19,6 +19,9 @@ class RusunBlok {
   final String name;
   final String buildingType;
   
+  @Index()
+  int? rusunId;
+  
   factory RusunBlok.fromJson(Map<String, dynamic> json) => _$RusunBlokFromJson(json);
   
   Map<String, dynamic> toJson() => _$RusunBlokToJson(this);
