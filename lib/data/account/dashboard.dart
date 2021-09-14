@@ -11,9 +11,9 @@ class Dashboard {
     required this.totalUncollectedMeterPdam,
   });
 
-  final int totalPanicButton;
-  final int totalComplaint;
-  final int totalUncollectedMeterPdam;
+  final String totalPanicButton;
+  final String totalComplaint;
+  final String totalUncollectedMeterPdam;
 
   factory Dashboard.fromJson(Map<String, dynamic> json) =>
       _$DashboardFromJson(json);

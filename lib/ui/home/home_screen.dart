@@ -162,6 +162,7 @@ class HomeScreen extends StatelessWidget {
                               height: spaceMedium,
                             ),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                   child: ShadowedContainer(

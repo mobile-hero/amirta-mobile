@@ -66,13 +66,15 @@ class AppProvider {
     repositoryConfig.setDeviceId(deviceId);
   }
 
-  _setupHeaderToken() async {
+  Future<Profile?> _setupHeaderToken() async {
     final user = await accountLocalRepository.getUser();
     print(user);
     if (user != null) {
-      _user = user;
       repositoryConfig.setToken(user.sessid!);
       repositoryConfig.setPid(user.pid);
+      return user;
+    } else {
+      return null;
     }
   }
 
@@ -82,11 +84,12 @@ class AppProvider {
     } else if (Platform.isIOS) {
       await _setupHeaderiOS();
     }
-    _setupHeaderToken();
+    _user = await _setupHeaderToken();
     repositoryConfig.setupInterceptor();
     dio.interceptors.clear();
     dio.interceptors.addAll(repositoryConfig.interceptors);
 
+    print(_user);
     if (_user != null) {
       return Future.delayed(Duration(seconds: 1), () => 1);
     } else {

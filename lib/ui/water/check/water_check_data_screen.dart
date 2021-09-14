@@ -8,8 +8,8 @@ import 'package:amirta_mobile/ui/bottomsheet/rusun_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/tahun_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:amirta_mobile/ui/water/water_customer_item.dart';
-import 'package:amirta_mobile/ui/water/water_input_bottomsheet.dart';
-import 'package:amirta_mobile/ui/water/water_input_done_bottomsheet.dart';
+import 'package:amirta_mobile/ui/water/bottomsheet/water_input_bottomsheet.dart';
+import 'package:amirta_mobile/ui/water/bottomsheet/water_input_done_bottomsheet.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
