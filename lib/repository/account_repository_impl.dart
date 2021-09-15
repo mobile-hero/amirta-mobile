@@ -23,8 +23,8 @@ class AccountRepositoryImpl extends AccountRepository {
   }
 
   Future<SimpleResponse> forgotPassword(String email) async {
-    final query = {"email_address": email};
-    final response = await get("/reset_passwd", query: query);
+    final body = {"email_address": email};
+    final response = await post("/reset_passwd", body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
 

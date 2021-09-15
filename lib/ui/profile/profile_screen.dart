@@ -1,5 +1,4 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -11,7 +10,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final roleController = TextEditingController();
-  
+
   @override
   void initState() {
     final user = context.appProvider().user;
@@ -28,6 +27,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text('Profile'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+            icon: ImageIcon(
+              AssetImage(imageRes('ic_settings.png')),
+              size: imgSizeNormal,
+            ),
+          )
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(130),
           child: Center(

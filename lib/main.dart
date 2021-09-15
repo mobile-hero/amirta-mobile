@@ -19,6 +19,7 @@ import 'package:amirta_mobile/ui/password/email/email_password_screen.dart';
 import 'package:amirta_mobile/ui/password/email/email_password_success_screen.dart';
 import 'package:amirta_mobile/ui/password/reset/reset_password_screen.dart';
 import 'package:amirta_mobile/ui/profile/profile_screen.dart';
+import 'package:amirta_mobile/ui/settings/settings_screen.dart';
 import 'package:amirta_mobile/ui/splash/splash_screen.dart';
 import 'package:amirta_mobile/ui/water/check/water_check_data_screen.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_screen.dart';
@@ -323,6 +324,7 @@ class _MyAppState extends State<MyApp> {
         '/complaint/history': (context) => ComplaintHistoryScreen(),
         '/complaint/set-complete': (context) => ComplaintSetCompleteScreen(),
         '/complaint/create-report': (context) => CreateComplaintReportScreen(),
+        '/settings': (context) => SettingsScreen(),
       },
       initialRoute: "/splash",
     );

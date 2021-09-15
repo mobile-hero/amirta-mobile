@@ -1,3 +1,4 @@
+import 'package:amirta_mobile/bloc/password/change/change_password_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:flutter/gestures.dart';
 
@@ -39,89 +40,109 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'title_change_password'.tr(),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(spaceMedium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'txt_change_password'.tr(),
-              style: context.styleHeadline4,
+    return BlocProvider(
+      create: (context) {
+        return ChangePasswordBloc(context.appProvider().accountRepository);
+      },
+      child: BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
+          listener: (context, state) {
+        if (state is ChangePasswordSuccess) {
+          Navigator.popAndPushNamed(
+            context,
+            '/password/change/success',
+          );
+        }
+        if (state is ChangePasswordError) {}
+      }, builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'title_change_password'.tr(),
             ),
-            const SizedBox(
-              height: spaceMedium,
-            ),
-            LabeledInputField(
-              passController,
-              label: "hint_current_password".tr(),
-              isPassword: true,
-              onChanged: (value) {
-                setState(() {});
-              },
-            ),
-            LabeledInputField(
-              passNewController,
-              label: "hint_new_password".tr(),
-              isPassword: true,
-              onChanged: (value) {
-                setState(() {});
-              },
-            ),
-            LabeledInputField(
-              passConfirmController,
-              label: "hint_new_password_confirm".tr(),
-              isPassword: true,
-              onChanged: (value) {
-                setState(() {});
-              },
-            ),
-            const SizedBox(
-              height: spaceMedium,
-            ),
-            PrimaryButton(
-              () {
-                Navigator.popAndPushNamed(
-                  context,
-                  '/password/change/success',
-                );
-              },
-              'btn_change_password'.tr(),
-              isEnabled: isButtonEnabled,
-            ),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            Text.rich(
-              TextSpan(
-                style: context.styleBody1.copyWith(
-                  color: grease,
+            centerTitle: true,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(spaceMedium),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'txt_change_password'.tr(),
+                  style: context.styleHeadline4,
                 ),
-                children: [
-                  TextSpan(
-                    text: "txt_forgot_password_1".tr(),
-                  ),
-                  TextSpan(
-                    text: "txt_forgot_password_2".tr(),
-                    style: TextStyle(
-                      color: egyptian,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
+                const SizedBox(
+                  height: spaceMedium,
+                ),
+                LabeledInputField(
+                  passController,
+                  label: "hint_current_password".tr(),
+                  isPassword: true,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                ),
+                LabeledInputField(
+                  passNewController,
+                  label: "hint_new_password".tr(),
+                  isPassword: true,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                ),
+                LabeledInputField(
+                  passConfirmController,
+                  label: "hint_new_password_confirm".tr(),
+                  isPassword: true,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                ),
+                const SizedBox(
+                  height: spaceMedium,
+                ),
+                PrimaryButton(
+                  () {
+                    context.read<ChangePasswordBloc>().add(ChangePassword(
+                          passController.text,
+                          passNewController.text,
+                          passConfirmController.text,
+                        ));
+                  },
+                  'btn_change_password'.tr(),
+                  isEnabled: isButtonEnabled,
+                  isLoading: state is ChangePasswordLoading,
+                ),
+                const SizedBox(
+                  height: spaceNormal,
+                ),
+                Center(
+                  child: Text.rich(
+                    TextSpan(
+                      style: context.styleBody1.copyWith(
+                        color: grease,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "txt_forgot_password_1".tr(),
+                        ),
+                        TextSpan(
+                          text: "txt_forgot_password_2".tr(),
+                          style: TextStyle(
+                            color: egyptian,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: resetPassGesture,
+                        ),
+                      ],
                     ),
-                    recognizer: resetPassGesture,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

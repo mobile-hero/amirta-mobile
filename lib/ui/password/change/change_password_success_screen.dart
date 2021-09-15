@@ -10,12 +10,12 @@ class ChangePasswordSuccessScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ImageIcon(
-                AssetImage(imageRes('img_change_password.png')),
-                size: 96,
+              Image.asset(
+                imageRes('img_change_password.png'),
+                height: 96,
               ),
               const SizedBox(
-                height: spaceMedium,
+                height: spaceBig,
               ),
               Text(
                 'txt_change_password2'.tr(),

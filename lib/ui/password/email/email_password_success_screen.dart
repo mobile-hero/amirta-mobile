@@ -9,12 +9,12 @@ class EmailPasswordSuccessScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(child: const SizedBox()),
-            ImageIcon(
-              AssetImage(imageRes('img_check_email.png')),
-              size: 96,
+            Image.asset(
+              imageRes('img_check_email.png'),
+              height: 96,
             ),
             const SizedBox(
-              height: spaceMedium,
+              height: spaceBig,
             ),
             Text(
               'txt_check_email'.tr(),
