@@ -1,13 +1,16 @@
+import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 
 enum ComplaintCustomerItemType { neutral, rejected, completed }
 
 class ComplaintCustomerItem extends StatelessWidget {
+  final Pengaduan item;
   final ComplaintCustomerItemType type;
   final VoidCallback? onTap;
 
   const ComplaintCustomerItem({
+    required this.item,
     this.type = ComplaintCustomerItemType.neutral,
     this.onTap,
   });
@@ -62,13 +65,13 @@ class ComplaintCustomerItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Air sudah mati 3 hari",
+                            item.content,
                             style: context.styleBody1.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            "Rusun Karang Anyar",
+                            item.rusunName,
                             style: context.styleCaption,
                           ),
                         ],
@@ -86,25 +89,25 @@ class ComplaintCustomerItem extends StatelessWidget {
                     Expanded(
                       child: TitleValueBox(
                         title: 'txt_blok'.tr(),
-                        value: 'Blok A',
+                        value: item.buildingName,
                       ),
                     ),
                     Expanded(
                       child: TitleValueBox(
                         title: 'txt_lantai'.tr(),
-                        value: '2',
+                        value: item.floor.toString(),
                       ),
                     ),
                     Expanded(
                       child: TitleValueBox(
                         title: 'txt_nomor'.tr(),
-                        value: '150',
+                        value: item.unitNumber,
                       ),
                     ),
                     Expanded(
                       child: TitleValueBox(
                         title: 'txt_name'.tr(),
-                        value: 'Halim Baskoro',
+                        value: item.complainantName,
                       ),
                     ),
                   ],

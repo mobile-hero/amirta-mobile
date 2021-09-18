@@ -8,8 +8,9 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
   PengaduanRepositoryImpl(Dio dio, RepositoryConfig config)
       : super(dio, config);
 
-  Future<PengaduanResponse> getList(String status, int page, int limit) async {
-    final query = {"status": status, "page": page, "limit": limit};
+  Future<PengaduanResponse> getList(
+      int type, int status, int page, int limit) async {
+    final query = {"typ": type, "status": status, "page": page, "limit": limit};
     final response = await get("/complaint", query: query);
     return (isResult(response))
         ? PengaduanResponse.fromJson(response)
@@ -19,6 +20,15 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
   Future<PengaduanDetailResponse> detail(int pengaduanId) async {
     final query = {"id": pengaduanId};
     final response = await get("/complaint_detail", query: query);
+    return (isResult(response))
+        ? PengaduanDetailResponse.fromJson(response)
+        : response;
+  }
+
+  @override
+  Future<PengaduanDetailResponse> detailExamination(int pengaduanId) async {
+    final query = {"id": pengaduanId};
+    final response = await get("/complaint_examination", query: query);
     return (isResult(response))
         ? PengaduanDetailResponse.fromJson(response)
         : response;
@@ -36,9 +46,14 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
     int id,
     int status,
     String notes,
-    String fname,
+    List<String> photos,
   ) async {
-    final body = {"id": id, "status": status, "notes": notes, "fname": fname};
+    final body = {
+      "id": id,
+      "status": status,
+      "notes": notes,
+      "fileList": photos.map((e) => {"fname": e}),
+    };
     final response = await post("/complaint_examination", body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }

@@ -1,7 +1,10 @@
+import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 
 class ComplaintBottomSheetContent extends StatelessWidget {
-  const ComplaintBottomSheetContent();
+  final Pengaduan pengaduan;
+
+  const ComplaintBottomSheetContent(this.pengaduan);
 
   final image =
       'https://cdn11.bigcommerce.com/s-gobnp3073t/images/stencil/1280x1280/products/3864/12342/apigjlste__34068.1609247181.jpg?c=2';
@@ -34,13 +37,13 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Air sudah mati 3 hari",
+                    pengaduan.title,
                     style: context.styleBody1.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    "Rusun Karang Anyar",
+                    pengaduan.rusunName,
                     style: context.styleCaption,
                   ),
                 ],
@@ -59,21 +62,21 @@ class ComplaintBottomSheetContent extends StatelessWidget {
               flex: 3,
               child: TitleValueBox(
                 title: 'txt_blok'.tr(),
-                value: 'Blok A',
+                value: pengaduan.buildingName,
               ),
             ),
             Expanded(
               flex: 3,
               child: TitleValueBox(
                 title: 'txt_lantai'.tr(),
-                value: '2',
+                value: pengaduan.floor.toString(),
               ),
             ),
             Expanded(
               flex: 2,
               child: TitleValueBox(
                 title: 'txt_nomor'.tr(),
-                value: '150',
+                value: pengaduan.unitNumber,
               ),
             ),
           ],
@@ -88,21 +91,21 @@ class ComplaintBottomSheetContent extends StatelessWidget {
               flex: 3,
               child: TitleValueBox(
                 title: 'txt_name'.tr(),
-                value: 'Halim Baskoro',
+                value: pengaduan.complainantName,
               ),
             ),
             Expanded(
               flex: 3,
               child: TitleValueBox(
                 title: 'txt_phone_num'.tr(),
-                value: '081223703990',
+                value: pengaduan.complaintNumber,
               ),
             ),
             Expanded(
               flex: 2,
               child: TitleValueBox(
                 title: 'txt_time'.tr(),
-                value: '10-01-2021',
+                value: pengaduan.receivedDtimeFormatted,
               ),
             ),
           ],
@@ -112,7 +115,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
         ),
         TitleValueBox(
           title: 'txt_complaint_desc'.tr(),
-          value: 'detail pelaporan yang panjang sekali hingga muncul dalam 2 baris, detail pelaporan yang panjang sekali hingga muncul dalam 2 baris',
+          value: pengaduan.content,
         ),
         const SizedBox(
           height: spaceNormal,

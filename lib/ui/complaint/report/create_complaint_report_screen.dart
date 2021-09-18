@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -17,6 +18,8 @@ class _CreateComplaintReportScreenState
 
   final ImagePicker _picker = ImagePicker();
   final List<XFile> images = [];
+  
+  late final Pengaduan pengaduan;
 
   @override
   void dispose() {
@@ -43,7 +46,7 @@ class _CreateComplaintReportScreenState
             const SizedBox(
               height: spaceNormal,
             ),
-            ComplaintCustomerItem(),
+            ComplaintCustomerItem(item: pengaduan,),
             const SizedBox(
               height: spaceNormal,
             ),

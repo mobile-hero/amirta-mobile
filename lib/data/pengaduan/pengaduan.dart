@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pengaduan.g.dart';
@@ -10,6 +11,7 @@ class Pengaduan {
     required this.complaintNumber,
     required this.complaintCategoryId,
     required this.complaintCategoryName,
+    required this.ctyp,
     required this.title,
     required this.content,
     required this.fname,
@@ -27,6 +29,8 @@ class Pengaduan {
     required this.operatorNotes,
     required this.operatorName,
     required this.operatorAcceptedDtime,
+    required this.operatorExaminationDtime,
+    required this.fileList,
   });
 
   final int id;
@@ -34,6 +38,7 @@ class Pengaduan {
   final String complaintNumber;
   final int complaintCategoryId;
   final String complaintCategoryName;
+  final String ctyp;
   final String title;
   final String content;
   final String fname;
@@ -51,8 +56,32 @@ class Pengaduan {
   final String? operatorNotes;
   final String? operatorName;
   final String? operatorAcceptedDtime;
-  
-  factory Pengaduan.fromJson(Map<String, dynamic> json) => _$PengaduanFromJson(json);
-  
+  final String? operatorExaminationDtime;
+  @JsonKey(name: "fileList")
+  final List<String>? fileList;
+
+  factory Pengaduan.fromJson(Map<String, dynamic> json) =>
+      _$PengaduanFromJson(json);
+
   Map<String, dynamic> toJson() => _$PengaduanToJson(this);
+
+  String get receivedDtimeFormatted {
+    return DateFormat("dd-MM-y").format(receivedDtime);
+  }
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class PengaduanFile {
+  PengaduanFile({
+    required this.fname,
+    required this.createdTime,
+  });
+
+  final String fname;
+  final String createdTime;
+
+  factory PengaduanFile.fromJson(Map<String, dynamic> json) =>
+      _$PengaduanFileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PengaduanFileToJson(this);
 }

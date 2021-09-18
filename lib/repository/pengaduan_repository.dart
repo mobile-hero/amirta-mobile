@@ -7,9 +7,11 @@ import 'package:dio/dio.dart';
 abstract class PengaduanRepository extends BaseRepository {
   PengaduanRepository(Dio dio, RepositoryConfig config) : super(dio, config);
 
-  Future<PengaduanResponse> getList(String status, int page, int limit);
+  Future<PengaduanResponse> getList(int type, int status, int page, int limit);
 
   Future<PengaduanDetailResponse> detail(int pengaduanId);
+  
+  Future<PengaduanDetailResponse> detailExamination(int pengaduanId);
 
   Future<SimpleResponse> acceptRejectPanic(int id, int status);
 
@@ -17,6 +19,6 @@ abstract class PengaduanRepository extends BaseRepository {
     int id,
     int status,
     String notes,
-    String fname,
+    List<String> photos,
   );
 }

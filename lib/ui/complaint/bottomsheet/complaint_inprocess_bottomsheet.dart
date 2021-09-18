@@ -1,3 +1,4 @@
+import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
@@ -5,10 +6,11 @@ import 'package:amirta_mobile/ui/complaint/dialog/complaint_set_complete_dialog.
 import 'package:slide_to_act/slide_to_act.dart';
 
 class ComplaintInProcessBottomSheet extends StatelessWidget {
+  final Pengaduan pengaduan;
   final ScrollController scrollController;
   final GlobalKey<SlideActionState> slideKey = GlobalKey();
 
-  ComplaintInProcessBottomSheet(this.scrollController);
+  ComplaintInProcessBottomSheet(this.pengaduan, this.scrollController);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ComplaintBottomSheetContent(),
+            ComplaintBottomSheetContent(pengaduan),
             const SizedBox(
               height: spaceNormal,
             ),
