@@ -32,7 +32,7 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                       final result = await showDialog(
                         context: context,
                         builder: (context) {
-                          return ComplaintAcceptDialog();
+                          return ComplaintAcceptDialog(pengaduan);
                         },
                       );
                       if (result != null) {
@@ -51,7 +51,7 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                       final result = await showDialog(
                         context: context,
                         builder: (context) {
-                          return ComplaintRejectDialog();
+                          return ComplaintRejectDialog(pengaduan);
                         },
                       );
                       if (result != null) {

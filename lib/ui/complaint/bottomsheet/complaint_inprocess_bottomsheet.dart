@@ -63,13 +63,13 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
             const SizedBox(
               height: spaceMedium,
             ),
-            TitleValueBox(
+            /*TitleValueBox(
               title: "txt_action_note".tr(),
               value: "Kami akan bantu untuk hubungi dinas terkait",
             ),
             const SizedBox(
               height: spaceHuge,
-            ),
+            ),*/
             SlideAction(
               key: slideKey,
               height: 52,
@@ -90,7 +90,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
                   },
                 );
                 if (result != null) {
-                  Navigator.pop(context, true);
+                  Navigator.pop(context, pengaduan);
                 } else {
                   slideKey.currentState?.reset();
                 }

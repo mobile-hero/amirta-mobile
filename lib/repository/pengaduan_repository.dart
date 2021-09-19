@@ -18,7 +18,7 @@ abstract class PengaduanRepository extends BaseRepository {
   Future<SimpleResponse> postExamination(
     int id,
     int status,
-    String notes,
-    List<String> photos,
+    String? notes,
+    List<String>? photos,
   );
 }

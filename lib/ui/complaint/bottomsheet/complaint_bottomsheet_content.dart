@@ -6,9 +6,6 @@ class ComplaintBottomSheetContent extends StatelessWidget {
 
   const ComplaintBottomSheetContent(this.pengaduan);
 
-  final image =
-      'https://cdn11.bigcommerce.com/s-gobnp3073t/images/stencil/1280x1280/products/3864/12342/apigjlste__34068.1609247181.jpg?c=2';
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -131,7 +128,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
           height: imgSizeBig,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 3,
+            itemCount: 1,
             itemBuilder: (context, position) {
               return Padding(
                 padding: const EdgeInsets.only(right: spaceNormal),
@@ -141,7 +138,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(cardRadius),
                     child: Image.network(
-                      image,
+                      pengaduan.fname.imageUrl,
                       width: imgSizeBig,
                       height: imgSizeBig,
                     ),

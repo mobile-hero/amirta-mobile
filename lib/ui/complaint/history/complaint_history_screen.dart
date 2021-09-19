@@ -90,18 +90,25 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                         ComplaintCustomerItemType.neutral,
                         "txt_no_complaint_in_process".tr(),
                         (value) async {
-                          final result =
-                              await context.showScrollableBottomSheet<bool>(
+                          final result = await context
+                              .showScrollableBottomSheet<Pengaduan>(
                             builder: (context, scrollController) {
                               return ComplaintInProcessBottomSheet(
                                   value, scrollController);
                             },
                           );
                           if (result != null) {
-                            Navigator.pushNamed(
+                            final response = await Navigator.pushNamed(
                               context,
                               '/complaint/set-complete',
+                              arguments: result,
                             );
+                            if (response != null) {
+                              context
+                                  .read<ComplaintInProcessBloc>()
+                                  .pagingController
+                                  .refresh();
+                            }
                           }
                         },
                       );

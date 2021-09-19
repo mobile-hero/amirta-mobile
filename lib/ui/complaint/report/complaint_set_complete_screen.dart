@@ -42,11 +42,13 @@ class ComplaintSetCompleteScreen extends StatelessWidget {
                 height: 70,
               ),
               PrimaryButton(
-                () {
-                  Navigator.popAndPushNamed(
+                () async {
+                  final response = await Navigator.pushNamed(
                     context,
                     '/complaint/create-report',
+                    arguments: ModalRoute.of(context)?.settings.arguments
                   );
+                  Navigator.pop(context, response);
                 },
                 "btn_next".tr(),
               ),

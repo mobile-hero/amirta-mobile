@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:amirta_mobile/bloc/complaint/create/complaint_create_bloc.dart';
+import 'package:amirta_mobile/data/pengaduan/complaint_status.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
@@ -18,7 +20,7 @@ class _CreateComplaintReportScreenState
 
   final ImagePicker _picker = ImagePicker();
   final List<XFile> images = [];
-  
+
   late final Pengaduan pengaduan;
 
   @override
@@ -29,82 +31,113 @@ class _CreateComplaintReportScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Laporan Pengaduan'),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(spaceMedium),
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                "txt_create_complaint_desc".tr(),
-                style: context.styleCaption,
-              ),
-            ),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            ComplaintCustomerItem(item: pengaduan,),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                'txt_report_note'.tr(),
-                style: context.styleCaption,
-              ),
-            ),
-            LabeledInputField(
-              noteController,
-              label: 'hint_notes'.tr(),
-              minLines: 3,
-              maxLength: 255,
-              onChanged: (value) {
-                setState(() {});
-              },
-            ),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                'txt_accident_photos'.tr(),
-                style: context.styleCaption,
-              ),
-            ),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            _createImagePickerButton(context),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            Center(
-              child: Text(
-                'txt_min_report_photo'.tr(),
-                style: context.styleCaption,
-              ),
-            ),
-            const SizedBox(
-              height: spaceHuge,
-            ),
-            PrimaryButton(
-              () {
-                Navigator.pop(context);
-              },
-              'btn_create_report'.tr(),
-            ),
-          ],
+    return BlocProvider(
+      create: (context) {
+        return ComplaintCreateBloc(
+          context.appProvider().pengaduanRepository,
+          context.appProvider().uploadImageRepository,
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Laporan Pengaduan'),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(spaceMedium),
+          child: BlocConsumer<ComplaintCreateBloc, ComplaintCreateState>(
+            listener: (context, state) {
+              if (state is ComplaintCreateSuccess) {
+                Navigator.pop(context, true);
+              } else if (state is ComplaintCreateError) {
+                context.showCustomToast(
+                  type: CustomToastType.error,
+                  message: state.message,
+                );
+              }
+            },
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Center(
+                    child: Text(
+                      "txt_create_complaint_desc".tr(),
+                      style: context.styleCaption,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  ComplaintCustomerItem(item: pengaduan),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'txt_report_note'.tr(),
+                      style: context.styleCaption,
+                    ),
+                  ),
+                  LabeledInputField(
+                    noteController,
+                    label: 'hint_notes'.tr(),
+                    minLines: 3,
+                    maxLength: 255,
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'txt_accident_photos'.tr(),
+                      style: context.styleCaption,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  _createImagePickerButton(
+                      context, state is ComplaintCreateLoading),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  Center(
+                    child: Text(
+                      'txt_min_report_photo'.tr(),
+                      style: context.styleCaption,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: spaceHuge,
+                  ),
+                  PrimaryButton(
+                    () {
+                      context.read<ComplaintCreateBloc>().add(CreateComplaint(
+                            pengaduanId: pengaduan.id,
+                            status: ComplaintStatus.completed,
+                            notes: noteController.text,
+                            images: images,
+                          ));
+                    },
+                    'btn_create_report'.tr(),
+                    isEnabled:
+                        noteController.text.isNotEmpty && images.isNotEmpty,
+                    isLoading: state is ComplaintCreateLoading,
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
   }
 
-  Widget _createImagePickerButton(BuildContext context) {
+  Widget _createImagePickerButton(BuildContext context, bool isLoading) {
     final size = buttonDefaultHeight + spaceSmall;
     return SizedBox(
       height: size,
@@ -133,27 +166,30 @@ class _CreateComplaintReportScreenState
                               width: size,
                             ),
                           ),
-                          Transform.translate(
-                            offset: Offset(5, -5),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    images.removeAt(position);
-                                  });
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(spaceTiny),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: white),
-                                    color: darkBackground,
-                                  ),
-                                  child: Icon(
-                                    Icons.clear,
-                                    color: white,
-                                    size: 10,
+                          Visibility(
+                            visible: !isLoading,
+                            child: Transform.translate(
+                              offset: Offset(5, -5),
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      images.removeAt(position);
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(spaceTiny),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: white),
+                                      color: darkBackground,
+                                    ),
+                                    child: Icon(
+                                      Icons.clear,
+                                      color: white,
+                                      size: 10,
+                                    ),
                                   ),
                                 ),
                               ),

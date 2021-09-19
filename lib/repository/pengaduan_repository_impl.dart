@@ -45,15 +45,19 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
   Future<SimpleResponse> postExamination(
     int id,
     int status,
-    String notes,
-    List<String> photos,
+    String? notes,
+    List<String>? photos,
   ) async {
-    final body = {
+    final body = <String, dynamic>{
       "id": id,
       "status": status,
-      "notes": notes,
-      "fileList": photos.map((e) => {"fname": e}),
     };
+    if (notes != null) {
+      body['notes'] = notes;
+    }
+    if (photos != null) {
+      body['fileList'] = photos.map((e) => {"fname": e});
+    }
     final response = await post("/complaint_examination", body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
