@@ -1,5 +1,6 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
+import 'package:amirta_mobile/ui/dialog/photo_viewer_dialog.dart';
 
 class ComplaintBottomSheetContent extends StatelessWidget {
   final Pengaduan pengaduan;
@@ -140,11 +141,21 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                   height: imgSizeBig,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(cardRadius),
-                    child: Image.network(
-                      pengaduan.fname.imageUrl,
-                      width: imgSizeBig,
-                      height: imgSizeBig,
-                      fit: BoxFit.cover,
+                    child: InkWell(
+                      child: Image.network(
+                        pengaduan.fname.imageUrl,
+                        width: imgSizeBig,
+                        height: imgSizeBig,
+                        fit: BoxFit.cover,
+                      ),
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return PhotoViewerDialog(pengaduan.fname.imageUrl);
+                          },
+                        );
+                      },
                     ),
                   ),
                 ),

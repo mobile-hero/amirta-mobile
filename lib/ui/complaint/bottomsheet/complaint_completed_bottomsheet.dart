@@ -2,6 +2,7 @@ import 'package:amirta_mobile/bloc/complaint/detail/complaint_detail_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
+import 'package:amirta_mobile/ui/dialog/photo_viewer_dialog.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
 
 class ComplaintCompletedBottomSheet extends StatelessWidget {
@@ -100,12 +101,26 @@ class ComplaintCompletedBottomSheet extends StatelessWidget {
                               height: imgSizeBig,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(cardRadius),
-                                child: Image.network(
-                                  state.pengaduan.fileList![position].fname
-                                      .imageUrl,
-                                  width: imgSizeBig,
-                                  height: imgSizeBig,
-                                  fit: BoxFit.cover,
+                                child: InkWell(
+                                  child: Image.network(
+                                    state.pengaduan.fileList![position].fname
+                                        .imageUrl,
+                                    width: imgSizeBig,
+                                    height: imgSizeBig,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return PhotoViewerDialog(state
+                                            .pengaduan
+                                            .fileList![position]
+                                            .fname
+                                            .imageUrl);
+                                      },
+                                    );
+                                  },
                                 ),
                               ),
                             ),

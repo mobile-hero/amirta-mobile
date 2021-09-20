@@ -1,6 +1,7 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 class PanicBottomSheetContent extends StatelessWidget {
   final Pengaduan pengaduan;
@@ -86,27 +87,38 @@ class PanicBottomSheetContent extends StatelessWidget {
           color: forest,
           radius: Radius.circular(cardRadius),
           borderType: BorderType.RRect,
-          child: Container(
-            color: forest.withOpacity(0.02),
-            height: 52,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.map_outlined,
-                  color: forest,
-                ),
-                const SizedBox(
-                  width: spaceNormal,
-                ),
-                Text(
-                  'Lokasi Kejadian',
-                  style: context.styleBody1.copyWith(
-                    fontWeight: FontWeight.bold,
+          child: InkWell(
+            onTap: () async {
+              final availableMaps = await MapLauncher.installedMaps;
+              final latlng = pengaduan.latlng.split(",").map((e) => double.parse(e));
+              await availableMaps.first.showMarker(
+                coords: Coords(latlng.first, latlng.last),
+                title: "Lokasi Kejadian",
+                zoom: 21,
+              );
+            },
+            child: Container(
+              color: forest.withOpacity(0.02),
+              height: 52,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.map_outlined,
                     color: forest,
                   ),
-                )
-              ],
+                  const SizedBox(
+                    width: spaceNormal,
+                  ),
+                  Text(
+                    'Lokasi Kejadian',
+                    style: context.styleBody1.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: forest,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
