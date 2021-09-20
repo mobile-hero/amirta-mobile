@@ -13,6 +13,10 @@ import 'package:amirta_mobile/ui/home/home_screen.dart';
 import 'package:amirta_mobile/ui/login/login_screen.dart';
 import 'package:amirta_mobile/ui/main/main_screen.dart';
 import 'package:amirta_mobile/ui/notification/notification_screen.dart';
+import 'package:amirta_mobile/ui/panic/history/panic_history_screen.dart';
+import 'package:amirta_mobile/ui/panic/panic_screen.dart';
+import 'package:amirta_mobile/ui/panic/report/create_panic_report_screen.dart';
+import 'package:amirta_mobile/ui/panic/report/panic_set_complete_screen.dart';
 import 'package:amirta_mobile/ui/password/change/change_password_screen.dart';
 import 'package:amirta_mobile/ui/password/change/change_password_success_screen.dart';
 import 'package:amirta_mobile/ui/password/email/email_password_screen.dart';
@@ -324,6 +328,10 @@ class _MyAppState extends State<MyApp> {
         '/complaint/history': (context) => ComplaintHistoryScreen(),
         '/complaint/set-complete': (context) => ComplaintSetCompleteScreen(),
         '/complaint/create-report': (context) => CreateComplaintReportScreen(),
+        '/panic': (context) => PanicScreen(),
+        '/panic/history': (context) => PanicHistoryScreen(),
+        '/panic/set-complete': (context) => PanicSetCompleteScreen(),
+        '/panic/create-report': (context) => CreatePanicReportScreen(),
         '/settings': (context) => SettingsScreen(),
       },
       initialRoute: "/splash",

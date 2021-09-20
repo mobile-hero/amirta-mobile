@@ -1,12 +1,12 @@
 import 'package:amirta_mobile/my_material.dart';
 
-class ComplaintSetCompleteScreen extends StatelessWidget {
+class PanicSetCompleteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'txt_complaint_completed'.tr(),
+          'txt_panic_completed'.tr(),
         ),
         titleTextStyle: context.styleHeadline5,
         centerTitle: true,
@@ -30,10 +30,10 @@ class ComplaintSetCompleteScreen extends StatelessWidget {
                   style: context.styleBody1,
                   children: [
                     TextSpan(
-                      text: "txt_set_complaint_complete_1".tr(),
+                      text: "txt_set_panic_complete_1".tr(),
                     ),
                     TextSpan(
-                      text: "txt_set_complaint_complete_2".tr(),
+                      text: "txt_set_panic_complete_2".tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -48,7 +48,7 @@ class ComplaintSetCompleteScreen extends StatelessWidget {
                 () async {
                   final response = await Navigator.pushNamed(
                     context,
-                    '/complaint/create-report',
+                    '/panic/create-report',
                     arguments: ModalRoute.of(context)?.settings.arguments
                   );
                   Navigator.pop(context, response);

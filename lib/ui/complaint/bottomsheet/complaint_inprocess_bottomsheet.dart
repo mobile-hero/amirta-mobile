@@ -23,7 +23,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
           children: [
             ComplaintBottomSheetContent(pengaduan),
             const SizedBox(
-              height: spaceNormal,
+              height: spaceBig,
             ),
             Center(
               child: Container(
@@ -36,6 +36,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
+                      padding: const EdgeInsets.all(spaceTiny),
                       decoration: BoxDecoration(
                         color: carrot,
                         shape: BoxShape.circle,
@@ -61,7 +62,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: spaceMedium,
+              height: spaceBig,
             ),
             /*TitleValueBox(
               title: "txt_action_note".tr(),

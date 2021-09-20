@@ -5,17 +5,18 @@ import 'package:amirta_mobile/data/pengaduan/complaint_status.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
+import 'package:amirta_mobile/ui/panic/panic_customer_item.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CreateComplaintReportScreen extends StatefulWidget {
+class CreatePanicReportScreen extends StatefulWidget {
   @override
-  _CreateComplaintReportScreenState createState() =>
-      _CreateComplaintReportScreenState();
+  _CreatePanicReportScreenState createState() =>
+      _CreatePanicReportScreenState();
 }
 
-class _CreateComplaintReportScreenState
-    extends State<CreateComplaintReportScreen> {
+class _CreatePanicReportScreenState
+    extends State<CreatePanicReportScreen> {
   final noteController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
@@ -41,7 +42,7 @@ class _CreateComplaintReportScreenState
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Laporan Pengaduan'),
+          title: Text('Laporan Panik'),
           titleTextStyle: context.styleHeadline5,
           centerTitle: true,
           elevation: 0.0,
@@ -64,14 +65,14 @@ class _CreateComplaintReportScreenState
                 children: [
                   Center(
                     child: Text(
-                      "txt_create_complaint_desc".tr(),
+                      "txt_create_panic_desc".tr(),
                       style: context.styleCaption,
                     ),
                   ),
                   const SizedBox(
                     height: spaceNormal,
                   ),
-                  ComplaintCustomerItem(item: pengaduan),
+                  PanicCustomerItem(item: pengaduan),
                   const SizedBox(
                     height: spaceNormal,
                   ),

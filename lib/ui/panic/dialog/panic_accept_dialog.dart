@@ -4,16 +4,16 @@ import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 
-class ComplaintAcceptDialog extends StatefulWidget {
+class PanicAcceptDialog extends StatefulWidget {
   final Pengaduan pengaduan;
 
-  const ComplaintAcceptDialog(this.pengaduan);
+  const PanicAcceptDialog(this.pengaduan);
 
   @override
-  _ComplaintAcceptDialogState createState() => _ComplaintAcceptDialogState();
+  _PanicAcceptDialogState createState() => _PanicAcceptDialogState();
 }
 
-class _ComplaintAcceptDialogState extends State<ComplaintAcceptDialog> {
+class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
   final noteController = TextEditingController();
 
   @override
@@ -55,7 +55,7 @@ class _ComplaintAcceptDialogState extends State<ComplaintAcceptDialog> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Terima pengaduan?",
+                    "Terima Panik?",
                     style: context.styleBody1,
                   ),
                   // Align(
@@ -80,9 +80,6 @@ class _ComplaintAcceptDialogState extends State<ComplaintAcceptDialog> {
                   //     setState(() {});
                   //   },
                   // ),
-                  const SizedBox(
-                    height: spaceMedium,
-                  ),
                   Visibility(
                     visible: !(state is ComplaintCreateLoading),
                     replacement: Center(

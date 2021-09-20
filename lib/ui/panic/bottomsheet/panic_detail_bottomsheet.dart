@@ -1,15 +1,15 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
-import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
-import 'package:amirta_mobile/ui/complaint/dialog/complaint_accept_dialog.dart';
-import 'package:amirta_mobile/ui/complaint/dialog/complaint_reject_dialog.dart';
+import 'package:amirta_mobile/ui/panic/bottomsheet/panic_bottomsheet_content.dart';
+import 'package:amirta_mobile/ui/panic/dialog/panic_accept_dialog.dart';
+import 'package:amirta_mobile/ui/panic/dialog/panic_reject_dialog.dart';
 
-class ComplaintDetailBottomSheet extends StatelessWidget {
+class PanicDetailBottomSheet extends StatelessWidget {
   final Pengaduan pengaduan;
   final ScrollController scrollController;
 
-  const ComplaintDetailBottomSheet(this.pengaduan, this.scrollController);
+  const PanicDetailBottomSheet(this.pengaduan, this.scrollController);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ComplaintBottomSheetContent(pengaduan),
+            PanicBottomSheetContent(pengaduan),
             const SizedBox(
               height: spaceNormal,
             ),
@@ -32,14 +32,14 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                       final result = await showDialog(
                         context: context,
                         builder: (context) {
-                          return ComplaintAcceptDialog(pengaduan);
+                          return PanicAcceptDialog(pengaduan);
                         },
                       );
                       if (result != null) {
-                        Navigator.pop(context, true);
+                        Navigator.pop(context);
                       }
                     },
-                    "btn_take_action".tr(),
+                    "btn_ready_action".tr(),
                   ),
                 ),
                 const SizedBox(
@@ -51,14 +51,14 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                       final result = await showDialog(
                         context: context,
                         builder: (context) {
-                          return ComplaintRejectDialog(pengaduan);
+                          return PanicRejectDialog(pengaduan);
                         },
                       );
                       if (result != null) {
-                        Navigator.pop(context, false);
+                        Navigator.pop(context);
                       }
                     },
-                    "btn_reject".tr(),
+                    "btn_out_of_reach".tr(),
                   ),
                 ),
               ],

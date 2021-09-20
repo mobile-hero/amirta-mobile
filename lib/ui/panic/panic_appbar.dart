@@ -1,10 +1,10 @@
 import 'package:amirta_mobile/my_material.dart';
 
-class ComplaintAppBar extends StatelessWidget with PreferredSizeWidget {
+class PanicAppBar extends StatelessWidget with PreferredSizeWidget {
   final bool enableLeading;
   final List<Widget>? actions;
 
-  const ComplaintAppBar({
+  const PanicAppBar({
     this.enableLeading = true,
     this.actions,
   });
@@ -17,14 +17,14 @@ class ComplaintAppBar extends StatelessWidget with PreferredSizeWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
-            imageRes('ic_complaint_color.png'),
+            imageRes('ic_alert_color.png'),
             height: 20,
             width: 20,
           ),
           const SizedBox(
             width: spaceNormal,
           ),
-          Text('Pengaduan'),
+          Text('Panik'),
         ],
       ),
       centerTitle: true,

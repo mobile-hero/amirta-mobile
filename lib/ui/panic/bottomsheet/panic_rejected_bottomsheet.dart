@@ -1,13 +1,13 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
-import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
+import 'package:amirta_mobile/ui/panic/bottomsheet/panic_bottomsheet_content.dart';
 
-class ComplaintRejectedBottomSheet extends StatelessWidget {
+class PanicRejectedBottomSheet extends StatelessWidget {
   final Pengaduan pengaduan;
   final ScrollController scrollController;
 
-  const ComplaintRejectedBottomSheet(this.pengaduan, this.scrollController);
+  const PanicRejectedBottomSheet(this.pengaduan, this.scrollController);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ComplaintBottomSheetContent(pengaduan),
+            PanicBottomSheetContent(pengaduan),
             const SizedBox(
-              height: spaceBig,
+              height: spaceMedium,
             ),
             Center(
               child: Container(
@@ -48,7 +48,7 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
                       width: spaceTiny,
                     ),
                     Text(
-                      "txt_complaint_rejected".tr(),
+                      "txt_panic_rejected".tr(),
                       style: context.styleBody1.copyWith(
                         fontWeight: FontWeight.w600,
                         color: scarlet,
@@ -62,11 +62,11 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
               height: spaceMedium,
             ),
             TitleValueBox(
-              title: "txt_rejection_note".tr(),
+              title: "txt_panic_rejection_note".tr(),
               value: pengaduan.operatorNotes ?? "-",
             ),
             const SizedBox(
-              height: spaceBig,
+              height: spaceHuge,
             ),
             PrimaryButton(
               () {

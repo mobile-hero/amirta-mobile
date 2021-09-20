@@ -1,20 +1,20 @@
 import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
-import 'package:amirta_mobile/bloc/complaint/list/complaint_types_bloc.dart';
+import 'package:amirta_mobile/bloc/complaint/list/panic_types_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan_export.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
-import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_completed_bottomsheet.dart';
-import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_inprocess_bottomsheet.dart';
-import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_rejected_bottomsheet.dart';
-import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
+import 'package:amirta_mobile/ui/panic/bottomsheet/panic_completed_bottomsheet.dart';
+import 'package:amirta_mobile/ui/panic/bottomsheet/panic_inprocess_bottomsheet.dart';
+import 'package:amirta_mobile/ui/panic/bottomsheet/panic_rejected_bottomsheet.dart';
+import 'package:amirta_mobile/ui/panic/panic_customer_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ComplaintHistoryScreen extends StatefulWidget {
+class PanicHistoryScreen extends StatefulWidget {
   @override
-  _ComplaintHistoryScreenState createState() => _ComplaintHistoryScreenState();
+  _PanicHistoryScreenState createState() => _PanicHistoryScreenState();
 }
 
-class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
+class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
   int tabPosition = 0;
 
   @override
@@ -28,18 +28,18 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) {
-          return ComplaintInProcessBloc(pengaduanRepository);
+          return PanicInProcessBloc(pengaduanRepository);
         }),
         BlocProvider(create: (context) {
-          return ComplaintRejectedBloc(pengaduanRepository);
+          return PanicRejectedBloc(pengaduanRepository);
         }),
         BlocProvider(create: (context) {
-          return ComplaintCompletedBloc(pengaduanRepository);
+          return PanicCompletedBloc(pengaduanRepository);
         }),
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('History Pengaduan'),
+          title: Text('History Panik'),
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -83,81 +83,81 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    BlocBuilder<ComplaintInProcessBloc, ComplaintListState>(
+                    BlocBuilder<PanicInProcessBloc, ComplaintListState>(
                         builder: (context, state) {
                       return _contentView(
-                        context.read<ComplaintInProcessBloc>().pagingController,
-                        ComplaintCustomerItemType.neutral,
-                        "txt_no_complaint_in_process".tr(),
+                        context.read<PanicInProcessBloc>().pagingController,
+                        PanicCustomerItemType.neutral,
+                        "txt_no_panic_in_process".tr(),
                         (value) async {
                           final result = await context
                               .showScrollableBottomSheet<Pengaduan>(
                             builder: (context, scrollController) {
-                              return ComplaintInProcessBottomSheet(
+                              return PanicInProcessBottomSheet(
                                   value, scrollController);
                             },
                           );
                           if (result != null) {
                             final response = await Navigator.pushNamed(
                               context,
-                              '/complaint/set-complete',
+                              '/panic/set-complete',
                               arguments: result,
                             );
                             if (response != null) {
                               context
-                                  .read<ComplaintInProcessBloc>()
+                                  .read<PanicInProcessBloc>()
                                   .pagingController
                                   .refresh();
 
                               context.showCustomToast(
                                 type: CustomToastType.success,
-                                message: "Pengaduan Selesai",
+                                message: "Panik Selesai",
                               );
                             }
                           }
                         },
                       );
                     }),
-                    BlocBuilder<ComplaintRejectedBloc, ComplaintListState>(
+                    BlocBuilder<PanicRejectedBloc, ComplaintListState>(
                         builder: (context, state) {
                       return _contentView(
-                        context.read<ComplaintRejectedBloc>().pagingController,
-                        ComplaintCustomerItemType.rejected,
-                        "txt_no_complaint_rejected".tr(),
+                        context.read<PanicRejectedBloc>().pagingController,
+                        PanicCustomerItemType.rejected,
+                        "txt_no_panic_rejected".tr(),
                         (value) async {
                           final result =
                               await context.showScrollableBottomSheet<int>(
                             builder: (context, scrollController) {
-                              return ComplaintRejectedBottomSheet(
+                              return PanicRejectedBottomSheet(
                                   value, scrollController);
                             },
                           );
                           if (result != null) {
                             context
-                                .read<ComplaintRejectedBloc>()
+                                .read<PanicRejectedBloc>()
                                 .pagingController
                                 .refresh();
                           }
                         },
                       );
                     }),
-                    BlocBuilder<ComplaintCompletedBloc, ComplaintListState>(
+                    BlocBuilder<PanicCompletedBloc, ComplaintListState>(
                         builder: (context, state) {
                       return _contentView(
-                        context.read<ComplaintCompletedBloc>().pagingController,
-                        ComplaintCustomerItemType.completed,
-                        "txt_no_complaint_completed".tr(),
+                        context.read<PanicCompletedBloc>().pagingController,
+                        PanicCustomerItemType.completed,
+                        "txt_no_panic_completed".tr(),
                         (value) async {
                           final result =
                               await context.showScrollableBottomSheet<int>(
                             builder: (context, scrollController) {
-                              return ComplaintCompletedBottomSheet(
+                              return PanicCompletedBottomSheet(
                                   value, scrollController);
                             },
                           );
                           if (result != null) {
                             context
-                                .read<ComplaintCompletedBloc>()
+                                .read<PanicCompletedBloc>()
                                 .pagingController
                                 .refresh();
                           }
@@ -176,7 +176,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
 
   Widget _contentView(
     PagingController<int, Pengaduan> pagingController,
-    ComplaintCustomerItemType type,
+    PanicCustomerItemType type,
     String emptyMessage,
     Function(Pengaduan) onTap,
   ) {
@@ -187,7 +187,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
         pagingController: pagingController,
         builderDelegate: PagedChildBuilderDelegate(
           itemBuilder: (context, item, position) {
-            return ComplaintCustomerItem(
+            return PanicCustomerItem(
               item: item,
               type: type,
               onTap: () => onTap.call(item),

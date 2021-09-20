@@ -1,6 +1,7 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_screen.dart';
 import 'package:amirta_mobile/ui/home/home_screen.dart';
+import 'package:amirta_mobile/ui/panic/panic_screen.dart';
 import 'package:amirta_mobile/ui/water/water_form_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     WaterFormScreen(),
     ComplaintScreen(),
-    Container(),
+    PanicScreen(),
   ];
 
   int bodyPos = 0;

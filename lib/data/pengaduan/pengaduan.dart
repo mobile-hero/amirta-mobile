@@ -58,7 +58,7 @@ class Pengaduan {
   final String? operatorAcceptedDtime;
   final String? operatorExaminationDtime;
   @JsonKey(name: "fileList")
-  final List<String>? fileList;
+  final List<PengaduanFile>? fileList;
 
   factory Pengaduan.fromJson(Map<String, dynamic> json) =>
       _$PengaduanFromJson(json);

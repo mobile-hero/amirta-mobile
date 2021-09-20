@@ -56,7 +56,7 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
       body['notes'] = notes;
     }
     if (photos != null) {
-      body['fileList'] = photos.map((e) => {"fname": e});
+      body['fileList'] = photos.map((e) => {"fname": e}).toList();
     }
     final response = await post("/complaint_examination", body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;

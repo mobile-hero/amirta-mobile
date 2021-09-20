@@ -1,14 +1,14 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 
-class ComplaintSetCompleteDialog extends StatefulWidget {
+class PanicSetCompleteDialog extends StatefulWidget {
   @override
-  _ComplaintSetCompleteDialogState createState() =>
-      _ComplaintSetCompleteDialogState();
+  _PanicSetCompleteDialogState createState() =>
+      _PanicSetCompleteDialogState();
 }
 
-class _ComplaintSetCompleteDialogState
-    extends State<ComplaintSetCompleteDialog> {
+class _PanicSetCompleteDialogState
+    extends State<PanicSetCompleteDialog> {
   final noteController = TextEditingController();
 
   @override
@@ -51,7 +51,7 @@ class _ComplaintSetCompleteDialogState
               ),
             ),
             const SizedBox(
-              height: spaceMedium,
+              height: spaceBig,
             ),
             Row(
               children: [

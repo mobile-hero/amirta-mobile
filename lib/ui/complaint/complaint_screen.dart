@@ -37,50 +37,65 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
         ),
         body: BlocBuilder<ComplaintNewBloc, ComplaintListState>(
           builder: (context, state) {
-            return PagedListView<int, Pengaduan>(
-              padding: const EdgeInsets.all(spaceMedium),
-              pagingController:
-                  context.read<ComplaintNewBloc>().pagingController,
-              builderDelegate: PagedChildBuilderDelegate(
-                itemBuilder: (context, item, position) {
-                  return ComplaintCustomerItem(
-                    item: item,
-                    onTap: () async {
-                      final result =
-                          await context.showScrollableBottomSheet<int>(
-                        builder: (context, scrollController) {
-                          return ComplaintDetailBottomSheet(
-                              item, scrollController);
-                        },
-                      );
-                      if (result != null) {
-                        setState(() {});
-                      }
-                    },
-                  );
-                },
-                noMoreItemsIndicatorBuilder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(spaceNormal),
-                    child: Center(
-                      child: Text(
-                        'txt_no_more_complaint'.tr(),
-                        style: context.styleCaption,
+            return RefreshIndicator(
+              onRefresh: () async =>
+                  context.read<ComplaintNewBloc>().pagingController.refresh(),
+              child: PagedListView<int, Pengaduan>(
+                padding: const EdgeInsets.all(spaceMedium),
+                pagingController:
+                    context.read<ComplaintNewBloc>().pagingController,
+                builderDelegate: PagedChildBuilderDelegate(
+                  itemBuilder: (context, item, position) {
+                    return ComplaintCustomerItem(
+                      item: item,
+                      onTap: () async {
+                        final bool? result =
+                            await context.showScrollableBottomSheet<bool>(
+                          builder: (context, scrollController) {
+                            return ComplaintDetailBottomSheet(
+                                item, scrollController);
+                          },
+                        );
+                        if (result != null) {
+                          if (result) {
+                            context.showCustomToast(
+                              type: CustomToastType.success,
+                              message: "Pengaduan Ditindak",
+                            );
+                          } else {
+                            context.showCustomToast(
+                              type: CustomToastType.error,
+                              message: "Pengaduan Ditolak",
+                            );
+                          }
+                          context.read<ComplaintNewBloc>().pagingController.refresh();
+                        }
+                      },
+                    );
+                  },
+                  noMoreItemsIndicatorBuilder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(spaceNormal),
+                      child: Center(
+                        child: Text(
+                          'txt_no_more_complaint'.tr(),
+                          style: context.styleCaption,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                noItemsFoundIndicatorBuilder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(spaceNormal),
-                    child: Center(
-                      child: Text(
-                        "txt_no_new_complaint".tr(),
-                        style: context.styleCaption,
+                    );
+                  },
+                  noItemsFoundIndicatorBuilder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(spaceNormal),
+                      child: Center(
+                        child: Text(
+                          "txt_no_new_complaint".tr(),
+                          style: context.styleCaption,
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             );
           },

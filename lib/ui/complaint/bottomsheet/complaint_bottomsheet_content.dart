@@ -18,7 +18,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
               height: imgSizeMedium,
               padding: const EdgeInsets.all(spaceTiny),
               child: Image.asset(
-                imageRes('ic_air_topbar.png'),
+                imageRes('ic_complaint.png'),
                 color: white,
               ),
               decoration: BoxDecoration(
@@ -46,7 +46,10 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                 ],
               ),
             ),
-            StatusChip(done: false),
+            StatusChip(
+              done: false,
+              notDoneText: 'Sarpas',
+            ),
           ],
         ),
         const SizedBox(
@@ -141,6 +144,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                       pengaduan.fname.imageUrl,
                       width: imgSizeBig,
                       height: imgSizeBig,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

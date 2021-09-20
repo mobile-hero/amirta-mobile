@@ -24,7 +24,6 @@ class ComplaintListBloc extends Bloc<ComplaintListEvent, ComplaintListState> {
         add(LoadMoreComplaint(status, pageKey));
       }
     });
-    add(LoadComplaint(status));
   }
 
   final PagingController<int, Pengaduan> pagingController =
@@ -43,11 +42,6 @@ class ComplaintListBloc extends Bloc<ComplaintListEvent, ComplaintListState> {
         yield* loadMoreComplaint(event as LoadMoreComplaint);
         break;
     }
-    // if (event is LoadComplaint) {
-    //   loadComplaint(event);
-    // } else if (event is LoadMoreComplaint) {
-    //   loadMoreComplaint(event);
-    // }
   }
 
   Stream<ComplaintListState> loadComplaint(LoadComplaint event) async* {

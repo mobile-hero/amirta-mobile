@@ -1,27 +1,26 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 
-enum ComplaintCustomerItemType { neutral, rejected, completed }
+enum PanicCustomerItemType { neutral, rejected, completed }
 
-class ComplaintCustomerItem extends StatelessWidget {
+class PanicCustomerItem extends StatelessWidget {
   final Pengaduan item;
-  final ComplaintCustomerItemType type;
+  final PanicCustomerItemType type;
   final VoidCallback? onTap;
 
-  const ComplaintCustomerItem({
+  const PanicCustomerItem({
     required this.item,
-    this.type = ComplaintCustomerItemType.neutral,
+    this.type = PanicCustomerItemType.neutral,
     this.onTap,
   });
 
   Color _getBorderColor() {
     switch (type) {
-      case ComplaintCustomerItemType.neutral:
+      case PanicCustomerItemType.neutral:
         return transparent;
-      case ComplaintCustomerItemType.rejected:
+      case PanicCustomerItemType.rejected:
         return carrot;
-      case ComplaintCustomerItemType.completed:
+      case PanicCustomerItemType.completed:
         return forest;
     }
   }
@@ -49,11 +48,12 @@ class ComplaintCustomerItem extends StatelessWidget {
                       height: imgSizeMedium,
                       padding: const EdgeInsets.all(spaceTiny),
                       child: Image.asset(
-                        imageRes('ic_complaint.png'),
+                        imageRes('ic_alert.png'),
                         color: white,
+                        height: spaceMedium,
                       ),
                       decoration: BoxDecoration(
-                        color: forest,
+                        color: scarlet,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
@@ -61,25 +61,12 @@ class ComplaintCustomerItem extends StatelessWidget {
                       width: spaceNormal,
                     ),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.title,
-                            style: context.styleBody1.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            item.rusunName,
-                            style: context.styleCaption,
-                          ),
-                        ],
+                      child: Text(
+                        item.complainantName,
+                        style: context.styleBody1.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    StatusChip(
-                      done: false,
-                      notDoneText: 'Sarpas',
                     ),
                   ],
                 ),
@@ -90,27 +77,24 @@ class ComplaintCustomerItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
+                      flex: 3,
                       child: TitleValueBox(
-                        title: 'txt_blok'.tr(),
-                        value: item.buildingName,
+                        title: 'txt_rusun'.tr(),
+                        value: item.rusunName,
                       ),
                     ),
                     Expanded(
+                      flex: 3,
                       child: TitleValueBox(
-                        title: 'txt_lantai'.tr(),
-                        value: item.floor.toString(),
+                        title: 'txt_phone_num'.tr(),
+                        value: item.complaintNumber,
                       ),
                     ),
                     Expanded(
+                      flex: 2,
                       child: TitleValueBox(
-                        title: 'txt_nomor'.tr(),
-                        value: item.unitNumber,
-                      ),
-                    ),
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_name'.tr(),
-                        value: item.complainantName,
+                        title: 'txt_time'.tr(),
+                        value: item.receivedDtimeFormatted,
                       ),
                     ),
                   ],
