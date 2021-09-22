@@ -69,7 +69,7 @@ class AppProvider {
   Future<Profile?> _setupHeaderToken() async {
     final user = await accountLocalRepository.getUser();
     print(user);
-    if (user != null) {
+    if (user != null && user.sessid != null) {
       repositoryConfig.setToken(user.sessid!);
       repositoryConfig.setPid(user.pid);
       return user;

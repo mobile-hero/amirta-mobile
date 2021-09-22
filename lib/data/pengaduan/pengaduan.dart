@@ -68,6 +68,10 @@ class Pengaduan {
   String get receivedDtimeFormatted {
     return DateFormat("dd-MM-y").format(receivedDtime);
   }
+  
+  String get receivedDtimeHomeFormatted {
+    return DateFormat("dd MMMM y | HH:mm", "id").format(receivedDtime);
+  }
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)

@@ -1,4 +1,5 @@
 import 'package:amirta_mobile/bloc/notification/notification_bloc.dart';
+import 'package:amirta_mobile/data/account/user_notification.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -9,16 +10,8 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  final PagingController<int, String> _pagingController =
-      PagingController(firstPageKey: 0);
-
   @override
   void initState() {
-    _pagingController.appendLastPage([
-      'satu',
-      'dua',
-      'tiga',
-    ]);
     super.initState();
   }
 
@@ -36,15 +29,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         body: BlocBuilder<NotificationBloc, NotificationState>(
             builder: (context, state) {
-          return PagedListView<int, String>(
+          return PagedListView<int, UserNotification>(
             padding: const EdgeInsets.all(spaceMedium),
-            pagingController: _pagingController,
+            pagingController: context.read<NotificationBloc>().pagingController,
             builderDelegate: PagedChildBuilderDelegate(
               itemBuilder: (context, item, position) {
+                final unread = false;
                 return Column(
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           width: imgSizeMedium,
@@ -52,11 +46,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           padding: const EdgeInsets.all(spaceSmall),
                           child: Image.asset(
                             imageRes('ic_notification.png'),
-                            color: position / ~2 == 0 ? carrot : white,
+                            color: unread ? carrot : white,
                           ),
                           decoration: BoxDecoration(
-                            color: carrot
-                                .withOpacity(position / ~2 == 0 ? 0.2 : 1.0),
+                            color: carrot.withOpacity(unread ? 0.2 : 1.0),
                             borderRadius: BorderRadius.circular(buttonRadius),
                           ),
                         ),
@@ -67,27 +60,37 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Pembaharuan Aplikasi',
-                                style: context.styleBody1.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.fade,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      item.title,
+                                      style: context.styleBody1.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      overflow: TextOverflow.fade,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: spaceMedium,
+                                  ),
+                                  Text(
+                                    item.sendTimeFormatted,
+                                    style: context.styleCaption,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: spaceSmall,
                               ),
                               Text(
-                                'Segera update aplikasi Anda',
-                                style: context.styleCaption,
+                                item.message,
+                                style:
+                                    context.styleCaption.copyWith(height: 1.5),
                                 overflow: TextOverflow.fade,
                               ),
                             ],
                           ),
-                        ),
-                        const SizedBox(
-                          width: spaceMedium,
-                        ),
-                        Text(
-                          '11:20',
-                          style: context.styleCaption,
                         ),
                       ],
                     ),

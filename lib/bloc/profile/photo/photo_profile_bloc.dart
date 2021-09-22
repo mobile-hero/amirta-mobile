@@ -41,7 +41,7 @@ class PhotoProfileBloc extends Bloc<PhotoProfileEvent, PhotoProfileState> {
         final response =
             await uploadImageRepository.uploadPhotoProfile(uriData);
         appProvider.setUser(response.data);
-        yield PhotoProfileSuccess(response.data.photo.imageUrl);
+        yield PhotoProfileSuccess(response.data.photo!.photoProfileUrl);
       } catch (e) {
         yield PhotoProfileError();
       }

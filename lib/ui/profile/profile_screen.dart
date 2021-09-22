@@ -90,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             )
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(130),
+            preferredSize: Size.fromHeight(150),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -99,10 +99,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     listener: (context, state) {
                       if (state is PhotoProfileSuccess) {
                         final phone =
-                          context.appProvider().user!.mobilePhoneNumber;
+                            context.appProvider().user!.mobilePhoneNumber;
                         context
-                          .read<ProfileBloc>()
-                          .add(SaveAccount(phone, emailController.text));
+                            .read<ProfileBloc>()
+                            .add(SaveAccount(phone, emailController.text));
                         setState(() {
                           file = null;
                         });
@@ -126,10 +126,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           NetworkImage(state.url),
                         );
                       }
-                      return imageProfile(
-                        NetworkImage(
-                          context.appProvider().user!.photo.photoProfileUrl,
-                        ),
+                      final user = context.appProvider().user;
+                      if (user?.photo != null && user?.photo?.isEmpty == false) {
+                        return imageProfile(
+                          NetworkImage(
+                            user!.photo!.photoProfileUrl,
+                          ),
+                        );
+                      }
+                      return Icon(
+                        Icons.account_circle_rounded,
+                        size: 80,
+                        color: white,
                       );
                     },
                   ),
@@ -201,10 +209,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             .add(UploadPhoto(file!));
                       } else {
                         final phone =
-                          context.appProvider().user!.mobilePhoneNumber;
+                            context.appProvider().user!.mobilePhoneNumber;
                         context
-                          .read<ProfileBloc>()
-                          .add(SaveAccount(phone, emailController.text));
+                            .read<ProfileBloc>()
+                            .add(SaveAccount(phone, emailController.text));
                       }
                     },
                     "Simpan",

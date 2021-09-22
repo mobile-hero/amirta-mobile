@@ -1,4 +1,5 @@
 import 'package:amirta_mobile/data/account/account_export.dart';
+import 'package:amirta_mobile/data/account/user_notification_response.dart';
 import 'package:amirta_mobile/data/simple_response.dart';
 import 'package:amirta_mobile/repository/account_repository.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
@@ -44,10 +45,10 @@ class AccountRepositoryImpl extends AccountRepository {
 
 
   @override
-  Future<dynamic> notifications() async {
+  Future<UserNotificationResponse> notifications() async {
     final response = await get("/notification");
     return (isResult(response))
-      ? DashboardResponse.fromJson(response)
+      ? UserNotificationResponse.fromJson(response)
       : response;
   }
 

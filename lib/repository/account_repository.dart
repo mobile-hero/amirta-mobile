@@ -1,4 +1,5 @@
 import 'package:amirta_mobile/data/account/account_export.dart';
+import 'package:amirta_mobile/data/account/user_notification_response.dart';
 import 'package:amirta_mobile/data/simple_response.dart';
 import 'package:amirta_mobile/repository/base_repository.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
@@ -19,7 +20,7 @@ abstract class AccountRepository extends BaseRepository {
 
   Future<ProfileResponse> editProfile(EditProfile edit);
   
-  Future<dynamic> notifications();
+  Future<UserNotificationResponse> notifications();
 
   Future<DashboardResponse> dashboard();
 }

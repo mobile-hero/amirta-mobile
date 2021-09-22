@@ -1,3 +1,5 @@
+import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
+import 'package:amirta_mobile/bloc/complaint/list/panic_types_bloc.dart';
 import 'package:amirta_mobile/bloc/dashboard/dashboard_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
@@ -11,10 +13,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.appProvider().user;
-    return BlocProvider(
-      create: (context) {
-        return DashboardBloc(context.appProvider().accountRepository);
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) {
+          return DashboardBloc(context.appProvider().accountRepository);
+        }),
+        BlocProvider(create: (context) {
+          return PanicNewBloc(context.appProvider().pengaduanRepository);
+        }),
+      ],
       child: Scaffold(
         body: SingleChildScrollView(
           child: Stack(
@@ -39,14 +46,29 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.pushNamed(context, '/profile');
                           },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Image.network(
-                              "https://img.icons8.com/bubbles/2x/user.png",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
+                          child: Builder(builder: (context) {
+                            final user = context.appProvider().user;
+                            if (user?.photo != null &&
+                                user?.photo?.isEmpty == false) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  user!.photo!.photoProfileUrl,
+                                  width: 70,
+                                  height: 70,
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            }
+                            return Icon(
+                              Icons.account_circle_rounded,
+                              size: 80,
+                              color: white,
+                            );
+                          }),
+                        ),
+                        const SizedBox(
+                          width: spaceNormal,
                         ),
                         Expanded(
                           child: InkWell(
@@ -90,220 +112,24 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                       height: spaceMedium,
                     ),
-                    BlocBuilder<DashboardBloc, DashboardState>(
-                        builder: (context, state) {
-                      if (state is DashboardLoading) {
-                        return MyProgressIndicator();
-                      }
-                      if (state is DashboardSuccess) {
-                        return Column(
-                          children: [
-                            ShadowedContainer(
-                              padding: const EdgeInsets.all(spaceNormal),
-                              borderRadius: buttonRadius,
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    imageRes('ic_panik_info_harian.png'),
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                                  const SizedBox(
-                                    width: spaceMedium,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Halim Baskoro',
-                                          style:
-                                              context.styleBody1.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jatinegara Barat',
-                                          style: context.styleCaption,
-                                        ),
-                                        const SizedBox(
-                                          height: spaceMedium,
-                                        ),
-                                        Text(
-                                          '10 April 2021 | 13:44',
-                                          style: context.styleCaption,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        state.dashboard.totalPanicButton
-                                            .toString(),
-                                        style: context.styleHeadline1.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: spaceTiny,
-                                      ),
-                                      Text(
-                                        'Data Panik',
-                                        style: context.styleCaption,
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: spaceMedium,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: ShadowedContainer(
-                                    padding: const EdgeInsets.all(spaceNormal),
-                                    borderRadius: buttonRadius,
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          imageRes('ic_pengaduan_info_harian.png'),
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(
-                                          width: spaceMedium,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                state.dashboard.totalComplaint
-                                                    .toString(),
-                                                style: context.styleHeadline4
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: spaceTiny,
-                                              ),
-                                              Text(
-                                                'Pengaduan',
-                                                style: context.styleCaption,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: spaceMedium,
-                                ),
-                                Expanded(
-                                  child: ShadowedContainer(
-                                    padding: const EdgeInsets.all(spaceNormal),
-                                    borderRadius: buttonRadius,
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          imageRes('ic_air_info_harian.png'),
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(
-                                          width: spaceMedium,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                state.dashboard
-                                                    .totalUncollectedMeterPdam
-                                                    .toString(),
-                                                style: context.styleHeadline4
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: spaceTiny,
-                                              ),
-                                              Text(
-                                                'Air ${dateFormat.format(dateTime)}',
-                                                style: context.styleCaption,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      }
-
-                      return Center(
-                        child: Text("Gagal Mengambil Data Dashboard"),
-                      );
-                    }),
+                    summarySection(),
                     const SizedBox(
                       height: spaceBig,
                     ),
-                    Text(
-                      'Info Harian',
-                      style: context.styleBody1.copyWith(
-                        fontWeight: FontWeight.bold,
+                    Visibility(
+                      visible: false,
+                      child: dailySection(context),
+                      replacement: Padding(
+                        padding: const EdgeInsets.only(top: spaceBig),
+                        child: Center(
+                          child: Text(
+                            'Info Harian akan datang',
+                            style: context.styleBody1.copyWith(
+                              color: grease.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Periksa pembaruan dari setiap menu',
-                      style: context.styleCaption.copyWith(
-                        color: grease.withOpacity(0.5),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: spaceBig,
-                    ),
-                    briefItem(
-                      context: context,
-                      image: 'ic_panik_info_harian.png',
-                      title: 'Siti Zubaedah',
-                      subtitle: 'Jatinegara Barat',
-                      date: '13:44',
-                    ),
-                    const SizedBox(
-                      height: spaceMedium,
-                    ),
-                    briefItem(
-                      context: context,
-                      image: 'ic_air_info_harian.png',
-                      title: 'Jatinegara Kaum',
-                      subtitle: 'Blok D Nomor 177',
-                      date: '10:00',
-                    ),
-                    const SizedBox(
-                      height: spaceMedium,
-                    ),
-                    briefItem(
-                      context: context,
-                      image: 'ic_pengaduan_info_harian.png',
-                      title: 'Muhammad Ikhsan',
-                      subtitle: 'Sarpas, Jatinegara Barat',
-                      date: '13:44',
                     ),
                   ],
                 ),
@@ -312,6 +138,237 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget summarySection() {
+    return BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
+      if (state is DashboardLoading) {
+        return MyProgressIndicator();
+      }
+      if (state is DashboardSuccess) {
+        return Column(
+          children: [
+            ShadowedContainer(
+              padding: const EdgeInsets.all(spaceNormal),
+              borderRadius: buttonRadius,
+              child: Row(
+                children: [
+                  Image.asset(
+                    imageRes('ic_panik_info_harian.png'),
+                    height: 30,
+                    width: 30,
+                  ),
+                  const SizedBox(
+                    width: spaceMedium,
+                  ),
+                  BlocBuilder<PanicNewBloc, ComplaintListState>(
+                    builder: (context, state) {
+                      final pagingController =
+                          context.read<PanicNewBloc>().pagingController;
+                      if (pagingController.itemList == null ||
+                          pagingController.itemList?.length == 0) {
+                        return Expanded(
+                          child: Text(
+                            "Tenang!\nKeadaan aman",
+                            style: context.styleCaption,
+                          ),
+                        );
+                      }
+
+                      final item = pagingController.itemList!.first;
+                      return Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.complainantName,
+                              style: context.styleBody1.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              item.rusunName,
+                              style: context.styleCaption,
+                            ),
+                            const SizedBox(
+                              height: spaceMedium,
+                            ),
+                            Text(
+                              item.receivedDtimeHomeFormatted,
+                              style: context.styleCaption,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        state.dashboard.totalPanicButton.toString(),
+                        style: context.styleHeadline1.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: spaceTiny,
+                      ),
+                      Text(
+                        'Data Panik',
+                        style: context.styleCaption,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: spaceMedium,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: ShadowedContainer(
+                    padding: const EdgeInsets.all(spaceNormal),
+                    borderRadius: buttonRadius,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          imageRes('ic_pengaduan_info_harian.png'),
+                          height: 30,
+                          width: 30,
+                        ),
+                        const SizedBox(
+                          width: spaceMedium,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                state.dashboard.totalComplaint.toString(),
+                                style: context.styleHeadline4.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: spaceTiny,
+                              ),
+                              Text(
+                                'Pengaduan',
+                                style: context.styleCaption,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: spaceMedium,
+                ),
+                Expanded(
+                  child: ShadowedContainer(
+                    padding: const EdgeInsets.all(spaceNormal),
+                    borderRadius: buttonRadius,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          imageRes('ic_air_info_harian.png'),
+                          height: 30,
+                          width: 30,
+                        ),
+                        const SizedBox(
+                          width: spaceMedium,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                state.dashboard.totalUncollectedMeterPdam
+                                    .toString(),
+                                style: context.styleHeadline4.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: spaceTiny,
+                              ),
+                              Text(
+                                'Air ${dateFormat.format(dateTime)}',
+                                style: context.styleCaption,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      }
+
+      return Center(
+        child: Text("Gagal Mengambil Data Dashboard"),
+      );
+    });
+  }
+
+  Widget dailySection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Info Harian',
+          style: context.styleBody1.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'Periksa pembaruan dari setiap menu',
+          style: context.styleCaption.copyWith(
+            color: grease.withOpacity(0.5),
+          ),
+        ),
+        const SizedBox(
+          height: spaceBig,
+        ),
+        briefItem(
+          context: context,
+          image: 'ic_panik_info_harian.png',
+          title: 'Siti Zubaedah',
+          subtitle: 'Jatinegara Barat',
+          date: '13:44',
+        ),
+        const SizedBox(
+          height: spaceMedium,
+        ),
+        briefItem(
+          context: context,
+          image: 'ic_air_info_harian.png',
+          title: 'Jatinegara Kaum',
+          subtitle: 'Blok D Nomor 177',
+          date: '10:00',
+        ),
+        const SizedBox(
+          height: spaceMedium,
+        ),
+        briefItem(
+          context: context,
+          image: 'ic_pengaduan_info_harian.png',
+          title: 'Muhammad Ikhsan',
+          subtitle: 'Sarpas, Jatinegara Barat',
+          date: '13:44',
+        ),
+      ],
     );
   }
 

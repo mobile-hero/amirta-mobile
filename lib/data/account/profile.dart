@@ -24,7 +24,7 @@ class Profile {
   final String name;
   final String mobilePhoneNumber;
   final String emailAddress;
-  final String photo;
+  final String? photo;
   final List<RusunLite> rusunList;
   final int? loginType;
   final String? sessid;
