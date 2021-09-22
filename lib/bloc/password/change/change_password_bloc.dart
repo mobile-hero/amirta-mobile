@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:amirta_mobile/data/error_message.dart';
 import 'package:amirta_mobile/repository/account_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
 part 'change_password_event.dart';
@@ -35,7 +37,8 @@ class ChangePasswordBloc
           event.newPassword, event.confirmPassword);
       yield ChangePasswordSuccess();
     } catch (e) {
-      yield ChangePasswordError('Gagal mengganti password');
+      final error = e as ErrorMessage;
+      yield ChangePasswordError(error.message ?? 'Gagal mengganti password');
     }
   }
   
@@ -46,7 +49,8 @@ class ChangePasswordBloc
           event.currentPassword, event.confirmPassword);
       yield ChangePasswordSuccess();
     } catch (e) {
-      yield ChangePasswordError('Gagal mengganti password');
+      final error = e as ErrorMessage;
+      yield ChangePasswordError(error.message ?? 'Gagal mengganti password');
     }
   }
 }

@@ -91,7 +91,7 @@ abstract class BaseRepository {
   Future _handleOtherErrorCodes(SimpleResponse data) {
     try {
       final messages = {
-        ErrorMessage.keyMessage: data.responsemessage.toString().tr()
+        ErrorMessage.keyMessage: data.responsemessage
       };
       return Future.error(ErrorMessage(
         response: data,

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amirta_mobile/data/error_message.dart';
 import 'package:amirta_mobile/repository/account_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -30,7 +31,8 @@ class EmailPasswordBloc extends Bloc<EmailPasswordEvent, EmailPasswordState> {
       final response = await accountRepository.forgotPassword(event.email);
       yield EmailPasswordSuccess();
     } catch (e) {
-      yield EmailPasswordError();
+      final error = e as ErrorMessage;
+      yield EmailPasswordError(error.message ?? 'Gagal reset kata sandi');
     }
   }
 }

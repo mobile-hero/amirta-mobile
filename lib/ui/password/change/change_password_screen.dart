@@ -17,7 +17,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   void initState() {
     resetPassGesture.onTap = () {
-      Navigator.pushNamed(context, '/password/reset');
+      Navigator.pushNamed(context, '/password/email');
     };
     super.initState();
   }
@@ -52,7 +52,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             '/password/change/success',
           );
         }
-        if (state is ChangePasswordError) {}
+        if (state is ChangePasswordError) {
+          context.showCustomSnackBar(state.message);
+        }
       }, builder: (context, state) {
         return Scaffold(
           appBar: AppBar(

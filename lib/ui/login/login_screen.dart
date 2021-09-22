@@ -55,12 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 );
               }
               if (state is LoginError) {
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('txt_login_error'.tr()),
-                  ),
-                );
+                context.showCustomSnackBar('txt_login_error'.tr());
               }
             },
             builder: (context, state) {

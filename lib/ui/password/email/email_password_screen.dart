@@ -44,7 +44,9 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
               '/password/email/success',
             );
           }
-          if (state is EmailPasswordError) {}
+          if (state is EmailPasswordError) {
+            context.showCustomSnackBar(state.message);
+          }
         }, builder: (context, state) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(spaceMedium),
