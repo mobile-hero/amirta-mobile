@@ -18,6 +18,8 @@ abstract class AccountRepository extends BaseRepository {
   Future<SimpleResponse> changePassword(String oldPassword, String newPassword);
 
   Future<ProfileResponse> editProfile(EditProfile edit);
+  
+  Future<dynamic> notifications();
 
   Future<DashboardResponse> dashboard();
 }

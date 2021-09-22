@@ -1,3 +1,4 @@
+import 'package:amirta_mobile/bloc/fcm/fcm_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_screen.dart';
 import 'package:amirta_mobile/ui/home/home_screen.dart';
@@ -18,6 +19,12 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   int bodyPos = 0;
+  
+  @override
+  void initState() {
+    context.read<FcmBloc>().add(RegisterFcm());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

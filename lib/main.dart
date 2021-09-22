@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:amirta_mobile/bloc/app_provider.dart';
+import 'package:amirta_mobile/bloc/fcm/fcm_bloc.dart';
 import 'package:amirta_mobile/event_bus.dart';
 import 'package:amirta_mobile/repository/account_local_repository_impl.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
@@ -38,6 +39,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info/package_info.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -150,8 +152,27 @@ class _MyAppState extends State<MyApp> {
             eventBus.fire(CheckUnreadNotificationEvent());
           }
         }
-        print('Message also contained a notification: ${message.notification}');
-        AndroidNotificationDetails androidPlatformChannelSpecifics =
+        print(
+            'Message also contained a notification: ${message.notification?.toString()}');
+        final imageUrl = message.notification?.android?.imageUrl;
+        late DefaultStyleInformation styleInformation;
+        AndroidBitmap? largeIcon;
+        if (imageUrl != null) {
+          final tempDir = await getTemporaryDirectory();
+          final downloadPath =
+              tempDir.path + Uri.parse(imageUrl).pathSegments.last;
+          await dio.download(imageUrl, downloadPath);
+
+          styleInformation = BigPictureStyleInformation(
+            largeIcon ??= FilePathAndroidBitmap(downloadPath),
+            summaryText: message.notification?.body ?? "-",
+          );
+        } else {
+          styleInformation = BigTextStyleInformation(
+            message.notification?.body ?? "-",
+          );
+        }
+        AndroidNotificationDetails androidNotificationDetails =
             AndroidNotificationDetails(
           'amirta-notification',
           'Amirta',
@@ -160,12 +181,18 @@ class _MyAppState extends State<MyApp> {
           priority: Priority.high,
           showWhen: false,
           icon: "ic_app_notification",
-          color: red,
-          styleInformation:
-              BigTextStyleInformation(message.notification?.body ?? "-"),
+          largeIcon: largeIcon,
+          color: egyptian,
+          styleInformation: styleInformation,
+        );
+        IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails(
+          presentAlert: true,
+          presentSound: true,
+          subtitle: message.notification?.body ?? "-",
         );
         NotificationDetails platformChannelSpecifics = NotificationDetails(
-          android: androidPlatformChannelSpecifics,
+          android: androidNotificationDetails,
+          iOS: iosNotificationDetails,
         );
         await flutterLocalNotificationsPlugin.show(
           0,
@@ -266,7 +293,7 @@ class _MyAppState extends State<MyApp> {
               future: Firebase.initializeApp(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return _initApp();
+                  return _initFcmBloc();
                 }
                 return Center(
                   child: CircularProgressIndicator(),
@@ -287,6 +314,22 @@ class _MyAppState extends State<MyApp> {
           ),
         );
       },
+    );
+  }
+
+  Widget _initFcmBloc() {
+    return BlocProvider(
+      create: (context) {
+        return FcmBloc(
+          context.appProvider().fcmRepository,
+          FirebaseMessaging.instance,
+        );
+      },
+      child: BlocBuilder<FcmBloc, FcmState>(
+        builder: (context, state) {
+          return _initApp();
+        },
+      ),
     );
   }
 

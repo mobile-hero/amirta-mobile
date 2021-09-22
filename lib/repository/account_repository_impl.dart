@@ -42,6 +42,15 @@ class AccountRepositoryImpl extends AccountRepository {
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
+
+  @override
+  Future<dynamic> notifications() async {
+    final response = await get("/notification");
+    return (isResult(response))
+      ? DashboardResponse.fromJson(response)
+      : response;
+  }
+
   @override
   Future<DashboardResponse> dashboard() async {
     final response = await get("/dashboard");
