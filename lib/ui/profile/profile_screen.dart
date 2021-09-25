@@ -79,13 +79,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Text('Profile'),
           centerTitle: true,
           actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/settings');
-              },
-              icon: ImageIcon(
-                AssetImage(imageRes('ic_settings.png')),
-                size: imgSizeNormal,
+            OfflineContainer(
+              offlineChild: SizedBox(),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/settings');
+                },
+                icon: ImageIcon(
+                  AssetImage(imageRes('ic_settings.png')),
+                  size: imgSizeNormal,
+                ),
               ),
             )
           ],
@@ -95,51 +98,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BlocConsumer<PhotoProfileBloc, PhotoProfileState>(
-                    listener: (context, state) {
-                      if (state is PhotoProfileSuccess) {
-                        final phone =
-                            context.appProvider().user!.mobilePhoneNumber;
-                        context
-                            .read<ProfileBloc>()
-                            .add(SaveAccount(phone, emailController.text));
-                        setState(() {
-                          file = null;
-                        });
-                      }
-                    },
-                    builder: (context, state) {
-                      if (state is PhotoProfileLoading) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: white,
-                          ),
+                  OfflineContainer(
+                    offlineChild: Icon(
+                      Icons.account_circle_rounded,
+                      size: 80,
+                      color: white,
+                    ),
+                    child: BlocConsumer<PhotoProfileBloc, PhotoProfileState>(
+                      listener: (context, state) {
+                        if (state is PhotoProfileSuccess) {
+                          final phone =
+                              context.appProvider().user!.mobilePhoneNumber;
+                          context
+                              .read<ProfileBloc>()
+                              .add(SaveAccount(phone, emailController.text));
+                          setState(() {
+                            file = null;
+                          });
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is PhotoProfileLoading) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: white,
+                            ),
+                          );
+                        }
+                        if (file != null) {
+                          return imageProfile(
+                            FileImage(File(file!.path)),
+                          );
+                        }
+                        if (state is PhotoProfileSuccess) {
+                          return imageProfile(
+                            NetworkImage(state.url),
+                          );
+                        }
+                        final user = context.appProvider().user;
+                        if (user?.photo != null &&
+                            user?.photo?.isEmpty == false) {
+                          return imageProfile(
+                            NetworkImage(
+                              user!.photo!.photoProfileUrl,
+                            ),
+                          );
+                        }
+                        return Icon(
+                          Icons.account_circle_rounded,
+                          size: 80,
+                          color: white,
                         );
-                      }
-                      if (file != null) {
-                        return imageProfile(
-                          FileImage(File(file!.path)),
-                        );
-                      }
-                      if (state is PhotoProfileSuccess) {
-                        return imageProfile(
-                          NetworkImage(state.url),
-                        );
-                      }
-                      final user = context.appProvider().user;
-                      if (user?.photo != null && user?.photo?.isEmpty == false) {
-                        return imageProfile(
-                          NetworkImage(
-                            user!.photo!.photoProfileUrl,
-                          ),
-                        );
-                      }
-                      return Icon(
-                        Icons.account_circle_rounded,
-                        size: 80,
-                        color: white,
-                      );
-                    },
+                      },
+                    ),
                   ),
                   const SizedBox(
                     height: spaceMedium,
@@ -201,22 +212,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(
                     height: spaceNormal,
                   ),
-                  PrimaryButton(
-                    () {
-                      if (file != null) {
-                        context
-                            .read<PhotoProfileBloc>()
-                            .add(UploadPhoto(file!));
-                      } else {
-                        final phone =
-                            context.appProvider().user!.mobilePhoneNumber;
-                        context
-                            .read<ProfileBloc>()
-                            .add(SaveAccount(phone, emailController.text));
-                      }
-                    },
-                    "Simpan",
-                    isLoading: state is ProfileLoading,
+                  OfflineContainer(
+                    offlineChild: SizedBox(),
+                    child: PrimaryButton(
+                      () {
+                        if (file != null) {
+                          context
+                              .read<PhotoProfileBloc>()
+                              .add(UploadPhoto(file!));
+                        } else {
+                          final phone =
+                              context.appProvider().user!.mobilePhoneNumber;
+                          context
+                              .read<ProfileBloc>()
+                              .add(SaveAccount(phone, emailController.text));
+                        }
+                      },
+                      "Simpan",
+                      isLoading: state is ProfileLoading,
+                    ),
                   ),
                   LogoutButton(
                     () async {

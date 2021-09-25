@@ -43,131 +43,133 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        body: DefaultTabController(
-          length: 3,
-          child: Column(
-            children: [
-              Container(
-                color: egyptian,
-                child: TabBar(
-                  tabs: [
-                    Tab(
-                      text: 'Dalam Proses',
+        body: OfflineContainer(
+          child: DefaultTabController(
+            length: 3,
+            child: Column(
+              children: [
+                Container(
+                  color: egyptian,
+                  child: TabBar(
+                    tabs: [
+                      Tab(
+                        text: 'Dalam Proses',
+                      ),
+                      Tab(
+                        text: 'Penolakan',
+                      ),
+                      Tab(
+                        text: 'Selesai',
+                      ),
+                    ],
+                    labelStyle: context.styleCaption.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                    Tab(
-                      text: 'Penolakan',
+                    labelColor: white,
+                    unselectedLabelStyle: context.styleCaption.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                    Tab(
-                      text: 'Selesai',
+                    unselectedLabelColor: white.withOpacity(0.5),
+                    indicatorPadding: const EdgeInsets.symmetric(
+                      horizontal: spaceHuge + spaceMedium,
                     ),
-                  ],
-                  labelStyle: context.styleCaption.copyWith(
-                    fontWeight: FontWeight.bold,
+                    indicatorColor: waterfall,
+                    onTap: (value) {
+                      setState(() {
+                        tabPosition = value;
+                      });
+                    },
                   ),
-                  labelColor: white,
-                  unselectedLabelStyle: context.styleCaption.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  unselectedLabelColor: white.withOpacity(0.5),
-                  indicatorPadding: const EdgeInsets.symmetric(
-                    horizontal: spaceHuge + spaceMedium,
-                  ),
-                  indicatorColor: waterfall,
-                  onTap: (value) {
-                    setState(() {
-                      tabPosition = value;
-                    });
-                  },
                 ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    BlocBuilder<ComplaintInProcessBloc, ComplaintListState>(
-                        builder: (context, state) {
-                      return _contentView(
-                        context.read<ComplaintInProcessBloc>().pagingController,
-                        ComplaintCustomerItemType.neutral,
-                        "txt_no_complaint_in_process".tr(),
-                        (value) async {
-                          final result = await context
-                              .showScrollableBottomSheet<Pengaduan>(
-                            builder: (context, scrollController) {
-                              return ComplaintInProcessBottomSheet(
-                                  value, scrollController);
-                            },
-                          );
-                          if (result != null) {
-                            final response = await Navigator.pushNamed(
-                              context,
-                              '/complaint/set-complete',
-                              arguments: result,
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      BlocBuilder<ComplaintInProcessBloc, ComplaintListState>(
+                          builder: (context, state) {
+                        return _contentView(
+                          context.read<ComplaintInProcessBloc>().pagingController,
+                          ComplaintCustomerItemType.neutral,
+                          "txt_no_complaint_in_process".tr(),
+                          (value) async {
+                            final result = await context
+                                .showScrollableBottomSheet<Pengaduan>(
+                              builder: (context, scrollController) {
+                                return ComplaintInProcessBottomSheet(
+                                    value, scrollController);
+                              },
                             );
-                            if (response != null) {
+                            if (result != null) {
+                              final response = await Navigator.pushNamed(
+                                context,
+                                '/complaint/set-complete',
+                                arguments: result,
+                              );
+                              if (response != null) {
+                                context
+                                    .read<ComplaintInProcessBloc>()
+                                    .pagingController
+                                    .refresh();
+
+                                context.showCustomToast(
+                                  type: CustomToastType.success,
+                                  message: "Pengaduan Selesai",
+                                );
+                              }
+                            }
+                          },
+                        );
+                      }),
+                      BlocBuilder<ComplaintRejectedBloc, ComplaintListState>(
+                          builder: (context, state) {
+                        return _contentView(
+                          context.read<ComplaintRejectedBloc>().pagingController,
+                          ComplaintCustomerItemType.rejected,
+                          "txt_no_complaint_rejected".tr(),
+                          (value) async {
+                            final result =
+                                await context.showScrollableBottomSheet<int>(
+                              builder: (context, scrollController) {
+                                return ComplaintRejectedBottomSheet(
+                                    value, scrollController);
+                              },
+                            );
+                            if (result != null) {
                               context
-                                  .read<ComplaintInProcessBloc>()
+                                  .read<ComplaintRejectedBloc>()
                                   .pagingController
                                   .refresh();
-
-                              context.showCustomToast(
-                                type: CustomToastType.success,
-                                message: "Pengaduan Selesai",
-                              );
                             }
-                          }
-                        },
-                      );
-                    }),
-                    BlocBuilder<ComplaintRejectedBloc, ComplaintListState>(
-                        builder: (context, state) {
-                      return _contentView(
-                        context.read<ComplaintRejectedBloc>().pagingController,
-                        ComplaintCustomerItemType.rejected,
-                        "txt_no_complaint_rejected".tr(),
-                        (value) async {
-                          final result =
-                              await context.showScrollableBottomSheet<int>(
-                            builder: (context, scrollController) {
-                              return ComplaintRejectedBottomSheet(
-                                  value, scrollController);
-                            },
-                          );
-                          if (result != null) {
-                            context
-                                .read<ComplaintRejectedBloc>()
-                                .pagingController
-                                .refresh();
-                          }
-                        },
-                      );
-                    }),
-                    BlocBuilder<ComplaintCompletedBloc, ComplaintListState>(
-                        builder: (context, state) {
-                      return _contentView(
-                        context.read<ComplaintCompletedBloc>().pagingController,
-                        ComplaintCustomerItemType.completed,
-                        "txt_no_complaint_completed".tr(),
-                        (value) async {
-                          final result =
-                              await context.showScrollableBottomSheet<int>(
-                            builder: (context, scrollController) {
-                              return ComplaintCompletedBottomSheet(
-                                  value, scrollController);
-                            },
-                          );
-                          if (result != null) {
-                            context
-                                .read<ComplaintCompletedBloc>()
-                                .pagingController
-                                .refresh();
-                          }
-                        },
-                      );
-                    }),
-                  ],
+                          },
+                        );
+                      }),
+                      BlocBuilder<ComplaintCompletedBloc, ComplaintListState>(
+                          builder: (context, state) {
+                        return _contentView(
+                          context.read<ComplaintCompletedBloc>().pagingController,
+                          ComplaintCustomerItemType.completed,
+                          "txt_no_complaint_completed".tr(),
+                          (value) async {
+                            final result =
+                                await context.showScrollableBottomSheet<int>(
+                              builder: (context, scrollController) {
+                                return ComplaintCompletedBottomSheet(
+                                    value, scrollController);
+                              },
+                            );
+                            if (result != null) {
+                              context
+                                  .read<ComplaintCompletedBloc>()
+                                  .pagingController
+                                  .refresh();
+                            }
+                          },
+                        );
+                      }),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

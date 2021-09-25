@@ -12,7 +12,7 @@ class UploadImageRepositoryImpl extends UploadImageRepository {
     final body = {"img": imageBase64};
     final response = await post("/upload_propic", body);
     return isResult(response)
-        ? UploadImageResponse.fromJson(response)
+        ? ProfileResponse.fromJson(response)
         : response;
   }
 

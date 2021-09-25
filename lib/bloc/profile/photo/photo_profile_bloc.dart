@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:amirta_mobile/bloc/app_provider.dart';
+import 'package:amirta_mobile/data/account/profile.dart';
 import 'package:amirta_mobile/repository/repository.dart';
 import 'package:amirta_mobile/utils/image_utils.dart';
 import 'package:bloc/bloc.dart';
@@ -40,7 +41,9 @@ class PhotoProfileBloc extends Bloc<PhotoProfileEvent, PhotoProfileState> {
         final uriData = "data:$mimeType;base64," + base64;
         final response =
             await uploadImageRepository.uploadPhotoProfile(uriData);
-        appProvider.setUser(response.data);
+        Profile user = appProvider.user!;
+        user = user.copyWith(photo: response.data.photo);
+        appProvider.setUser(user);
         yield PhotoProfileSuccess(response.data.photo!.photoProfileUrl);
       } catch (e) {
         yield PhotoProfileError();

@@ -1,13 +1,18 @@
-import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
-import 'package:amirta_mobile/bloc/complaint/list/panic_types_bloc.dart';
 import 'package:amirta_mobile/bloc/dashboard/dashboard_bloc.dart';
+import 'package:amirta_mobile/bloc/dashboard/panic/latest_panic_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/res/view/bottom_ellipse_container.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final dateTime = DateTime.now();
+
   final dateFormat = DateFormat("MMMM y", "id");
 
   @override
@@ -19,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           return DashboardBloc(context.appProvider().accountRepository);
         }),
         BlocProvider(create: (context) {
-          return PanicNewBloc(context.appProvider().pengaduanRepository);
+          return LatestPanicBloc(context.appProvider().pengaduanRepository);
         }),
       ],
       child: Scaffold(
@@ -42,38 +47,49 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/profile');
-                          },
-                          child: Builder(builder: (context) {
-                            final user = context.appProvider().user;
-                            if (user?.photo != null &&
-                                user?.photo?.isEmpty == false) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.network(
-                                  user!.photo!.photoProfileUrl,
-                                  width: 70,
-                                  height: 70,
-                                  fit: BoxFit.cover,
-                                ),
+                        OfflineContainer(
+                          offlineChild: Icon(
+                            Icons.account_circle_rounded,
+                            size: 80,
+                            color: white,
+                          ),
+                          child: InkWell(
+                            onTap: () async {
+                              final result = await Navigator.pushNamed(
+                                  context, '/profile');
+                              setState(() {});
+                            },
+                            child: Builder(builder: (context) {
+                              final user = context.appProvider().user;
+                              if (user?.photo != null &&
+                                  user?.photo?.isEmpty == false) {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(
+                                    user!.photo!.photoProfileUrl,
+                                    width: 70,
+                                    height: 70,
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              }
+                              return Icon(
+                                Icons.account_circle_rounded,
+                                size: 80,
+                                color: white,
                               );
-                            }
-                            return Icon(
-                              Icons.account_circle_rounded,
-                              size: 80,
-                              color: white,
-                            );
-                          }),
+                            }),
+                          ),
                         ),
                         const SizedBox(
                           width: spaceNormal,
                         ),
                         Expanded(
                           child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/profile');
+                            onTap: () async {
+                              final result = await Navigator.pushNamed(
+                                  context, '/profile');
+                              setState(() {});
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,27 +125,19 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: spaceMedium,
-                    ),
-                    summarySection(),
-                    const SizedBox(
-                      height: spaceBig,
-                    ),
-                    Visibility(
-                      visible: false,
-                      child: dailySection(context),
-                      replacement: Padding(
-                        padding: const EdgeInsets.only(top: spaceBig),
+                    OfflineContainer(
+                      offlineChild: Container(
+                        margin: const EdgeInsets.only(top: 120),
+                        padding: const EdgeInsets.all(spaceMedium),
                         child: Center(
                           child: Text(
-                            'Info Harian akan datang',
-                            style: context.styleBody1.copyWith(
-                              color: grease.withOpacity(0.5),
-                            ),
+                            'offline_message'.tr(),
+                            style: context.styleHeadline6,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
+                      child: _createBody(context),
                     ),
                   ],
                 ),
@@ -141,185 +149,227 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget _createBody(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: spaceMedium,
+        ),
+        summarySection(),
+        const SizedBox(
+          height: spaceBig,
+        ),
+        Visibility(
+          visible: false,
+          child: dailySection(context),
+          replacement: Padding(
+            padding: const EdgeInsets.only(top: spaceBig),
+            child: Center(
+              child: Text(
+                'Fitur Info Harian dalam pengembangan',
+                style: context.styleBody1.copyWith(
+                  color: grease.withOpacity(0.5),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget summarySection() {
-    return BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-      if (state is DashboardLoading) {
-        return MyProgressIndicator();
-      }
-      if (state is DashboardSuccess) {
-        return Column(
-          children: [
-            ShadowedContainer(
-              padding: const EdgeInsets.all(spaceNormal),
-              borderRadius: buttonRadius,
-              child: Row(
-                children: [
-                  Image.asset(
-                    imageRes('ic_panik_info_harian.png'),
-                    height: 30,
-                    width: 30,
-                  ),
-                  const SizedBox(
-                    width: spaceMedium,
-                  ),
-                  BlocBuilder<PanicNewBloc, ComplaintListState>(
-                    builder: (context, state) {
-                      final pagingController =
-                          context.read<PanicNewBloc>().pagingController;
-                      if (pagingController.itemList == null ||
-                          pagingController.itemList?.length == 0) {
+    return BlocConsumer<DashboardBloc, DashboardState>(
+      listener: (context, state) {
+        if (state is DashboardSuccess) {
+          context.read<LatestPanicBloc>().add(LoadLatestPanic());
+        }
+      },
+      builder: (context, state) {
+        if (state is DashboardLoading) {
+          return MyProgressIndicator();
+        }
+        if (state is DashboardSuccess) {
+          return Column(
+            children: [
+              ShadowedContainer(
+                padding: const EdgeInsets.all(spaceNormal),
+                borderRadius: buttonRadius,
+                child: Row(
+                  children: [
+                    Image.asset(
+                      imageRes('ic_panik_info_harian.png'),
+                      height: 30,
+                      width: 30,
+                    ),
+                    const SizedBox(
+                      width: spaceMedium,
+                    ),
+                    BlocBuilder<LatestPanicBloc, LatestPanicState>(
+                      builder: (context, state) {
+                        if (state is LatestPanicLoading) {
+                          return Expanded(
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: egyptian,
+                              ),
+                            ),
+                          );
+                        }
+
+                        if (state is LatestPanicSuccess &&
+                            state.pengaduan != null) {
+                          return Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  state.pengaduan!.complainantName,
+                                  style: context.styleBody1.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  state.pengaduan!.rusunName,
+                                  style: context.styleCaption,
+                                ),
+                                const SizedBox(
+                                  height: spaceMedium,
+                                ),
+                                Text(
+                                  state.pengaduan!.receivedDtimeHomeFormatted,
+                                  style: context.styleCaption,
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
                         return Expanded(
                           child: Text(
                             "Tenang!\nKeadaan aman",
                             style: context.styleCaption,
                           ),
                         );
-                      }
-
-                      final item = pagingController.itemList!.first;
-                      return Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.complainantName,
-                              style: context.styleBody1.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              item.rusunName,
-                              style: context.styleCaption,
-                            ),
-                            const SizedBox(
-                              height: spaceMedium,
-                            ),
-                            Text(
-                              item.receivedDtimeHomeFormatted,
-                              style: context.styleCaption,
-                            ),
-                          ],
+                      },
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          state.dashboard.totalPanicButton.toString(),
+                          style: context.styleHeadline1.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      );
-                    },
+                        const SizedBox(
+                          height: spaceTiny,
+                        ),
+                        Text(
+                          'Data Panik',
+                          style: context.styleCaption,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: spaceMedium,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ShadowedContainer(
+                      padding: const EdgeInsets.all(spaceNormal),
+                      borderRadius: buttonRadius,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            imageRes('ic_pengaduan_info_harian.png'),
+                            height: 30,
+                            width: 30,
+                          ),
+                          const SizedBox(
+                            width: spaceMedium,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  state.dashboard.totalComplaint.toString(),
+                                  style: context.styleHeadline4.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: spaceTiny,
+                                ),
+                                Text(
+                                  'Pengaduan',
+                                  style: context.styleCaption,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  Column(
-                    children: [
-                      Text(
-                        state.dashboard.totalPanicButton.toString(),
-                        style: context.styleHeadline1.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                  const SizedBox(
+                    width: spaceMedium,
+                  ),
+                  Expanded(
+                    child: ShadowedContainer(
+                      padding: const EdgeInsets.all(spaceNormal),
+                      borderRadius: buttonRadius,
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            imageRes('ic_air_info_harian.png'),
+                            height: 30,
+                            width: 30,
+                          ),
+                          const SizedBox(
+                            width: spaceMedium,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  state.dashboard.totalUncollectedMeterPdam
+                                      .toString(),
+                                  style: context.styleHeadline4.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: spaceTiny,
+                                ),
+                                Text(
+                                  'Air ${dateFormat.format(dateTime)}',
+                                  style: context.styleCaption,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                      const SizedBox(
-                        height: spaceTiny,
-                      ),
-                      Text(
-                        'Data Panik',
-                        style: context.styleCaption,
-                      ),
-                    ],
-                  )
+                    ),
+                  ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: spaceMedium,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ShadowedContainer(
-                    padding: const EdgeInsets.all(spaceNormal),
-                    borderRadius: buttonRadius,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          imageRes('ic_pengaduan_info_harian.png'),
-                          height: 30,
-                          width: 30,
-                        ),
-                        const SizedBox(
-                          width: spaceMedium,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                state.dashboard.totalComplaint.toString(),
-                                style: context.styleHeadline4.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: spaceTiny,
-                              ),
-                              Text(
-                                'Pengaduan',
-                                style: context.styleCaption,
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: spaceMedium,
-                ),
-                Expanded(
-                  child: ShadowedContainer(
-                    padding: const EdgeInsets.all(spaceNormal),
-                    borderRadius: buttonRadius,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          imageRes('ic_air_info_harian.png'),
-                          height: 30,
-                          width: 30,
-                        ),
-                        const SizedBox(
-                          width: spaceMedium,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                state.dashboard.totalUncollectedMeterPdam
-                                    .toString(),
-                                style: context.styleHeadline4.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: spaceTiny,
-                              ),
-                              Text(
-                                'Air ${dateFormat.format(dateTime)}',
-                                style: context.styleCaption,
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      }
+            ],
+          );
+        }
 
-      return Center(
-        child: Text("Gagal Mengambil Data Dashboard"),
-      );
-    });
+        return Center(
+          child: Text("Gagal Mengambil Data Dashboard"),
+        );
+      },
+    );
   }
 
   Widget dailySection(BuildContext context) {

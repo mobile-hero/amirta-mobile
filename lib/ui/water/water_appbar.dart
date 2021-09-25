@@ -2,8 +2,12 @@ import 'package:amirta_mobile/my_material.dart';
 
 class WaterAppBar extends StatelessWidget with PreferredSizeWidget {
   final bool enableLeading;
+  final List<Widget>? actions;
 
-  const WaterAppBar({this.enableLeading = true});
+  const WaterAppBar({
+    this.enableLeading = true,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class WaterAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       centerTitle: true,
       elevation: 0.0,
+      actions: actions,
     );
   }
 

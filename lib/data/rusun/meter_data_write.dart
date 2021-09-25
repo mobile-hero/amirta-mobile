@@ -32,7 +32,10 @@ class MeterDataWrite {
   final int meterType;
   final double meterValue;
   final String notes;
-  final String image;
+  String? image;
+  
+  @JsonKey(ignore: true)
+  String? photoBase64;
 
   factory MeterDataWrite.fromJson(Map<String, dynamic> json) =>
       _$MeterDataWriteFromJson(json);

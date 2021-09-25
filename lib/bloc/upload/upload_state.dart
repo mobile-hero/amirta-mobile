@@ -13,4 +13,10 @@ class UploadSuccess extends UploadState {
   UploadSuccess(this.url);
 }
 
+class UploadOffline extends UploadState {
+  final String base64;
+
+  UploadOffline(this.base64);
+}
+
 class UploadError extends UploadState {}

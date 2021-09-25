@@ -26,6 +26,8 @@ class WaterAddReportBloc
   ) async* {
     if (event is AddReport) {
       yield* _addReport(event);
+    } else if (event is AddReportOffline) {
+      yield* _addReportOffline(event);
     }
   }
 
@@ -44,7 +46,7 @@ class WaterAddReportBloc
       dataWrite.id = existing?.id;
       final dataId = dataBox.put(dataWrite);
 
-      // get data meter
+      // get meter status
       final statusBox = store.box<MeterStatusWrite>();
       final statusWrite = MeterStatusWrite(
         unitId: dataWrite.unitId,
@@ -68,12 +70,15 @@ class WaterAddReportBloc
         statusBox.remove(statusId);
 
         final unitBox = store.box<RusunUnitValue>();
-        final result = unitBox.query(
-          RusunUnitValue_.unitId.equals(event.dataWrite.unitId) &
-              RusunUnitValue_.month.equals(event.dataWrite.month) &
-              RusunUnitValue_.year.equals(int.parse(event.dataWrite.year)),
-        ).build().findFirst();
-        
+        final result = unitBox
+            .query(
+              RusunUnitValue_.unitId.equals(event.dataWrite.unitId) &
+                  RusunUnitValue_.month.equals(event.dataWrite.month) &
+                  RusunUnitValue_.year.equals(int.parse(event.dataWrite.year)),
+            )
+            .build()
+            .findFirst();
+
         if (result != null) {
           result.pdamMeterStatus = statusWrite.status;
           result.lastMeterValue = event.dataWrite.meterValue;
@@ -90,6 +95,60 @@ class WaterAddReportBloc
         yield WaterAddReportSuccessLocal();
       }
       store.close();
+    } catch (e) {
+      store.close();
+      yield WaterAddReportError(e.toString());
+    }
+  }
+
+  Stream<WaterAddReportState> _addReportOffline(AddReportOffline event) async* {
+    final store = await openStore();
+    try {
+      yield WaterAddReportLoading();
+
+      // get data meter
+      final dataBox = store.box<MeterDataWrite>();
+      final dataWrite = event.dataWrite;
+      final existing = dataBox
+          .query(MeterDataWrite_.unitId.equals(dataWrite.unitId))
+          .build()
+          .findFirst();
+      dataWrite.id = existing?.id;
+      final dataId = dataBox.put(dataWrite);
+
+      // get meter status
+      final statusBox = store.box<MeterStatusWrite>();
+      final statusWrite = MeterStatusWrite(
+        unitId: dataWrite.unitId,
+        meterType: dataWrite.meterType,
+        status: event.meterCondition ? 0 : 1,
+      );
+      final statusExisting = statusBox
+          .query(MeterStatusWrite_.unitId.equals(dataWrite.unitId))
+          .build()
+          .findFirst();
+      statusWrite.id = statusExisting?.id;
+      final statusId = statusBox.put(statusWrite);
+
+      final unitBox = store.box<RusunUnitValue>();
+      final result = unitBox
+          .query(
+            RusunUnitValue_.unitId.equals(event.dataWrite.unitId) &
+                RusunUnitValue_.month.equals(event.dataWrite.month) &
+                RusunUnitValue_.year.equals(int.parse(event.dataWrite.year)),
+          )
+          .build()
+          .findFirst();
+
+      if (result != null) {
+        result.pdamMeterStatus = statusWrite.status;
+        result.lastMeterValue = event.dataWrite.meterValue;
+        result.meterPostDtime = DateTime.now();
+        unitBox.put(result);
+      }
+
+      store.close();
+      yield WaterAddReportSuccessLocal();
     } catch (e) {
       store.close();
       yield WaterAddReportError(e.toString());

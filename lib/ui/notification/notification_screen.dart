@@ -27,87 +27,92 @@ class _NotificationScreenState extends State<NotificationScreen> {
           title: Text("Notifikasi"),
           centerTitle: true,
         ),
-        body: BlocBuilder<NotificationBloc, NotificationState>(
+        body: OfflineContainer(
+          child: BlocBuilder<NotificationBloc, NotificationState>(
             builder: (context, state) {
-          return PagedListView<int, UserNotification>(
-            padding: const EdgeInsets.all(spaceMedium),
-            pagingController: context.read<NotificationBloc>().pagingController,
-            builderDelegate: PagedChildBuilderDelegate(
-              itemBuilder: (context, item, position) {
-                final unread = false;
-                return Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              return PagedListView<int, UserNotification>(
+                padding: const EdgeInsets.all(spaceMedium),
+                pagingController:
+                    context.read<NotificationBloc>().pagingController,
+                builderDelegate: PagedChildBuilderDelegate(
+                  itemBuilder: (context, item, position) {
+                    final unread = false;
+                    return Column(
                       children: [
-                        Container(
-                          width: imgSizeMedium,
-                          height: imgSizeMedium,
-                          padding: const EdgeInsets.all(spaceSmall),
-                          child: Image.asset(
-                            imageRes('ic_notification.png'),
-                            color: unread ? carrot : white,
-                          ),
-                          decoration: BoxDecoration(
-                            color: carrot.withOpacity(unread ? 0.2 : 1.0),
-                            borderRadius: BorderRadius.circular(buttonRadius),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: spaceMedium,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: imgSizeMedium,
+                              height: imgSizeMedium,
+                              padding: const EdgeInsets.all(spaceSmall),
+                              child: Image.asset(
+                                imageRes('ic_notification.png'),
+                                color: unread ? carrot : white,
+                              ),
+                              decoration: BoxDecoration(
+                                color: carrot.withOpacity(unread ? 0.2 : 1.0),
+                                borderRadius:
+                                    BorderRadius.circular(buttonRadius),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: spaceMedium,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: Text(
-                                      item.title,
-                                      style: context.styleBody1.copyWith(
-                                        fontWeight: FontWeight.bold,
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          item.title,
+                                          style: context.styleBody1.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          overflow: TextOverflow.fade,
+                                        ),
                                       ),
-                                      overflow: TextOverflow.fade,
-                                    ),
+                                      const SizedBox(
+                                        width: spaceMedium,
+                                      ),
+                                      Text(
+                                        item.sendTimeFormatted,
+                                        style: context.styleCaption,
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(
-                                    width: spaceMedium,
+                                    height: spaceSmall,
                                   ),
                                   Text(
-                                    item.sendTimeFormatted,
-                                    style: context.styleCaption,
+                                    item.message,
+                                    style: context.styleCaption
+                                        .copyWith(height: 1.5),
+                                    overflow: TextOverflow.fade,
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: spaceSmall,
-                              ),
-                              Text(
-                                item.message,
-                                style:
-                                    context.styleCaption.copyWith(height: 1.5),
-                                overflow: TextOverflow.fade,
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: spaceBig,
                         ),
                       ],
-                    ),
-                    const SizedBox(
-                      height: spaceBig,
-                    ),
-                  ],
-                );
-              },
-              noItemsFoundIndicatorBuilder: (context) {
-                return Center(
-                  child: Text("Anda tidak memiliki notifikasi"),
-                );
-              },
-            ),
-          );
-        }),
+                    );
+                  },
+                  noItemsFoundIndicatorBuilder: (context) {
+                    return Center(
+                      child: Text("Anda tidak memiliki notifikasi"),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

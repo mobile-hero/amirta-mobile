@@ -57,8 +57,8 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                             return e.unitId == item.id;
                           }).inputDone
                         : item.inputDone,
-                    onTap: () {
-                      context.showScrollableBottomSheet(
+                    onTap: () async {
+                      final result = await context.showScrollableBottomSheet(
                         builder: (context, scrollController) {
                           RusunUnitValue? localData;
                           if (bloc.local && values.isNotEmpty) {
@@ -90,6 +90,7 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                           }
                         },
                       );
+                      context.read<RusunUnitBloc>().pagingController.refresh();
                     },
                   );
                 },

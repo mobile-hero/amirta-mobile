@@ -71,7 +71,10 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
         ),
         BlocProvider(
           create: (context) {
-            return UploadBloc(context.appProvider().uploadImageRepository);
+            return UploadBloc(
+              context.appProvider().uploadImageRepository,
+              context.appProvider().connectivity,
+            );
           },
         )
       ],
@@ -81,6 +84,13 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
           context.showCustomToast(
             type: CustomToastType.success,
             message: "txt_data_saved".tr(),
+          );
+          Navigator.pop(context);
+        }
+        if (state is WaterAddReportSuccessLocal) {
+          context.showCustomToast(
+            type: CustomToastType.success,
+            message: "txt_data_saved_local".tr(),
           );
           Navigator.pop(context);
         }
@@ -245,6 +255,24 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                                 notes: noteController.text.trim(),
                                 image: uploadState.url,
                               ),
+                            ),
+                          );
+                    }
+                    if (uploadState is UploadOffline) {
+                      context.read<WaterAddReportBloc>().add(
+                            AddReportOffline(
+                              isConditionGood,
+                              MeterDataWrite(
+                                rusunId: widget.rusunUnit.rusunId,
+                                buildingId: widget.rusunUnit.buildingId,
+                                unitId: widget.rusunUnit.id,
+                                month: widget.month,
+                                year: widget.year.toString(),
+                                meterType: 1,
+                                meterValue: widget.lastMeterValue,
+                                notes: noteController.text.trim(),
+                                image: null,
+                              )..photoBase64 = uploadState.base64,
                             ),
                           );
                     }

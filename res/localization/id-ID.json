@@ -1,5 +1,8 @@
 {
   "app_name": "Amirta",
+  "offline_message": "Anda sedang offline\n\nSilakan nyalakan paket data atau sambungkan ke Wifi terdekat\nuntuk kembali menggunakan fitur ini.",
+  "txt_no_internet_connection": "Tidak ada koneksi internet",
+  "txt_sync_failed": "Gagal mengirim data",
   "----Login-----": "",
   "txt_welcome": "Selamat Datang!",
   "txt_login_nrk": "Silakan Login Menggunakan NRK",
@@ -71,6 +74,7 @@
   "txt_list_data": "List Data",
   "txt_data_not_found": "Data tidak ditemukan",
   "txt_data_saved": "Data Berhasil Disimpan",
+  "txt_data_saved_local": "Data Berhasil Disimpan.\nLakukan sinkronisasi segera.",
   "----Pengaduan-----": "",
   "txt_no_more_complaint": "Anda telah melihat semua Pengaduan",
   "txt_phone_num": "No Telp",

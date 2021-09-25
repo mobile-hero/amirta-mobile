@@ -35,53 +35,55 @@ class _PanicScreenState extends State<PanicScreen> {
             ),
           ],
         ),
-        body: BlocBuilder<PanicNewBloc, ComplaintListState>(
-          builder: (context, state) {
-            return PagedListView<int, Pengaduan>(
-              padding: const EdgeInsets.all(spaceMedium),
-              pagingController: context.read<PanicNewBloc>().pagingController,
-              builderDelegate: PagedChildBuilderDelegate(
-                itemBuilder: (context, item, position) {
-                  return PanicCustomerItem(
-                    item: item,
-                    onTap: () async {
-                      final result =
-                          await context.showScrollableBottomSheet<int>(
-                        builder: (context, scrollController) {
-                          return PanicDetailBottomSheet(item, scrollController);
-                        },
-                      );
-                      if (result != null) {
-                        setState(() {});
-                      }
-                    },
-                  );
-                },
-                noMoreItemsIndicatorBuilder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(spaceNormal),
-                    child: Center(
-                      child: Text(
-                        'txt_no_more_panic'.tr(),
-                        style: context.styleCaption,
+        body: OfflineContainer(
+          child: BlocBuilder<PanicNewBloc, ComplaintListState>(
+            builder: (context, state) {
+              return PagedListView<int, Pengaduan>(
+                padding: const EdgeInsets.all(spaceMedium),
+                pagingController: context.read<PanicNewBloc>().pagingController,
+                builderDelegate: PagedChildBuilderDelegate(
+                  itemBuilder: (context, item, position) {
+                    return PanicCustomerItem(
+                      item: item,
+                      onTap: () async {
+                        final result =
+                            await context.showScrollableBottomSheet<int>(
+                          builder: (context, scrollController) {
+                            return PanicDetailBottomSheet(item, scrollController);
+                          },
+                        );
+                        if (result != null) {
+                          setState(() {});
+                        }
+                      },
+                    );
+                  },
+                  noMoreItemsIndicatorBuilder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(spaceNormal),
+                      child: Center(
+                        child: Text(
+                          'txt_no_more_panic'.tr(),
+                          style: context.styleCaption,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                noItemsFoundIndicatorBuilder: (context) {
-                  return Padding(
-                    padding: const EdgeInsets.all(spaceNormal),
-                    child: Center(
-                      child: Text(
-                        "txt_no_new_panic".tr(),
-                        style: context.styleCaption,
+                    );
+                  },
+                  noItemsFoundIndicatorBuilder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(spaceNormal),
+                      child: Center(
+                        child: Text(
+                          "txt_no_new_panic".tr(),
+                          style: context.styleCaption,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

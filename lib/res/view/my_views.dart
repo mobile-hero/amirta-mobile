@@ -8,6 +8,7 @@ export 'labeled_autocomplete_field.dart';
 export 'labeled_input_field.dart';
 export 'logout_button.dart';
 export 'my_progress_indicator.dart';
+export 'offline_container.dart';
 export 'primary_button.dart';
 export 'secondary_button.dart';
 export 'shadowed_container.dart';

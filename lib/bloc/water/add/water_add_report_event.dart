@@ -12,3 +12,13 @@ class AddReport extends WaterAddReportEvent {
     this.dataWrite,
   );
 }
+
+class AddReportOffline extends WaterAddReportEvent {
+  final MeterDataWrite dataWrite;
+  final bool meterCondition;
+
+  AddReportOffline(
+    this.meterCondition,
+    this.dataWrite,
+  );
+}

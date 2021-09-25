@@ -16,7 +16,7 @@ class WaterInputBottomSheet extends StatefulWidget {
   final int meterStatus;
   final int month;
   final int year;
-  
+
   const WaterInputBottomSheet({
     required this.scrollController,
     required this.rusunUnit,
@@ -36,7 +36,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
 
   final ImagePicker _picker = ImagePicker();
   XFile? selectedImage;
-  
+
   @override
   void initState() {
     isConditionGood = widget.meterStatus == 0;
@@ -68,7 +68,10 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
         ),
         BlocProvider(
           create: (context) {
-            return UploadBloc(context.appProvider().uploadImageRepository);
+            return UploadBloc(
+              context.appProvider().uploadImageRepository,
+              context.appProvider().connectivity,
+            );
           },
         )
       ],
@@ -78,6 +81,13 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
             context.showCustomToast(
               type: CustomToastType.success,
               message: "txt_data_saved".tr(),
+            );
+            Navigator.pop(context);
+          }
+          if (state is WaterAddReportSuccessLocal) {
+            context.showCustomToast(
+              type: CustomToastType.success,
+              message: "txt_data_saved_local".tr(),
             );
             Navigator.pop(context);
           }
@@ -238,6 +248,25 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                   notes: noteController.text.trim(),
                                   image: uploadState.url,
                                 ),
+                              ),
+                            );
+                      }
+                      if (uploadState is UploadOffline) {
+                        context.read<WaterAddReportBloc>().add(
+                              AddReportOffline(
+                                isConditionGood,
+                                MeterDataWrite(
+                                  rusunId: widget.rusunUnit.rusunId,
+                                  buildingId: widget.rusunUnit.buildingId,
+                                  unitId: widget.rusunUnit.id,
+                                  month: widget.month,
+                                  year: widget.year.toString(),
+                                  meterType: 1,
+                                  meterValue:
+                                      double.parse(numberController.text),
+                                  notes: noteController.text.trim(),
+                                  image: null,
+                                )..photoBase64 = uploadState.base64,
                               ),
                             );
                       }

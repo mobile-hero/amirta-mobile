@@ -43,131 +43,133 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
           centerTitle: true,
           elevation: 0.0,
         ),
-        body: DefaultTabController(
-          length: 3,
-          child: Column(
-            children: [
-              Container(
-                color: egyptian,
-                child: TabBar(
-                  tabs: [
-                    Tab(
-                      text: 'Dalam Proses',
+        body: OfflineContainer(
+          child: DefaultTabController(
+            length: 3,
+            child: Column(
+              children: [
+                Container(
+                  color: egyptian,
+                  child: TabBar(
+                    tabs: [
+                      Tab(
+                        text: 'Dalam Proses',
+                      ),
+                      Tab(
+                        text: 'Penolakan',
+                      ),
+                      Tab(
+                        text: 'Selesai',
+                      ),
+                    ],
+                    labelStyle: context.styleCaption.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                    Tab(
-                      text: 'Penolakan',
+                    labelColor: white,
+                    unselectedLabelStyle: context.styleCaption.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                    Tab(
-                      text: 'Selesai',
+                    unselectedLabelColor: white.withOpacity(0.5),
+                    indicatorPadding: const EdgeInsets.symmetric(
+                      horizontal: spaceHuge + spaceMedium,
                     ),
-                  ],
-                  labelStyle: context.styleCaption.copyWith(
-                    fontWeight: FontWeight.bold,
+                    indicatorColor: waterfall,
+                    onTap: (value) {
+                      setState(() {
+                        tabPosition = value;
+                      });
+                    },
                   ),
-                  labelColor: white,
-                  unselectedLabelStyle: context.styleCaption.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  unselectedLabelColor: white.withOpacity(0.5),
-                  indicatorPadding: const EdgeInsets.symmetric(
-                    horizontal: spaceHuge + spaceMedium,
-                  ),
-                  indicatorColor: waterfall,
-                  onTap: (value) {
-                    setState(() {
-                      tabPosition = value;
-                    });
-                  },
                 ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    BlocBuilder<PanicInProcessBloc, ComplaintListState>(
-                        builder: (context, state) {
-                      return _contentView(
-                        context.read<PanicInProcessBloc>().pagingController,
-                        PanicCustomerItemType.neutral,
-                        "txt_no_panic_in_process".tr(),
-                        (value) async {
-                          final result = await context
-                              .showScrollableBottomSheet<Pengaduan>(
-                            builder: (context, scrollController) {
-                              return PanicInProcessBottomSheet(
-                                  value, scrollController);
-                            },
-                          );
-                          if (result != null) {
-                            final response = await Navigator.pushNamed(
-                              context,
-                              '/panic/set-complete',
-                              arguments: result,
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      BlocBuilder<PanicInProcessBloc, ComplaintListState>(
+                          builder: (context, state) {
+                        return _contentView(
+                          context.read<PanicInProcessBloc>().pagingController,
+                          PanicCustomerItemType.neutral,
+                          "txt_no_panic_in_process".tr(),
+                          (value) async {
+                            final result = await context
+                                .showScrollableBottomSheet<Pengaduan>(
+                              builder: (context, scrollController) {
+                                return PanicInProcessBottomSheet(
+                                    value, scrollController);
+                              },
                             );
-                            if (response != null) {
+                            if (result != null) {
+                              final response = await Navigator.pushNamed(
+                                context,
+                                '/panic/set-complete',
+                                arguments: result,
+                              );
+                              if (response != null) {
+                                context
+                                    .read<PanicInProcessBloc>()
+                                    .pagingController
+                                    .refresh();
+
+                                context.showCustomToast(
+                                  type: CustomToastType.success,
+                                  message: "Panik Selesai",
+                                );
+                              }
+                            }
+                          },
+                        );
+                      }),
+                      BlocBuilder<PanicRejectedBloc, ComplaintListState>(
+                          builder: (context, state) {
+                        return _contentView(
+                          context.read<PanicRejectedBloc>().pagingController,
+                          PanicCustomerItemType.rejected,
+                          "txt_no_panic_rejected".tr(),
+                          (value) async {
+                            final result =
+                                await context.showScrollableBottomSheet<int>(
+                              builder: (context, scrollController) {
+                                return PanicRejectedBottomSheet(
+                                    value, scrollController);
+                              },
+                            );
+                            if (result != null) {
                               context
-                                  .read<PanicInProcessBloc>()
+                                  .read<PanicRejectedBloc>()
                                   .pagingController
                                   .refresh();
-
-                              context.showCustomToast(
-                                type: CustomToastType.success,
-                                message: "Panik Selesai",
-                              );
                             }
-                          }
-                        },
-                      );
-                    }),
-                    BlocBuilder<PanicRejectedBloc, ComplaintListState>(
-                        builder: (context, state) {
-                      return _contentView(
-                        context.read<PanicRejectedBloc>().pagingController,
-                        PanicCustomerItemType.rejected,
-                        "txt_no_panic_rejected".tr(),
-                        (value) async {
-                          final result =
-                              await context.showScrollableBottomSheet<int>(
-                            builder: (context, scrollController) {
-                              return PanicRejectedBottomSheet(
-                                  value, scrollController);
-                            },
-                          );
-                          if (result != null) {
-                            context
-                                .read<PanicRejectedBloc>()
-                                .pagingController
-                                .refresh();
-                          }
-                        },
-                      );
-                    }),
-                    BlocBuilder<PanicCompletedBloc, ComplaintListState>(
-                        builder: (context, state) {
-                      return _contentView(
-                        context.read<PanicCompletedBloc>().pagingController,
-                        PanicCustomerItemType.completed,
-                        "txt_no_panic_completed".tr(),
-                        (value) async {
-                          final result =
-                              await context.showScrollableBottomSheet<int>(
-                            builder: (context, scrollController) {
-                              return PanicCompletedBottomSheet(
-                                  value, scrollController);
-                            },
-                          );
-                          if (result != null) {
-                            context
-                                .read<PanicCompletedBloc>()
-                                .pagingController
-                                .refresh();
-                          }
-                        },
-                      );
-                    }),
-                  ],
+                          },
+                        );
+                      }),
+                      BlocBuilder<PanicCompletedBloc, ComplaintListState>(
+                          builder: (context, state) {
+                        return _contentView(
+                          context.read<PanicCompletedBloc>().pagingController,
+                          PanicCustomerItemType.completed,
+                          "txt_no_panic_completed".tr(),
+                          (value) async {
+                            final result =
+                                await context.showScrollableBottomSheet<int>(
+                              builder: (context, scrollController) {
+                                return PanicCompletedBottomSheet(
+                                    value, scrollController);
+                              },
+                            );
+                            if (result != null) {
+                              context
+                                  .read<PanicCompletedBloc>()
+                                  .pagingController
+                                  .refresh();
+                            }
+                          },
+                        );
+                      }),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
