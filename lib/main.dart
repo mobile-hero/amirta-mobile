@@ -335,7 +335,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget _initApp() {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Amirta',
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
