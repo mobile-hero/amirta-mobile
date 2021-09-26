@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final ImagePicker _picker = ImagePicker();
   XFile? file;
-
+  
   @override
   void initState() {
     final user = context.appProvider().user;
@@ -39,6 +39,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         file = result;
       });
+      context
+        .read<PhotoProfileBloc>()
+        .add(UploadPhoto(file!));
     }
   }
 

@@ -14,6 +14,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   late final resetPassGesture = TapGestureRecognizer();
 
+  bool passwordVisible = false;
+  bool oldPasswordVisible = false;
+
   @override
   void initState() {
     resetPassGesture.onTap = () {
@@ -78,7 +81,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 LabeledInputField(
                   passController,
                   label: "hint_current_password".tr(),
-                  isPassword: true,
+                  isPassword: !oldPasswordVisible,
+                  suffix: InkWell(
+                    child: Icon(
+                      oldPasswordVisible
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                      color: egyptian,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        oldPasswordVisible = !oldPasswordVisible;
+                      });
+                    },
+                  ),
                   onChanged: (value) {
                     setState(() {});
                   },
@@ -86,7 +102,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 LabeledInputField(
                   passNewController,
                   label: "hint_new_password".tr(),
-                  isPassword: true,
+                  isPassword: !passwordVisible,
+                  suffix: InkWell(
+                    child: Icon(
+                      passwordVisible
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                      color: egyptian,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                  ),
+                  suffixConstraints: BoxConstraints(
+                    maxHeight: 20,
+                  ),
                   onChanged: (value) {
                     setState(() {});
                   },
