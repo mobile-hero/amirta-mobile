@@ -91,7 +91,7 @@ class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
                           child: PrimaryButton(
                             () {
                               context.read<ComplaintCreateBloc>().add(
-                                    CreateComplaint(
+                                    AcceptPanic(
                                       pengaduanId: widget.pengaduan.id,
                                       status: ComplaintStatus.inProcess,
                                     ),

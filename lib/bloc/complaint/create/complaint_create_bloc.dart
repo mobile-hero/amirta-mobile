@@ -29,6 +29,8 @@ class ComplaintCreateBloc
       yield* createComplaint(event);
     } else if (event is ContinueCreateComplaint) {
       yield* continueCreate(event);
+    } else if (event is AcceptPanic) {
+      yield* acceptPanic(event);
     }
   }
 
@@ -76,8 +78,20 @@ class ComplaintCreateBloc
   Stream<ComplaintCreateState> continueCreate(
       ContinueCreateComplaint event) async* {
     try {
+      yield ComplaintCreateLoading();
       final response = await pengaduanRepository.postExamination(
           event.pengaduanId, event.status, event.notes, event.images);
+      yield ComplaintCreateSuccess();
+    } on DioError catch (e) {
+      yield ComplaintCreateError(e.response!.data);
+    }
+  }
+
+  Stream<ComplaintCreateState> acceptPanic(AcceptPanic event) async* {
+    try {
+      yield ComplaintCreateLoading();
+      final response = await pengaduanRepository.acceptRejectPanic(
+          event.pengaduanId, event.status);
       yield ComplaintCreateSuccess();
     } on DioError catch (e) {
       yield ComplaintCreateError(e.response!.data);

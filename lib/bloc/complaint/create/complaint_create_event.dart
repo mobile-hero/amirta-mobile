@@ -30,3 +30,13 @@ class ContinueCreateComplaint extends ComplaintCreateEvent {
     required this.images,
   });
 }
+
+class AcceptPanic extends ComplaintCreateEvent {
+  final int pengaduanId;
+  final int status;
+
+  AcceptPanic({
+    required this.pengaduanId,
+    required this.status,
+  });
+}
