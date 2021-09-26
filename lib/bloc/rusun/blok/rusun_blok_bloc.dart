@@ -33,9 +33,9 @@ class RusunBlokBloc extends Bloc<RusunBlokEvent, RusunBlokState> {
   }
 
   Stream<RusunBlokState> getBlok(LoadBlok event) async* {
+    final store = await openStore();
     try {
       yield RusunBlokLoading();
-      final store = await openStore();
       final box = store.box<RusunBlok>();
       final result = box
           .query(
@@ -54,6 +54,7 @@ class RusunBlokBloc extends Bloc<RusunBlokEvent, RusunBlokState> {
       pagingController.appendLastPage(response.data);
       yield RusunBlokSuccess(response.data);
     } catch (e) {
+      store.close();
       yield RusunBlokError();
     }
   }

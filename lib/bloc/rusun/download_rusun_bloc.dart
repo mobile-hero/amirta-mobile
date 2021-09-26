@@ -27,9 +27,9 @@ class DownloadRusunBloc extends Bloc<DownloadRusunEvent, DownloadRusunState> {
   Stream<DownloadRusunState> downloadWaterData(
     DownloadWaterData event,
   ) async* {
+    final store = await openStore();
     try {
       yield DownloadRusunLoading();
-      final store = await openStore();
 
       // download and save rusun
       final rusunResponse = await rusunRepository.getRusunawa();
@@ -111,6 +111,7 @@ class DownloadRusunBloc extends Bloc<DownloadRusunEvent, DownloadRusunState> {
       yield DownloadRusunSuccess();
     } catch (e) {
       print(e);
+      store.close();
       yield DownloadRusunError();
     }
   }

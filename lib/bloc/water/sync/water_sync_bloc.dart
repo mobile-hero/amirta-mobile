@@ -39,8 +39,8 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
     final store = await openStore();
     final dataBox = store.box<MeterDataWrite>();
     total = dataBox.count();
-    yield WaterUnsyncLoaded(total);
     store.close();
+    yield WaterUnsyncLoaded(total);
   }
 
   Stream<WaterSyncState> _uploadSavedData(UploadSavedData event) async* {
@@ -110,10 +110,11 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
         yield WaterSyncProgress(existing.length / (i + 1), total);
       }
 
+      store.close();
       yield WaterSyncSuccess(--total);
     } catch (e) {
+      store.close();
       yield WaterSyncError('txt_sync_failed'.tr(), total);
     }
-    store.close();
   }
 }

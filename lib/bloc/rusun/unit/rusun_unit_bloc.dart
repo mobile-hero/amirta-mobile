@@ -72,8 +72,8 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
   Stream<RusunUnitState> getUnit(LoadUnit event) async* {
     lastRusunId = event.rusunId;
     lastBuildingId = event.buildingId;
+    final store = await openStore();
     try {
-      final store = await openStore();
       yield RusunUnitLoading();
 
       // get existing unit value
@@ -121,15 +121,14 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
 
       // online unit fallback
       final response = await rusunRepository.getUnit(
-        rusunId: event.rusunId,
-        buildingId: event.buildingId,
-        floor: event.floor,
-        page: event.page,
-        meterType: 1,
-        limit: limit,
-        month: month,
-        year: year
-      );
+          rusunId: event.rusunId,
+          buildingId: event.buildingId,
+          floor: event.floor,
+          page: event.page,
+          meterType: 1,
+          limit: limit,
+          month: month,
+          year: year);
       if (response.length < limit) {
         pagingController.appendLastPage(response.data);
       } else {
@@ -138,6 +137,7 @@ class RusunUnitBloc extends Bloc<RusunUnitEvent, RusunUnitState> {
       }
       yield RusunUnitSuccess(response.data);
     } catch (e) {
+      store.close();
       yield RusunUnitError();
     }
   }

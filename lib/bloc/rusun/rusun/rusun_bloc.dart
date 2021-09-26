@@ -31,9 +31,9 @@ class RusunBloc extends Bloc<RusunEvent, RusunState> {
   }
 
   Stream<RusunState> getRusun(LoadRusun event) async* {
+    final store = await openStore();
     try {
       yield RusunLoading();
-      final store = await openStore();
       final box = store.box<Rusun>();
       final result = box.getAll();
       print(result);
@@ -49,6 +49,7 @@ class RusunBloc extends Bloc<RusunEvent, RusunState> {
       yield RusunSuccess(response.data);
     } catch (e) {
       print(e);
+      store.close();
       yield RusunError();
     }
   }
