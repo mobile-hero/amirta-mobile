@@ -30,7 +30,7 @@ class MeterDataWrite {
   final int month;
   final String year;
   final int meterType;
-  final double meterValue;
+  final double? meterValue;
   final String notes;
   String? image;
   

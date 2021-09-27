@@ -14,7 +14,7 @@ class WaterInputDoneBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
   final RusunUnit rusunUnit;
   final int meterStatus;
-  final double lastMeterValue;
+  final double? lastMeterValue;
   final int month;
   final int year;
 
@@ -43,6 +43,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
   @override
   void initState() {
     isConditionGood = widget.meterStatus == 0;
+    numberController.text = widget.lastMeterValue?.toStringAsFixed(0) ?? '-';
     super.initState();
   }
 
@@ -79,318 +80,361 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
         )
       ],
       child: BlocConsumer<WaterAddReportBloc, WaterAddReportState>(
-          listener: (context, state) {
-        if (state is WaterAddReportSuccess) {
-          context.showCustomToast(
-            type: CustomToastType.success,
-            message: "txt_data_saved".tr(),
-          );
-          Navigator.pop(context);
-        }
-        if (state is WaterAddReportSuccessLocal) {
-          context.showCustomToast(
-            type: CustomToastType.success,
-            message: "txt_data_saved_local".tr(),
-          );
-          Navigator.pop(context);
-        }
-        if (state is WaterAddReportError) {
-          context.showCustomToast(
-            type: CustomToastType.error,
-            message: state.errorMessage,
-          );
-        }
-      }, builder: (context, state) {
-        return SingleChildScrollView(
-          controller: widget.scrollController,
-          padding: const EdgeInsets.all(spaceBig),
-          child: Container(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_indicator_condition'.tr(),
-                        value: isConditionGood
-                            ? 'txt_good'.tr()
-                            : 'txt_broken'.tr(),
+        listener: (context, state) {
+          if (state is WaterAddReportSuccess) {
+            context.showCustomToast(
+              type: CustomToastType.success,
+              message: "txt_data_saved".tr(),
+            );
+            Navigator.pop(context);
+          }
+          if (state is WaterAddReportSuccessLocal) {
+            context.showCustomToast(
+              type: CustomToastType.success,
+              message: "txt_data_saved_local".tr(),
+            );
+            Navigator.pop(context);
+          }
+          if (state is WaterAddReportError) {
+            context.showCustomToast(
+              type: CustomToastType.error,
+              message: state.errorMessage,
+            );
+          }
+        },
+        builder: (context, state) {
+          return SingleChildScrollView(
+            controller: widget.scrollController,
+            padding: const EdgeInsets.all(spaceBig),
+            child: Container(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TitleValueBox(
+                          title: 'txt_indicator_condition'.tr(),
+                          value: isConditionGood
+                              ? 'txt_good'.tr()
+                              : 'txt_broken'.tr(),
+                        ),
                       ),
-                    ),
-                    CupertinoSwitch(
-                      value: isConditionGood,
-                      onChanged: (value) {
-                        setState(() {
-                          isConditionGood = value;
-                        });
-                      },
-                      activeColor: waterfall,
-                      trackColor: carrot,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: spaceNormal,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: TitleValueBox(
-                    title: 'txt_number_water_meter'.tr(),
-                    value: widget.lastMeterValue.toStringAsFixed(0),
+                      CupertinoSwitch(
+                        value: isConditionGood,
+                        onChanged: (value) {
+                          setState(() {
+                            isConditionGood = value;
+                          });
+                        },
+                        activeColor: waterfall,
+                        trackColor: carrot,
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(
-                  height: spaceNormal,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_name'.tr(),
-                        value: widget.rusunUnit.residentName ?? "-",
-                      ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TitleValueBox(
+                      title: 'txt_number_water_meter'.tr(),
+                      value: widget.lastMeterValue?.toStringAsFixed(0) ?? "",
                     ),
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_rusun'.tr(),
-                        value: widget.rusunUnit.rusunName,
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TitleValueBox(
+                          title: 'txt_name'.tr(),
+                          value: widget.rusunUnit.residentName ?? "-",
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: spaceNormal,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_blok'.tr(),
-                        value: widget.rusunUnit.buildingName,
+                      Expanded(
+                        child: TitleValueBox(
+                          title: 'txt_rusun'.tr(),
+                          value: widget.rusunUnit.rusunName,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_lantai'.tr(),
-                        value: widget.rusunUnit.floor.toString(),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TitleValueBox(
+                          title: 'txt_blok'.tr(),
+                          value: widget.rusunUnit.buildingName,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: spaceNormal,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: TitleValueBox(
-                        title: 'txt_nomor'.tr(),
-                        value: widget.rusunUnit.unitNumber,
+                      Expanded(
+                        child: TitleValueBox(
+                          title: 'txt_lantai'.tr(),
+                          value: widget.rusunUnit.floor.toString(),
+                        ),
                       ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TitleValueBox(
+                          title: 'txt_nomor'.tr(),
+                          value: widget.rusunUnit.unitNumber,
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'txt_status'.tr(),
+                              style: context.styleCaption,
+                            ),
+                            StatusChip(done: true),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: spaceNormal,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'txt_notes'.tr(),
+                      style: context.styleCaption,
                     ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'txt_status'.tr(),
-                            style: context.styleCaption,
+                  ),
+                  LabeledInputField(
+                    noteController,
+                    label: 'hint_notes'.tr(),
+                    minLines: 3,
+                    maxLength: 255,
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                  Visibility(
+                    visible: isConditionGood,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: LabeledInputField(
+                            numberController,
+                            label: 'txt_input_water_meter'.tr(),
+                            inputType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
                           ),
-                          StatusChip(done: true),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          width: spaceNormal,
+                        ),
+                        _createImagePickerButton(context),
+                      ],
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: spaceNormal,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'txt_notes'.tr(),
-                    style: context.styleCaption,
                   ),
-                ),
-                LabeledInputField(
-                  noteController,
-                  label: 'hint_notes'.tr(),
-                  minLines: 3,
-                  maxLength: 255,
-                  onChanged: (value) {
-                    setState(() {});
-                  },
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'txt_photo_meter'.tr(),
-                    style: context.styleCaption,
+                  const SizedBox(
+                    height: spaceBig,
                   ),
-                ),
-                const SizedBox(
-                  height: spaceTiny,
-                ),
-                _createImagePickerButton(context),
-                const SizedBox(
-                  height: spaceBig,
-                ),
-                BlocConsumer<UploadBloc, UploadState>(
-                  listener: (context, uploadState) {
-                    if (uploadState is UploadSuccess) {
-                      context.read<WaterAddReportBloc>().add(
-                            AddReport(
-                              isConditionGood,
-                              MeterDataWrite(
-                                rusunId: widget.rusunUnit.rusunId,
-                                buildingId: widget.rusunUnit.buildingId,
-                                unitId: widget.rusunUnit.id,
-                                month: widget.month,
-                                year: widget.year.toString(),
-                                meterType: 1,
-                                meterValue: widget.lastMeterValue,
-                                notes: noteController.text.trim(),
-                                image: uploadState.url,
+                  BlocConsumer<UploadBloc, UploadState>(
+                    listener: (context, uploadState) {
+                      if (uploadState is UploadSuccess) {
+                        context.read<WaterAddReportBloc>().add(
+                              AddReport(
+                                isConditionGood,
+                                MeterDataWrite(
+                                  rusunId: widget.rusunUnit.rusunId,
+                                  buildingId: widget.rusunUnit.buildingId,
+                                  unitId: widget.rusunUnit.id,
+                                  month: widget.month,
+                                  year: widget.year.toString(),
+                                  meterType: 1,
+                                  meterValue:
+                                      double.parse(numberController.text),
+                                  notes: noteController.text.trim(),
+                                  image: uploadState.url,
+                                ),
                               ),
-                            ),
-                          );
-                    }
-                    if (uploadState is UploadOffline) {
-                      context.read<WaterAddReportBloc>().add(
-                            AddReportOffline(
-                              isConditionGood,
-                              MeterDataWrite(
-                                rusunId: widget.rusunUnit.rusunId,
-                                buildingId: widget.rusunUnit.buildingId,
-                                unitId: widget.rusunUnit.id,
-                                month: widget.month,
-                                year: widget.year.toString(),
-                                meterType: 1,
-                                meterValue: widget.lastMeterValue,
-                                notes: noteController.text.trim(),
-                                image: null,
-                              )..photoBase64 = uploadState.base64,
-                            ),
-                          );
-                    }
-                  },
-                  builder: (context, uploadState) {
-                    return PrimaryButton(
-                      () {
-                        context
-                            .read<UploadBloc>()
-                            .add(UploadImage(selectedImage!));
-                      },
-                      'btn_save_data'.tr(),
-                      isEnabled: enableSaveButton,
-                      isLoading: uploadState is UploadLoading ||
-                          state is WaterAddReportLoading,
-                    );
-                  },
-                ),
-              ],
+                            );
+                      }
+                      if (uploadState is UploadOffline) {
+                        context.read<WaterAddReportBloc>().add(
+                              AddReportOffline(
+                                isConditionGood,
+                                MeterDataWrite(
+                                  rusunId: widget.rusunUnit.rusunId,
+                                  buildingId: widget.rusunUnit.buildingId,
+                                  unitId: widget.rusunUnit.id,
+                                  month: widget.month,
+                                  year: widget.year.toString(),
+                                  meterType: 1,
+                                  meterValue:
+                                      double.parse(numberController.text),
+                                  notes: noteController.text.trim(),
+                                  image: null,
+                                )..photoBase64 = uploadState.base64,
+                              ),
+                            );
+                      }
+                    },
+                    builder: (context, uploadState) {
+                      return PrimaryButton(
+                        () async {
+                          if (isConditionGood) {
+                            context
+                                .read<UploadBloc>()
+                                .add(UploadImage(selectedImage!));
+                          } else {
+                            final result = await context
+                                .appProvider()
+                                .connectivity
+                                .checkConnectivity();
+                            if (result.isConnected) {
+                              context.read<WaterAddReportBloc>().add(
+                                    AddReport(
+                                      isConditionGood,
+                                      MeterDataWrite(
+                                        rusunId: widget.rusunUnit.rusunId,
+                                        buildingId: widget.rusunUnit.buildingId,
+                                        unitId: widget.rusunUnit.id,
+                                        month: widget.month,
+                                        year: widget.year.toString(),
+                                        meterType: 1,
+                                        meterValue: null,
+                                        notes: noteController.text.trim(),
+                                        image: null,
+                                      ),
+                                    ),
+                                  );
+                            } else {
+                              context.read<WaterAddReportBloc>().add(
+                                    AddReportOffline(
+                                      isConditionGood,
+                                      MeterDataWrite(
+                                        rusunId: widget.rusunUnit.rusunId,
+                                        buildingId: widget.rusunUnit.buildingId,
+                                        unitId: widget.rusunUnit.id,
+                                        month: widget.month,
+                                        year: widget.year.toString(),
+                                        meterType: 1,
+                                        meterValue: null,
+                                        notes: noteController.text.trim(),
+                                        image: null,
+                                      ),
+                                    ),
+                                  );
+                            }
+                          }
+                        },
+                        'btn_save_data'.tr(),
+                        isEnabled: enableSaveButton,
+                        isLoading: uploadState is UploadLoading ||
+                            state is WaterAddReportLoading,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 
   Widget _createImagePickerButton(BuildContext context) {
     final size = buttonDefaultHeight + spaceSmall;
-    return Builder(
-      builder: (context) {
-        if (selectedImage != null) {
-          return Align(
-            alignment: Alignment.centerLeft,
-            child: SizedBox(
-              height: size,
-              width: size,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(buttonRadius),
-                    child: Image.file(
-                      File(selectedImage!.path),
-                      fit: BoxFit.cover,
-                      height: size,
-                      width: size,
-                    ),
+    return SizedBox(
+      height: size,
+      width: size,
+      child: Builder(
+        builder: (context) {
+          if (selectedImage != null) {
+            return Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(buttonRadius),
+                  child: Image.file(
+                    File(selectedImage!.path),
+                    fit: BoxFit.cover,
+                    height: size,
+                    width: size,
                   ),
-                  Transform.translate(
-                    offset: Offset(5, -5),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectedImage = null;
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(spaceTiny),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: white),
-                            color: darkBackground,
-                          ),
-                          child: Icon(
-                            Icons.clear,
-                            color: white,
-                            size: 10,
-                          ),
+                ),
+                Transform.translate(
+                  offset: Offset(5, -5),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedImage = null;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(spaceTiny),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: white),
+                          color: darkBackground,
+                        ),
+                        child: Icon(
+                          Icons.clear,
+                          color: white,
+                          size: 10,
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
+              ],
+            );
+          }
+          return DottedBorder(
+            radius: Radius.circular(buttonRadius),
+            borderType: BorderType.RRect,
+            color: borderColor,
+            child: SizedBox(
+              height: size,
+              width: size,
+              child: InkWell(
+                onTap: () async {
+                  final result = await _picker.pickImage(
+                    source: ImageSource.camera,
+                  );
+                  if (result != null) {
+                    final path = result.path;
+                    print(path);
+                    setState(() {
+                      selectedImage = result;
+                    });
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(spaceNormal),
+                  child: Image.asset(
+                    imageRes('ic_camera.png'),
+                  ),
+                ),
               ),
             ),
           );
-        }
-        return SizedBox(
-          height: buttonDefaultHeight,
-          width: double.infinity,
-          child: DottedBorder(
-            radius: Radius.circular(buttonRadius),
-            borderType: BorderType.RRect,
-            padding: const EdgeInsets.all(spaceNormal),
-            color: borderColor,
-            child: InkWell(
-              onTap: () async {
-                final result = await _picker.pickImage(
-                  source: ImageSource.camera,
-                );
-                if (result != null) {
-                  final path = result.path;
-                  print(path);
-                  setState(() {
-                    selectedImage = result;
-                  });
-                }
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    imageRes('ic_camera.png'),
-                  ),
-                  const SizedBox(
-                    width: spaceNormal,
-                  ),
-                  Text(
-                    'txt_photo_electric_meter'.tr(),
-                    style: context.styleCaption,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+        },
+      ),
     );
   }
 }

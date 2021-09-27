@@ -212,23 +212,26 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                       setState(() {});
                     },
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: LabeledInputField(
-                          numberController,
-                          label: 'txt_input_water_meter'.tr(),
-                          inputType: TextInputType.number,
-                          onChanged: (value) {
-                            setState(() {});
-                          },
+                  Visibility(
+                    visible: isConditionGood,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: LabeledInputField(
+                            numberController,
+                            label: 'txt_input_water_meter'.tr(),
+                            inputType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: spaceNormal,
-                      ),
-                      _createImagePickerButton(context),
-                    ],
+                        const SizedBox(
+                          width: spaceNormal,
+                        ),
+                        _createImagePickerButton(context),
+                      ],
+                    ),
                   ),
                   BlocConsumer<UploadBloc, UploadState>(
                     listener: (context, uploadState) {
@@ -273,10 +276,52 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                     },
                     builder: (context, uploadState) {
                       return PrimaryButton(
-                        () {
-                          context
+                        () async {
+                          if (isConditionGood) {
+                            context
                               .read<UploadBloc>()
                               .add(UploadImage(selectedImage!));
+                          } else {
+                            final result = await context
+                              .appProvider()
+                              .connectivity
+                              .checkConnectivity();
+                            if (result.isConnected) {
+                              context.read<WaterAddReportBloc>().add(
+                                AddReport(
+                                  isConditionGood,
+                                  MeterDataWrite(
+                                    rusunId: widget.rusunUnit.rusunId,
+                                    buildingId: widget.rusunUnit.buildingId,
+                                    unitId: widget.rusunUnit.id,
+                                    month: widget.month,
+                                    year: widget.year.toString(),
+                                    meterType: 1,
+                                    meterValue: null,
+                                    notes: noteController.text.trim(),
+                                    image: null,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              context.read<WaterAddReportBloc>().add(
+                                AddReportOffline(
+                                  isConditionGood,
+                                  MeterDataWrite(
+                                    rusunId: widget.rusunUnit.rusunId,
+                                    buildingId: widget.rusunUnit.buildingId,
+                                    unitId: widget.rusunUnit.id,
+                                    month: widget.month,
+                                    year: widget.year.toString(),
+                                    meterType: 1,
+                                    meterValue: null,
+                                    notes: noteController.text.trim(),
+                                    image: null,
+                                  ),
+                                ),
+                              );
+                            }
+                          }
                         },
                         'btn_save_data'.tr(),
                         isEnabled: enableSaveButton,
