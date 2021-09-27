@@ -46,14 +46,25 @@ class _PanicScreenState extends State<PanicScreen> {
                     return PanicCustomerItem(
                       item: item,
                       onTap: () async {
-                        final result =
-                            await context.showScrollableBottomSheet<int>(
+                        final bool? result =
+                            await context.showScrollableBottomSheet<bool>(
                           builder: (context, scrollController) {
                             return PanicDetailBottomSheet(item, scrollController);
                           },
                         );
                         if (result != null) {
-                          setState(() {});
+                          if (result) {
+                            context.showCustomToast(
+                              type: CustomToastType.success,
+                              message: "Panik Diterima",
+                            );
+                          } else {
+                            context.showCustomToast(
+                              type: CustomToastType.error,
+                              message: "Panik Ditolak",
+                            );
+                          }
+                          context.read<PanicNewBloc>().pagingController.refresh();
                         }
                       },
                     );

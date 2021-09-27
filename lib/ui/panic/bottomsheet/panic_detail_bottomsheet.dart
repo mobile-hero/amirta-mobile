@@ -36,7 +36,7 @@ class PanicDetailBottomSheet extends StatelessWidget {
                         },
                       );
                       if (result != null) {
-                        Navigator.pop(context);
+                        Navigator.pop(context, true);
                       }
                     },
                     "btn_ready_action".tr(),
@@ -55,7 +55,7 @@ class PanicDetailBottomSheet extends StatelessWidget {
                         },
                       );
                       if (result != null) {
-                        Navigator.pop(context);
+                        Navigator.pop(context, false);
                       }
                     },
                     "btn_out_of_reach".tr(),
