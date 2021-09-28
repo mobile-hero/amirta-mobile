@@ -44,6 +44,8 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
   void initState() {
     isConditionGood = widget.meterStatus == 0;
     numberController.text = widget.lastMeterValue?.toStringAsFixed(0) ?? '-';
+    noteController.text =
+        "Periode bulan ${widget.month} tahun ${widget.year} sudah dicatat";
     super.initState();
   }
 
@@ -55,7 +57,11 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
   }
 
   bool get enableSaveButton {
-    return selectedImage != null;
+    if (isConditionGood) {
+      return numberController.text.trim().isNotEmpty && selectedImage != null;
+    } else {
+      return selectedImage != null;
+    }
   }
 
   @override
@@ -124,6 +130,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                         onChanged: (value) {
                           setState(() {
                             isConditionGood = value;
+                            numberController.text = "";
                           });
                         },
                         activeColor: waterfall,
@@ -226,26 +233,26 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                       setState(() {});
                     },
                   ),
-                  Visibility(
-                    visible: isConditionGood,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: LabeledInputField(
-                            numberController,
-                            label: 'txt_input_water_meter'.tr(),
-                            inputType: TextInputType.number,
-                            onChanged: (value) {
-                              setState(() {});
-                            },
-                          ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: LabeledInputField(
+                          numberController,
+                          label: 'txt_input_water_meter'.tr(),
+                          inputType: TextInputType.number,
+                          onChanged: (value) {
+                            setState(() {});
+                          },
+                          isEnabled: isConditionGood,
+                          backgroundColor:
+                              isConditionGood ? null : inputDisabledColor,
                         ),
-                        const SizedBox(
-                          width: spaceNormal,
-                        ),
-                        _createImagePickerButton(context),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        width: spaceNormal,
+                      ),
+                      _createImagePickerButton(context),
+                    ],
                   ),
                   const SizedBox(
                     height: spaceBig,
@@ -264,8 +271,15 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                                   year: widget.year.toString(),
                                   meterType: 1,
                                   meterValue:
-                                      double.parse(numberController.text),
-                                  notes: noteController.text.trim(),
+                                      double.tryParse(numberController.text) ??
+                                          0,
+                                  notes: isConditionGood
+                                      ? noteController.text.trim()
+                                      : "",
+                                  statusNotes: isConditionGood
+                                      ? null
+                                      : noteController.text.trim(),
+                                  status: isConditionGood ? 0 : 1,
                                   image: uploadState.url,
                                 ),
                               ),
@@ -283,8 +297,15 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                                   year: widget.year.toString(),
                                   meterType: 1,
                                   meterValue:
-                                      double.parse(numberController.text),
-                                  notes: noteController.text.trim(),
+                                      double.tryParse(numberController.text) ??
+                                          0,
+                                  notes: isConditionGood
+                                      ? noteController.text.trim()
+                                      : "",
+                                  statusNotes: isConditionGood
+                                      ? null
+                                      : noteController.text.trim(),
+                                  status: isConditionGood ? 0 : 1,
                                   image: null,
                                 )..photoBase64 = uploadState.base64,
                               ),
@@ -294,51 +315,9 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                     builder: (context, uploadState) {
                       return PrimaryButton(
                         () async {
-                          if (isConditionGood) {
-                            context
-                                .read<UploadBloc>()
-                                .add(UploadImage(selectedImage!));
-                          } else {
-                            final result = await context
-                                .appProvider()
-                                .connectivity
-                                .checkConnectivity();
-                            if (result.isConnected) {
-                              context.read<WaterAddReportBloc>().add(
-                                    AddReport(
-                                      isConditionGood,
-                                      MeterDataWrite(
-                                        rusunId: widget.rusunUnit.rusunId,
-                                        buildingId: widget.rusunUnit.buildingId,
-                                        unitId: widget.rusunUnit.id,
-                                        month: widget.month,
-                                        year: widget.year.toString(),
-                                        meterType: 1,
-                                        meterValue: null,
-                                        notes: noteController.text.trim(),
-                                        image: null,
-                                      ),
-                                    ),
-                                  );
-                            } else {
-                              context.read<WaterAddReportBloc>().add(
-                                    AddReportOffline(
-                                      isConditionGood,
-                                      MeterDataWrite(
-                                        rusunId: widget.rusunUnit.rusunId,
-                                        buildingId: widget.rusunUnit.buildingId,
-                                        unitId: widget.rusunUnit.id,
-                                        month: widget.month,
-                                        year: widget.year.toString(),
-                                        meterType: 1,
-                                        meterValue: null,
-                                        notes: noteController.text.trim(),
-                                        image: null,
-                                      ),
-                                    ),
-                                  );
-                            }
-                          }
+                          context
+                              .read<UploadBloc>()
+                              .add(UploadImage(selectedImage!));
                         },
                         'btn_save_data'.tr(),
                         isEnabled: enableSaveButton,

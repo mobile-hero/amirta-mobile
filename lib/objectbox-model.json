@@ -333,7 +333,7 @@
     },
     {
       "id": "5:7180620432326266397",
-      "lastPropertyId": "11:2964316573681346071",
+      "lastPropertyId": "13:3142139467888618835",
       "name": "MeterDataWrite",
       "properties": [
         {
@@ -397,6 +397,16 @@
           "id": "11:2964316573681346071",
           "name": "photoBase64",
           "type": 9
+        },
+        {
+          "id": "12:5427004916280224535",
+          "name": "statusNotes",
+          "type": 9
+        },
+        {
+          "id": "13:3142139467888618835",
+          "name": "status",
+          "type": 6
         }
       ],
       "relations": []

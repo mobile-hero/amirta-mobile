@@ -46,7 +46,7 @@ class WaterAddReportBloc
       dataWrite.id = existing?.id;
       final dataId = dataBox.put(dataWrite);
 
-      // get meter status
+      /*// get meter status
       final statusBox = store.box<MeterStatusWrite>();
       final statusWrite = MeterStatusWrite(
         unitId: dataWrite.unitId,
@@ -58,16 +58,16 @@ class WaterAddReportBloc
           .build()
           .findFirst();
       statusWrite.id = statusExisting?.id;
-      final statusId = statusBox.put(statusWrite);
+      final statusId = statusBox.put(statusWrite);*/
 
       final connResult = await connectivity.checkConnectivity();
       if (connResult.isConnected) {
-        final statusResponse =
-            await rusunRepository.changeMeterStatus(statusWrite);
+        /*final statusResponse =
+            await rusunRepository.changeMeterStatus(statusWrite);*/
         final response = await rusunRepository.addMeterData(dataWrite);
 
         dataBox.remove(dataId);
-        statusBox.remove(statusId);
+        /*statusBox.remove(statusId);*/
 
         final unitBox = store.box<RusunUnitValue>();
         final result = unitBox
@@ -80,13 +80,14 @@ class WaterAddReportBloc
             .findFirst();
 
         if (result != null) {
-          result.pdamMeterStatus = statusWrite.status;
+          result.pdamMeterStatus = event.dataWrite.status;
           result.lastMeterValue = event.dataWrite.meterValue;
           result.meterPostDtime = DateTime.now();
           unitBox.put(result);
         }
 
-        if (statusResponse.requestSuccess && response.requestSuccess) {
+        /*if (statusResponse.requestSuccess && response.requestSuccess) {*/
+        if (response.requestSuccess) {
           yield WaterAddReportSuccess();
         } else {
           yield WaterAddReportError(response.responsemessage);

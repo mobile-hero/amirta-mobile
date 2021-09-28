@@ -28,6 +28,7 @@ class LabeledInputField<T> extends StatefulWidget {
   final FocusNode? focusNode;
   final VoidCallback? onTap;
   final ValueChanged<String>? onChanged;
+  final Color? backgroundColor;
 
   const LabeledInputField(
     this._controller, {
@@ -54,6 +55,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.focusNode,
     this.onTap,
     this.onChanged,
+    this.backgroundColor,
   });
 
   @override
@@ -89,6 +91,7 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
         children: [
           Container(
             decoration: BoxDecoration(
+              color: widget.backgroundColor,
               border: Border.all(
                 color: !widget.isEnabled
                     ? inputDisabledColor

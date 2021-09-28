@@ -58,11 +58,9 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
       final dataBox = store.box<MeterDataWrite>();
       final existing = dataBox.getAll();
 
-      // get meter status
+      /*// get meter status
       final statusBox = store.box<MeterStatusWrite>();
-      final statusExisting = statusBox.getAll();
-
-      print(existing.map((e) => e.toJson()));
+      final statusExisting = statusBox.getAll();*/
 
       for (int i = 0; i < existing.length; i++) {
         // upload image if base64 present
@@ -75,18 +73,16 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
           dataBox.put(data);
         }
 
-        MeterStatusWrite? status;
+        /*MeterStatusWrite? status;
         try {
           status = statusExisting.firstWhere((e) => e.unitId == data.unitId);
         } catch (e) {}
 
-        print(data.toJson());
-        print(status?.toJson());
         if (status != null) {
           final statusResponse =
               await rusunRepository.changeMeterStatus(status);
           statusBox.remove(status.id!);
-        }
+        }*/
         final response = await rusunRepository.addMeterData(data);
         dataBox.remove(data.id!);
 
@@ -101,7 +97,7 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
             .findFirst();
 
         if (result != null) {
-          result.pdamMeterStatus = status?.status ?? 0;
+          result.pdamMeterStatus = data.status;
           result.lastMeterValue = data.meterValue;
           result.meterPostDtime = DateTime.now();
           unitBox.put(result);
