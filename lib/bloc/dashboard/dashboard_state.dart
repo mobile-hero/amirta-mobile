@@ -14,3 +14,5 @@ class DashboardSuccess extends DashboardState {
 }
 
 class DashboardError extends DashboardState {}
+
+class DashboardTokenExpired extends DashboardState {}

@@ -164,14 +164,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: dailySection(context),
           replacement: Padding(
             padding: const EdgeInsets.only(top: spaceBig),
-            child: Center(
+            child:
+                SizedBox(), /*Center(
               child: Text(
                 'Fitur Info Harian dalam pengembangan',
                 style: context.styleBody1.copyWith(
                   color: grease.withOpacity(0.5),
                 ),
               ),
-            ),
+            ),*/
           ),
         ),
       ],
@@ -180,9 +181,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget summarySection() {
     return BlocConsumer<DashboardBloc, DashboardState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is DashboardSuccess) {
           context.read<LatestPanicBloc>().add(LoadLatestPanic());
+        }
+        if (state is DashboardTokenExpired) {
+          await context.appProvider().clearData();
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/login',
+            (route) => false,
+          );
         }
       },
       builder: (context, state) {

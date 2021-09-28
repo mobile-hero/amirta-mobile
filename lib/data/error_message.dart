@@ -24,7 +24,7 @@ class ErrorMessage extends Equatable {
     this.errorCode = "-",
     this.shouldRelogin = false,
   });
-  
+
   static ErrorMessage init() {
     return ErrorMessage(messages: {});
   }
@@ -35,7 +35,7 @@ class ErrorMessage extends Equatable {
     }
     return messages?.values.first;
   }
-  
+
   String? get message {
     if (messages?.containsKey(keyMessage) == false) {
       return null;
@@ -55,7 +55,9 @@ class ErrorMessage extends Equatable {
     }
   }
 
-  bool get isEmpty => messages!.isEmpty == true || messages!.values.every((element) => element?.isEmpty == true);
+  bool get isEmpty =>
+      messages!.isEmpty == true ||
+      messages!.values.every((element) => element?.isEmpty == true);
 
   bool get isNotEmpty => !isEmpty;
 
