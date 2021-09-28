@@ -16,7 +16,7 @@ class MeterDataWrite {
     required this.meterType,
     required this.meterValue,
     required this.notes,
-    required this.statusNotes,
+    required this.statusNote,
     required this.status,
     required this.image,
   });
@@ -34,7 +34,7 @@ class MeterDataWrite {
   final int meterType;
   final double? meterValue;
   final String? notes;
-  final String? statusNotes;
+  final String? statusNote;
   final int status;
   String? image;
   

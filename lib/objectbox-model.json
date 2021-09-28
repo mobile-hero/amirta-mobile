@@ -333,7 +333,7 @@
     },
     {
       "id": "5:7180620432326266397",
-      "lastPropertyId": "13:3142139467888618835",
+      "lastPropertyId": "14:2389717214068037972",
       "name": "MeterDataWrite",
       "properties": [
         {
@@ -399,14 +399,14 @@
           "type": 9
         },
         {
-          "id": "12:5427004916280224535",
-          "name": "statusNotes",
-          "type": 9
-        },
-        {
           "id": "13:3142139467888618835",
           "name": "status",
           "type": 6
+        },
+        {
+          "id": "14:2389717214068037972",
+          "name": "statusNote",
+          "type": 9
         }
       ],
       "relations": []
@@ -449,7 +449,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    5427004916280224535
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

@@ -259,7 +259,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                   notes: isConditionGood
                                       ? noteController.text.trim()
                                       : "",
-                                  statusNotes: isConditionGood
+                                  statusNote: isConditionGood
                                       ? null
                                       : noteController.text.trim(),
                                   status: isConditionGood ? 0 : 1,
@@ -285,7 +285,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                   notes: isConditionGood
                                       ? noteController.text.trim()
                                       : "",
-                                  statusNotes: isConditionGood
+                                  statusNote: isConditionGood
                                       ? null
                                       : noteController.text.trim(),
                                   status: isConditionGood ? 0 : 1,
