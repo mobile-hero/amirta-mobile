@@ -114,7 +114,7 @@
   "txt_panic_desc": "Isi Pelaporan",
   "txt_ready_action_note": "Catatan Siap Action",
   "txt_panic_rejection_note": "Catatan Diluar Jangkauan",
-  "txt_panic_in_process": "Dalam Process Penanganan",
+  "txt_panic_in_process": "Dalam Proses Penanganan",
   "txt_panic_rejected": "Panik Ditolak",
   "txt_panic_completed": "Panik Selesai",
   "txt_create_panic_desc": "Harap mengisi laporan peyelesaian Panik",

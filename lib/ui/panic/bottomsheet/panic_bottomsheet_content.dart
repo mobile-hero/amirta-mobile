@@ -113,7 +113,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
               },
               initialCameraPosition: CameraPosition(
                 target: position,
-                zoom: 17.4746,
+                zoom: 15.4746,
               ),
               onMapCreated: (mapController) {
                 this.mapController = mapController;
