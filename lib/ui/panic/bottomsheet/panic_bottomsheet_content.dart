@@ -90,7 +90,7 @@ class PanicBottomSheetContent extends StatelessWidget {
           child: InkWell(
             onTap: () async {
               final availableMaps = await MapLauncher.installedMaps;
-              final latlng = pengaduan.latlng.split(",").map((e) => double.parse(e));
+              final latlng = pengaduan.latlng!.split(",").map((e) => double.parse(e));
               await availableMaps.first.showMarker(
                 coords: Coords(latlng.first, latlng.last),
                 title: "Lokasi Kejadian",

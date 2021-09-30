@@ -32,7 +32,7 @@ class LatestPanicBloc extends Bloc<LatestPanicEvent, LatestPanicState> {
       yield LatestPanicLoading();
       final response = await pengaduanRepository.getList(
         ComplaintType.panic,
-        ComplaintStatus.completed,
+        ComplaintStatus.newItem,
         1,
         limit,
       );
