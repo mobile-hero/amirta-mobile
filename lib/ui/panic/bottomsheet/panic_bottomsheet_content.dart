@@ -1,12 +1,21 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_launcher/map_launcher.dart';
 
-class PanicBottomSheetContent extends StatelessWidget {
+class PanicBottomSheetContent extends StatefulWidget {
   final Pengaduan pengaduan;
 
   const PanicBottomSheetContent(this.pengaduan);
+
+  @override
+  _PanicBottomSheetContentState createState() =>
+      _PanicBottomSheetContentState();
+}
+
+class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
+  GoogleMapController? mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +46,13 @@ class PanicBottomSheetContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    pengaduan.complainantName,
+                    widget.pengaduan.complainantName,
                     style: context.styleBody1.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    pengaduan.rusunName,
+                    widget.pengaduan.rusunName,
                     style: context.styleCaption,
                   ),
                 ],
@@ -61,24 +70,56 @@ class PanicBottomSheetContent extends StatelessWidget {
               flex: 3,
               child: TitleValueBox(
                 title: 'txt_rusun'.tr(),
-                value: pengaduan.rusunName,
+                value: widget.pengaduan.rusunName,
               ),
             ),
             Expanded(
               flex: 3,
               child: TitleValueBox(
                 title: 'txt_phone_num'.tr(),
-                value: pengaduan.complaintNumber,
+                value: widget.pengaduan.complaintNumber,
               ),
             ),
             Expanded(
               flex: 2,
               child: TitleValueBox(
                 title: 'txt_time'.tr(),
-                value: pengaduan.receivedDtimeFormatted,
+                value: widget.pengaduan.receivedDtimeFormatted,
               ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: spaceMedium,
+        ),
+        SizedBox(
+          height: 250,
+          child: Builder(builder: (context) {
+            final latlng =
+                widget.pengaduan.latlng.split(",").map((e) => double.parse(e));
+            final position = LatLng(latlng.first, latlng.last);
+
+            return GoogleMap(
+              myLocationEnabled: true,
+              zoomControlsEnabled: false,
+              compassEnabled: false,
+              myLocationButtonEnabled: false,
+              mapToolbarEnabled: false,
+              markers: {
+                Marker(
+                  markerId: MarkerId(widget.pengaduan.id.toString()),
+                  position: position,
+                )
+              },
+              initialCameraPosition: CameraPosition(
+                target: position,
+                zoom: 17.4746,
+              ),
+              onMapCreated: (mapController) {
+                this.mapController = mapController;
+              },
+            );
+          }),
         ),
         const SizedBox(
           height: spaceMedium,
@@ -90,7 +131,9 @@ class PanicBottomSheetContent extends StatelessWidget {
           child: InkWell(
             onTap: () async {
               final availableMaps = await MapLauncher.installedMaps;
-              final latlng = pengaduan.latlng.split(",").map((e) => double.parse(e));
+              final latlng = widget.pengaduan.latlng
+                  .split(",")
+                  .map((e) => double.parse(e));
               await availableMaps.first.showMarker(
                 coords: Coords(latlng.first, latlng.last),
                 title: "Lokasi Kejadian",
