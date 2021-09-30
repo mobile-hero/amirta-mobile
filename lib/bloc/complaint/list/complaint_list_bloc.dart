@@ -60,6 +60,7 @@ class ComplaintListBloc extends Bloc<ComplaintListEvent, ComplaintListState> {
       }
       yield ComplaintListSuccess();
     } catch (e) {
+      print(e);
       yield ComplaintListError();
     }
   }

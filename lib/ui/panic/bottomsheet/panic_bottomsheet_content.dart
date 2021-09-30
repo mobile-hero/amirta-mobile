@@ -96,7 +96,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
           height: 250,
           child: Builder(builder: (context) {
             final latlng =
-                widget.pengaduan.latlng.split(",").map((e) => double.parse(e));
+                widget.pengaduan.latlng!.split(",").map((e) => double.parse(e));
             final position = LatLng(latlng.first, latlng.last);
 
             return GoogleMap(
@@ -131,7 +131,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
           child: InkWell(
             onTap: () async {
               final availableMaps = await MapLauncher.installedMaps;
-              final latlng = widget.pengaduan.latlng
+              final latlng = widget.pengaduan.latlng!
                   .split(",")
                   .map((e) => double.parse(e));
               await availableMaps.first.showMarker(

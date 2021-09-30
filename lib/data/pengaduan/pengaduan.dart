@@ -43,7 +43,7 @@ class Pengaduan {
   final String content;
   final String fname;
   final String? fdoc;
-  final String latlng;
+  final String? latlng;
   final String statusName;
   final String complainantName;
   final String complainantPhoto;

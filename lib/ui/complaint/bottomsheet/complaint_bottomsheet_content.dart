@@ -118,58 +118,66 @@ class ComplaintBottomSheetContent extends StatelessWidget {
           title: 'txt_complaint_desc'.tr(),
           value: pengaduan.content,
         ),
-        const SizedBox(
-          height: spaceNormal,
-        ),
-        Text(
-          "txt_attachment".tr(),
-          style: context.styleCaption,
-        ),
-        const SizedBox(
-          height: spaceTiny,
-        ),
-        SizedBox(
-          height: imgSizeBig,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 1,
-            itemBuilder: (context, position) {
-              return Padding(
-                padding: const EdgeInsets.only(right: spaceNormal),
-                child: SizedBox(
-                  width: imgSizeBig,
-                  height: imgSizeBig,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(cardRadius),
-                    child: InkWell(
-                      child: Image.network(
-                        pengaduan.fname.imageUrl,
+        Visibility(
+          visible: pengaduan.fname.isNotEmpty,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: spaceNormal,
+              ),
+              Text(
+                "txt_attachment".tr(),
+                style: context.styleCaption,
+              ),
+              const SizedBox(
+                height: spaceTiny,
+              ),
+              SizedBox(
+                height: imgSizeBig,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 1,
+                  itemBuilder: (context, position) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: spaceNormal),
+                      child: SizedBox(
                         width: imgSizeBig,
                         height: imgSizeBig,
-                        fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(cardRadius),
+                          child: InkWell(
+                            child: Image.network(
+                              pengaduan.fname.imageUrl,
+                              width: imgSizeBig,
+                              height: imgSizeBig,
+                              fit: BoxFit.cover,
+                            ),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return PhotoViewerDialog(
+                                      pengaduan.fname.imageUrl);
+                                },
+                              );
+                            },
+                          ),
+                        ),
                       ),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return PhotoViewerDialog(pengaduan.fname.imageUrl);
-                          },
-                        );
-                      },
-                    ),
-                  ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(
-          height: spaceTiny,
-        ),
-        Text(
-          "txt_tap_enlarge".tr(),
-          style: context.styleCaption.copyWith(
-            color: accentColor,
+              ),
+              const SizedBox(
+                height: spaceTiny,
+              ),
+              Text(
+                "txt_tap_enlarge".tr(),
+                style: context.styleCaption.copyWith(
+                  color: accentColor,
+                ),
+              ),
+            ],
           ),
         ),
       ],
