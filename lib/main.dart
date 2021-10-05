@@ -153,7 +153,7 @@ class _MyAppState extends State<MyApp> {
           }
         }
         print(
-            'Message also contained a notification: ${message.notification?.toString()}');
+            'Message also contained a notification: ${message.notification?.android?.clickAction}');
         final imageUrl = message.notification?.android?.imageUrl;
         late DefaultStyleInformation styleInformation;
         AndroidBitmap? largeIcon;
@@ -204,6 +204,8 @@ class _MyAppState extends State<MyApp> {
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      print(
+          'Message also contained a notification: ${message.notification?.android?.clickAction}');
       selectNotification(jsonEncode(message.data));
     });
   }
@@ -233,6 +235,11 @@ class _MyAppState extends State<MyApp> {
             // ));
             break;
         }
+      } else {
+        _navigatorKey.currentState?.pushNamedAndRemoveUntil(
+          '/main',
+          (route) => false,
+        );
       }
     }
   }
