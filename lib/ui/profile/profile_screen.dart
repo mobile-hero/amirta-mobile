@@ -55,6 +55,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 80,
           height: 80,
           fit: BoxFit.cover,
+          errorBuilder: (context, obj, stacktrace) {
+            return Icon(
+              Icons.account_circle_rounded,
+              size: 80,
+              color: white,
+            );
+          },
         ),
       ),
     );
