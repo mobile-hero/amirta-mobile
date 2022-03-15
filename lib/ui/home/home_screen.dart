@@ -70,6 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 70,
                                     height: 70,
                                     fit: BoxFit.cover,
+                                    errorBuilder: (context, obj, stacktrace) {
+                                      return Icon(
+                                        Icons.account_circle_rounded,
+                                        size: 80,
+                                        color: white,
+                                      );
+                                    },
                                   ),
                                 );
                               }

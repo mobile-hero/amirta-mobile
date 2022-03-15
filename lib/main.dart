@@ -111,7 +111,7 @@ class _MyAppState extends State<MyApp> {
 
   final Dio dio = Dio();
 
-  final RepositoryConfig repositoryConfig = RepositoryConfig.staging();
+  final RepositoryConfig repositoryConfig = RepositoryConfig.production();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -180,6 +180,8 @@ class _MyAppState extends State<MyApp> {
           importance: Importance.max,
           priority: Priority.high,
           showWhen: false,
+          playSound: true,
+          sound: RawResourceAndroidNotificationSound('danger_alarm'),
           icon: "ic_app_notification",
           largeIcon: largeIcon,
           color: egyptian,
@@ -188,6 +190,7 @@ class _MyAppState extends State<MyApp> {
         IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails(
           presentAlert: true,
           presentSound: true,
+          sound: 'alarm.m4r',
           subtitle: message.notification?.body ?? "-",
         );
         NotificationDetails platformChannelSpecifics = NotificationDetails(
