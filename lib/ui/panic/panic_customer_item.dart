@@ -99,6 +99,42 @@ class PanicCustomerItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: spaceNormal,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: TitleValueBox(
+                        title: 'txt_blok'.tr(),
+                        value: item.buildingName,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: TitleValueBox(
+                        title: 'txt_lantai'.tr(),
+                        value: item.floor.toString(),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: TitleValueBox(
+                        title: 'txt_nomor'.tr(),
+                        value: item.unitNumber,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: TitleValueBox(
+                        title: 'txt_hour'.tr(),
+                        value: item.receivedDtimeHourOnly,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

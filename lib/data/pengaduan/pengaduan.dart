@@ -69,6 +69,10 @@ class Pengaduan {
     return DateFormat("dd-MM-y").format(receivedDtime);
   }
   
+  String get receivedDtimeHourOnly {
+    return DateFormat("HH:mm:ss").format(receivedDtime);
+  }
+  
   String get receivedDtimeHomeFormatted {
     return DateFormat("dd MMMM y | HH:mm", "id").format(receivedDtime);
   }

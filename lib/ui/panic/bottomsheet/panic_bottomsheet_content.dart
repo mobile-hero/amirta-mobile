@@ -90,6 +90,42 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
           ],
         ),
         const SizedBox(
+          height: spaceNormal,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: TitleValueBox(
+                title: 'txt_blok'.tr(),
+                value: widget.pengaduan.buildingName,
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: TitleValueBox(
+                title: 'txt_lantai'.tr(),
+                value: widget.pengaduan.floor.toString(),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: TitleValueBox(
+                title: 'txt_nomor'.tr(),
+                value: widget.pengaduan.unitNumber,
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: TitleValueBox(
+                title: 'txt_hour'.tr(),
+                value: widget.pengaduan.receivedDtimeHourOnly,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
           height: spaceMedium,
         ),
         SizedBox(
