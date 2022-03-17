@@ -130,7 +130,7 @@ class _CreatePanicReportScreenState
                     },
                     'btn_create_report'.tr(),
                     isEnabled:
-                        noteController.text.isNotEmpty && images.length >= 3,
+                        noteController.text.isNotEmpty && images.length >= 1,
                     isLoading: state is ComplaintCreateLoading,
                   ),
                 ],
