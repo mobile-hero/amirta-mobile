@@ -1,6 +1,18 @@
 import 'package:amirta_mobile/my_material.dart';
 import 'package:native_pdf_view/native_pdf_view.dart';
 
+Future<void> showPhotoViewerDialog({
+  required BuildContext context,
+  required String imageUrl,
+}) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return PhotoViewerDialog(imageUrl);
+    },
+  );
+}
+
 class PhotoViewerDialog extends StatelessWidget {
   final String imageUrl;
 

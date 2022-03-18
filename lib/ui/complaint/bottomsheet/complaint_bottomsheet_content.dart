@@ -153,12 +153,9 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             onTap: () {
-                              showDialog(
+                              showPhotoViewerDialog(
                                 context: context,
-                                builder: (context) {
-                                  return PhotoViewerDialog(
-                                      pengaduan.fname.imageUrl);
-                                },
+                                imageUrl: pengaduan.fname.imageUrl,
                               );
                             },
                           ),

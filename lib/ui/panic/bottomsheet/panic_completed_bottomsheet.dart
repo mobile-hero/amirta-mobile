@@ -100,21 +100,17 @@ class PanicCompletedBottomSheet extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(cardRadius),
                                 child: InkWell(
                                   child: Image.network(
-                                    state.pengaduan.fileList![position].fname.imageUrl,
+                                    state.pengaduan.fileList![position].fname
+                                        .imageUrl,
                                     width: imgSizeBig,
                                     height: imgSizeBig,
                                     fit: BoxFit.cover,
                                   ),
                                   onTap: () {
-                                    showDialog(
+                                    showPhotoViewerDialog(
                                       context: context,
-                                      builder: (context) {
-                                        return PhotoViewerDialog(state
-                                          .pengaduan
-                                          .fileList![position]
-                                          .fname
-                                          .imageUrl);
-                                      },
+                                      imageUrl: state.pengaduan
+                                          .fileList![position].fname.imageUrl,
                                     );
                                   },
                                 ),
