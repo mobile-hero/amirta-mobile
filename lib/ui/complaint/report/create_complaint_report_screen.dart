@@ -41,7 +41,7 @@ class _CreateComplaintReportScreenState
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Laporan Pengaduan'),
+          title: Text('txt_set_complaint_complete_2'.tr()),
           titleTextStyle: context.styleHeadline5,
           centerTitle: true,
           elevation: 0.0,

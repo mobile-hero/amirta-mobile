@@ -45,7 +45,7 @@ class _BulanBottomSheetState extends State<BulanBottomSheet> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Bulan',
+                      'txt_bulan'.tr(),
                       style: context.styleBody1.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

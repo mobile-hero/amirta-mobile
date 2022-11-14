@@ -20,7 +20,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   void initState() {
     resetPassGesture.onTap = () {
-      Navigator.pushNamed(context, '/password/email');
+      Navigator.pushNamed(context, Routes.passwordEmail);
     };
     super.initState();
   }
@@ -52,7 +52,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         if (state is ChangePasswordSuccess) {
           Navigator.popAndPushNamed(
             context,
-            '/password/change/success',
+            Routes.passwordChangeSuccess,
           );
         }
         if (state is ChangePasswordError) {

@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   int bodyPos = 0;
-  
+
   @override
   void initState() {
     context.read<FcmBloc>().add(RegisterFcm());
@@ -52,22 +52,22 @@ class _MainScreenState extends State<MainScreen> {
             _createNavBarItem(
               icon: 'ic_navbar_home_outline.png',
               selectedIcon: 'ic_navbar_home_filled.png',
-              label: 'Home',
+              label: 'title_home'.tr(),
             ),
             _createNavBarItem(
               icon: 'ic_navbar_air_outline.png',
               selectedIcon: 'ic_navbar_air_filled.png',
-              label: 'Air',
+              label: 'title_air'.tr(),
             ),
             _createNavBarItem(
               icon: 'ic_navbar_pengaduan_outline.png',
               selectedIcon: 'ic_navbar_pengaduan_filled.png',
-              label: 'Pengaduan',
+              label: 'title_pengaduan'.tr(),
             ),
             _createNavBarItem(
               icon: 'ic_navbar_panik_outline.png',
               selectedIcon: 'ic_navbar_panik_filled.png',
-              label: 'Panik',
+              label: 'title_panik'.tr(),
             ),
           ],
         ),

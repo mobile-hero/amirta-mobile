@@ -2,7 +2,6 @@ import 'package:amirta_mobile/bloc/complaint/create/complaint_create_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/complaint_status.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 
 class ComplaintRejectDialog extends StatefulWidget {
   final Pengaduan pengaduan;

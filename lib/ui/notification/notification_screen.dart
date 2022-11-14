@@ -4,6 +4,8 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class NotificationScreen extends StatefulWidget {
+  static final String path = '/notification';
+
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }

@@ -1,7 +1,6 @@
 import 'package:amirta_mobile/bloc/password/email/email_password_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmailPasswordScreen extends StatefulWidget {
   @override
@@ -41,7 +40,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
           if (state is EmailPasswordSuccess) {
             Navigator.popAndPushNamed(
               context,
-              '/password/email/success',
+              Routes.passwordEmailSuccess,
             );
           }
           if (state is EmailPasswordError) {

@@ -4,10 +4,8 @@ import 'package:amirta_mobile/bloc/upload/upload_bloc.dart';
 import 'package:amirta_mobile/bloc/water/add/water_add_report_bloc.dart';
 import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class WaterInputDoneBottomSheet extends StatefulWidget {
@@ -44,8 +42,8 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
   void initState() {
     isConditionGood = widget.meterStatus == 0;
     numberController.text = widget.lastMeterValue?.toStringAsFixed(0) ?? '-';
-    noteController.text =
-        "Periode bulan ${widget.month} tahun ${widget.year} sudah dicatat";
+    noteController.text = "txt_periode_recorded"
+        .tr(args: [widget.month.toString(), widget.year.toString()]);
     super.initState();
   }
 

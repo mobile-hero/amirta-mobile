@@ -24,7 +24,7 @@ class PanicAppBar extends StatelessWidget with PreferredSizeWidget {
           const SizedBox(
             width: spaceNormal,
           ),
-          Text('Panik'),
+          Text('title_panik'.tr()),
         ],
       ),
       centerTitle: true,

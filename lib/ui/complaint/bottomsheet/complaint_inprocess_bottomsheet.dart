@@ -1,6 +1,5 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_bottomsheet_content.dart';
 import 'package:amirta_mobile/ui/complaint/dialog/complaint_set_complete_dialog.dart';
 import 'package:slide_to_act/slide_to_act.dart';

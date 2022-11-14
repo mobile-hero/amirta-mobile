@@ -1,5 +1,4 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 
 class ComplaintSetCompleteDialog extends StatefulWidget {
   @override

@@ -49,7 +49,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
             ),
             StatusChip(
               done: false,
-              notDoneText: 'Sarpas',
+              notDoneText: 'txt_sarpas'.tr(),
             ),
           ],
         ),

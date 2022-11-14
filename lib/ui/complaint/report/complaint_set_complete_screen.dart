@@ -48,7 +48,7 @@ class ComplaintSetCompleteScreen extends StatelessWidget {
                 () async {
                   final response = await Navigator.pushNamed(
                     context,
-                    '/complaint/create-report',
+                    Routes.complaintCreateReport,
                     arguments: ModalRoute.of(context)?.settings.arguments
                   );
                   Navigator.pop(context, response);

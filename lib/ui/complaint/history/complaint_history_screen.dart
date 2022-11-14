@@ -2,7 +2,6 @@ import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
 import 'package:amirta_mobile/bloc/complaint/list/complaint_types_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan_export.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_completed_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_inprocess_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_rejected_bottomsheet.dart';
@@ -39,7 +38,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('History Pengaduan'),
+          title: Text('title_history_complaint'.tr()),
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -53,13 +52,13 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                   child: TabBar(
                     tabs: [
                       Tab(
-                        text: 'Dalam Proses',
+                        text: 'tab_processing'.tr(),
                       ),
                       Tab(
-                        text: 'Penolakan',
+                        text: 'tab_rejected'.tr(),
                       ),
                       Tab(
-                        text: 'Selesai',
+                        text: 'tab_completed'.tr(),
                       ),
                     ],
                     labelStyle: context.styleCaption.copyWith(
@@ -101,7 +100,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                             if (result != null) {
                               final response = await Navigator.pushNamed(
                                 context,
-                                '/complaint/set-complete',
+                                Routes.complaintSetComplete,
                                 arguments: result,
                               );
                               if (response != null) {
@@ -112,7 +111,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
 
                                 context.showCustomToast(
                                   type: CustomToastType.success,
-                                  message: "Pengaduan Selesai",
+                                  message: "txt_complaint_completed".tr(),
                                 );
                               }
                             }

@@ -5,12 +5,10 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:amirta_mobile/ui/bottomsheet/blok_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/bulan_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/lantai_bottomsheet.dart';
-import 'package:amirta_mobile/ui/bottomsheet/rounded_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/rusun_bottomsheet.dart';
 import 'package:amirta_mobile/ui/bottomsheet/tahun_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WaterFormScreen extends StatefulWidget {
   @override
@@ -402,8 +400,10 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                 );
                                 if (result != null) {
                                   setState(() {
-                                    lantaiController.text =
-                                        result == -1 ? "Semua" : "Lt. $result";
+                                    lantaiController.text = result == -1
+                                        ? "txt_all_floor".tr()
+                                        : "txt_floor_num"
+                                            .tr(args: [result.toString()]);
                                     selectedLantai = result;
 
                                     numberController.text = "";
@@ -438,8 +438,8 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                             ),
                           );
                           context
-                            .read<WaterSyncBloc>()
-                            .add(LoadTotalUnsynced());
+                              .read<WaterSyncBloc>()
+                              .add(LoadTotalUnsynced());
                         },
                         'btn_search'.tr(),
                         isEnabled:

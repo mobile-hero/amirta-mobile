@@ -1,6 +1,5 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/panic/bottomsheet/panic_bottomsheet_content.dart';
 
 class PanicRejectedBottomSheet extends StatelessWidget {

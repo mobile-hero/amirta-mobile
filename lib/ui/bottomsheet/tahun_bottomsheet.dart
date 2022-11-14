@@ -38,7 +38,7 @@ class _TahunBottomSheetState extends State<TahunBottomSheet> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Tahun',
+                      'txt_tahun'.tr(),
                       style: context.styleBody1.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

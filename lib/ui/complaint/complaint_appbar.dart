@@ -24,7 +24,7 @@ class ComplaintAppBar extends StatelessWidget with PreferredSizeWidget {
           const SizedBox(
             width: spaceNormal,
           ),
-          Text('Pengaduan'),
+          Text('title_pengaduan'.tr()),
         ],
       ),
       centerTitle: true,

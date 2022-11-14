@@ -86,14 +86,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Profile'),
+          title: Text('title_profile'.tr()),
           centerTitle: true,
           actions: [
             OfflineContainer(
               offlineChild: SizedBox(),
               child: IconButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/settings');
+                  Navigator.pushNamed(context, Routes.settings);
                 },
                 icon: ImageIcon(
                   AssetImage(imageRes('ic_settings.png')),
@@ -201,22 +201,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   LabeledInputField(
                     nrkController,
-                    label: "Nomor NRK",
+                    label: "txt_nrk_number".tr(),
                     isEnabled: false,
                   ),
                   LabeledInputField(
                     nameController,
-                    label: "Nama",
+                    label: "txt_name".tr(),
                     isEnabled: false,
                   ),
                   LabeledInputField(
                     emailController,
-                    label: "Email",
+                    label: "txt_email".tr(),
                     isEnabled: true,
                   ),
                   LabeledInputField(
                     roleController,
-                    label: "Jabatan",
+                    label: "txt_role".tr(),
                     isEnabled: false,
                   ),
                   const SizedBox(
@@ -238,7 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               .add(SaveAccount(phone, emailController.text));
                         }
                       },
-                      "Simpan",
+                      "btn_save".tr(),
                       isLoading: state is ProfileLoading,
                     ),
                   ),
@@ -247,11 +247,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       await context.appProvider().clearData();
                       Navigator.pushNamedAndRemoveUntil(
                         context,
-                        '/login',
+                        Routes.login,
                         (route) => false,
                       );
                     },
-                    "Keluar",
+                    "btn_logout".tr(),
                     isEnabled: !(state is ProfileLoading),
                   ),
                 ],

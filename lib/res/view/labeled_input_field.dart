@@ -1,7 +1,4 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class LabeledInputField<T> extends StatefulWidget {
   final TextEditingController _controller;

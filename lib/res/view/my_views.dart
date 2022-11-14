@@ -1,5 +1,6 @@
 export 'app_logo.dart';
 export 'bottom_ellipse_clipper.dart';
+export 'bottom_ellipse_container.dart';
 export 'bottom_ellipse_painter.dart';
 export 'custom_bottom_sheet.dart';
 export 'gradient_view.dart';

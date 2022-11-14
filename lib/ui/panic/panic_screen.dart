@@ -25,7 +25,7 @@ class _PanicScreenState extends State<PanicScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/panic/history');
+                Navigator.pushNamed(context, Routes.panicHistory);
               },
               icon: ImageIcon(
                 AssetImage(
@@ -49,22 +49,26 @@ class _PanicScreenState extends State<PanicScreen> {
                         final bool? result =
                             await context.showScrollableBottomSheet<bool>(
                           builder: (context, scrollController) {
-                            return PanicDetailBottomSheet(item, scrollController);
+                            return PanicDetailBottomSheet(
+                                item, scrollController);
                           },
                         );
                         if (result != null) {
                           if (result) {
                             context.showCustomToast(
                               type: CustomToastType.success,
-                              message: "Panik Diterima",
+                              message: "txt_panic_received".tr(),
                             );
                           } else {
                             context.showCustomToast(
                               type: CustomToastType.error,
-                              message: "Panik Ditolak",
+                              message: "txt_panic_rejected".tr(),
                             );
                           }
-                          context.read<PanicNewBloc>().pagingController.refresh();
+                          context
+                              .read<PanicNewBloc>()
+                              .pagingController
+                              .refresh();
                         }
                       },
                     );

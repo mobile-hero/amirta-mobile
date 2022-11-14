@@ -1,6 +1,5 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 
 enum ComplaintCustomerItemType { neutral, rejected, completed }
 
@@ -79,7 +78,7 @@ class ComplaintCustomerItem extends StatelessWidget {
                     ),
                     StatusChip(
                       done: false,
-                      notDoneText: 'Sarpas',
+                      notDoneText: 'txt_sarpas'.tr(),
                     ),
                   ],
                 ),

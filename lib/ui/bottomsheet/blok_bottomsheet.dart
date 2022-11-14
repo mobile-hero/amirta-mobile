@@ -1,7 +1,6 @@
 import 'package:amirta_mobile/bloc/rusun/blok/rusun_blok_bloc.dart';
 import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class BlokBottomSheet extends StatefulWidget {
@@ -44,7 +43,7 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
                       children: [
                         Expanded(
                           child: Text(
-                            'Daftar Blok/Tower',
+                            'txt_blok_list'.tr(),
                             style: context.styleBody1.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -64,7 +63,7 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
                     ),
                     LabeledInputField(
                       keywordController,
-                      label: 'Nama Blok/Tower',
+                      label: 'txt_blok_name'.tr(),
                       suffix: Icon(
                         Icons.search,
                         color: egyptian,

@@ -172,7 +172,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
                   .map((e) => double.parse(e));
               await availableMaps.first.showMarker(
                 coords: Coords(latlng.first, latlng.last),
-                title: "Lokasi Kejadian",
+                title: "txt_accident_location".tr(),
                 zoom: 21,
               );
             },
@@ -190,7 +190,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
                     width: spaceNormal,
                   ),
                   Text(
-                    'Lokasi Kejadian',
+                    'txt_accident_location'.tr(),
                     style: context.styleBody1.copyWith(
                       fontWeight: FontWeight.bold,
                       color: forest,

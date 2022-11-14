@@ -1,14 +1,11 @@
 import 'package:amirta_mobile/bloc/rusun/unit/rusun_unit_bloc.dart';
 import 'package:amirta_mobile/data/rusun/rusun_export.dart';
-import 'package:amirta_mobile/data/rusun/rusun_unit.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/water/bottomsheet/water_input_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/bottomsheet/water_input_done_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:amirta_mobile/ui/water/water_customer_item.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class WaterSearchResultScreen extends StatefulWidget {

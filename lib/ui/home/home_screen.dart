@@ -1,9 +1,7 @@
 import 'package:amirta_mobile/bloc/dashboard/dashboard_bloc.dart';
 import 'package:amirta_mobile/bloc/dashboard/panic/latest_panic_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
-import 'package:amirta_mobile/res/view/bottom_ellipse_container.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:amirta_mobile/ui/notification/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -127,7 +125,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: white,
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/notification');
+                            Navigator.pushNamed(
+                                context, NotificationScreen.path);
                           },
                         ),
                       ],
@@ -196,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
           await context.appProvider().clearData();
           Navigator.pushNamedAndRemoveUntil(
             context,
-            '/login',
+            Routes.login,
             (route) => false,
           );
         }

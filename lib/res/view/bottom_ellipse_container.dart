@@ -25,11 +25,6 @@ class BottomEllipseContainer extends StatelessWidget {
             child: child,
           ),
         ),
-        // Container(
-        //   width: double.infinity,
-        //   color: color,
-        //   child: child,
-        // ),
       ),
     );
   }

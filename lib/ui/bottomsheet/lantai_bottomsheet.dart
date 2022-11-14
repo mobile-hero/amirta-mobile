@@ -37,7 +37,7 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Lantai',
+                      'txt_lantai'.tr(),
                       style: context.styleBody1.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -83,7 +83,9 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                     vertical: 0,
                   ),
                   title: Text(
-                    item == -1 ? "Semua Lantai" : "Lantai $item",
+                    item == -1
+                        ? "txt_all_floor".tr()
+                        : "txt_floor_num".tr(args: [item.toString()]),
                     style: context.styleBody1,
                   ),
                   onTap: () {

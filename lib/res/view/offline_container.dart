@@ -1,5 +1,4 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/utils/connectivity_result_utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class OfflineContainer extends StatefulWidget {

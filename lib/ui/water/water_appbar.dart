@@ -24,7 +24,7 @@ class WaterAppBar extends StatelessWidget with PreferredSizeWidget {
           const SizedBox(
             width: spaceNormal,
           ),
-          Text('Air'),
+          Text('title_air'.tr()),
         ],
       ),
       centerTitle: true,

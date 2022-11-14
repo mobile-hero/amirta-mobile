@@ -1,6 +1,5 @@
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:amirta_mobile/ui/panic/bottomsheet/panic_bottomsheet_content.dart';
 import 'package:amirta_mobile/ui/panic/dialog/panic_accept_dialog.dart';
 import 'package:amirta_mobile/ui/panic/dialog/panic_reject_dialog.dart';

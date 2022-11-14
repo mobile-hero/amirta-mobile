@@ -4,7 +4,6 @@ import 'package:amirta_mobile/bloc/complaint/create/complaint_create_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/complaint_status.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
 import 'package:amirta_mobile/ui/panic/panic_customer_item.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
@@ -42,7 +41,7 @@ class _CreatePanicReportScreenState
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Laporan Panik'),
+          title: Text('txt_set_panic_complete_2'.tr()),
           titleTextStyle: context.styleHeadline5,
           centerTitle: true,
           elevation: 0.0,

@@ -45,7 +45,7 @@ class WaterCustomerItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        customerName ?? "Belum Ada Penghuni",
+                        customerName ?? "txt_no_resident_found".tr(),
                         style: context.styleBody1.copyWith(
                           fontWeight: FontWeight.bold,
                           color: customerName != null ? grease : orange,

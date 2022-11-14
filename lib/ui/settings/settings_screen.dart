@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
               shadowBlur: 4,
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/password/change');
+                  Navigator.pushNamed(context, Routes.passwordChange);
                 },
                 child: ListTile(
                   leading: Transform.translate(

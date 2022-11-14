@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -63,13 +62,13 @@ class _SplashScreenState extends State<SplashScreen> {
       if (result == 0) {
         Navigator.pushNamedAndRemoveUntil(
           context,
-          "/login",
+          Routes.login,
           (route) => false,
         );
       } else {
         Navigator.pushNamedAndRemoveUntil(
           context,
-          "/main",
+          Routes.main,
           (route) => false,
         );
       }

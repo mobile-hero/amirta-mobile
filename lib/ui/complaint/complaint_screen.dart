@@ -25,7 +25,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/complaint/history');
+                Navigator.pushNamed(context, Routes.complaintHistory);
               },
               icon: ImageIcon(
                 AssetImage(
@@ -61,12 +61,12 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                             if (result) {
                               context.showCustomToast(
                                 type: CustomToastType.success,
-                                message: "Pengaduan Ditindak",
+                                message: "txt_complaint_handled".tr(),
                               );
                             } else {
                               context.showCustomToast(
                                 type: CustomToastType.error,
-                                message: "Pengaduan Ditolak",
+                                message: "txt_complaint_rejected".tr(),
                               );
                             }
                             context.read<ComplaintNewBloc>().pagingController.refresh();

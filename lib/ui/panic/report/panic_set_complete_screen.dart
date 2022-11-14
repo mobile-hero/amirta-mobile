@@ -48,7 +48,7 @@ class PanicSetCompleteScreen extends StatelessWidget {
                 () async {
                   final response = await Navigator.pushNamed(
                     context,
-                    '/panic/create-report',
+                    Routes.panicCreateReport,
                     arguments: ModalRoute.of(context)?.settings.arguments
                   );
                   Navigator.pop(context, response);

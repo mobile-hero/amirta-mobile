@@ -92,7 +92,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               () {
                 Navigator.popAndPushNamed(
                   context,
-                  '/password/change/success',
+                  Routes.passwordChangeSuccess,
                 );
               },
               'btn_reset_password'.tr(),
