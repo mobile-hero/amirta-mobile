@@ -1,7 +1,6 @@
 import 'package:amirta_mobile/bloc/notification/notification_bloc.dart';
 import 'package:amirta_mobile/data/account/user_notification.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -24,7 +23,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Notifikasi"),
+          title: Text("title_notification".tr()),
           centerTitle: true,
         ),
         body: OfflineContainer(
@@ -105,7 +104,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   },
                   noItemsFoundIndicatorBuilder: (context) {
                     return Center(
-                      child: Text("Anda tidak memiliki notifikasi"),
+                      child: Text("txt_notification_empty".tr()),
                     );
                   },
                 ),

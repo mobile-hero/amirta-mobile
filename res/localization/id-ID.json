@@ -127,5 +127,8 @@
   "txt_no_panic_rejected": "Tidak ada Panik yang telah ditolak",
   "txt_no_panic_completed": "Tidak ada Panik yang telah selesai",
   "btn_ready_action": "Siap Action!",
-  "btn_out_of_reach": "Diluar Jangkauan"
+  "btn_out_of_reach": "Diluar Jangkauan",
+  "----Notifikasi-----": "",
+  "title_notification": "Notifikasi",
+  "txt_notification_empty": "Anda tidak memiliki notifikasi"
 }

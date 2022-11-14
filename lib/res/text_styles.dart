@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:amirta_mobile/res/dimens.dart';
 import 'package:amirta_mobile/res/colors.dart';

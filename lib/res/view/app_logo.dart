@@ -1,5 +1,4 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AppLogo extends StatelessWidget {
   final AppLogoSize logoSize;
