@@ -54,6 +54,8 @@
   "btn_search": "Cari",
   "btn_check_data": "Lihat Data",
   "btn_downloading_data": "Mengunduh Data",
+  "txt_complete_input": "Sudah Input",
+  "txt_incomplete_input": "Belum Input",
   "----Form Bottom Sheet-----": "",
   "txt_indicator_condition": "Kondisi Meteran",
   "txt_good": "Baik",

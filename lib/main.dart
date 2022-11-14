@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:amirta_mobile/bloc/app_provider.dart';
 import 'package:amirta_mobile/bloc/fcm/fcm_bloc.dart';
 import 'package:amirta_mobile/event_bus.dart';
-import 'package:amirta_mobile/repository/account_local_repository_impl.dart';
 import 'package:amirta_mobile/repository/repository_config.dart';
 import 'package:amirta_mobile/repository/repository_impl.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_screen.dart';
@@ -35,7 +33,6 @@ import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:package_info/package_info.dart';
@@ -220,23 +217,6 @@ class _MyAppState extends State<MyApp> {
       if (json.containsKey("click_action")) {
         final action = json["click_action"] as String;
         switch (action) {
-          case "payment_success":
-          case "invoice_expired":
-          case "charging_complete":
-            // _navigatorKey.currentState?.push(MaterialPageRoute(
-            //   builder: (context) => TrxHistoryPage(),
-            //   settings: RouteSettings(name: TransactionHistory().routeName),
-            // ));
-            break;
-          case "charging_start":
-          case "charging_incomplete":
-          case "charging_stop":
-          case "charging_requested":
-            // _navigatorKey.currentState?.pushReplacement(MaterialPageRoute(
-            //   builder: (context) => HomePage(),
-            //   settings: RouteSettings(name: Home().routeName),
-            // ));
-            break;
         }
       } else {
         _navigatorKey.currentState?.pushNamedAndRemoveUntil(
@@ -260,12 +240,6 @@ class _MyAppState extends State<MyApp> {
             child: Text('Ok'),
             onPressed: () async {
               Navigator.of(context, rootNavigator: true).pop();
-              // await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => SecondScreen(payload),
-              //   ),
-              // );
             },
           )
         ],
@@ -363,31 +337,33 @@ class _MyAppState extends State<MyApp> {
         splashColor: waterfall,
       ),
       routes: <String, WidgetBuilder>{
-        '/splash': (context) => SplashScreen(),
-        '/login': (context) => LoginPage(),
-        '/home': (context) => HomeScreen(),
-        '/main': (context) => MainScreen(),
-        '/notification': (context) => NotificationScreen(),
-        '/password/change': (context) => ChangePasswordScreen(),
-        '/password/change/success': (context) => ChangePasswordSuccessScreen(),
-        '/password/email': (context) => EmailPasswordScreen(),
-        '/password/email/success': (context) => EmailPasswordSuccessScreen(),
-        '/password/reset': (context) => ResetPasswordScreen(),
-        '/profile': (context) => ProfileScreen(),
-        '/water': (context) => WaterFormScreen(),
-        '/water/search_result': (context) => WaterSearchResultScreen(),
-        '/water/check': (context) => WaterCheckDataScreen(),
-        '/complaint': (context) => ComplaintScreen(),
-        '/complaint/history': (context) => ComplaintHistoryScreen(),
-        '/complaint/set-complete': (context) => ComplaintSetCompleteScreen(),
-        '/complaint/create-report': (context) => CreateComplaintReportScreen(),
-        '/panic': (context) => PanicScreen(),
-        '/panic/history': (context) => PanicHistoryScreen(),
-        '/panic/set-complete': (context) => PanicSetCompleteScreen(),
-        '/panic/create-report': (context) => CreatePanicReportScreen(),
-        '/settings': (context) => SettingsScreen(),
+        Routes.splash: (context) => SplashScreen(),
+        Routes.login: (context) => LoginPage(),
+        Routes.home: (context) => HomeScreen(),
+        Routes.main: (context) => MainScreen(),
+        Routes.notification: (context) => NotificationScreen(),
+        Routes.passwordChange: (context) => ChangePasswordScreen(),
+        Routes.passwordChangeSuccess: (context) =>
+            ChangePasswordSuccessScreen(),
+        Routes.passwordEmail: (context) => EmailPasswordScreen(),
+        Routes.passwordEmailSuccess: (context) => EmailPasswordSuccessScreen(),
+        Routes.passwordReset: (context) => ResetPasswordScreen(),
+        Routes.profile: (context) => ProfileScreen(),
+        Routes.water: (context) => WaterFormScreen(),
+        Routes.waterSearch: (context) => WaterSearchResultScreen(),
+        Routes.waterCheck: (context) => WaterCheckDataScreen(),
+        Routes.complaint: (context) => ComplaintScreen(),
+        Routes.complaintHistory: (context) => ComplaintHistoryScreen(),
+        Routes.complaintSetComplete: (context) => ComplaintSetCompleteScreen(),
+        Routes.complaintCreateReport: (context) =>
+            CreateComplaintReportScreen(),
+        Routes.panic: (context) => PanicScreen(),
+        Routes.panicHistory: (context) => PanicHistoryScreen(),
+        Routes.panicSetComplete: (context) => PanicSetCompleteScreen(),
+        Routes.panicCreateReport: (context) => CreatePanicReportScreen(),
+        Routes.settings: (context) => SettingsScreen(),
       },
-      initialRoute: "/splash",
+      initialRoute: Routes.splash,
     );
   }
 }
