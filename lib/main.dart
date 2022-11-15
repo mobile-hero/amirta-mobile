@@ -58,7 +58,7 @@ class BaseConfiguration extends StatelessWidget {
 
   BaseConfiguration({Key? key, required this.child}) : super(key: key);
 
-  final locales = [const Locale("id", "ID")];
+  final locales = [const Locale('en', 'US'), const Locale('id', 'ID')];
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +66,21 @@ class BaseConfiguration extends StatelessWidget {
       future: SharedPreferences.getInstance(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          final language = snapshot.data!.getString('language') ?? 'en';
+          late Locale locale;
+          switch (language) {
+            case 'en':
+              locale = locales.first;
+              break;
+            case 'id':
+              locale = locales.last;
+              break;
+          }
+
           return EasyLocalization(
             child: child,
             supportedLocales: locales,
-            startLocale: locales.first,
+            startLocale: locale,
             fallbackLocale: locales.first,
             path: 'res/localization',
           );
@@ -95,7 +106,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
 
-  print("Handling a background message: ${message.messageId}");
+  print('Handling a background message: ${message.messageId}');
 }
 
 class MyApp extends StatefulWidget {
@@ -144,8 +155,8 @@ class _MyAppState extends State<MyApp> {
       print('Message data: ${message.data}');
 
       if (message.notification != null) {
-        if (message.data.containsKey("click_action")) {
-          if (message.data["click_action"] == "payment_success") {
+        if (message.data.containsKey('click_action')) {
+          if (message.data['click_action'] == 'payment_success') {
             eventBus.fire(NotificationTopupEvent());
           } else {
             eventBus.fire(CheckUnreadNotificationEvent());
@@ -164,11 +175,11 @@ class _MyAppState extends State<MyApp> {
 
           styleInformation = BigPictureStyleInformation(
             largeIcon ??= FilePathAndroidBitmap(downloadPath),
-            summaryText: message.notification?.body ?? "-",
+            summaryText: message.notification?.body ?? '-',
           );
         } else {
           styleInformation = BigTextStyleInformation(
-            message.notification?.body ?? "-",
+            message.notification?.body ?? '-',
           );
         }
         AndroidNotificationDetails androidNotificationDetails =
@@ -181,7 +192,7 @@ class _MyAppState extends State<MyApp> {
           showWhen: false,
           playSound: true,
           sound: const RawResourceAndroidNotificationSound('danger_alarm'),
-          icon: "ic_app_notification",
+          icon: 'ic_app_notification',
           largeIcon: largeIcon,
           color: egyptian,
           styleInformation: styleInformation,
@@ -190,7 +201,7 @@ class _MyAppState extends State<MyApp> {
           presentAlert: true,
           presentSound: true,
           sound: 'alarm.m4r',
-          subtitle: message.notification?.body ?? "-",
+          subtitle: message.notification?.body ?? '-',
         );
         NotificationDetails platformChannelSpecifics = NotificationDetails(
           android: androidNotificationDetails,
@@ -216,8 +227,8 @@ class _MyAppState extends State<MyApp> {
     if (payload != null) {
       debugPrint('notification payload: $payload');
       Map<String, dynamic> json = jsonDecode(payload);
-      if (json.containsKey("click_action")) {
-        final action = json["click_action"] as String;
+      if (json.containsKey('click_action')) {
+        final action = json['click_action'] as String;
         switch (action) {
         }
       } else {
@@ -382,7 +393,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Amirta"),
+        title: const Text('Amirta'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(spaceMedium),
@@ -391,15 +402,15 @@ class _MyHomePageState extends State<MyHomePage> {
             const AppLogo(),
             LabeledInputField(
               TextEditingController(),
-              label: "NRK",
+              label: 'NRK',
             ),
             LabeledInputField(
               TextEditingController(),
-              label: "Password",
+              label: 'Password',
             ),
             PrimaryButton(
               () {},
-              "Submit",
+              'Submit',
             ),
           ],
         ),
