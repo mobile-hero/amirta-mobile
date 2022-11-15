@@ -9,6 +9,8 @@ import 'package:amirta_mobile/ui/water/water_customer_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class WaterSearchResultScreen extends StatefulWidget {
+  const WaterSearchResultScreen({Key? key}) : super(key: key);
+
   @override
   _WaterSearchResultScreenState createState() =>
       _WaterSearchResultScreenState();
@@ -54,7 +56,7 @@ class _WaterSearchResultScreenState extends State<WaterSearchResultScreen> {
                           }).inputDone
                         : item.inputDone,
                     onTap: () async {
-                      final result = await context.showScrollableBottomSheet(
+                      final _ = await context.showScrollableBottomSheet(
                         builder: (context, scrollController) {
                           RusunUnitValue? localData;
                           if (bloc.local && values.isNotEmpty) {

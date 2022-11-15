@@ -8,27 +8,32 @@ import 'package:dio/dio.dart';
 class AccountRepositoryImpl extends AccountRepository {
   AccountRepositoryImpl(Dio dio, RepositoryConfig config) : super(dio, config);
 
+  @override
   Future<ProfileResponse> login(LoginWrite login) async {
     final response = await post("/signin", login.toJson());
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
+  @override
   Future<dynamic> logout() async {
     final response = await post("/signout", {});
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
+  @override
   Future<ProfileResponse> getProfile() async {
     final response = await get("/myprofile");
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
+  @override
   Future<SimpleResponse> forgotPassword(String email) async {
     final body = {"email_address": email};
     final response = await post("/reset_passwd", body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
 
+  @override
   Future<SimpleResponse> changePassword(
     String oldPassword,
     String newPassword,
@@ -38,6 +43,7 @@ class AccountRepositoryImpl extends AccountRepository {
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
 
+  @override
   Future<ProfileResponse> editProfile(EditProfile edit) async {
     final response = await post("/setup_account", edit.toJson());
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;

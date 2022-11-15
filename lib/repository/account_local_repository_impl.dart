@@ -14,6 +14,7 @@ class AccountLocalRepositoryImpl extends AccountLocalRepository {
   
   final _keyUser = "user";
 
+  @override
   Future<Profile?> getUser() async {
     if (await prefs.containsKey(key: _keyUser)) {
       final json = await prefs.read(key: _keyUser);
@@ -22,6 +23,7 @@ class AccountLocalRepositoryImpl extends AccountLocalRepository {
     return null;
   }
 
+  @override
   Future<void> saveUser(Profile user) {
     return prefs.write(key: _keyUser, value: jsonEncode(user.toJson()));
   }

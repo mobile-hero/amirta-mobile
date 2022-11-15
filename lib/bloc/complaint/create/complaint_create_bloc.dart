@@ -79,7 +79,7 @@ class ComplaintCreateBloc
       ContinueCreateComplaint event) async* {
     try {
       yield ComplaintCreateLoading();
-      final response = await pengaduanRepository.postExamination(
+      final _ = await pengaduanRepository.postExamination(
           event.pengaduanId, event.status, event.notes, event.images);
       yield ComplaintCreateSuccess();
     } on DioError catch (e) {
@@ -90,7 +90,7 @@ class ComplaintCreateBloc
   Stream<ComplaintCreateState> acceptPanic(AcceptPanic event) async* {
     try {
       yield ComplaintCreateLoading();
-      final response = await pengaduanRepository.acceptRejectPanic(
+      final _ = await pengaduanRepository.acceptRejectPanic(
           event.pengaduanId, event.status);
       yield ComplaintCreateSuccess();
     } on DioError catch (e) {

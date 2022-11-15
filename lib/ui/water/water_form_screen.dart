@@ -11,6 +11,8 @@ import 'package:amirta_mobile/ui/water/search/water_search_result_argument.dart'
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 
 class WaterFormScreen extends StatefulWidget {
+  const WaterFormScreen({Key? key}) : super(key: key);
+
   @override
   _WaterFormScreenState createState() => _WaterFormScreenState();
 }
@@ -66,7 +68,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
               final count = state.totalUnsynced;
 
               if (count == 0) {
-                return SizedBox();
+                return const SizedBox();
               }
 
               return IconButton(
@@ -76,14 +78,14 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                 icon: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.sync_outlined,
                       color: white,
                     ),
                     Align(
                       alignment: Alignment.topRight,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: scarlet,
                           shape: BoxShape.circle,
                         ),
@@ -117,7 +119,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
           },
           builder: (context, state) {
             if (state is WaterSyncLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -126,7 +128,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircularProgressIndicator(),
+                    const CircularProgressIndicator(),
                     const SizedBox(
                       height: spaceMedium,
                     ),
@@ -184,7 +186,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                MyProgressIndicator(
+                                const MyProgressIndicator(
                                   height: 100,
                                 ),
                                 const SizedBox(
@@ -302,7 +304,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                       ),
                                     );
                               },
-                              Icon(Icons.cloud_download_outlined),
+                              const Icon(Icons.cloud_download_outlined),
                             ),
                           ),
                         ],
@@ -342,11 +344,11 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               blokController,
                               label: "txt_blok".tr() + " *",
                               readOnly: true,
-                              suffix: Icon(
+                              suffix: const Icon(
                                 Icons.keyboard_arrow_down,
                                 color: egyptian,
                               ),
-                              suffixConstraints: BoxConstraints(
+                              suffixConstraints: const BoxConstraints(
                                 minHeight: 20,
                               ),
                               isEnabled: selectedRusun != null,
@@ -383,11 +385,11 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               lantaiController,
                               label: "txt_lantai".tr(),
                               readOnly: true,
-                              suffix: Icon(
+                              suffix: const Icon(
                                 Icons.keyboard_arrow_down,
                                 color: egyptian,
                               ),
-                              suffixConstraints: BoxConstraints(
+                              suffixConstraints: const BoxConstraints(
                                 minHeight: 20,
                               ),
                               isEnabled: selectedBlok != null,
@@ -425,9 +427,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                       ),
                       PrimaryButton(
                         () async {
-                          final result = await Navigator.pushNamed(
+                          final _ = await Navigator.pushNamed(
                             context,
-                            '/water/search_result',
+                            Routes.waterSearch,
                             arguments: WaterSearchResultArgument(
                               selectedMonth,
                               selectedYear,
@@ -485,9 +487,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                             ),
                             PrimaryButton(
                               () async {
-                                final result = await Navigator.pushNamed(
+                                final _ = await Navigator.pushNamed(
                                   context,
-                                  '/water/check',
+                                  Routes.waterCheck,
                                 );
                                 context
                                     .read<WaterSyncBloc>()

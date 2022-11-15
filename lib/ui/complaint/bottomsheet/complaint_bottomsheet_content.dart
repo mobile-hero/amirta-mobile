@@ -5,7 +5,8 @@ import 'package:amirta_mobile/ui/dialog/photo_viewer_dialog.dart';
 class ComplaintBottomSheetContent extends StatelessWidget {
   final Pengaduan pengaduan;
 
-  const ComplaintBottomSheetContent(this.pengaduan);
+  const ComplaintBottomSheetContent(this.pengaduan, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

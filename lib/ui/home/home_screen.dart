@@ -1,9 +1,10 @@
 import 'package:amirta_mobile/bloc/dashboard/dashboard_bloc.dart';
 import 'package:amirta_mobile/bloc/dashboard/panic/latest_panic_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/ui/notification/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Stack(
             children: [
-              BottomEllipseContainer(
+              const BottomEllipseContainer(
                 child: SizedBox(
                   height: 200,
                 ),
@@ -46,15 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OfflineContainer(
-                          offlineChild: Icon(
+                          offlineChild: const Icon(
                             Icons.account_circle_rounded,
                             size: 80,
                             color: white,
                           ),
                           child: InkWell(
                             onTap: () async {
-                              final result = await Navigator.pushNamed(
-                                  context, '/profile');
+                              final _ = await Navigator.pushNamed(
+                                  context, Routes.profile);
                               setState(() {});
                             },
                             child: Builder(builder: (context) {
@@ -69,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 70,
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, obj, stacktrace) {
-                                      return Icon(
+                                      return const Icon(
                                         Icons.account_circle_rounded,
                                         size: 80,
                                         color: white,
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 );
                               }
-                              return Icon(
+                              return const Icon(
                                 Icons.account_circle_rounded,
                                 size: 80,
                                 color: white,
@@ -92,8 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
-                              final result = await Navigator.pushNamed(
-                                  context, '/profile');
+                              final _ = await Navigator.pushNamed(
+                                  context, Routes.profile);
                               setState(() {});
                             },
                             child: Column(
@@ -125,8 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: white,
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(
-                                context, NotificationScreen.path);
+                            Navigator.pushNamed(context, Routes.notification);
                           },
                         ),
                       ],
@@ -168,8 +168,8 @@ class _HomeScreenState extends State<HomeScreen> {
         Visibility(
           visible: false,
           child: dailySection(context),
-          replacement: Padding(
-            padding: const EdgeInsets.only(top: spaceBig),
+          replacement: const Padding(
+            padding: EdgeInsets.only(top: spaceBig),
             child:
                 SizedBox(), /*Center(
               child: Text(
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       builder: (context, state) {
         if (state is DashboardLoading) {
-          return MyProgressIndicator();
+          return const MyProgressIndicator();
         }
         if (state is DashboardSuccess) {
           return Column(
@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     BlocBuilder<LatestPanicBloc, LatestPanicState>(
                       builder: (context, state) {
                         if (state is LatestPanicLoading) {
-                          return Expanded(
+                          return const Expanded(
                             child: Center(
                               child: CircularProgressIndicator(
                                 color: egyptian,
@@ -380,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         }
 
-        return Center(
+        return const Center(
           child: Text("Gagal Mengambil Data Dashboard"),
         );
       },

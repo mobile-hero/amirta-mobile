@@ -3,6 +3,8 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:email_validator/email_validator.dart';
 
 class EmailPasswordScreen extends StatefulWidget {
+  const EmailPasswordScreen({Key? key}) : super(key: key);
+
   @override
   _EmailPasswordScreenState createState() => _EmailPasswordScreenState();
 }

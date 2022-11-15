@@ -4,6 +4,8 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             child: GradientView(
               child: Center(
                 child: AppLogo(
@@ -47,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   if (snapshot.hasData) {
                     startOpeningPage(snapshot.data);
                   }
-                  return SizedBox();
+                  return const SizedBox();
                 },
               );
             },

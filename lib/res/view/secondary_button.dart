@@ -10,10 +10,11 @@ class SecondaryButton extends StatelessWidget {
   const SecondaryButton(
     this.onPressed,
     this.text, {
+    Key? key,
     this.padding = buttonDefaultPadding,
     this.isEnabled = true,
     this.isLoading = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class SecondaryButton extends StatelessWidget {
         height: buttonDefaultHeight,
         child: Builder(builder: (context) {
           if (isLoading) {
-            return MyProgressIndicator();
+            return const MyProgressIndicator();
           }
           return TextButton(
             onPressed: isEnabled ? onPressed : null,
@@ -39,7 +40,7 @@ class SecondaryButton extends StatelessWidget {
                 ),
                 color: transparent,
               ),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: buttonDefaultHeight,
                 child: Center(

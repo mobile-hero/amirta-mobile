@@ -3,7 +3,10 @@ import 'package:amirta_mobile/my_material.dart';
 class AppLogo extends StatelessWidget {
   final AppLogoSize logoSize;
 
-  AppLogo({this.logoSize = AppLogoSize.medium});
+  const AppLogo({
+    Key? key,
+    this.logoSize = AppLogoSize.medium,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class TahunBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
 
-  TahunBottomSheet(this.scrollController);
+  const TahunBottomSheet(this.scrollController, {Key? key}) : super(key: key);
 
   @override
   _TahunBottomSheetState createState() => _TahunBottomSheetState();
@@ -45,12 +45,12 @@ class _TahunBottomSheetState extends State<TahunBottomSheet> {
                     ),
                   ),
                   Transform.translate(
-                    offset: Offset(10, 0),
+                    offset: const Offset(10, 0),
                     child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.clear_outlined),
+                      icon: const Icon(Icons.clear_outlined),
                       color: egyptian,
                     ),
                   ),
@@ -66,7 +66,7 @@ class _TahunBottomSheetState extends State<TahunBottomSheet> {
             builderDelegate: PagedChildBuilderDelegate(
               itemBuilder: (context, item, position) {
                 return ListTile(
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: spaceBig,
                     vertical: spaceSmall,
                   ),

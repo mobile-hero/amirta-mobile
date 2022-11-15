@@ -6,7 +6,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class RusunBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
 
-  RusunBottomSheet(this.scrollController);
+  const RusunBottomSheet(this.scrollController, {Key? key}) : super(key: key);
 
   @override
   _RusunBottomSheetState createState() => _RusunBottomSheetState();
@@ -38,19 +38,19 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
                       children: [
                         Expanded(
                           child: Text(
-                            'Daftar Rusun',
+                            'txt_rusun_list'.tr(),
                             style: context.styleBody1.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                         Transform.translate(
-                          offset: Offset(10, 0),
+                          offset: const Offset(10, 0),
                           child: IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.clear_outlined),
+                            icon: const Icon(Icons.clear_outlined),
                             color: egyptian,
                           ),
                         ),
@@ -58,12 +58,12 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
                     ),
                     LabeledInputField(
                       keywordController,
-                      label: 'Nama Rusun',
-                      suffix: Icon(
+                      label: 'txt_rusun_name'.tr(),
+                      suffix: const Icon(
                         Icons.search,
                         color: egyptian,
                       ),
-                      suffixConstraints: BoxConstraints(
+                      suffixConstraints: const BoxConstraints(
                         minHeight: 20,
                       ),
                       onChanged: (value) {},
@@ -78,7 +78,7 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
                   builderDelegate: PagedChildBuilderDelegate(
                     itemBuilder: (context, item, position) {
                       return ListTile(
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: spaceBig,
                           vertical: spaceSmall,
                         ),

@@ -3,7 +3,10 @@ import 'package:amirta_mobile/res/resources.dart';
 class MyProgressIndicator extends StatefulWidget {
   final double height;
 
-  const MyProgressIndicator({this.height = buttonDefaultHeight});
+  const MyProgressIndicator({
+    Key? key,
+    this.height = buttonDefaultHeight,
+  }) : super(key: key);
 
   @override
   _MyProgressIndicatorState createState() => _MyProgressIndicatorState();
@@ -17,7 +20,7 @@ class _MyProgressIndicatorState extends State<MyProgressIndicator>
   void initState() {
     super.initState();
     animationController = AnimationController(
-      duration: new Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       vsync: this,
     );
     animationController.repeat();
@@ -31,7 +34,7 @@ class _MyProgressIndicatorState extends State<MyProgressIndicator>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: widget.height,
       child: Center(
         child: CircularProgressIndicator(

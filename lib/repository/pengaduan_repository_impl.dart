@@ -8,6 +8,7 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
   PengaduanRepositoryImpl(Dio dio, RepositoryConfig config)
       : super(dio, config);
 
+  @override
   Future<PengaduanResponse> getList(
       int type, int status, int page, int limit) async {
     final query = {"typ": type, "status": status, "page": page, "limit": limit};
@@ -17,6 +18,7 @@ class PengaduanRepositoryImpl extends PengaduanRepository {
         : response;
   }
 
+  @override
   Future<PengaduanDetailResponse> detail(int pengaduanId) async {
     final query = {"id": pengaduanId};
     final response = await get("/complaint_detail", query: query);

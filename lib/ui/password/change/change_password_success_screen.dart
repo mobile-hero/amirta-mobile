@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class ChangePasswordSuccessScreen extends StatelessWidget {
+  const ChangePasswordSuccessScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -16,12 +16,13 @@ class WaterInputBottomSheet extends StatefulWidget {
   final int year;
 
   const WaterInputBottomSheet({
+    Key? key,
     required this.scrollController,
     required this.rusunUnit,
     required this.meterStatus,
     required this.month,
     required this.year,
-  });
+  }) : super(key: key);
 
   @override
   _WaterInputBottomSheetState createState() => _WaterInputBottomSheetState();
@@ -106,209 +107,205 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
           return SingleChildScrollView(
             controller: widget.scrollController,
             padding: const EdgeInsets.all(spaceBig),
-            child: Container(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TitleValueBox(
-                          title: 'txt_indicator_condition'.tr(),
-                          value: isConditionGood
-                              ? 'txt_good'.tr()
-                              : 'txt_broken'.tr(),
-                        ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: TitleValueBox(
+                        title: 'txt_indicator_condition'.tr(),
+                        value: isConditionGood
+                            ? 'txt_good'.tr()
+                            : 'txt_broken'.tr(),
                       ),
-                      CupertinoSwitch(
-                        value: isConditionGood,
-                        onChanged: (value) {
-                          setState(() {
-                            isConditionGood = value;
-                            numberController.text = "";
-                          });
-                        },
-                        activeColor: waterfall,
-                        trackColor: carrot,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: spaceNormal,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: TitleValueBox(
-                          title: 'txt_name'.tr(),
-                          value: widget.rusunUnit.residentName ?? "-",
-                        ),
-                      ),
-                      Expanded(
-                        child: TitleValueBox(
-                          title: 'txt_rusun'.tr(),
-                          value: widget.rusunUnit.rusunName,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: spaceNormal,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: TitleValueBox(
-                          title: 'txt_blok'.tr(),
-                          value: widget.rusunUnit.buildingName,
-                        ),
-                      ),
-                      Expanded(
-                        child: TitleValueBox(
-                          title: 'txt_lantai'.tr(),
-                          value: widget.rusunUnit.floor.toString(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: spaceNormal,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: TitleValueBox(
-                          title: 'txt_nomor'.tr(),
-                          value: widget.rusunUnit.unitNumber,
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'txt_status'.tr(),
-                              style: context.styleCaption,
-                            ),
-                            StatusChip(done: false),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: spaceNormal,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      'txt_notes'.tr(),
-                      style: context.styleCaption,
                     ),
-                  ),
-                  LabeledInputField(
-                    noteController,
-                    label: 'hint_notes'.tr(),
-                    minLines: 3,
-                    maxLength: 255,
-                    onChanged: (value) {
-                      setState(() {});
-                    },
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: LabeledInputField(
-                          numberController,
-                          label: 'txt_input_water_meter'.tr(),
-                          inputType: TextInputType.number,
-                          onChanged: (value) {
-                            setState(() {});
-                          },
-                          isEnabled: isConditionGood,
-                          backgroundColor:
-                              isConditionGood ? null : inputDisabledColor,
-                        ),
+                    CupertinoSwitch(
+                      value: isConditionGood,
+                      onChanged: (value) {
+                        setState(() {
+                          isConditionGood = value;
+                          numberController.text = "";
+                        });
+                      },
+                      activeColor: waterfall,
+                      trackColor: carrot,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: spaceNormal,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: TitleValueBox(
+                        title: 'txt_name'.tr(),
+                        value: widget.rusunUnit.residentName ?? "-",
                       ),
-                      const SizedBox(
-                        width: spaceNormal,
+                    ),
+                    Expanded(
+                      child: TitleValueBox(
+                        title: 'txt_rusun'.tr(),
+                        value: widget.rusunUnit.rusunName,
                       ),
-                      _createImagePickerButton(context),
-                    ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: spaceNormal,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: TitleValueBox(
+                        title: 'txt_blok'.tr(),
+                        value: widget.rusunUnit.buildingName,
+                      ),
+                    ),
+                    Expanded(
+                      child: TitleValueBox(
+                        title: 'txt_lantai'.tr(),
+                        value: widget.rusunUnit.floor.toString(),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: spaceNormal,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: TitleValueBox(
+                        title: 'txt_nomor'.tr(),
+                        value: widget.rusunUnit.unitNumber,
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'txt_status'.tr(),
+                            style: context.styleCaption,
+                          ),
+                          const StatusChip(done: false),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: spaceNormal,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    'txt_notes'.tr(),
+                    style: context.styleCaption,
                   ),
-                  BlocConsumer<UploadBloc, UploadState>(
-                    listener: (context, uploadState) {
-                      if (uploadState is UploadSuccess) {
-                        context.read<WaterAddReportBloc>().add(
-                              AddReport(
-                                isConditionGood,
-                                MeterDataWrite(
-                                  rusunId: widget.rusunUnit.rusunId,
-                                  buildingId: widget.rusunUnit.buildingId,
-                                  unitId: widget.rusunUnit.id,
-                                  month: widget.month,
-                                  year: widget.year.toString(),
-                                  meterType: 1,
-                                  meterValue:
-                                      double.tryParse(numberController.text) ??
-                                          0,
-                                  notes: isConditionGood
-                                      ? noteController.text.trim()
-                                      : "",
-                                  statusNote: isConditionGood
-                                      ? null
-                                      : noteController.text.trim(),
-                                  status: isConditionGood ? 0 : 1,
-                                  image: uploadState.url,
-                                ),
-                              ),
-                            );
-                      }
-                      if (uploadState is UploadOffline) {
-                        context.read<WaterAddReportBloc>().add(
-                              AddReportOffline(
-                                isConditionGood,
-                                MeterDataWrite(
-                                  rusunId: widget.rusunUnit.rusunId,
-                                  buildingId: widget.rusunUnit.buildingId,
-                                  unitId: widget.rusunUnit.id,
-                                  month: widget.month,
-                                  year: widget.year.toString(),
-                                  meterType: 1,
-                                  meterValue:
-                                      double.tryParse(numberController.text) ??
-                                          0,
-                                  notes: isConditionGood
-                                      ? noteController.text.trim()
-                                      : "",
-                                  statusNote: isConditionGood
-                                      ? null
-                                      : noteController.text.trim(),
-                                  status: isConditionGood ? 0 : 1,
-                                  image: null,
-                                )..photoBase64 = uploadState.base64,
-                              ),
-                            );
-                      }
-                    },
-                    builder: (context, uploadState) {
-                      return PrimaryButton(
-                        () async {
-                          context
-                              .read<UploadBloc>()
-                              .add(UploadImage(selectedImage!));
+                ),
+                LabeledInputField(
+                  noteController,
+                  label: 'hint_notes'.tr(),
+                  minLines: 3,
+                  maxLength: 255,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: LabeledInputField(
+                        numberController,
+                        label: 'txt_input_water_meter'.tr(),
+                        inputType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {});
                         },
-                        'btn_save_data'.tr(),
-                        isEnabled: enableSaveButton,
-                        isLoading: uploadState is UploadLoading ||
-                            state is WaterAddReportLoading,
-                      );
-                    },
-                  ),
-                ],
-              ),
+                        isEnabled: isConditionGood,
+                        backgroundColor:
+                            isConditionGood ? null : inputDisabledColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: spaceNormal,
+                    ),
+                    _createImagePickerButton(context),
+                  ],
+                ),
+                BlocConsumer<UploadBloc, UploadState>(
+                  listener: (context, uploadState) {
+                    if (uploadState is UploadSuccess) {
+                      context.read<WaterAddReportBloc>().add(
+                            AddReport(
+                              isConditionGood,
+                              MeterDataWrite(
+                                rusunId: widget.rusunUnit.rusunId,
+                                buildingId: widget.rusunUnit.buildingId,
+                                unitId: widget.rusunUnit.id,
+                                month: widget.month,
+                                year: widget.year.toString(),
+                                meterType: 1,
+                                meterValue:
+                                    double.tryParse(numberController.text) ?? 0,
+                                notes: isConditionGood
+                                    ? noteController.text.trim()
+                                    : "",
+                                statusNote: isConditionGood
+                                    ? null
+                                    : noteController.text.trim(),
+                                status: isConditionGood ? 0 : 1,
+                                image: uploadState.url,
+                              ),
+                            ),
+                          );
+                    }
+                    if (uploadState is UploadOffline) {
+                      context.read<WaterAddReportBloc>().add(
+                            AddReportOffline(
+                              isConditionGood,
+                              MeterDataWrite(
+                                rusunId: widget.rusunUnit.rusunId,
+                                buildingId: widget.rusunUnit.buildingId,
+                                unitId: widget.rusunUnit.id,
+                                month: widget.month,
+                                year: widget.year.toString(),
+                                meterType: 1,
+                                meterValue:
+                                    double.tryParse(numberController.text) ?? 0,
+                                notes: isConditionGood
+                                    ? noteController.text.trim()
+                                    : "",
+                                statusNote: isConditionGood
+                                    ? null
+                                    : noteController.text.trim(),
+                                status: isConditionGood ? 0 : 1,
+                                image: null,
+                              )..photoBase64 = uploadState.base64,
+                            ),
+                          );
+                    }
+                  },
+                  builder: (context, uploadState) {
+                    return PrimaryButton(
+                      () async {
+                        context
+                            .read<UploadBloc>()
+                            .add(UploadImage(selectedImage!));
+                      },
+                      'btn_save_data'.tr(),
+                      isEnabled: enableSaveButton,
+                      isLoading: uploadState is UploadLoading ||
+                          state is WaterAddReportLoading,
+                    );
+                  },
+                ),
+              ],
             ),
           );
         },
@@ -317,7 +314,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
   }
 
   Widget _createImagePickerButton(BuildContext context) {
-    final size = buttonDefaultHeight + spaceSmall;
+    const size = buttonDefaultHeight + spaceSmall;
     return SizedBox(
       height: size,
       width: size,
@@ -336,7 +333,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                   ),
                 ),
                 Transform.translate(
-                  offset: Offset(5, -5),
+                  offset: const Offset(5, -5),
                   child: Align(
                     alignment: Alignment.topRight,
                     child: InkWell(
@@ -352,7 +349,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                           border: Border.all(color: white),
                           color: darkBackground,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.clear,
                           color: white,
                           size: 10,
@@ -365,7 +362,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
             );
           }
           return DottedBorder(
-            radius: Radius.circular(buttonRadius),
+            radius: const Radius.circular(buttonRadius),
             borderType: BorderType.RRect,
             color: borderColor,
             child: SizedBox(

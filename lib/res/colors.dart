@@ -32,8 +32,8 @@ const accentColor = Color(0xFF5C6170);
 const gradientTop = egyptian;
 const gradientBottom = egyptian2;
 
-Color shadowBoxColor = Color(0xFF7090B0).withOpacity(0.12);
-Color backgroundColor = Color(0xFFF9FAFF);
+Color shadowBoxColor = const Color(0xFF7090B0).withOpacity(0.12);
+Color backgroundColor = const Color(0xFFF9FAFF);
 const textTitleColor = Color(0xFF7E7E7E);
 const textContentColor = Color(0xFF5C5E62);
 const textItalicColor = Color(0xFF4A90E2);

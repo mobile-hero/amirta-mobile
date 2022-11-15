@@ -10,10 +10,11 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
     this.onPressed,
     this.text, {
+    Key? key,
     this.padding = buttonDefaultPadding,
     this.isEnabled = true,
     this.isLoading = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,51 +23,49 @@ class PrimaryButton extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: buttonDefaultHeight,
-        child: Builder(
-          builder: (context) {
-            if (isLoading) {
-              return MyProgressIndicator();
-            }
-            return TextButton(
-              onPressed: isEnabled ? onPressed : null,
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-                foregroundColor: MaterialStateProperty.resolveWith((states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return darkerGrey;
-                  }
-                  return white;
-                }),
+        child: Builder(builder: (context) {
+          if (isLoading) {
+            return const MyProgressIndicator();
+          }
+          return TextButton(
+            onPressed: isEnabled ? onPressed : null,
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+              foregroundColor: MaterialStateProperty.resolveWith((states) {
+                if (states.contains(MaterialState.disabled)) {
+                  return darkerGrey;
+                }
+                return white;
+              }),
+            ),
+            child: Ink(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(buttonRadius),
+                color: isEnabled ? null : inputDisabledColor,
+                gradient: isEnabled == false
+                    ? null
+                    : const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          gradientTop,
+                          gradientBottom,
+                        ],
+                      ),
               ),
-              child: Ink(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(buttonRadius),
-                  color: isEnabled ? null : inputDisabledColor,
-                  gradient: isEnabled == false
-                      ? null
-                      : LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            gradientTop,
-                            gradientBottom,
-                          ],
-                        ),
-                ),
-                child: Container(
-                  width: double.infinity,
-                  height: buttonDefaultHeight,
-                  child: Center(
-                    child: Text(
-                      text,
-                      style: context.styleButton,
-                    ),
+              child: SizedBox(
+                width: double.infinity,
+                height: buttonDefaultHeight,
+                child: Center(
+                  child: Text(
+                    text,
+                    style: context.styleButton,
                   ),
                 ),
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

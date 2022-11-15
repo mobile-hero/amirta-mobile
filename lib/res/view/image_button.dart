@@ -9,9 +9,10 @@ class ImageButton extends StatelessWidget {
   const ImageButton(
     this.onPressed,
     this.child, {
+    Key? key,
     this.padding = buttonDefaultPadding,
     this.isEnabled = true,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class ImageButton extends StatelessWidget {
               color: isEnabled ? null : inputDisabledColor,
               gradient: isEnabled == false
                   ? null
-                  : LinearGradient(
+                  : const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
@@ -45,7 +46,7 @@ class ImageButton extends StatelessWidget {
                       ],
                     ),
             ),
-            child: Container(
+            child: SizedBox(
               height: buttonDefaultHeight,
               child: Center(
                 child: child,

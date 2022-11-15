@@ -3,6 +3,8 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:flutter/gestures.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({Key? key}) : super(key: key);
+
   @override
   _ChangePasswordScreenState createState() => _ChangePasswordScreenState();
 }
@@ -116,7 +118,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       });
                     },
                   ),
-                  suffixConstraints: BoxConstraints(
+                  suffixConstraints: const BoxConstraints(
                     maxHeight: 20,
                   ),
                   onChanged: (value) {
@@ -161,7 +163,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         ),
                         TextSpan(
                           text: "txt_forgot_password_2".tr(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: egyptian,
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,

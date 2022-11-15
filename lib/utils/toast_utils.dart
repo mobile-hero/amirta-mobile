@@ -38,7 +38,7 @@ extension ToastUtils on BuildContext {
             Flexible(
               child: Text(
                 message,
-                style: this.styleBody1.copyWith(
+                style: styleBody1.copyWith(
                       color: white,
                     ),
               ),

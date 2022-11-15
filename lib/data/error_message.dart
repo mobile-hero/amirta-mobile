@@ -18,7 +18,7 @@ class ErrorMessage extends Equatable {
   static String defaultMessage = "Terjadi kesalahan. Silakan kontak admin";
   static Map<String, String> defaultMessages = {keyMessage: defaultMessage};
 
-  ErrorMessage({
+  const ErrorMessage({
     this.response,
     this.messages,
     this.errorCode = "-",
@@ -26,7 +26,7 @@ class ErrorMessage extends Equatable {
   });
 
   static ErrorMessage init() {
-    return ErrorMessage(messages: {});
+    return const ErrorMessage(messages: {});
   }
 
   String? get first {

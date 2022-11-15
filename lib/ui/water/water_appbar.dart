@@ -4,10 +4,10 @@ class WaterAppBar extends StatelessWidget with PreferredSizeWidget {
   final bool enableLeading;
   final List<Widget>? actions;
 
-  const WaterAppBar({
+  WaterAppBar({Key? key,
     this.enableLeading = true,
     this.actions,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,6 @@ class WaterAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Size get preferredSize {
-    return Size.fromHeight(kToolbarHeight);
+    return const Size.fromHeight(kToolbarHeight);
   }
 }

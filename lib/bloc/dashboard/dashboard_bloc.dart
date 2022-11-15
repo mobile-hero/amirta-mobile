@@ -21,7 +21,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Stream<DashboardState> mapEventToState(
     DashboardEvent event,
   ) async* {
-    if (event is DashboardEvent) {
+    if (event is LoadDashboard) {
       yield* loadDashboard(event);
     }
   }

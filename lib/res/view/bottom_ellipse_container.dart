@@ -6,12 +6,12 @@ class BottomEllipseContainer extends StatelessWidget {
   final double height;
   final Widget child;
 
-  BottomEllipseContainer({
+  const BottomEllipseContainer({Key? key,
     required this.child,
     this.clipSize = 30,
     this.color = egyptian,
     this.height = 100,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

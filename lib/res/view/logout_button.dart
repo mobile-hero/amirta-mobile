@@ -9,9 +9,10 @@ class LogoutButton extends StatelessWidget {
   const LogoutButton(
     this.onPressed,
     this.text, {
+    Key? key,
     this.padding = buttonDefaultPadding,
     this.isEnabled = true,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

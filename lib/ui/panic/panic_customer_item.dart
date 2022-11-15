@@ -9,10 +9,11 @@ class PanicCustomerItem extends StatelessWidget {
   final VoidCallback? onTap;
 
   const PanicCustomerItem({
+    Key? key,
     required this.item,
     this.type = PanicCustomerItemType.neutral,
     this.onTap,
-  });
+  }) : super(key: key);
 
   Color _getBorderColor() {
     switch (type) {
@@ -37,7 +38,7 @@ class PanicCustomerItem extends StatelessWidget {
               color: _getBorderColor(),
             ),
             borderRadius: cardRadius,
-            shadowOffset: Offset(0, 16),
+            shadowOffset: const Offset(0, 16),
             shadowBlur: 40,
             child: Column(
               children: [

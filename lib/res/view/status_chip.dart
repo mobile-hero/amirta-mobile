@@ -5,11 +5,11 @@ class StatusChip extends StatelessWidget {
   final String? doneText;
   final String? notDoneText;
 
-  const StatusChip({
+  const StatusChip({Key? key,
     required this.done,
     this.doneText,
     this.notDoneText,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class StatusChip extends StatelessWidget {
       labelStyle: context.styleCaption.copyWith(
         color: done ? white : grease,
       ),
-      backgroundColor: done ? waterfall : Color(0xFFECEBFF),
+      backgroundColor: done ? waterfall : const Color(0xFFECEBFF),
       shadowColor: transparent,
     );
   }

@@ -9,6 +9,8 @@ import 'package:amirta_mobile/ui/panic/bottomsheet/panic_rejected_bottomsheet.da
 import 'package:amirta_mobile/ui/panic/panic_customer_item.dart';
 
 class PanicHistoryScreen extends StatefulWidget {
+  const PanicHistoryScreen({Key? key}) : super(key: key);
+
   @override
   _PanicHistoryScreenState createState() => _PanicHistoryScreenState();
 }

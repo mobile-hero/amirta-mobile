@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class PanicSetCompleteDialog extends StatefulWidget {
+  const PanicSetCompleteDialog({Key? key}) : super(key: key);
+
   @override
   _PanicSetCompleteDialogState createState() =>
       _PanicSetCompleteDialogState();

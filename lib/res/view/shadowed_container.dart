@@ -17,6 +17,7 @@ class ShadowedContainer extends StatelessWidget {
   final bool hideShadow;
 
   const ShadowedContainer({
+    Key? key,
     required this.child,
     this.backgroundColor = Colors.white,
     this.shadowColor,
@@ -31,7 +32,7 @@ class ShadowedContainer extends StatelessWidget {
     this.height,
     this.width,
     this.hideShadow = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

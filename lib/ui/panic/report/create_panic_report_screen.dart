@@ -9,6 +9,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreatePanicReportScreen extends StatefulWidget {
+  const CreatePanicReportScreen({Key? key}) : super(key: key);
+
   @override
   _CreatePanicReportScreenState createState() =>
       _CreatePanicReportScreenState();
@@ -129,7 +131,7 @@ class _CreatePanicReportScreenState
                     },
                     'btn_create_report'.tr(),
                     isEnabled:
-                        noteController.text.isNotEmpty && images.length >= 1,
+                        noteController.text.isNotEmpty && images.isNotEmpty,
                     isLoading: state is ComplaintCreateLoading,
                   ),
                 ],
@@ -142,7 +144,7 @@ class _CreatePanicReportScreenState
   }
 
   Widget _createImagePickerButton(BuildContext context, bool isLoading) {
-    final size = buttonDefaultHeight + spaceSmall;
+    const size = buttonDefaultHeight + spaceSmall;
     return SizedBox(
       height: size,
       width: double.infinity,
@@ -173,7 +175,7 @@ class _CreatePanicReportScreenState
                           Visibility(
                             visible: !isLoading,
                             child: Transform.translate(
-                              offset: Offset(5, -5),
+                              offset: const Offset(5, -5),
                               child: Align(
                                 alignment: Alignment.topRight,
                                 child: InkWell(
@@ -189,7 +191,7 @@ class _CreatePanicReportScreenState
                                       border: Border.all(color: white),
                                       color: darkBackground,
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.clear,
                                       color: white,
                                       size: 10,
@@ -208,7 +210,7 @@ class _CreatePanicReportScreenState
                 return Padding(
                   padding: const EdgeInsets.only(right: spaceMedium),
                   child: DottedBorder(
-                    radius: Radius.circular(buttonRadius),
+                    radius: const Radius.circular(buttonRadius),
                     borderType: BorderType.RRect,
                     color: borderColor,
                     child: SizedBox(
@@ -241,7 +243,7 @@ class _CreatePanicReportScreenState
             );
           }
           return DottedBorder(
-            radius: Radius.circular(buttonRadius),
+            radius: const Radius.circular(buttonRadius),
             borderType: BorderType.RRect,
             color: borderColor,
             child: SizedBox(

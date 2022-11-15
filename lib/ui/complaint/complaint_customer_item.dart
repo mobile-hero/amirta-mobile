@@ -8,11 +8,11 @@ class ComplaintCustomerItem extends StatelessWidget {
   final ComplaintCustomerItemType type;
   final VoidCallback? onTap;
 
-  const ComplaintCustomerItem({
+  const ComplaintCustomerItem({Key? key,
     required this.item,
     this.type = ComplaintCustomerItemType.neutral,
     this.onTap,
-  });
+  }) : super(key: key);
 
   Color _getBorderColor() {
     switch (type) {
@@ -37,7 +37,7 @@ class ComplaintCustomerItem extends StatelessWidget {
               color: _getBorderColor(),
             ),
             borderRadius: cardRadius,
-            shadowOffset: Offset(0, 16),
+            shadowOffset: const Offset(0, 16),
             shadowBlur: 40,
             child: Column(
               children: [

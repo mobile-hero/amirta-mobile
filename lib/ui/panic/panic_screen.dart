@@ -8,6 +8,8 @@ import 'package:amirta_mobile/ui/panic/panic_customer_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class PanicScreen extends StatefulWidget {
+  const PanicScreen({Key? key}) : super(key: key);
+
   @override
   _PanicScreenState createState() => _PanicScreenState();
 }

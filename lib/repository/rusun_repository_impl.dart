@@ -7,11 +7,13 @@ import 'package:dio/dio.dart';
 class RusunRepositoryImpl extends RusunRepository {
   RusunRepositoryImpl(Dio dio, RepositoryConfig config) : super(dio, config);
 
+  @override
   Future<RusunResponse> getRusunawa() async {
     final response = await get("/flats");
     return (isResult(response)) ? RusunResponse.fromJson(response) : response;
   }
 
+  @override
   Future<RusunBlokResponse> getBlok(int rusunId) async {
     final query = {"rusun_id": rusunId};
     final response = await get("/buildings", query: query);
@@ -20,6 +22,7 @@ class RusunRepositoryImpl extends RusunRepository {
         : response;
   }
 
+  @override
   Future<RusunUnitResponse> getUnit({
     required int rusunId,
     int? buildingId,
@@ -50,6 +53,7 @@ class RusunRepositoryImpl extends RusunRepository {
         : response;
   }
 
+  @override
   Future<RusunUnitDetailResponse> getUnitInfoById(
     int id,
     int? meterType,
@@ -71,6 +75,7 @@ class RusunRepositoryImpl extends RusunRepository {
         : response;
   }
 
+  @override
   Future<RusunUnitDetailResponse> getUnitInfoByPLN(
     String plnNumber,
     int? meterType,
@@ -92,6 +97,7 @@ class RusunRepositoryImpl extends RusunRepository {
         : response;
   }
 
+  @override
   Future<RusunUnitDetailResponse> getUnitInfoByPDAM(
     String pdamNumber,
     int? meterType,
@@ -113,11 +119,13 @@ class RusunRepositoryImpl extends RusunRepository {
         : response;
   }
 
+  @override
   Future<SimpleResponse> addMeterData(MeterDataWrite dataWrite) async {
     final response = await post("/pln_pdam_meter", dataWrite.toJson());
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
 
+  @override
   Future<SimpleResponse> changeMeterStatus(MeterStatusWrite statusWrite) async {
     final response =
         await post("/change_pln_pdam_meter_status", statusWrite.toJson());

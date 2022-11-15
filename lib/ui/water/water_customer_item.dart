@@ -8,12 +8,13 @@ class WaterCustomerItem extends StatelessWidget {
   final VoidCallback onTap;
 
   const WaterCustomerItem({
+    Key? key,
     required this.customerName,
     required this.locationName,
     required this.number,
     required this.inputDone,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

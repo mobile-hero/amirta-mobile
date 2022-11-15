@@ -13,7 +13,7 @@ Future<T?> showMyModalBottomSheet<T>({
     isDismissible: false,
     elevation: 20,
     backgroundColor: brightnessLight ? white : darkBackground,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(spaceMedium),
       ),

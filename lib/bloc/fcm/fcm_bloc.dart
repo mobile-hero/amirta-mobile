@@ -35,13 +35,13 @@ class FcmBloc extends Bloc<FcmEvent, FcmState> {
       try {
         final fcmId = await messaging.getToken();
         if (fcmId != null) {
-          final response = await fcmRepository.registerFcmId(fcmId);
+          final _ = await fcmRepository.registerFcmId(fcmId);
         }
       } catch (e) {}
     }
     if (event is RefreshFcmId) {
       try {
-        final response = await fcmRepository.registerFcmId(event.fcmid);
+        final _ = await fcmRepository.registerFcmId(event.fcmid);
       } catch (e) {}
     }
   }

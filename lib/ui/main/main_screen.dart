@@ -6,16 +6,18 @@ import 'package:amirta_mobile/ui/panic/panic_screen.dart';
 import 'package:amirta_mobile/ui/water/water_form_screen.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   final List<Widget> bodies = [
-    HomeScreen(),
-    WaterFormScreen(),
-    ComplaintScreen(),
-    PanicScreen(),
+    const HomeScreen(),
+    const WaterFormScreen(),
+    const ComplaintScreen(),
+    const PanicScreen(),
   ];
 
   int bodyPos = 0;

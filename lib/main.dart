@@ -48,7 +48,7 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     BaseConfiguration(
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -56,9 +56,9 @@ void main() async {
 class BaseConfiguration extends StatelessWidget {
   final Widget child;
 
-  BaseConfiguration({required this.child});
+  BaseConfiguration({Key? key, required this.child}) : super(key: key);
 
-  final locales = [Locale("id", "ID")];
+  final locales = [const Locale("id", "ID")];
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class BaseConfiguration extends StatelessWidget {
           color: borderColor,
           width: double.infinity,
           height: double.infinity,
-          child: Center(
+          child: const Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(egyptian),
             ),
@@ -99,6 +99,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -178,7 +180,7 @@ class _MyAppState extends State<MyApp> {
           priority: Priority.high,
           showWhen: false,
           playSound: true,
-          sound: RawResourceAndroidNotificationSound('danger_alarm'),
+          sound: const RawResourceAndroidNotificationSound('danger_alarm'),
           icon: "ic_app_notification",
           largeIcon: largeIcon,
           color: egyptian,
@@ -237,7 +239,7 @@ class _MyAppState extends State<MyApp> {
         actions: [
           CupertinoDialogAction(
             isDefaultAction: true,
-            child: Text('Ok'),
+            child: const Text('Ok'),
             onPressed: () async {
               Navigator.of(context, rootNavigator: true).pop();
             },
@@ -263,7 +265,7 @@ class _MyAppState extends State<MyApp> {
                 deviceInfo: DeviceInfoPlugin(),
                 connectivity: Connectivity(),
                 accountLocalRepository:
-                    AccountLocalRepositoryImpl(FlutterSecureStorage()),
+                    AccountLocalRepositoryImpl(const FlutterSecureStorage()),
                 accountRepository: AccountRepositoryImpl(dio, repositoryConfig),
                 rusunRepository: RusunRepositoryImpl(dio, repositoryConfig),
                 fcmRepository: FcmRepositoryImpl(dio, repositoryConfig),
@@ -279,7 +281,7 @@ class _MyAppState extends State<MyApp> {
                 if (snapshot.hasData) {
                   return _initFcmBloc();
                 }
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               },
@@ -291,7 +293,7 @@ class _MyAppState extends State<MyApp> {
           color: borderColor,
           width: double.infinity,
           height: double.infinity,
-          child: Center(
+          child: const Center(
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(egyptian),
             ),
@@ -331,52 +333,45 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: backgroundColor,
         scaffoldBackgroundColor: white,
         brightness: Brightness.dark,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: egyptian,
         ),
         splashColor: waterfall,
       ),
       routes: <String, WidgetBuilder>{
-        Routes.splash: (context) => SplashScreen(),
-        Routes.login: (context) => LoginPage(),
-        Routes.home: (context) => HomeScreen(),
-        Routes.main: (context) => MainScreen(),
-        Routes.notification: (context) => NotificationScreen(),
-        Routes.passwordChange: (context) => ChangePasswordScreen(),
+        Routes.splash: (context) => const SplashScreen(),
+        Routes.login: (context) => const LoginPage(),
+        Routes.home: (context) => const HomeScreen(),
+        Routes.main: (context) => const MainScreen(),
+        Routes.notification: (context) => const NotificationScreen(),
+        Routes.passwordChange: (context) => const ChangePasswordScreen(),
         Routes.passwordChangeSuccess: (context) =>
-            ChangePasswordSuccessScreen(),
-        Routes.passwordEmail: (context) => EmailPasswordScreen(),
-        Routes.passwordEmailSuccess: (context) => EmailPasswordSuccessScreen(),
-        Routes.passwordReset: (context) => ResetPasswordScreen(),
-        Routes.profile: (context) => ProfileScreen(),
-        Routes.water: (context) => WaterFormScreen(),
-        Routes.waterSearch: (context) => WaterSearchResultScreen(),
-        Routes.waterCheck: (context) => WaterCheckDataScreen(),
-        Routes.complaint: (context) => ComplaintScreen(),
-        Routes.complaintHistory: (context) => ComplaintHistoryScreen(),
-        Routes.complaintSetComplete: (context) => ComplaintSetCompleteScreen(),
+            const ChangePasswordSuccessScreen(),
+        Routes.passwordEmail: (context) => const EmailPasswordScreen(),
+        Routes.passwordEmailSuccess: (context) => const EmailPasswordSuccessScreen(),
+        Routes.passwordReset: (context) => const ResetPasswordScreen(),
+        Routes.profile: (context) => const ProfileScreen(),
+        Routes.water: (context) => const WaterFormScreen(),
+        Routes.waterSearch: (context) => const WaterSearchResultScreen(),
+        Routes.waterCheck: (context) => const WaterCheckDataScreen(),
+        Routes.complaint: (context) => const ComplaintScreen(),
+        Routes.complaintHistory: (context) => const ComplaintHistoryScreen(),
+        Routes.complaintSetComplete: (context) => const ComplaintSetCompleteScreen(),
         Routes.complaintCreateReport: (context) =>
-            CreateComplaintReportScreen(),
-        Routes.panic: (context) => PanicScreen(),
-        Routes.panicHistory: (context) => PanicHistoryScreen(),
-        Routes.panicSetComplete: (context) => PanicSetCompleteScreen(),
-        Routes.panicCreateReport: (context) => CreatePanicReportScreen(),
-        Routes.settings: (context) => SettingsScreen(),
+            const CreateComplaintReportScreen(),
+        Routes.panic: (context) => const PanicScreen(),
+        Routes.panicHistory: (context) => const PanicHistoryScreen(),
+        Routes.panicSetComplete: (context) => const PanicSetCompleteScreen(),
+        Routes.panicCreateReport: (context) => const CreatePanicReportScreen(),
+        Routes.settings: (context) => const SettingsScreen(),
       },
       initialRoute: Routes.splash,
     );
   }
 }
 
-final pageRoutes = <String, WidgetBuilder>{
-  '/': (context) => SplashScreen(),
-  '/login': (context) => LoginPage(),
-  '/home': (context) => HomeScreen(),
-  '/main': (context) => MainScreen(),
-};
-
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -387,28 +382,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Amirta"),
+        title: const Text("Amirta"),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(spaceMedium),
-        child: Container(
-          child: Column(
-            children: [
-              AppLogo(),
-              LabeledInputField(
-                TextEditingController(),
-                label: "NRK",
-              ),
-              LabeledInputField(
-                TextEditingController(),
-                label: "Password",
-              ),
-              PrimaryButton(
-                () {},
-                "Submit",
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            const AppLogo(),
+            LabeledInputField(
+              TextEditingController(),
+              label: "NRK",
+            ),
+            LabeledInputField(
+              TextEditingController(),
+              label: "Password",
+            ),
+            PrimaryButton(
+              () {},
+              "Submit",
+            ),
+          ],
         ),
       ),
     );

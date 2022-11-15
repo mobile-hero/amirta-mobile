@@ -6,7 +6,7 @@ import 'package:amirta_mobile/my_material.dart';
 class ComplaintRejectDialog extends StatefulWidget {
   final Pengaduan pengaduan;
 
-  const ComplaintRejectDialog(this.pengaduan);
+  const ComplaintRejectDialog(this.pengaduan, {Key? key}) : super(key: key);
 
   @override
   _ComplaintRejectDialogState createState() => _ComplaintRejectDialogState();
@@ -75,8 +75,8 @@ class _ComplaintRejectDialogState extends State<ComplaintRejectDialog> {
                   },
                 ),
                 Visibility(
-                  visible: !(state is ComplaintCreateLoading),
-                  replacement: Center(
+                  visible: state is! ComplaintCreateLoading,
+                  replacement: const Center(
                     child: MyProgressIndicator(),
                   ),
                   child: Row(

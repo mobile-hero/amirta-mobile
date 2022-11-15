@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class ComplaintSetCompleteDialog extends StatefulWidget {
+  const ComplaintSetCompleteDialog({Key? key}) : super(key: key);
+
   @override
   _ComplaintSetCompleteDialogState createState() =>
       _ComplaintSetCompleteDialogState();

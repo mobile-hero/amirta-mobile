@@ -4,7 +4,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 class LantaiBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
 
-  LantaiBottomSheet(this.scrollController);
+  const LantaiBottomSheet(this.scrollController, {Key? key}) : super(key: key);
 
   @override
   _LantaiBottomSheetState createState() => _LantaiBottomSheetState();
@@ -44,12 +44,12 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                     ),
                   ),
                   Transform.translate(
-                    offset: Offset(10, 0),
+                    offset: const Offset(10, 0),
                     child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.clear_outlined),
+                      icon: const Icon(Icons.clear_outlined),
                       color: egyptian,
                     ),
                   ),
@@ -78,7 +78,7 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
               itemBuilder: (context, item, position) {
                 return ListTile(
                   dense: true,
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: spaceBig,
                     vertical: 0,
                   ),

@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             ShadowedContainer(
               borderRadius: cardRadius,
-              shadowOffset: Offset(0, 4),
+              shadowOffset: const Offset(0, 4),
               shadowBlur: 4,
               child: InkWell(
                 onTap: () {
@@ -24,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
                 },
                 child: ListTile(
                   leading: Transform.translate(
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                     child: ImageIcon(
                       AssetImage(imageRes('ic_password.png')),
                       color: egyptian,
@@ -35,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
                     'txt_password'.tr(),
                     style: context.styleBody1,
                   ),
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.keyboard_arrow_right_sharp,
                     color: egyptian,
                   ),

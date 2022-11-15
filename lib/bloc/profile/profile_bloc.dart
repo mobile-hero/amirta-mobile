@@ -33,7 +33,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     } else if (event is SaveAccount) {
       try {
         yield ProfileLoading();
-        final response = await accountRepository.editProfile(EditProfile(
+        final _ = await accountRepository.editProfile(EditProfile(
           mobilePhoneNumber: event.phone,
           emailAddress: event.email,
         ));

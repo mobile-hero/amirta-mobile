@@ -29,6 +29,7 @@ class LabeledInputField<T> extends StatefulWidget {
 
   const LabeledInputField(
     this._controller, {
+    Key? key,
     this.padding = const EdgeInsets.symmetric(vertical: spaceSmall),
     required this.label,
     this.hint,
@@ -53,7 +54,7 @@ class LabeledInputField<T> extends StatefulWidget {
     this.onTap,
     this.onChanged,
     this.backgroundColor,
-  });
+  }) : super(key: key);
 
   @override
   _LabeledInputFieldState<T> createState() => _LabeledInputFieldState<T>();
@@ -100,7 +101,7 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
             ),
             padding: const EdgeInsets.all(spaceSmall),
             child: Transform.translate(
-              offset: Offset(0, 5),
+              offset: const Offset(0, 5),
               child: TextField(
                 controller: widget._controller,
                 obscureText: widget.isPassword,
@@ -122,7 +123,7 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                 onChanged: widget.onChanged,
                 decoration: InputDecoration(
                     isDense: true,
-                    counter: SizedBox(),
+                    counter: const SizedBox(),
                     prefix: widget.prefix,
                     suffixIcon: widget.suffix,
                     enabled: widget.isEnabled,

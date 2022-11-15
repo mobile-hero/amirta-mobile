@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class EmailPasswordSuccessScreen extends StatelessWidget {
+  const EmailPasswordSuccessScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,7 +10,7 @@ class EmailPasswordSuccessScreen extends StatelessWidget {
         padding: const EdgeInsets.all(spaceBig),
         child: Column(
           children: [
-            Expanded(child: const SizedBox()),
+            const Spacer(),
             Image.asset(
               imageRes('img_check_email.png'),
               height: 96,
@@ -31,7 +33,7 @@ class EmailPasswordSuccessScreen extends StatelessWidget {
               style: context.styleBody1,
               textAlign: TextAlign.center,
             ),
-            Expanded(child: const SizedBox()),
+            const Spacer(),
             Text(
               'txt_check_spam'.tr(),
               style: context.styleBody1,

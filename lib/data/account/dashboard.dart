@@ -1,4 +1,3 @@
-import 'package:amirta_mobile/data/rusun/rusun_lite.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'dashboard.g.dart';

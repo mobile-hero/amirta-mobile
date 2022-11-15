@@ -5,7 +5,8 @@ class BulanBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
   final int year;
 
-  BulanBottomSheet(this.scrollController, this.year);
+  const BulanBottomSheet(this.scrollController, this.year, {Key? key})
+      : super(key: key);
 
   @override
   _BulanBottomSheetState createState() => _BulanBottomSheetState();
@@ -52,12 +53,12 @@ class _BulanBottomSheetState extends State<BulanBottomSheet> {
                     ),
                   ),
                   Transform.translate(
-                    offset: Offset(10, 0),
+                    offset: const Offset(10, 0),
                     child: IconButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.clear_outlined),
+                      icon: const Icon(Icons.clear_outlined),
                       color: egyptian,
                     ),
                   ),
@@ -74,7 +75,7 @@ class _BulanBottomSheetState extends State<BulanBottomSheet> {
               itemBuilder: (context, item, position) {
                 return ListTile(
                   dense: true,
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: spaceBig,
                     vertical: 0,
                   ),

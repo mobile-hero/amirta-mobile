@@ -1,11 +1,10 @@
 import 'package:amirta_mobile/bloc/login/login_bloc.dart';
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
-import 'package:amirta_mobile/res/view/shadowed_container.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -21,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     resetPassGesture.onTap = () {
-      Navigator.pushNamed(context, '/password/email');
+      Navigator.pushNamed(context, Routes.passwordEmail);
     };
     super.initState();
   }
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               if (state is LoginSuccess) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  '/main',
+                  Routes.main,
                   (route) => false,
                 );
               }
@@ -61,14 +60,14 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context, state) {
               return Column(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: AppLogo(
                       logoSize: AppLogoSize.big,
                     ),
                   ),
                   ShadowedContainer(
                     shadowColor: null,
-                    borderRadiusObject: BorderRadius.only(
+                    borderRadiusObject: const BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
                     ),
@@ -108,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                               });
                             },
                           ),
-                          suffixConstraints: BoxConstraints(
+                          suffixConstraints: const BoxConstraints(
                             maxHeight: 20,
                           ),
                         ),
@@ -137,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 TextSpan(
                                   text: "txt_forgot_password_2".tr(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: egyptian,
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.underline,

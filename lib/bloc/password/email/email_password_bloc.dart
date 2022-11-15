@@ -28,7 +28,7 @@ class EmailPasswordBloc extends Bloc<EmailPasswordEvent, EmailPasswordState> {
   ) async* {
     try {
       yield EmailPasswordLoading();
-      final response = await accountRepository.forgotPassword(event.email);
+      final _ = await accountRepository.forgotPassword(event.email);
       yield EmailPasswordSuccess();
     } catch (e) {
       final error = e as ErrorMessage;

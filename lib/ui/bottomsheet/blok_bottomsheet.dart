@@ -7,7 +7,8 @@ class BlokBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
   final int rusunId;
 
-  BlokBottomSheet(this.scrollController, this.rusunId);
+  const BlokBottomSheet(this.scrollController, this.rusunId, {Key? key})
+      : super(key: key);
 
   @override
   _BlokBottomSheetState createState() => _BlokBottomSheetState();
@@ -50,12 +51,12 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
                           ),
                         ),
                         Transform.translate(
-                          offset: Offset(10, 0),
+                          offset: const Offset(10, 0),
                           child: IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.clear_outlined),
+                            icon: const Icon(Icons.clear_outlined),
                             color: egyptian,
                           ),
                         ),
@@ -64,11 +65,11 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
                     LabeledInputField(
                       keywordController,
                       label: 'txt_blok_name'.tr(),
-                      suffix: Icon(
+                      suffix: const Icon(
                         Icons.search,
                         color: egyptian,
                       ),
-                      suffixConstraints: BoxConstraints(
+                      suffixConstraints: const BoxConstraints(
                         minHeight: 20,
                       ),
                       onChanged: (value) {},
@@ -84,7 +85,7 @@ class _BlokBottomSheetState extends State<BlokBottomSheet> {
                     itemBuilder: (context, item, position) {
                       return ListTile(
                         dense: true,
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: spaceBig,
                           vertical: spaceSmall,
                         ),

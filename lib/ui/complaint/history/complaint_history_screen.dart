@@ -9,6 +9,8 @@ import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_rejected_bottom
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
 
 class ComplaintHistoryScreen extends StatefulWidget {
+  const ComplaintHistoryScreen({Key? key}) : super(key: key);
+
   @override
   _ComplaintHistoryScreenState createState() => _ComplaintHistoryScreenState();
 }

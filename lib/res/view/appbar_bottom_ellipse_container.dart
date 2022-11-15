@@ -7,19 +7,19 @@ class AppBarBottomEllipseContainer extends StatelessWidget
   final double height;
   final Widget child;
 
-  AppBarBottomEllipseContainer({
+  AppBarBottomEllipseContainer({Key? key,
     required this.child,
     this.clipSize = 10,
     this.color = egyptian,
     this.height = 100,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: BottomEllipsePainter(),
+      painter: const BottomEllipsePainter(),
       child: ClipPath(
-        clipper: BottomEllipseClipper(),
+        clipper: const BottomEllipseClipper(),
         child: Container(width: double.infinity, color: color, child: child),
       ),
     );

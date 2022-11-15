@@ -4,7 +4,7 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class NotificationScreen extends StatefulWidget {
-  static final String path = '/notification';
+  const NotificationScreen({Key? key}) : super(key: key);
 
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -37,7 +37,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     context.read<NotificationBloc>().pagingController,
                 builderDelegate: PagedChildBuilderDelegate(
                   itemBuilder: (context, item, position) {
-                    final unread = false;
+                    const unread = false;
                     return Column(
                       children: [
                         Row(

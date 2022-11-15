@@ -5,7 +5,11 @@ class OfflineContainer extends StatefulWidget {
   final Widget child;
   final Widget? offlineChild;
 
-  const OfflineContainer({required this.child, this.offlineChild});
+  const OfflineContainer({
+    Key? key,
+    required this.child,
+    this.offlineChild,
+  }) : super(key: key);
 
   @override
   _OfflineContainerState createState() => _OfflineContainerState();
@@ -21,7 +25,7 @@ class _OfflineContainerState extends State<OfflineContainer> {
           return widget.child;
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: MyProgressIndicator());
+          return const Center(child: MyProgressIndicator());
         }
         return InkWell(
           onTap: () {

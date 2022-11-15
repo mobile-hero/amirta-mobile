@@ -8,62 +8,64 @@ class PanicDetailBottomSheet extends StatelessWidget {
   final Pengaduan pengaduan;
   final ScrollController scrollController;
 
-  const PanicDetailBottomSheet(this.pengaduan, this.scrollController);
+  const PanicDetailBottomSheet(
+    this.pengaduan,
+    this.scrollController, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: scrollController,
       padding: const EdgeInsets.all(spaceHuge),
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            PanicBottomSheetContent(pengaduan),
-            const SizedBox(
-              height: spaceNormal,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: PrimaryButton(
-                    () async {
-                      final result = await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return PanicAcceptDialog(pengaduan);
-                        },
-                      );
-                      if (result != null) {
-                        Navigator.pop(context, true);
-                      }
-                    },
-                    "btn_ready_action".tr(),
-                  ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          PanicBottomSheetContent(pengaduan),
+          const SizedBox(
+            height: spaceNormal,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: PrimaryButton(
+                  () async {
+                    final result = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return PanicAcceptDialog(pengaduan);
+                      },
+                    );
+                    if (result != null) {
+                      Navigator.pop(context, true);
+                    }
+                  },
+                  "btn_ready_action".tr(),
                 ),
-                const SizedBox(
-                  width: spaceMedium,
+              ),
+              const SizedBox(
+                width: spaceMedium,
+              ),
+              Expanded(
+                child: SecondaryButton(
+                  () async {
+                    final result = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return PanicRejectDialog(pengaduan);
+                      },
+                    );
+                    if (result != null) {
+                      Navigator.pop(context, false);
+                    }
+                  },
+                  "btn_out_of_reach".tr(),
                 ),
-                Expanded(
-                  child: SecondaryButton(
-                    () async {
-                      final result = await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return PanicRejectDialog(pengaduan);
-                        },
-                      );
-                      if (result != null) {
-                        Navigator.pop(context, false);
-                      }
-                    },
-                    "btn_out_of_reach".tr(),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

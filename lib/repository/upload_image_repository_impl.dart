@@ -8,6 +8,7 @@ class UploadImageRepositoryImpl extends UploadImageRepository {
   UploadImageRepositoryImpl(Dio dio, RepositoryConfig config)
       : super(dio, config);
 
+  @override
   Future<ProfileResponse> uploadPhotoProfile(String imageBase64) async {
     final body = {"img": imageBase64};
     final response = await post("/upload_propic", body);
@@ -16,6 +17,7 @@ class UploadImageRepositoryImpl extends UploadImageRepository {
         : response;
   }
 
+  @override
   Future<UploadImageResponse> uploadImageFile(String imageBase64) async {
     final body = {"img": imageBase64};
     final response = await post("/index.php/upload_image", body);

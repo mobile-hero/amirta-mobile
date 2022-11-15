@@ -8,6 +8,8 @@ import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ComplaintScreen extends StatefulWidget {
+  const ComplaintScreen({Key? key}) : super(key: key);
+
   @override
   _ComplaintScreenState createState() => _ComplaintScreenState();
 }

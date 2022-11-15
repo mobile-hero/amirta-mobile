@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:amirta_mobile/data/rusun/rusun_export.dart';
 import 'package:amirta_mobile/objectbox.g.dart';
 import 'package:amirta_mobile/repository/repository.dart';
-import 'package:amirta_mobile/repository/rusun_repository.dart';
 import 'package:amirta_mobile/utils/connectivity_result_utils.dart';
 import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -20,7 +19,7 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
   final Connectivity connectivity;
 
   WaterSyncBloc(this.rusunRepository, this.imageRepository, this.connectivity)
-      : super(WaterSyncInitial(0));
+      : super(const WaterSyncInitial(0));
 
   int total = 0;
 
@@ -83,7 +82,7 @@ class WaterSyncBloc extends Bloc<WaterSyncEvent, WaterSyncState> {
               await rusunRepository.changeMeterStatus(status);
           statusBox.remove(status.id!);
         }*/
-        final response = await rusunRepository.addMeterData(data);
+        final _ = await rusunRepository.addMeterData(data);
         dataBox.remove(data.id!);
 
         final unitBox = store.box<RusunUnitValue>();

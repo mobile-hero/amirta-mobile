@@ -6,7 +6,7 @@ import 'package:amirta_mobile/my_material.dart';
 class PanicRejectDialog extends StatefulWidget {
   final Pengaduan pengaduan;
 
-  const PanicRejectDialog(this.pengaduan);
+  const PanicRejectDialog(this.pengaduan, {Key? key}) : super(key: key);
 
   @override
   _PanicRejectDialogState createState() => _PanicRejectDialogState();
@@ -75,8 +75,8 @@ class _PanicRejectDialogState extends State<PanicRejectDialog> {
                   },
                 ),
                 Visibility(
-                  visible: !(state is ComplaintCreateLoading),
-                  replacement: Center(
+                  visible: state is! ComplaintCreateLoading,
+                  replacement: const Center(
                     child: MyProgressIndicator(),
                   ),
                   child: Row(

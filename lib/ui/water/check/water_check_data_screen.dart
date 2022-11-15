@@ -10,10 +10,11 @@ import 'package:amirta_mobile/ui/water/bottomsheet/water_input_bottomsheet.dart'
 import 'package:amirta_mobile/ui/water/bottomsheet/water_input_done_bottomsheet.dart';
 import 'package:amirta_mobile/ui/water/water_appbar.dart';
 import 'package:amirta_mobile/ui/water/water_customer_item.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class WaterCheckDataScreen extends StatefulWidget {
+  const WaterCheckDataScreen({Key? key}) : super(key: key);
+
   @override
   _WaterCheckDataScreenState createState() => _WaterCheckDataScreenState();
 }
@@ -208,11 +209,11 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                           label: "txt_blok".tr(),
                                           padding: EdgeInsets.zero,
                                           readOnly: true,
-                                          suffix: Icon(
+                                          suffix: const Icon(
                                             Icons.keyboard_arrow_down,
                                             color: egyptian,
                                           ),
-                                          suffixConstraints: BoxConstraints(
+                                          suffixConstraints: const BoxConstraints(
                                             minHeight: 20,
                                           ),
                                           onTap: () async {
@@ -299,7 +300,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                         const SizedBox(
                                           width: spaceTiny,
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.keyboard_arrow_down,
                                           color: grease,
                                         ),

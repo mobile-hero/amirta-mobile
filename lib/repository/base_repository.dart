@@ -10,7 +10,7 @@ abstract class BaseRepository {
 
   BaseRepository(this._dio, this._config);
 
-  bool isResult(dynamic response) => !(response is ErrorMessage);
+  bool isResult(dynamic response) => response is! ErrorMessage;
 
   Future<dynamic> get(String path, {Map<String, dynamic>? query}) async {
     try {
@@ -90,7 +90,7 @@ abstract class BaseRepository {
         final data = SimpleResponse.fromJson(error.response!.data);
         if (data.responsecode == "01" &&
             data.responsemessage == "Session Expired") {
-          return Future.error(ErrorMessage(
+          return Future.error(const ErrorMessage(
             messages: {},
             shouldRelogin: true,
             errorCode: "01",
@@ -106,7 +106,7 @@ abstract class BaseRepository {
       if (data.responsecode == "01" &&
           data.responsemessage == "Session Expired") {
         print (data.toJson());
-        return Future.error(ErrorMessage(
+        return Future.error(const ErrorMessage(
           messages: {},
           shouldRelogin: true,
           errorCode: "01",

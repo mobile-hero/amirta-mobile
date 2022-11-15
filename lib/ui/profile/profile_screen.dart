@@ -6,6 +6,8 @@ import 'package:amirta_mobile/my_material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -56,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           height: 80,
           fit: BoxFit.cover,
           errorBuilder: (context, obj, stacktrace) {
-            return Icon(
+            return const Icon(
               Icons.account_circle_rounded,
               size: 80,
               color: white,
@@ -90,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           centerTitle: true,
           actions: [
             OfflineContainer(
-              offlineChild: SizedBox(),
+              offlineChild: const SizedBox(),
               child: IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, Routes.settings);
@@ -103,13 +105,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             )
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(150),
+            preferredSize: const Size.fromHeight(150),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   OfflineContainer(
-                    offlineChild: Icon(
+                    offlineChild: const Icon(
                       Icons.account_circle_rounded,
                       size: 80,
                       color: white,
@@ -129,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                       builder: (context, state) {
                         if (state is PhotoProfileLoading) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(
                               color: white,
                             ),
@@ -154,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           );
                         }
-                        return Icon(
+                        return const Icon(
                           Icons.account_circle_rounded,
                           size: 80,
                           color: white,
@@ -223,7 +225,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: spaceNormal,
                   ),
                   OfflineContainer(
-                    offlineChild: SizedBox(),
+                    offlineChild: const SizedBox(),
                     child: PrimaryButton(
                       () {
                         if (file != null) {
@@ -252,7 +254,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       );
                     },
                     "btn_logout".tr(),
-                    isEnabled: !(state is ProfileLoading),
+                    isEnabled: state is! ProfileLoading,
                   ),
                 ],
               ),

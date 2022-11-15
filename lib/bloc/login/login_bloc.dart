@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:amirta_mobile/bloc/app_provider.dart';
 import 'package:amirta_mobile/data/account/login_write.dart';
-import 'package:amirta_mobile/repository/account_local_repository.dart';
 import 'package:amirta_mobile/repository/account_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';

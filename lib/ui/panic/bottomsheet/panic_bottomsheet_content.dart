@@ -7,7 +7,7 @@ import 'package:map_launcher/map_launcher.dart';
 class PanicBottomSheetContent extends StatefulWidget {
   final Pengaduan pengaduan;
 
-  const PanicBottomSheetContent(this.pengaduan);
+  const PanicBottomSheetContent(this.pengaduan, {Key? key}) : super(key: key);
 
   @override
   _PanicBottomSheetContentState createState() =>
@@ -162,7 +162,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
         ),
         DottedBorder(
           color: forest,
-          radius: Radius.circular(cardRadius),
+          radius: const Radius.circular(cardRadius),
           borderType: BorderType.RRect,
           child: InkWell(
             onTap: () async {
@@ -182,7 +182,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.map_outlined,
                     color: forest,
                   ),

@@ -1,6 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
 
 class ComplaintSetCompleteScreen extends StatelessWidget {
+  const ComplaintSetCompleteScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class ComplaintSetCompleteScreen extends StatelessWidget {
                     ),
                     TextSpan(
                       text: "txt_set_complaint_complete_2".tr(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),

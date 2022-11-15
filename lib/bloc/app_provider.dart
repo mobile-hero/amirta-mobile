@@ -91,9 +91,9 @@ class AppProvider {
 
     print(_user);
     if (_user != null) {
-      return Future.delayed(Duration(seconds: 1), () => 1);
+      return Future.delayed(const Duration(seconds: 1), () => 1);
     } else {
-      return Future.delayed(Duration(seconds: 1), () => 0);
+      return Future.delayed(const Duration(seconds: 1), () => 0);
     }
   }
 

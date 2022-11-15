@@ -1,7 +1,8 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:flutter/gestures.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({Key? key}) : super(key: key);
+
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
@@ -70,7 +71,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   });
                 },
               ),
-              suffixConstraints: BoxConstraints(
+              suffixConstraints: const BoxConstraints(
                 maxHeight: 20,
               ),
               onChanged: (value) {

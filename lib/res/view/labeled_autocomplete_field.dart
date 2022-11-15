@@ -1,5 +1,5 @@
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:amirta_mobile/res/resources.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class LabeledAutocompleteField<T> extends StatelessWidget {
   final TextEditingController _controller;
@@ -28,6 +28,7 @@ class LabeledAutocompleteField<T> extends StatelessWidget {
 
   const LabeledAutocompleteField(
     this._controller, {
+    Key? key,
     this.padding = const EdgeInsets.symmetric(vertical: spaceSmall),
     required this.label,
     this.hint,
@@ -50,7 +51,7 @@ class LabeledAutocompleteField<T> extends StatelessWidget {
     this.loadingBuilder,
     this.noItemsFoundBuilder,
     this.errorBuilder,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +61,14 @@ class LabeledAutocompleteField<T> extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(spaceBig, 0, spaceBig, spaceSmall),
+            padding:
+                const EdgeInsets.fromLTRB(spaceBig, 0, spaceBig, spaceSmall),
             child: Text(
               label,
-              style: TextStyle(color: Theme.of(context).brightness == Brightness.dark ? white : textContentColor),
+              style: TextStyle(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? white
+                      : textContentColor),
             ),
           ),
           TypeAheadField<T>(
@@ -74,14 +79,15 @@ class LabeledAutocompleteField<T> extends StatelessWidget {
                 maxLength: maxLength,
                 minLines: minLines,
                 maxLines: minLines,
-                style: style ?? TextStyle(color: textContentColor),
+                style: style ?? const TextStyle(color: textContentColor),
                 textAlign: textAlign,
                 textInputAction: textInputAction,
                 textCapitalization: textCapitalization,
                 focusNode: focusNode,
                 decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: spaceBig),
-                  counter: SizedBox(),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: spaceBig),
+                  counter: const SizedBox(),
                   prefix: prefix,
                   filled: true,
                   fillColor: inputColor,
@@ -94,7 +100,7 @@ class LabeledAutocompleteField<T> extends StatelessWidget {
                   errorBorder: createBorder(red),
                 ),
               ),
-              debounceDuration: Duration(milliseconds: 300),
+              debounceDuration: const Duration(milliseconds: 300),
               direction: AxisDirection.up,
               suggestionsCallback: suggestionsCallback,
               itemBuilder: itemBuilder,
@@ -106,6 +112,7 @@ class LabeledAutocompleteField<T> extends StatelessWidget {
 
   OutlineInputBorder createBorder(Color color) {
     return OutlineInputBorder(
-        borderSide: BorderSide(color: color), borderRadius: const BorderRadius.all(Radius.circular(30)));
+        borderSide: BorderSide(color: color),
+        borderRadius: const BorderRadius.all(Radius.circular(30)));
   }
 }

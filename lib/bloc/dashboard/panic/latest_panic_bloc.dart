@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:amirta_mobile/data/pengaduan/pengaduan.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan_export.dart';
 import 'package:amirta_mobile/repository/pengaduan_repository.dart';
 import 'package:bloc/bloc.dart';
