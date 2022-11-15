@@ -3,6 +3,7 @@
   "offline_message": "Anda sedang offline\n\nSilakan nyalakan paket data atau sambungkan ke Wifi terdekat\nuntuk kembali menggunakan fitur ini.",
   "txt_no_internet_connection": "Tidak ada koneksi internet",
   "txt_sync_failed": "Gagal mengirim data",
+  "txt_server_not_responded": "Server tidak merespon\nTap untuk coba lagi",
   "----Login-----": "",
   "txt_welcome": "Selamat Datang!",
   "txt_login_nrk": "Silakan Login Menggunakan NRK",

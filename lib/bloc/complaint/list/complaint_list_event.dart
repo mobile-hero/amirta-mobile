@@ -7,6 +7,11 @@ class LoadComplaint extends ComplaintListEvent {
   final int status;
 
   LoadComplaint(this.status);
+
+  static final newItem = LoadComplaint(ComplaintStatus.newItem);
+  static final inProcess = LoadComplaint(ComplaintStatus.inProcess);
+  static final rejected = LoadComplaint(ComplaintStatus.rejected);
+  static final completed = LoadComplaint(ComplaintStatus.completed);
 }
 
 class LoadMoreComplaint extends ComplaintListEvent {
@@ -14,17 +19,4 @@ class LoadMoreComplaint extends ComplaintListEvent {
   final int nextPageKey;
 
   LoadMoreComplaint(this.status, this.nextPageKey);
-}
-
-class LoadPanic extends ComplaintListEvent {
-  final int status;
-
-  LoadPanic(this.status);
-}
-
-class LoadMorePanic extends ComplaintListEvent {
-  final int status;
-  final int nextPageKey;
-
-  LoadMorePanic(this.status, this.nextPageKey);
 }

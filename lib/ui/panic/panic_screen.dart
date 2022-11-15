@@ -38,9 +38,17 @@ class _PanicScreenState extends State<PanicScreen> {
         body: OfflineContainer(
           child: BlocBuilder<PanicNewBloc, ComplaintListState>(
             builder: (context, state) {
+              final bloc = context.read<PanicNewBloc>();
+              if (state is ComplaintListError) {
+                return ErrorContainer(
+                  onTap: () {
+                    bloc.add(LoadComplaint.newItem);
+                  },
+                );
+              }
               return PagedListView<int, Pengaduan>(
                 padding: const EdgeInsets.all(spaceMedium),
-                pagingController: context.read<PanicNewBloc>().pagingController,
+                pagingController: bloc.pagingController,
                 builderDelegate: PagedChildBuilderDelegate(
                   itemBuilder: (context, item, position) {
                     return PanicCustomerItem(
@@ -65,10 +73,7 @@ class _PanicScreenState extends State<PanicScreen> {
                               message: "txt_panic_rejected".tr(),
                             );
                           }
-                          context
-                              .read<PanicNewBloc>()
-                              .pagingController
-                              .refresh();
+                          bloc.pagingController.refresh();
                         }
                       },
                     );

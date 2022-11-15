@@ -2,11 +2,11 @@ import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
 import 'package:amirta_mobile/bloc/complaint/list/complaint_types_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan_export.dart';
 import 'package:amirta_mobile/my_material.dart';
+import 'package:amirta_mobile/ui/common/common_complaint_history_view.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_completed_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_inprocess_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/bottomsheet/complaint_rejected_bottomsheet.dart';
 import 'package:amirta_mobile/ui/complaint/complaint_customer_item.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ComplaintHistoryScreen extends StatefulWidget {
   @override
@@ -85,11 +85,19 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                     children: [
                       BlocBuilder<ComplaintInProcessBloc, ComplaintListState>(
                           builder: (context, state) {
-                        return _contentView(
-                          context.read<ComplaintInProcessBloc>().pagingController,
-                          ComplaintCustomerItemType.neutral,
-                          "txt_no_complaint_in_process".tr(),
-                          (value) async {
+                        final bloc = context.read<ComplaintInProcessBloc>();
+                        if (state is ComplaintListError) {
+                          return ErrorContainer(
+                            onTap: () {
+                              bloc.add(LoadComplaint.inProcess);
+                            },
+                          );
+                        }
+                        return CommonComplaintHistoryView(
+                          pagingController: bloc.pagingController,
+                          type: ComplaintCustomerItemType.neutral,
+                          emptyMessage: "txt_no_complaint_in_process".tr(),
+                          onTap: (value) async {
                             final result = await context
                                 .showScrollableBottomSheet<Pengaduan>(
                               builder: (context, scrollController) {
@@ -104,10 +112,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                                 arguments: result,
                               );
                               if (response != null) {
-                                context
-                                    .read<ComplaintInProcessBloc>()
-                                    .pagingController
-                                    .refresh();
+                                bloc.pagingController.refresh();
 
                                 context.showCustomToast(
                                   type: CustomToastType.success,
@@ -120,11 +125,19 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                       }),
                       BlocBuilder<ComplaintRejectedBloc, ComplaintListState>(
                           builder: (context, state) {
-                        return _contentView(
-                          context.read<ComplaintRejectedBloc>().pagingController,
-                          ComplaintCustomerItemType.rejected,
-                          "txt_no_complaint_rejected".tr(),
-                          (value) async {
+                        final bloc = context.read<ComplaintRejectedBloc>();
+                        if (state is ComplaintListError) {
+                          return ErrorContainer(
+                            onTap: () {
+                              bloc.add(LoadComplaint.rejected);
+                            },
+                          );
+                        }
+                        return CommonComplaintHistoryView(
+                          pagingController: bloc.pagingController,
+                          type: ComplaintCustomerItemType.rejected,
+                          emptyMessage: "txt_no_complaint_rejected".tr(),
+                          onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(
                               builder: (context, scrollController) {
@@ -133,21 +146,26 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                               },
                             );
                             if (result != null) {
-                              context
-                                  .read<ComplaintRejectedBloc>()
-                                  .pagingController
-                                  .refresh();
+                              bloc.pagingController.refresh();
                             }
                           },
                         );
                       }),
                       BlocBuilder<ComplaintCompletedBloc, ComplaintListState>(
                           builder: (context, state) {
-                        return _contentView(
-                          context.read<ComplaintCompletedBloc>().pagingController,
-                          ComplaintCustomerItemType.completed,
-                          "txt_no_complaint_completed".tr(),
-                          (value) async {
+                        final bloc = context.read<ComplaintCompletedBloc>();
+                        if (state is ComplaintListError) {
+                          return ErrorContainer(
+                            onTap: () {
+                              bloc.add(LoadComplaint.completed);
+                            },
+                          );
+                        }
+                        return CommonComplaintHistoryView(
+                          pagingController: bloc.pagingController,
+                          type: ComplaintCustomerItemType.completed,
+                          emptyMessage: "txt_no_complaint_completed".tr(),
+                          onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(
                               builder: (context, scrollController) {
@@ -156,10 +174,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                               },
                             );
                             if (result != null) {
-                              context
-                                  .read<ComplaintCompletedBloc>()
-                                  .pagingController
-                                  .refresh();
+                              bloc.pagingController.refresh();
                             }
                           },
                         );
@@ -170,41 +185,6 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _contentView(
-    PagingController<int, Pengaduan> pagingController,
-    ComplaintCustomerItemType type,
-    String emptyMessage,
-    Function(Pengaduan) onTap,
-  ) {
-    return RefreshIndicator(
-      onRefresh: () async => pagingController.refresh(),
-      child: PagedListView<int, Pengaduan>(
-        padding: const EdgeInsets.all(spaceMedium),
-        pagingController: pagingController,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: (context, item, position) {
-            return ComplaintCustomerItem(
-              item: item,
-              type: type,
-              onTap: () => onTap.call(item),
-            );
-          },
-          noItemsFoundIndicatorBuilder: (context) {
-            return Padding(
-              padding: const EdgeInsets.all(spaceNormal),
-              child: Center(
-                child: Text(
-                  emptyMessage,
-                  style: context.styleCaption,
-                ),
-              ),
-            );
-          },
         ),
       ),
     );

@@ -38,13 +38,19 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
         body: OfflineContainer(
           child: BlocBuilder<ComplaintNewBloc, ComplaintListState>(
             builder: (context, state) {
+              final bloc = context.read<ComplaintNewBloc>();
+              if (state is ComplaintListError) {
+                return ErrorContainer(
+                  onTap: () {
+                    bloc.add(LoadComplaint.newItem);
+                  },
+                );
+              }
               return RefreshIndicator(
-                onRefresh: () async =>
-                    context.read<ComplaintNewBloc>().pagingController.refresh(),
+                onRefresh: () async => bloc.pagingController.refresh(),
                 child: PagedListView<int, Pengaduan>(
                   padding: const EdgeInsets.all(spaceMedium),
-                  pagingController:
-                      context.read<ComplaintNewBloc>().pagingController,
+                  pagingController: bloc.pagingController,
                   builderDelegate: PagedChildBuilderDelegate(
                     itemBuilder: (context, item, position) {
                       return ComplaintCustomerItem(
@@ -69,7 +75,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                                 message: "txt_complaint_rejected".tr(),
                               );
                             }
-                            context.read<ComplaintNewBloc>().pagingController.refresh();
+                            bloc.pagingController.refresh();
                           }
                         },
                       );

@@ -2,11 +2,11 @@ import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
 import 'package:amirta_mobile/bloc/complaint/list/panic_types_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan_export.dart';
 import 'package:amirta_mobile/my_material.dart';
+import 'package:amirta_mobile/ui/common/common_panic_history_view.dart';
 import 'package:amirta_mobile/ui/panic/bottomsheet/panic_completed_bottomsheet.dart';
 import 'package:amirta_mobile/ui/panic/bottomsheet/panic_inprocess_bottomsheet.dart';
 import 'package:amirta_mobile/ui/panic/bottomsheet/panic_rejected_bottomsheet.dart';
 import 'package:amirta_mobile/ui/panic/panic_customer_item.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class PanicHistoryScreen extends StatefulWidget {
   @override
@@ -85,11 +85,19 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                     children: [
                       BlocBuilder<PanicInProcessBloc, ComplaintListState>(
                           builder: (context, state) {
-                        return _contentView(
-                          context.read<PanicInProcessBloc>().pagingController,
-                          PanicCustomerItemType.neutral,
-                          "txt_no_panic_in_process".tr(),
-                          (value) async {
+                        final bloc = context.read<PanicInProcessBloc>();
+                        if (state is ComplaintListError) {
+                          return ErrorContainer(
+                            onTap: () {
+                              bloc.add(LoadComplaint.inProcess);
+                            },
+                          );
+                        }
+                        return CommonPanicHistoryView(
+                          pagingController: bloc.pagingController,
+                          type: PanicCustomerItemType.neutral,
+                          emptyMessage: "txt_no_panic_in_process".tr(),
+                          onTap: (value) async {
                             final result = await context
                                 .showScrollableBottomSheet<Pengaduan>(
                               builder: (context, scrollController) {
@@ -104,10 +112,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                                 arguments: result,
                               );
                               if (response != null) {
-                                context
-                                    .read<PanicInProcessBloc>()
-                                    .pagingController
-                                    .refresh();
+                                bloc.pagingController.refresh();
 
                                 context.showCustomToast(
                                   type: CustomToastType.success,
@@ -120,11 +125,19 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                       }),
                       BlocBuilder<PanicRejectedBloc, ComplaintListState>(
                           builder: (context, state) {
-                        return _contentView(
-                          context.read<PanicRejectedBloc>().pagingController,
-                          PanicCustomerItemType.rejected,
-                          "txt_no_panic_rejected".tr(),
-                          (value) async {
+                        final bloc = context.read<PanicRejectedBloc>();
+                        if (state is ComplaintListError) {
+                          return ErrorContainer(
+                            onTap: () {
+                              bloc.add(LoadComplaint.rejected);
+                            },
+                          );
+                        }
+                        return CommonPanicHistoryView(
+                          pagingController: bloc.pagingController,
+                          type: PanicCustomerItemType.rejected,
+                          emptyMessage: "txt_no_panic_rejected".tr(),
+                          onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(
                               builder: (context, scrollController) {
@@ -133,21 +146,26 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                               },
                             );
                             if (result != null) {
-                              context
-                                  .read<PanicRejectedBloc>()
-                                  .pagingController
-                                  .refresh();
+                              bloc.pagingController.refresh();
                             }
                           },
                         );
                       }),
                       BlocBuilder<PanicCompletedBloc, ComplaintListState>(
                           builder: (context, state) {
-                        return _contentView(
-                          context.read<PanicCompletedBloc>().pagingController,
-                          PanicCustomerItemType.completed,
-                          "txt_no_panic_completed".tr(),
-                          (value) async {
+                        final bloc = context.read<PanicCompletedBloc>();
+                        if (state is ComplaintListError) {
+                          return ErrorContainer(
+                            onTap: () {
+                              bloc.add(LoadComplaint.completed);
+                            },
+                          );
+                        }
+                        return CommonPanicHistoryView(
+                          pagingController: bloc.pagingController,
+                          type: PanicCustomerItemType.completed,
+                          emptyMessage: "txt_no_panic_completed".tr(),
+                          onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(
                               builder: (context, scrollController) {
@@ -156,10 +174,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                               },
                             );
                             if (result != null) {
-                              context
-                                  .read<PanicCompletedBloc>()
-                                  .pagingController
-                                  .refresh();
+                              bloc.pagingController.refresh();
                             }
                           },
                         );
@@ -170,41 +185,6 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _contentView(
-    PagingController<int, Pengaduan> pagingController,
-    PanicCustomerItemType type,
-    String emptyMessage,
-    Function(Pengaduan) onTap,
-  ) {
-    return RefreshIndicator(
-      onRefresh: () async => pagingController.refresh(),
-      child: PagedListView<int, Pengaduan>(
-        padding: const EdgeInsets.all(spaceMedium),
-        pagingController: pagingController,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: (context, item, position) {
-            return PanicCustomerItem(
-              item: item,
-              type: type,
-              onTap: () => onTap.call(item),
-            );
-          },
-          noItemsFoundIndicatorBuilder: (context) {
-            return Padding(
-              padding: const EdgeInsets.all(spaceNormal),
-              child: Center(
-                child: Text(
-                  emptyMessage,
-                  style: context.styleCaption,
-                ),
-              ),
-            );
-          },
         ),
       ),
     );

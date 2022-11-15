@@ -3,6 +3,7 @@ export 'bottom_ellipse_clipper.dart';
 export 'bottom_ellipse_container.dart';
 export 'bottom_ellipse_painter.dart';
 export 'custom_bottom_sheet.dart';
+export 'error_container.dart';
 export 'gradient_view.dart';
 export 'image_button.dart';
 export 'labeled_autocomplete_field.dart';

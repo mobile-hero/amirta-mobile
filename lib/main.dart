@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
 
   final Dio dio = Dio();
 
-  final RepositoryConfig repositoryConfig = RepositoryConfig.production();
+  final RepositoryConfig repositoryConfig = RepositoryConfig.staging();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();

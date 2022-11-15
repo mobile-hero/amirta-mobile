@@ -20,6 +20,9 @@ class _OfflineContainerState extends State<OfflineContainer> {
         if (snapshot.hasData && snapshot.data!.isConnected) {
           return widget.child;
         }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: MyProgressIndicator());
+        }
         return InkWell(
           onTap: () {
             setState(() {});
