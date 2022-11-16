@@ -59,7 +59,7 @@ class _BulanBottomSheetState extends State<BulanBottomSheet> {
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.clear_outlined),
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                     ),
                   ),
                 ],

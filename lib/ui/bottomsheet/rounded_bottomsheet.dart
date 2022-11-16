@@ -20,7 +20,7 @@ extension CustomBottomSheet on BuildContext {
       enableDrag: false,
       isDismissible: false,
       elevation: 20,
-      backgroundColor: white,//brightnessLight ? white : darkBackground,
+      backgroundColor: isDark ? darkBackground : white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(spaceMedium),

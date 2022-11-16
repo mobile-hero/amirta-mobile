@@ -51,7 +51,7 @@ class _TahunBottomSheetState extends State<TahunBottomSheet> {
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.clear_outlined),
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                     ),
                   ),
                 ],

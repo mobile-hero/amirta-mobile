@@ -50,7 +50,7 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.clear_outlined),
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                     ),
                   ),
                 ],

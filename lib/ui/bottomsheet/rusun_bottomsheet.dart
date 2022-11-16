@@ -51,7 +51,7 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
                               Navigator.pop(context);
                             },
                             icon: const Icon(Icons.clear_outlined),
-                            color: egyptian,
+                            color: context.isDark ? borderColor : egyptian,
                           ),
                         ),
                       ],
@@ -59,9 +59,9 @@ class _RusunBottomSheetState extends State<RusunBottomSheet> {
                     LabeledInputField(
                       keywordController,
                       label: 'txt_rusun_name'.tr(),
-                      suffix: const Icon(
+                      suffix: Icon(
                         Icons.search,
-                        color: egyptian,
+                        color: context.isDark ? borderColor : egyptian,
                       ),
                       suffixConstraints: const BoxConstraints(
                         minHeight: 20,
