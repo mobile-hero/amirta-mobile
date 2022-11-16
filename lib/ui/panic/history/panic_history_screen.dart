@@ -50,7 +50,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
             child: Column(
               children: [
                 Container(
-                  color: egyptian,
+                  color: Theme.of(context).primaryColor,
                   child: TabBar(
                     tabs: [
                       Tab(

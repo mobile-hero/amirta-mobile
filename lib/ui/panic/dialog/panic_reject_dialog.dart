@@ -31,7 +31,7 @@ class _PanicRejectDialogState extends State<PanicRejectDialog> {
         );
       },
       child: Dialog(
-        backgroundColor: white,
+        backgroundColor: context.isDark ? darkBackground : white,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(spaceMedium)),

@@ -20,6 +20,7 @@ class CommonHistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async => pagingController.refresh(),
+      color: context.isDark ? borderColor : null,
       child: PagedListView<int, Pengaduan>(
         padding: const EdgeInsets.all(spaceMedium),
         pagingController: pagingController,
@@ -38,6 +39,9 @@ class CommonHistoryView extends StatelessWidget {
               ),
             );
           },
+          firstPageProgressIndicatorBuilder: (context) {
+            return const MyProgressIndicator();
+          }
         ),
       ),
     );

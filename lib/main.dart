@@ -360,7 +360,7 @@ class _MyAppState extends State<MyApp> {
         appBarTheme: const AppBarTheme(
           backgroundColor: egyptianDark,
         ),
-        splashColor: waterfall,
+        splashColor: waterfallDark,
       ),
       routes: <String, WidgetBuilder>{
         Routes.splash: (context) => const SplashScreen(),

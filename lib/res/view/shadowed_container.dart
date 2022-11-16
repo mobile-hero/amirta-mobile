@@ -37,8 +37,10 @@ class ShadowedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.isDark;
-    final _backgroundColor = isDark ? accentColor : backgroundColor;
+    final _backgroundColor = isDark ? darkBackground : backgroundColor;
     final _shadowColor = isDark ? lightGrey : (shadowColor ?? shadowBoxColor);
+    final _shadowOffset = isDark ? const Offset(0, 3) : shadowOffset;
+    final _shadowBlur = isDark ? 4.0 : shadowBlur;
     return Container(
       padding: padding,
       margin: margin,
@@ -53,8 +55,8 @@ class ShadowedContainer extends StatelessWidget {
             : [
                 BoxShadow(
                   color: _shadowColor,
-                  offset: shadowOffset,
-                  blurRadius: shadowBlur,
+                  offset: _shadowOffset,
+                  blurRadius: _shadowBlur,
                   spreadRadius: shadowSpread,
                 )
               ],

@@ -108,6 +108,9 @@ class ComplaintCompletedBottomSheet extends StatelessWidget {
                                   width: imgSizeBig,
                                   height: imgSizeBig,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, object, trace) {
+                                    return const ErrorImageThumbnail();
+                                  },
                                 ),
                                 onTap: () {
                                   showPhotoViewerDialog(
@@ -129,7 +132,7 @@ class ComplaintCompletedBottomSheet extends StatelessWidget {
                   Text(
                     'txt_tap_enlarge'.tr(),
                     style: context.styleCaption.copyWith(
-                      color: accentColor,
+                      color: context.isDark ? darkerGrey : accentColor,
                     ),
                   ),
                   const SizedBox(

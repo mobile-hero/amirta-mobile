@@ -1,4 +1,5 @@
 import 'package:amirta_mobile/res/resources.dart';
+import 'package:amirta_mobile/utils/theme_utils.dart';
 
 class MyProgressIndicator extends StatefulWidget {
   final double height;
@@ -38,7 +39,8 @@ class _MyProgressIndicatorState extends State<MyProgressIndicator>
       height: widget.height,
       child: Center(
         child: CircularProgressIndicator(
-          valueColor: animationController.drive(
+          color: context.isDark ? borderColor : null,
+          valueColor: context.isDark ? null : animationController.drive(
             ColorTween(begin: gradientTop, end: gradientBottom),
           ),
         ),

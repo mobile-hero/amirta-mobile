@@ -1,3 +1,4 @@
+
 import 'package:amirta_mobile/bloc/complaint/list/complaint_list_bloc.dart';
 import 'package:amirta_mobile/bloc/complaint/list/complaint_types_bloc.dart';
 import 'package:amirta_mobile/data/pengaduan/pengaduan_export.dart';
@@ -50,7 +51,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
             child: Column(
               children: [
                 Container(
-                  color: egyptian,
+                  color: Theme.of(context).primaryColor,
                   child: TabBar(
                     tabs: [
                       Tab(

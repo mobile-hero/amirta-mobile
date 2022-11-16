@@ -31,7 +31,7 @@ class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
         );
       },
       child: Dialog(
-        backgroundColor: white,
+        backgroundColor: context.isDark ? darkBackground : white,
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(spaceMedium)),
@@ -55,8 +55,9 @@ class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
                 children: [
                   Text(
                     'txt_receive_panic'.tr(),
-                    style: context.styleBody1,
+                    style: context.styleBody2,
                   ),
+                  const SizedBox(height: spaceMedium),
                   // Align(
                   //   alignment: Alignment.centerLeft,
                   //   child: Text(
