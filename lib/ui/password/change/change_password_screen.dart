@@ -89,13 +89,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       oldPasswordVisible
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                     ),
                     onTap: () {
                       setState(() {
                         oldPasswordVisible = !oldPasswordVisible;
                       });
                     },
+                  ),
+                  suffixConstraints: const BoxConstraints(
+                    maxHeight: 20,
                   ),
                   onChanged: (value) {
                     setState(() {});
@@ -110,7 +113,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       passwordVisible
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                     ),
                     onTap: () {
                       setState(() {
@@ -155,7 +158,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   child: Text.rich(
                     TextSpan(
                       style: context.styleBody1.copyWith(
-                        color: grease,
+                        color: context.isDark ? borderColor : grease,
                       ),
                       children: [
                         TextSpan(
@@ -163,8 +166,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         ),
                         TextSpan(
                           text: 'txt_forgot_password_2'.tr(),
-                          style: const TextStyle(
-                            color: egyptian,
+                          style: TextStyle(
+                            color: context.isDark ? borderColor : egyptian,
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
                           ),

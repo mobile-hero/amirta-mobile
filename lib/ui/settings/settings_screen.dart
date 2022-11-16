@@ -30,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
                     offset: const Offset(0, 5),
                     child: ImageIcon(
                       AssetImage(imageRes('ic_password.png')),
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                       size: spaceMedium,
                     ),
                   ),
@@ -38,9 +38,9 @@ class SettingsScreen extends StatelessWidget {
                     'txt_password'.tr(),
                     style: context.styleBody1,
                   ),
-                  trailing: const Icon(
+                  trailing: Icon(
                     Icons.keyboard_arrow_right_sharp,
-                    color: egyptian,
+                    color: context.isDark ? borderColor : egyptian,
                   ),
                 ),
               ),
@@ -54,9 +54,9 @@ class SettingsScreen extends StatelessWidget {
                 child: ListTile(
                   leading: Transform.translate(
                     offset: const Offset(0, 5),
-                    child: const Icon(
+                    child: Icon(
                       Icons.language,
-                      color: egyptian,
+                      color: context.isDark ? borderColor : egyptian,
                       size: spaceMedium,
                     ),
                   ),
@@ -111,7 +111,11 @@ class SettingsScreen extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           border: Border.all(
-            color: selection == language ? egyptian : transparent,
+            color: selection == language
+                ? context.isDark
+                    ? borderColor
+                    : egyptian
+                : transparent,
             width: 1.5,
           ),
           borderRadius: BorderRadius.circular(8),
@@ -120,11 +124,14 @@ class SettingsScreen extends StatelessWidget {
         child: TextButton(
           child: Text(
             text,
-            style: const TextStyle(color: egyptian),
+            style: TextStyle(
+              color: context.isDark ? textContentColor : egyptian,
+            ),
           ),
           style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-            backgroundColor: grey.withOpacity(0.3),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            backgroundColor: context.isDark ? grey : grey.withOpacity(0.3),
             side: const BorderSide(color: transparent),
           ),
           onPressed: () async {
