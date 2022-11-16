@@ -176,8 +176,8 @@ class HomeSummarySection extends StatelessWidget {
           );
         }
 
-        return const Center(
-          child: Text('Gagal Mengambil Data Dashboard'),
+        return Center(
+          child: Text('txt_fetch_dashboard_failed'.tr()),
         );
       },
     );

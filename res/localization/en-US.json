@@ -42,6 +42,7 @@
   "txt_msg_relax_okay": "Relax!\nEverything okay!",
   "txt_water_date": "Water\n{}",
   "txt_panic_data": "Panic Data",
+  "txt_fetch_dashboard_failed": "Fetching data failed",
   "----Settings-----": "",
   "title_settings": "Settings",
   "txt_language": "Language",

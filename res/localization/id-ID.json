@@ -42,6 +42,7 @@
   "txt_msg_relax_okay": "Tenang!\nKeadaan aman",
   "txt_water_date": "Air\n{}",
   "txt_panic_data": "Data Panik",
+  "txt_fetch_dashboard_failed": "Gagal mengambil data dashboard",
   "----Settings-----": "",
   "title_settings": "Pengaturan",
   "txt_language": "Bahasa",
