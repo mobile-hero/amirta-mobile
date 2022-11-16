@@ -82,6 +82,18 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDark;
+    final _borderColor = isDark
+        ? !widget.isEnabled
+            ? inputDisabledColor
+            : hasFocus
+                ? egyptian
+                : borderColor
+        : !widget.isEnabled
+            ? inputDisabledColor
+            : hasFocus
+                ? grease
+                : borderColor;
     return Padding(
       padding: widget.padding,
       child: Column(
@@ -91,11 +103,8 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
             decoration: BoxDecoration(
               color: widget.backgroundColor,
               border: Border.all(
-                color: !widget.isEnabled
-                    ? inputDisabledColor
-                    : hasFocus
-                        ? grease
-                        : borderColor,
+                color: _borderColor,
+                width: isDark ? 2 : 1,
               ),
               borderRadius: BorderRadius.circular(6),
             ),
@@ -111,7 +120,9 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                 maxLines: widget.minLines,
                 style: widget.style ??
                     context.styleBody1.copyWith(
-                      color: grease.withOpacity(widget.isEnabled ? 1.0 : 0.7),
+                      color: isDark
+                          ? borderColor
+                          : grease.withOpacity(widget.isEnabled ? 1.0 : 0.7),
                     ),
                 textAlign: widget.textAlign,
                 textInputAction: widget.textInputAction,
@@ -129,7 +140,9 @@ class _LabeledInputFieldState<T> extends State<LabeledInputField<T>> {
                     enabled: widget.isEnabled,
                     labelText: widget.label,
                     labelStyle: context.styleCaption.copyWith(
-                      color: grease.withOpacity(0.5),
+                      color: isDark
+                          ? borderColor.withOpacity(0.8)
+                          : grease.withOpacity(0.5),
                     ),
                     hintText: widget.hint,
                     hintMaxLines: 4,

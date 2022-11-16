@@ -36,6 +36,9 @@ class ShadowedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDark;
+    final _backgroundColor = isDark ? accentColor : backgroundColor;
+    final _shadowColor = isDark ? lightGrey : (shadowColor ?? shadowBoxColor);
     return Container(
       padding: padding,
       margin: margin,
@@ -44,12 +47,12 @@ class ShadowedContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: border,
         borderRadius: borderRadiusObject ?? BorderRadius.circular(borderRadius),
-        color: backgroundColor,
+        color: _backgroundColor,
         boxShadow: hideShadow
             ? []
             : [
                 BoxShadow(
-                  color: shadowColor ?? shadowBoxColor,
+                  color: _shadowColor,
                   offset: shadowOffset,
                   blurRadius: shadowBlur,
                   spreadRadius: shadowSpread,

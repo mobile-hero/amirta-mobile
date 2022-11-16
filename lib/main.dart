@@ -349,6 +349,19 @@ class _MyAppState extends State<MyApp> {
         ),
         splashColor: waterfall,
       ),
+      darkTheme: ThemeData(
+        fontFamily: 'Poppins',
+        textTheme: darkCustomTextTheme,
+        primarySwatch: Colors.deepPurple,
+        primaryColor: egyptianDark,
+        backgroundColor: darkBackground,
+        scaffoldBackgroundColor: darkBackground,
+        brightness: Brightness.dark,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: egyptianDark,
+        ),
+        splashColor: waterfall,
+      ),
       routes: <String, WidgetBuilder>{
         Routes.splash: (context) => const SplashScreen(),
         Routes.login: (context) => const LoginPage(),
@@ -359,7 +372,8 @@ class _MyAppState extends State<MyApp> {
         Routes.passwordChangeSuccess: (context) =>
             const ChangePasswordSuccessScreen(),
         Routes.passwordEmail: (context) => const EmailPasswordScreen(),
-        Routes.passwordEmailSuccess: (context) => const EmailPasswordSuccessScreen(),
+        Routes.passwordEmailSuccess: (context) =>
+            const EmailPasswordSuccessScreen(),
         Routes.passwordReset: (context) => const ResetPasswordScreen(),
         Routes.profile: (context) => const ProfileScreen(),
         Routes.water: (context) => const WaterFormScreen(),
@@ -367,7 +381,8 @@ class _MyAppState extends State<MyApp> {
         Routes.waterCheck: (context) => const WaterCheckDataScreen(),
         Routes.complaint: (context) => const ComplaintScreen(),
         Routes.complaintHistory: (context) => const ComplaintHistoryScreen(),
-        Routes.complaintSetComplete: (context) => const ComplaintSetCompleteScreen(),
+        Routes.complaintSetComplete: (context) =>
+            const ComplaintSetCompleteScreen(),
         Routes.complaintCreateReport: (context) =>
             const CreateComplaintReportScreen(),
         Routes.panic: (context) => const PanicScreen(),

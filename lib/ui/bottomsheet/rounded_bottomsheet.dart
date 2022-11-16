@@ -2,7 +2,6 @@ import 'package:amirta_mobile/my_material.dart';
 
 extension CustomBottomSheet on BuildContext {
   Future<T?> showScrollableBottomSheet<T>({required ScrollableWidgetBuilder builder}) {
-    final brightnessLight = Theme.of(this).brightness == Brightness.light;
     final height = MediaQuery.of(this).size.height;
     final top = MediaQuery.of(this).viewPadding.top;
     final fullRatio = ((height - top) - (height / 8)) / height;

@@ -150,34 +150,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                     padding: const EdgeInsets.all(spaceMedium),
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'txt_input_air'.tr(),
-                                    style: context.styleHeadline4,
-                                  ),
-                                  Text(
-                                    'txt_input_air_desc'.tr(),
-                                    style: context.styleBody1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(spaceMedium),
-                              child: Image.asset(
-                                imageRes('ic_air_bg.png'),
-                                color: egyptian.withOpacity(0.3),
-                                width: imgSizeMedium,
-                                height: imgSizeMedium,
-                              ),
-                            ),
-                          ],
-                        ),
+                        const WaterFormHeader(),
                         const SizedBox(
                           height: spaceNormal,
                         ),
@@ -208,34 +181,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                   padding: const EdgeInsets.all(spaceMedium),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'txt_input_air'.tr(),
-                                  style: context.styleHeadline4,
-                                ),
-                                Text(
-                                  'txt_input_air_desc'.tr(),
-                                  style: context.styleBody1,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(spaceMedium),
-                            child: Image.asset(
-                              imageRes('ic_air_bg.png'),
-                              color: egyptian.withOpacity(0.3),
-                              width: imgSizeMedium,
-                              height: imgSizeMedium,
-                            ),
-                          ),
-                        ],
-                      ),
+                      const WaterFormHeader(),
                       const SizedBox(
                         height: spaceNormal,
                       ),
@@ -344,9 +290,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               blokController,
                               label: 'txt_blok'.tr() + ' *',
                               readOnly: true,
-                              suffix: const Icon(
+                              suffix: Icon(
                                 Icons.keyboard_arrow_down,
-                                color: egyptian,
+                                color: context.isDark ? borderColor : egyptian,
                               ),
                               suffixConstraints: const BoxConstraints(
                                 minHeight: 20,
@@ -385,9 +331,9 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               lantaiController,
                               label: 'txt_lantai'.tr(),
                               readOnly: true,
-                              suffix: const Icon(
+                              suffix: Icon(
                                 Icons.keyboard_arrow_down,
-                                color: egyptian,
+                                color: context.isDark ? borderColor : egyptian,
                               ),
                               suffixConstraints: const BoxConstraints(
                                 minHeight: 20,
@@ -508,6 +454,42 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
           },
         ),
       ),
+    );
+  }
+}
+
+class WaterFormHeader extends StatelessWidget {
+  const WaterFormHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'txt_input_air'.tr(),
+                style: context.styleHeadline4,
+              ),
+              Text(
+                'txt_input_air_desc'.tr(),
+                style: context.styleBody1,
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(spaceMedium),
+          child: Image.asset(
+            imageRes('ic_air_bg.png'),
+            color: context.isDark ? borderColor : egyptian.withOpacity(0.3),
+            width: imgSizeMedium,
+            height: imgSizeMedium,
+          ),
+        ),
+      ],
     );
   }
 }

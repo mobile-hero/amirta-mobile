@@ -5,11 +5,13 @@ const black = Colors.black;
 const transparent = Colors.transparent;
 
 const egyptian = Color(0xFF3736A5);
+const egyptianDark = Color(0xFF29297C);
 const egyptian2 = Color(0xFF2A2971);
 const waterfall = Color(0xFF81D6C6);
 const waterfallDark = Color(0xFF69BAAA);
 const forest = Color(0xFF48A368);
 const grease = Color(0xFF393858);
+const greaseDark = Color(0xFF2A2940);
 const scarlet = Color(0xFFE35A5A);
 const scarletDark = Color(0xFFC14D4C);
 const carrot = Color(0xFFFF8F6C);
