@@ -39,20 +39,20 @@ class RepositoryConfig {
     interceptors.clear();
     interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       if (token != null) {
-        options.headers["sessid"] = "$token";
+        options.headers['sessid'] = '$token';
       }
       if (pid != null) {
-        options.headers["pid"] = pid;
+        options.headers['pid'] = pid;
       }
-      options.headers["version"] = version;
+      options.headers['version'] = version;
       handler.next(options);
     }));
     interceptors.add(logInterceptor);
   }
 
   static RepositoryConfig staging() =>
-      RepositoryConfig("https://amirtadev-sirukim.jakarta.go.id");
+      RepositoryConfig('https://amirtadev-sirukim.jakarta.go.id');
 
   static RepositoryConfig production() =>
-      RepositoryConfig("https://amirta-sirukim.jakarta.go.id");
+      RepositoryConfig('https://amirta-sirukim.jakarta.go.id');
 }

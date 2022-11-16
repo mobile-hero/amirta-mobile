@@ -7,7 +7,7 @@ class FcmRepositoryImpl extends FcmRepository {
 
   @override
   Future<dynamic> registerFcmId(String fcmId) async {
-    final response = await post("/fcm", {"fcmregid": fcmId});
+    final response = await post('/fcm', {'fcmregid': fcmId});
     return response;
   }
 }

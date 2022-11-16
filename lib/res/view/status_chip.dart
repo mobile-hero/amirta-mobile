@@ -15,8 +15,8 @@ class StatusChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       label: Text(done
-          ? (doneText ?? "txt_complete_input".tr())
-          : (notDoneText ?? "txt_incomplete_input".tr())),
+          ? (doneText ?? 'txt_complete_input'.tr())
+          : (notDoneText ?? 'txt_incomplete_input'.tr())),
       labelStyle: context.styleCaption.copyWith(
         color: done ? white : grease,
       ),

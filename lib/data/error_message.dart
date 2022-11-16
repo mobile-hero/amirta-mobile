@@ -6,22 +6,22 @@ class ErrorMessage extends Equatable {
   final bool shouldRelogin;
   final String errorCode;
 
-  static String keyMessage = "message";
-  static String keyEmail = "email";
-  static String keyPhone = "phone";
-  static String keyPassword = "password";
-  static String keyConfPassword = "conf_password";
-  static String keyFirstName = "first_name";
-  static String keyLastName = "last_name";
-  static String keyPromoCode = "promo_code";
-  static String keyCarType = "car_type";
-  static String defaultMessage = "Terjadi kesalahan. Silakan kontak admin";
+  static String keyMessage = 'message';
+  static String keyEmail = 'email';
+  static String keyPhone = 'phone';
+  static String keyPassword = 'password';
+  static String keyConfPassword = 'conf_password';
+  static String keyFirstName = 'first_name';
+  static String keyLastName = 'last_name';
+  static String keyPromoCode = 'promo_code';
+  static String keyCarType = 'car_type';
+  static String defaultMessage = 'Terjadi kesalahan. Silakan kontak admin';
   static Map<String, String> defaultMessages = {keyMessage: defaultMessage};
 
   const ErrorMessage({
     this.response,
     this.messages,
-    this.errorCode = "-",
+    this.errorCode = '-',
     this.shouldRelogin = false,
   });
 

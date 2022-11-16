@@ -28,9 +28,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           loginType: 0,
           userid: event.nrk,
           passwd: event.password,
-          emailAddress: "",
-          loginId: "",
-          name: "",
+          emailAddress: '',
+          loginId: '',
+          name: '',
         ));
         await appProvider.setUser(response.data);
         yield LoginSuccess();

@@ -84,8 +84,8 @@ class _LantaiBottomSheetState extends State<LantaiBottomSheet> {
                   ),
                   title: Text(
                     item == -1
-                        ? "txt_all_floor".tr()
-                        : "txt_floor_num".tr(args: [item.toString()]),
+                        ? 'txt_all_floor'.tr()
+                        : 'txt_floor_num'.tr(args: [item.toString()]),
                     style: context.styleBody1,
                   ),
                   onTap: () {

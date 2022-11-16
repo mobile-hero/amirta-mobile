@@ -37,7 +37,7 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                       Navigator.pop(context, true);
                     }
                   },
-                  "btn_take_action".tr(),
+                  'btn_take_action'.tr(),
                 ),
               ),
               const SizedBox(
@@ -56,7 +56,7 @@ class ComplaintDetailBottomSheet extends StatelessWidget {
                       Navigator.pop(context, false);
                     }
                   },
-                  "btn_reject".tr(),
+                  'btn_reject'.tr(),
                 ),
               ),
             ],

@@ -57,7 +57,7 @@ class Pengaduan {
   final String? operatorName;
   final String? operatorAcceptedDtime;
   final String? operatorExaminationDtime;
-  @JsonKey(name: "fileList")
+  @JsonKey(name: 'fileList')
   final List<PengaduanFile>? fileList;
 
   factory Pengaduan.fromJson(Map<String, dynamic> json) =>
@@ -66,15 +66,15 @@ class Pengaduan {
   Map<String, dynamic> toJson() => _$PengaduanToJson(this);
 
   String get receivedDtimeFormatted {
-    return DateFormat("dd-MM-y").format(receivedDtime);
+    return DateFormat('dd-MM-y').format(receivedDtime);
   }
   
   String get receivedDtimeHourOnly {
-    return DateFormat("HH:mm:ss").format(receivedDtime);
+    return DateFormat('HH:mm:ss').format(receivedDtime);
   }
   
   String get receivedDtimeHomeFormatted {
-    return DateFormat("dd MMMM y | HH:mm", "id").format(receivedDtime);
+    return DateFormat('dd MMMM y | HH:mm', 'id').format(receivedDtime);
   }
 }
 

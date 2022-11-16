@@ -70,7 +70,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
                 ),
                 LabeledInputField(
                   emailController,
-                  label: "txt_email_address".tr(),
+                  label: 'txt_email_address'.tr(),
                   inputType: TextInputType.emailAddress,
                   onChanged: (value) {
                     setState(() {});

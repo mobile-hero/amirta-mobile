@@ -48,7 +48,7 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
                     width: spaceTiny,
                   ),
                   Text(
-                    "txt_complaint_rejected".tr(),
+                    'txt_complaint_rejected'.tr(),
                     style: context.styleBody1.copyWith(
                       fontWeight: FontWeight.w600,
                       color: scarlet,
@@ -62,8 +62,8 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
             height: spaceMedium,
           ),
           TitleValueBox(
-            title: "txt_rejection_note".tr(),
-            value: pengaduan.operatorNotes ?? "-",
+            title: 'txt_rejection_note'.tr(),
+            value: pengaduan.operatorNotes ?? '-',
           ),
           const SizedBox(
             height: spaceBig,
@@ -72,7 +72,7 @@ class ComplaintRejectedBottomSheet extends StatelessWidget {
             () {
               Navigator.pop(context);
             },
-            "btn_close".tr(),
+            'btn_close'.tr(),
           ),
         ],
       ),

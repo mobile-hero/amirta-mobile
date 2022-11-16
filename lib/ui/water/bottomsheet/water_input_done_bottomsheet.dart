@@ -43,7 +43,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
   void initState() {
     isConditionGood = widget.meterStatus == 0;
     numberController.text = widget.lastMeterValue?.toStringAsFixed(0) ?? '-';
-    noteController.text = "txt_periode_recorded"
+    noteController.text = 'txt_periode_recorded'
         .tr(args: [widget.month.toString(), widget.year.toString()]);
     super.initState();
   }
@@ -89,14 +89,14 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
           if (state is WaterAddReportSuccess) {
             context.showCustomToast(
               type: CustomToastType.success,
-              message: "txt_data_saved".tr(),
+              message: 'txt_data_saved'.tr(),
             );
             Navigator.pop(context);
           }
           if (state is WaterAddReportSuccessLocal) {
             context.showCustomToast(
               type: CustomToastType.success,
-              message: "txt_data_saved_local".tr(),
+              message: 'txt_data_saved_local'.tr(),
             );
             Navigator.pop(context);
           }
@@ -128,7 +128,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                       onChanged: (value) {
                         setState(() {
                           isConditionGood = value;
-                          numberController.text = "";
+                          numberController.text = '';
                         });
                       },
                       activeColor: waterfall,
@@ -143,7 +143,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                   width: double.infinity,
                   child: TitleValueBox(
                     title: 'txt_number_water_meter'.tr(),
-                    value: widget.lastMeterValue?.toStringAsFixed(0) ?? "",
+                    value: widget.lastMeterValue?.toStringAsFixed(0) ?? '',
                   ),
                 ),
                 const SizedBox(
@@ -155,7 +155,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                     Expanded(
                       child: TitleValueBox(
                         title: 'txt_name'.tr(),
-                        value: widget.rusunUnit.residentName ?? "-",
+                        value: widget.rusunUnit.residentName ?? '-',
                       ),
                     ),
                     Expanded(
@@ -273,7 +273,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                                         0,
                                 notes: isConditionGood
                                     ? noteController.text.trim()
-                                    : "",
+                                    : '',
                                 statusNote: isConditionGood
                                     ? null
                                     : noteController.text.trim(),
@@ -299,7 +299,7 @@ class _WaterInputDoneBottomSheetState extends State<WaterInputDoneBottomSheet> {
                                         0,
                                 notes: isConditionGood
                                     ? noteController.text.trim()
-                                    : "",
+                                    : '',
                                 statusNote: isConditionGood
                                     ? null
                                     : noteController.text.trim(),

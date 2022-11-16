@@ -50,7 +50,7 @@ class PanicRejectedBottomSheet extends StatelessWidget {
                     width: spaceTiny,
                   ),
                   Text(
-                    "txt_panic_rejected".tr(),
+                    'txt_panic_rejected'.tr(),
                     style: context.styleBody1.copyWith(
                       fontWeight: FontWeight.w600,
                       color: scarlet,
@@ -64,8 +64,8 @@ class PanicRejectedBottomSheet extends StatelessWidget {
             height: spaceMedium,
           ),
           TitleValueBox(
-            title: "txt_panic_rejection_note".tr(),
-            value: pengaduan.operatorNotes ?? "-",
+            title: 'txt_panic_rejection_note'.tr(),
+            value: pengaduan.operatorNotes ?? '-',
           ),
           const SizedBox(
             height: spaceHuge,
@@ -74,7 +74,7 @@ class PanicRejectedBottomSheet extends StatelessWidget {
             () {
               Navigator.pop(context);
             },
-            "btn_close".tr(),
+            'btn_close'.tr(),
           ),
         ],
       ),

@@ -98,7 +98,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                         return CommonPanicHistoryView(
                           pagingController: bloc.pagingController,
                           type: PanicCustomerItemType.neutral,
-                          emptyMessage: "txt_no_panic_in_process".tr(),
+                          emptyMessage: 'txt_no_panic_in_process'.tr(),
                           onTap: (value) async {
                             final result = await context
                                 .showScrollableBottomSheet<Pengaduan>(
@@ -118,7 +118,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
 
                                 context.showCustomToast(
                                   type: CustomToastType.success,
-                                  message: "txt_panic_completed".tr(),
+                                  message: 'txt_panic_completed'.tr(),
                                 );
                               }
                             }
@@ -138,7 +138,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                         return CommonPanicHistoryView(
                           pagingController: bloc.pagingController,
                           type: PanicCustomerItemType.rejected,
-                          emptyMessage: "txt_no_panic_rejected".tr(),
+                          emptyMessage: 'txt_no_panic_rejected'.tr(),
                           onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(
@@ -166,7 +166,7 @@ class _PanicHistoryScreenState extends State<PanicHistoryScreen> {
                         return CommonPanicHistoryView(
                           pagingController: bloc.pagingController,
                           type: PanicCustomerItemType.completed,
-                          emptyMessage: "txt_no_panic_completed".tr(),
+                          emptyMessage: 'txt_no_panic_completed'.tr(),
                           onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(

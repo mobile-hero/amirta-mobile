@@ -76,11 +76,11 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "txt_welcome".tr(),
+                          'txt_welcome'.tr(),
                           style: context.styleHeadline5,
                         ),
                         Text(
-                          "txt_login_nrk".tr(),
+                          'txt_login_nrk'.tr(),
                           style: context.styleBody1,
                         ),
                         const SizedBox(
@@ -88,11 +88,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         LabeledInputField(
                           nrkController,
-                          label: "txt_nrk".tr(),
+                          label: 'txt_nrk'.tr(),
                         ),
                         LabeledInputField(
                           passwordController,
-                          label: "txt_password".tr(),
+                          label: 'txt_password'.tr(),
                           isPassword: !passwordVisible,
                           suffix: InkWell(
                             child: Icon(
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                   passwordController.text,
                                 ));
                           },
-                          "btn_submit".tr(),
+                          'btn_submit'.tr(),
                           isLoading: state is LoginLoading,
                         ),
                         const SizedBox(
@@ -132,10 +132,10 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: "txt_forgot_password_1".tr(),
+                                  text: 'txt_forgot_password_1'.tr(),
                                 ),
                                 TextSpan(
-                                  text: "txt_forgot_password_2".tr(),
+                                  text: 'txt_forgot_password_2'.tr(),
                                   style: const TextStyle(
                                     color: egyptian,
                                     fontWeight: FontWeight.bold,

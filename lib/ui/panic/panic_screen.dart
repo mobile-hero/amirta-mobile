@@ -67,12 +67,12 @@ class _PanicScreenState extends State<PanicScreen> {
                           if (result) {
                             context.showCustomToast(
                               type: CustomToastType.success,
-                              message: "txt_panic_received".tr(),
+                              message: 'txt_panic_received'.tr(),
                             );
                           } else {
                             context.showCustomToast(
                               type: CustomToastType.error,
-                              message: "txt_panic_rejected".tr(),
+                              message: 'txt_panic_rejected'.tr(),
                             );
                           }
                           bloc.pagingController.refresh();
@@ -96,7 +96,7 @@ class _PanicScreenState extends State<PanicScreen> {
                       padding: const EdgeInsets.all(spaceNormal),
                       child: Center(
                         child: Text(
-                          "txt_no_new_panic".tr(),
+                          'txt_no_new_panic'.tr(),
                           style: context.styleCaption,
                         ),
                       ),

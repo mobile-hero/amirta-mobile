@@ -67,7 +67,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
           final bloc = context.read<RusunUnitBloc>();
           final pagingController = bloc.pagingController;
           final values = bloc.values;
-          print("items : $values");
+          print('items : $values');
           return NestedScrollView(
             headerSliverBuilder: (context, isScrolled) {
               return [
@@ -108,7 +108,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                       Expanded(
                                         child: LabeledInputField(
                                           monthController,
-                                          label: "txt_bulan".tr(),
+                                          label: 'txt_bulan'.tr(),
                                           padding: EdgeInsets.zero,
                                           readOnly: true,
                                           onTap: () async {
@@ -138,7 +138,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                       Expanded(
                                         child: LabeledInputField(
                                           yearController,
-                                          label: "txt_tahun".tr(),
+                                          label: 'txt_tahun'.tr(),
                                           padding: EdgeInsets.zero,
                                           readOnly: true,
                                           onTap: () async {
@@ -171,7 +171,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                         flex: 3,
                                         child: LabeledInputField(
                                           rusunController,
-                                          label: "txt_rusun".tr(),
+                                          label: 'txt_rusun'.tr(),
                                           padding: EdgeInsets.zero,
                                           readOnly: true,
                                           onTap: () async {
@@ -191,7 +191,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                                     result.name;
                                                 selectedRusun = result;
 
-                                                blokController.text = "";
+                                                blokController.text = '';
                                                 selectedBlok = null;
                                               });
                                               print(result.toJson());
@@ -206,7 +206,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                         flex: 1,
                                         child: LabeledInputField(
                                           blokController,
-                                          label: "txt_blok".tr(),
+                                          label: 'txt_blok'.tr(),
                                           padding: EdgeInsets.zero,
                                           readOnly: true,
                                           suffix: const Icon(
@@ -291,8 +291,8 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                                         Text(
                                           selectedLantai == -1 ||
                                                   selectedLantai == null
-                                              ? "txt_all_floor".tr()
-                                              : "txt_floor_num".tr(args: [
+                                              ? 'txt_all_floor'.tr()
+                                              : 'txt_floor_num'.tr(args: [
                                                   selectedLantai.toString()
                                                 ]),
                                           style: context.styleCaption,
@@ -350,7 +350,7 @@ class _WaterCheckDataScreenState extends State<WaterCheckDataScreen> {
                   try {
                     inputDone = bloc.local && values.isNotEmpty
                         ? values.firstWhere((e) {
-                            print("values: ${e.unitId}; list: ${item.id}");
+                            print('values: ${e.unitId}; list: ${item.id}');
                             return e.unitId == item.id;
                           }).inputDone
                         : item.inputDone;

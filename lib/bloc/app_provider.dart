@@ -35,7 +35,7 @@ class AppProvider {
     dio.interceptors.addAll(repositoryConfig.interceptors);
   }
 
-  String _version = "version";
+  String _version = 'version';
 
   String get version => _version;
 

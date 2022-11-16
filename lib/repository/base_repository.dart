@@ -88,12 +88,12 @@ abstract class BaseRepository {
     if (error is DioError) {
       try {
         final data = SimpleResponse.fromJson(error.response!.data);
-        if (data.responsecode == "01" &&
-            data.responsemessage == "Session Expired") {
+        if (data.responsecode == '01' &&
+            data.responsemessage == 'Session Expired') {
           return Future.error(const ErrorMessage(
             messages: {},
             shouldRelogin: true,
-            errorCode: "01",
+            errorCode: '01',
           ));
         } else {
           return _handleOtherErrorCodes(data);
@@ -103,13 +103,13 @@ abstract class BaseRepository {
 
     try {
       final data = SimpleResponse.fromJson(error);
-      if (data.responsecode == "01" &&
-          data.responsemessage == "Session Expired") {
+      if (data.responsecode == '01' &&
+          data.responsemessage == 'Session Expired') {
         print (data.toJson());
         return Future.error(const ErrorMessage(
           messages: {},
           shouldRelogin: true,
-          errorCode: "01",
+          errorCode: '01',
         ));
       } else {
         return _handleOtherErrorCodes(data);

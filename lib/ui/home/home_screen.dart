@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final dateTime = DateTime.now();
 
-  final dateFormat = DateFormat("MMMM y", "id");
+  final dateFormat = DateFormat('MMMM y', 'id');
 
   @override
   Widget build(BuildContext context) {
@@ -101,14 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  user?.name ?? "-",
+                                  user?.name ?? '-',
                                   style: context.styleBody1.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: white,
                                   ),
                                 ),
                                 Text(
-                                  user?.userId ?? "-",
+                                  user?.userId ?? '-',
                                   style: context.styleBody1.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: white.withOpacity(0.5),
@@ -262,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         return Expanded(
                           child: Text(
-                            "Tenang!\nKeadaan aman",
+                            'Tenang!\nKeadaan aman',
                             style: context.styleCaption,
                           ),
                         );
@@ -381,7 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         return const Center(
-          child: Text("Gagal Mengambil Data Dashboard"),
+          child: Text('Gagal Mengambil Data Dashboard'),
         );
       },
     );

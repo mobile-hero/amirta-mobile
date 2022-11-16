@@ -41,7 +41,7 @@ class PanicDetailBottomSheet extends StatelessWidget {
                       Navigator.pop(context, true);
                     }
                   },
-                  "btn_ready_action".tr(),
+                  'btn_ready_action'.tr(),
                 ),
               ),
               const SizedBox(
@@ -60,7 +60,7 @@ class PanicDetailBottomSheet extends StatelessWidget {
                       Navigator.pop(context, false);
                     }
                   },
-                  "btn_out_of_reach".tr(),
+                  'btn_out_of_reach'.tr(),
                 ),
               ),
             ],

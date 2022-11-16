@@ -92,7 +92,7 @@ class _PanicRejectDialogState extends State<PanicRejectDialog> {
                                   ),
                                 );
                           },
-                          "btn_confirm".tr(),
+                          'btn_confirm'.tr(),
                           isEnabled: noteController.text.isNotEmpty,
                         ),
                       ),
@@ -104,7 +104,7 @@ class _PanicRejectDialogState extends State<PanicRejectDialog> {
                           () {
                             Navigator.pop(context);
                           },
-                          "btn_cancel".tr(),
+                          'btn_cancel'.tr(),
                         ),
                       ),
                     ],

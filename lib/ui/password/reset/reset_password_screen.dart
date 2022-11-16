@@ -56,7 +56,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
             LabeledInputField(
               passNewController,
-              label: "hint_new_password".tr(),
+              label: 'hint_new_password'.tr(),
               isPassword: true,
               suffix: InkWell(
                 child: Icon(
@@ -80,7 +80,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
             LabeledInputField(
               passConfirmController,
-              label: "hint_new_password_confirm".tr(),
+              label: 'hint_new_password_confirm'.tr(),
               isPassword: true,
               onChanged: (value) {
                 setState(() {});

@@ -54,7 +54,7 @@ class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "txt_receive_panic".tr(),
+                    'txt_receive_panic'.tr(),
                     style: context.styleBody1,
                   ),
                   // Align(
@@ -96,7 +96,7 @@ class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
                                     ),
                                   );
                             },
-                            "btn_confirm".tr(),
+                            'btn_confirm'.tr(),
                           ),
                         ),
                         const SizedBox(
@@ -107,7 +107,7 @@ class _PanicAcceptDialogState extends State<PanicAcceptDialog> {
                             () {
                               Navigator.pop(context);
                             },
-                            "btn_cancel".tr(),
+                            'btn_cancel'.tr(),
                           ),
                         ),
                       ],

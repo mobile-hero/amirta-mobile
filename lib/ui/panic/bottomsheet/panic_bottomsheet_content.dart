@@ -132,7 +132,7 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
           height: 250,
           child: Builder(builder: (context) {
             final latlng =
-                widget.pengaduan.latlng!.split(",").map((e) => double.parse(e));
+                widget.pengaduan.latlng!.split(',').map((e) => double.parse(e));
             final position = LatLng(latlng.first, latlng.last);
 
             return GoogleMap(
@@ -168,11 +168,11 @@ class _PanicBottomSheetContentState extends State<PanicBottomSheetContent> {
             onTap: () async {
               final availableMaps = await MapLauncher.installedMaps;
               final latlng = widget.pengaduan.latlng!
-                  .split(",")
+                  .split(',')
                   .map((e) => double.parse(e));
               await availableMaps.first.showMarker(
                 coords: Coords(latlng.first, latlng.last),
-                title: "txt_accident_location".tr(),
+                title: 'txt_accident_location'.tr(),
                 zoom: 21,
               );
             },

@@ -82,7 +82,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 LabeledInputField(
                   passController,
-                  label: "hint_current_password".tr(),
+                  label: 'hint_current_password'.tr(),
                   isPassword: !oldPasswordVisible,
                   suffix: InkWell(
                     child: Icon(
@@ -103,7 +103,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 LabeledInputField(
                   passNewController,
-                  label: "hint_new_password".tr(),
+                  label: 'hint_new_password'.tr(),
                   isPassword: !passwordVisible,
                   suffix: InkWell(
                     child: Icon(
@@ -127,7 +127,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
                 LabeledInputField(
                   passConfirmController,
-                  label: "hint_new_password_confirm".tr(),
+                  label: 'hint_new_password_confirm'.tr(),
                   isPassword: true,
                   onChanged: (value) {
                     setState(() {});
@@ -159,10 +159,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                       children: [
                         TextSpan(
-                          text: "txt_forgot_password_1".tr(),
+                          text: 'txt_forgot_password_1'.tr(),
                         ),
                         TextSpan(
-                          text: "txt_forgot_password_2".tr(),
+                          text: 'txt_forgot_password_2'.tr(),
                           style: const TextStyle(
                             color: egyptian,
                             fontWeight: FontWeight.bold,

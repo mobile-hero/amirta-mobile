@@ -127,7 +127,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                 height: spaceNormal,
               ),
               Text(
-                "txt_attachment".tr(),
+                'txt_attachment'.tr(),
                 style: context.styleCaption,
               ),
               const SizedBox(
@@ -170,7 +170,7 @@ class ComplaintBottomSheetContent extends StatelessWidget {
                 height: spaceTiny,
               ),
               Text(
-                "txt_tap_enlarge".tr(),
+                'txt_tap_enlarge'.tr(),
                 style: context.styleCaption.copyWith(
                   color: accentColor,
                 ),

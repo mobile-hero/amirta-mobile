@@ -10,8 +10,8 @@ class UploadImageRepositoryImpl extends UploadImageRepository {
 
   @override
   Future<ProfileResponse> uploadPhotoProfile(String imageBase64) async {
-    final body = {"img": imageBase64};
-    final response = await post("/upload_propic", body);
+    final body = {'img': imageBase64};
+    final response = await post('/upload_propic', body);
     return isResult(response)
         ? ProfileResponse.fromJson(response)
         : response;
@@ -19,8 +19,8 @@ class UploadImageRepositoryImpl extends UploadImageRepository {
 
   @override
   Future<UploadImageResponse> uploadImageFile(String imageBase64) async {
-    final body = {"img": imageBase64};
-    final response = await post("/index.php/upload_image", body);
+    final body = {'img': imageBase64};
+    final response = await post('/index.php/upload_image', body);
     return isResult(response)
         ? UploadImageResponse.fromJson(response)
         : response;

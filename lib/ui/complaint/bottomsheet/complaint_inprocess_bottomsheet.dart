@@ -51,7 +51,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
                     width: spaceTiny,
                   ),
                   Text(
-                    "txt_complaint_in_process".tr(),
+                    'txt_complaint_in_process'.tr(),
                     style: context.styleBody1.copyWith(
                       fontWeight: FontWeight.w600,
                       color: carrot,
@@ -77,7 +77,7 @@ class ComplaintInProcessBottomSheet extends StatelessWidget {
             elevation: 0,
             outerColor: egyptian2,
             innerColor: white,
-            text: "txt_swipe_to_complete".tr(),
+            text: 'txt_swipe_to_complete'.tr(),
             textStyle: context.styleBody1.copyWith(
               fontWeight: FontWeight.bold,
               color: white,

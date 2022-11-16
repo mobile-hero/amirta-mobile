@@ -12,7 +12,7 @@ class AccountLocalRepositoryImpl extends AccountLocalRepository {
     return prefs.deleteAll();
   }
   
-  final _keyUser = "user";
+  final _keyUser = 'user';
 
   @override
   Future<Profile?> getUser() async {

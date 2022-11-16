@@ -38,7 +38,7 @@ class PhotoProfileBloc extends Bloc<PhotoProfileEvent, PhotoProfileState> {
 
         final base64 = base64Encode(compressed!);
         final mimeType = lookupMimeType(xfile.path);
-        final uriData = "data:$mimeType;base64," + base64;
+        final uriData = 'data:$mimeType;base64,' + base64;
         final response =
             await uploadImageRepository.uploadPhotoProfile(uriData);
         Profile user = appProvider.user!;

@@ -54,7 +54,7 @@ class _ComplaintAcceptDialogState extends State<ComplaintAcceptDialog> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Terima pengaduan?",
+                    'Terima pengaduan?',
                     style: context.styleBody1,
                   ),
                   // Align(
@@ -99,7 +99,7 @@ class _ComplaintAcceptDialogState extends State<ComplaintAcceptDialog> {
                                     ),
                                   );
                             },
-                            "btn_confirm".tr(),
+                            'btn_confirm'.tr(),
                           ),
                         ),
                         const SizedBox(
@@ -110,7 +110,7 @@ class _ComplaintAcceptDialogState extends State<ComplaintAcceptDialog> {
                             () {
                               Navigator.pop(context);
                             },
-                            "btn_cancel".tr(),
+                            'btn_cancel'.tr(),
                           ),
                         ),
                       ],

@@ -66,7 +66,7 @@ class _CreatePanicReportScreenState
                 children: [
                   Center(
                     child: Text(
-                      "txt_create_panic_desc".tr(),
+                      'txt_create_panic_desc'.tr(),
                       style: context.styleCaption,
                     ),
                   ),

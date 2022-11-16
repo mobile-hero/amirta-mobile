@@ -32,10 +32,10 @@ class PanicSetCompleteScreen extends StatelessWidget {
                   style: context.styleBody1,
                   children: [
                     TextSpan(
-                      text: "txt_set_panic_complete_1".tr(),
+                      text: 'txt_set_panic_complete_1'.tr(),
                     ),
                     TextSpan(
-                      text: "txt_set_panic_complete_2".tr(),
+                      text: 'txt_set_panic_complete_2'.tr(),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,7 +55,7 @@ class PanicSetCompleteScreen extends StatelessWidget {
                   );
                   Navigator.pop(context, response);
                 },
-                "btn_next".tr(),
+                'btn_next'.tr(),
               ),
             ],
           ),

@@ -1,5 +1,4 @@
 import 'package:amirta_mobile/my_material.dart';
-import 'package:amirta_mobile/res/resources.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatelessWidget {

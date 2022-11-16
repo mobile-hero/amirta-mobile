@@ -61,7 +61,7 @@ class _PanicSetCompleteDialogState
                     () {
                       Navigator.pop(context, true);
                     },
-                    "btn_yes".tr(),
+                    'btn_yes'.tr(),
                   ),
                 ),
                 const SizedBox(
@@ -72,7 +72,7 @@ class _PanicSetCompleteDialogState
                     () {
                       Navigator.pop(context);
                     },
-                    "btn_cancel".tr(),
+                    'btn_cancel'.tr(),
                   ),
                 ),
               ],

@@ -98,7 +98,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                         return CommonComplaintHistoryView(
                           pagingController: bloc.pagingController,
                           type: ComplaintCustomerItemType.neutral,
-                          emptyMessage: "txt_no_complaint_in_process".tr(),
+                          emptyMessage: 'txt_no_complaint_in_process'.tr(),
                           onTap: (value) async {
                             final result = await context
                                 .showScrollableBottomSheet<Pengaduan>(
@@ -118,7 +118,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
 
                                 context.showCustomToast(
                                   type: CustomToastType.success,
-                                  message: "txt_complaint_completed".tr(),
+                                  message: 'txt_complaint_completed'.tr(),
                                 );
                               }
                             }
@@ -138,7 +138,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                         return CommonComplaintHistoryView(
                           pagingController: bloc.pagingController,
                           type: ComplaintCustomerItemType.rejected,
-                          emptyMessage: "txt_no_complaint_rejected".tr(),
+                          emptyMessage: 'txt_no_complaint_rejected'.tr(),
                           onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(
@@ -166,7 +166,7 @@ class _ComplaintHistoryScreenState extends State<ComplaintHistoryScreen> {
                         return CommonComplaintHistoryView(
                           pagingController: bloc.pagingController,
                           type: ComplaintCustomerItemType.completed,
-                          emptyMessage: "txt_no_complaint_completed".tr(),
+                          emptyMessage: 'txt_no_complaint_completed'.tr(),
                           onTap: (value) async {
                             final result =
                                 await context.showScrollableBottomSheet<int>(

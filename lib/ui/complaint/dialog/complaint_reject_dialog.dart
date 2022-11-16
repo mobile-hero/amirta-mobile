@@ -92,7 +92,7 @@ class _ComplaintRejectDialogState extends State<ComplaintRejectDialog> {
                                   ),
                                 );
                           },
-                          "btn_confirm".tr(),
+                          'btn_confirm'.tr(),
                           isEnabled: noteController.text.isNotEmpty,
                         ),
                       ),
@@ -104,7 +104,7 @@ class _ComplaintRejectDialogState extends State<ComplaintRejectDialog> {
                           () {
                             Navigator.pop(context);
                           },
-                          "btn_cancel".tr(),
+                          'btn_cancel'.tr(),
                         ),
                       ),
                     ],

@@ -60,7 +60,7 @@ class PanicCompletedBottomSheet extends StatelessWidget {
                             width: spaceTiny,
                           ),
                           Text(
-                            "txt_panic_completed".tr(),
+                            'txt_panic_completed'.tr(),
                             style: context.styleBody1.copyWith(
                               fontWeight: FontWeight.w600,
                               color: forest,
@@ -74,14 +74,14 @@ class PanicCompletedBottomSheet extends StatelessWidget {
                     height: spaceMedium,
                   ),
                   TitleValueBox(
-                    title: "txt_report_note".tr(),
-                    value: pengaduan.operatorNotes ?? "-",
+                    title: 'txt_report_note'.tr(),
+                    value: pengaduan.operatorNotes ?? '-',
                   ),
                   const SizedBox(
                     height: spaceNormal,
                   ),
                   Text(
-                    "txt_on_duty_photos".tr(),
+                    'txt_on_duty_photos'.tr(),
                     style: context.styleCaption,
                   ),
                   const SizedBox(
@@ -126,7 +126,7 @@ class PanicCompletedBottomSheet extends StatelessWidget {
                     height: spaceTiny,
                   ),
                   Text(
-                    "txt_tap_enlarge".tr(),
+                    'txt_tap_enlarge'.tr(),
                     style: context.styleCaption.copyWith(
                       color: accentColor,
                     ),
@@ -138,7 +138,7 @@ class PanicCompletedBottomSheet extends StatelessWidget {
                     () {
                       Navigator.pop(context);
                     },
-                    "btn_close".tr(),
+                    'btn_close'.tr(),
                   ),
                 ],
               );

@@ -69,12 +69,12 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                             if (result) {
                               context.showCustomToast(
                                 type: CustomToastType.success,
-                                message: "txt_complaint_handled".tr(),
+                                message: 'txt_complaint_handled'.tr(),
                               );
                             } else {
                               context.showCustomToast(
                                 type: CustomToastType.error,
-                                message: "txt_complaint_rejected".tr(),
+                                message: 'txt_complaint_rejected'.tr(),
                               );
                             }
                             bloc.pagingController.refresh();
@@ -98,7 +98,7 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                         padding: const EdgeInsets.all(spaceNormal),
                         child: Center(
                           child: Text(
-                            "txt_no_new_complaint".tr(),
+                            'txt_no_new_complaint'.tr(),
                             style: context.styleCaption,
                           ),
                         ),

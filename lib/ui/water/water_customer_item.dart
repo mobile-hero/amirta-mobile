@@ -46,14 +46,14 @@ class WaterCustomerItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        customerName ?? "txt_no_resident_found".tr(),
+                        customerName ?? 'txt_no_resident_found'.tr(),
                         style: context.styleBody1.copyWith(
                           fontWeight: FontWeight.bold,
                           color: customerName != null ? grease : orange,
                         ),
                       ),
                       Text(
-                        "$locationName-$number",
+                        '$locationName-$number',
                         style: context.styleCaption,
                       ),
                     ],

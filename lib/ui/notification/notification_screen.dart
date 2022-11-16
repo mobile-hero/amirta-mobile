@@ -25,7 +25,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("title_notification".tr()),
+          title: Text('title_notification'.tr()),
           centerTitle: true,
         ),
         body: OfflineContainer(
@@ -106,7 +106,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   },
                   noItemsFoundIndicatorBuilder: (context) {
                     return Center(
-                      child: Text("txt_notification_empty".tr()),
+                      child: Text('txt_notification_empty'.tr()),
                     );
                   },
                 ),

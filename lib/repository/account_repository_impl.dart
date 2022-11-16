@@ -10,26 +10,26 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @override
   Future<ProfileResponse> login(LoginWrite login) async {
-    final response = await post("/signin", login.toJson());
+    final response = await post('/signin', login.toJson());
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
   @override
   Future<dynamic> logout() async {
-    final response = await post("/signout", {});
+    final response = await post('/signout', {});
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
   @override
   Future<ProfileResponse> getProfile() async {
-    final response = await get("/myprofile");
+    final response = await get('/myprofile');
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
   @override
   Future<SimpleResponse> forgotPassword(String email) async {
-    final body = {"email_address": email};
-    final response = await post("/reset_passwd", body);
+    final body = {'email_address': email};
+    final response = await post('/reset_passwd', body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
 
@@ -38,21 +38,21 @@ class AccountRepositoryImpl extends AccountRepository {
     String oldPassword,
     String newPassword,
   ) async {
-    final body = {"old_passwd": oldPassword, "passwd": newPassword};
-    final response = await post("/change_passwd", body);
+    final body = {'old_passwd': oldPassword, 'passwd': newPassword};
+    final response = await post('/change_passwd', body);
     return (isResult(response)) ? SimpleResponse.fromJson(response) : response;
   }
 
   @override
   Future<ProfileResponse> editProfile(EditProfile edit) async {
-    final response = await post("/setup_account", edit.toJson());
+    final response = await post('/setup_account', edit.toJson());
     return (isResult(response)) ? ProfileResponse.fromJson(response) : response;
   }
 
 
   @override
   Future<UserNotificationResponse> notifications() async {
-    final response = await get("/notification");
+    final response = await get('/notification');
     return (isResult(response))
       ? UserNotificationResponse.fromJson(response)
       : response;
@@ -60,7 +60,7 @@ class AccountRepositoryImpl extends AccountRepository {
 
   @override
   Future<DashboardResponse> dashboard() async {
-    final response = await get("/dashboard");
+    final response = await get('/dashboard');
     return (isResult(response))
         ? DashboardResponse.fromJson(response)
         : response;

@@ -66,7 +66,7 @@ class _CreateComplaintReportScreenState
                 children: [
                   Center(
                     child: Text(
-                      "txt_create_complaint_desc".tr(),
+                      'txt_create_complaint_desc'.tr(),
                       style: context.styleCaption,
                     ),
                   ),

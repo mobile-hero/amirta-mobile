@@ -49,7 +49,7 @@ class ComplaintCreateBloc
 
           final base64 = base64Encode(compressed!);
           final mimeType = lookupMimeType(xfile.path);
-          final uriData = "data:$mimeType;base64," + base64;
+          final uriData = 'data:$mimeType;base64,' + base64;
           final response = await uploadImageRepository.uploadImageFile(uriData);
           uploaded.add(response.data.name);
         } catch (e) {}
@@ -63,7 +63,7 @@ class ComplaintCreateBloc
           images: uploaded,
         ));
       } else {
-        yield ComplaintCreateError("Gagal mengupload gambar");
+        yield ComplaintCreateError('Gagal mengupload gambar');
       }
     } else {
       add(ContinueCreateComplaint(

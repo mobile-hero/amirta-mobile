@@ -203,22 +203,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   LabeledInputField(
                     nrkController,
-                    label: "txt_nrk_number".tr(),
+                    label: 'txt_nrk_number'.tr(),
                     isEnabled: false,
                   ),
                   LabeledInputField(
                     nameController,
-                    label: "txt_name".tr(),
+                    label: 'txt_name'.tr(),
                     isEnabled: false,
                   ),
                   LabeledInputField(
                     emailController,
-                    label: "txt_email".tr(),
+                    label: 'txt_email'.tr(),
                     isEnabled: true,
                   ),
                   LabeledInputField(
                     roleController,
-                    label: "txt_role".tr(),
+                    label: 'txt_role'.tr(),
                     isEnabled: false,
                   ),
                   const SizedBox(
@@ -240,7 +240,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               .add(SaveAccount(phone, emailController.text));
                         }
                       },
-                      "btn_save".tr(),
+                      'btn_save'.tr(),
                       isLoading: state is ProfileLoading,
                     ),
                   ),
@@ -253,7 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         (route) => false,
                       );
                     },
-                    "btn_logout".tr(),
+                    'btn_logout'.tr(),
                     isEnabled: state is! ProfileLoading,
                   ),
                 ],

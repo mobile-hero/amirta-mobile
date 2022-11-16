@@ -107,7 +107,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
             if (state is WaterSyncSuccess) {
               context.showCustomToast(
                 type: CustomToastType.success,
-                message: "txt_data_saved".tr(),
+                message: 'txt_data_saved'.tr(),
               );
             }
             if (state is WaterSyncError) {
@@ -193,7 +193,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                   height: spaceBig,
                                 ),
                                 Text(
-                                  "btn_downloading_data".tr(),
+                                  'btn_downloading_data'.tr(),
                                   style: context.styleHeadline5,
                                 )
                               ],
@@ -245,7 +245,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                             flex: 2,
                             child: LabeledInputField(
                               monthController,
-                              label: "txt_bulan".tr(),
+                              label: 'txt_bulan'.tr(),
                               readOnly: true,
                               onTap: () async {
                                 final result = await context
@@ -272,7 +272,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                             flex: 2,
                             child: LabeledInputField(
                               yearController,
-                              label: "txt_tahun".tr(),
+                              label: 'txt_tahun'.tr(),
                               readOnly: true,
                               onTap: () async {
                                 final result = await context
@@ -311,7 +311,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                       ),
                       LabeledInputField(
                         rusunController,
-                        label: "txt_rusun".tr() + " *",
+                        label: 'txt_rusun'.tr() + ' *',
                         readOnly: true,
                         onTap: () async {
                           final result =
@@ -325,13 +325,13 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                               rusunController.text = result.name;
                               selectedRusun = result;
 
-                              blokController.text = "";
+                              blokController.text = '';
                               selectedBlok = null;
 
-                              lantaiController.text = "";
+                              lantaiController.text = '';
                               selectedLantai = null;
 
-                              numberController.text = "";
+                              numberController.text = '';
                             });
                             print(result.toJson());
                           }
@@ -342,7 +342,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           Expanded(
                             child: LabeledInputField(
                               blokController,
-                              label: "txt_blok".tr() + " *",
+                              label: 'txt_blok'.tr() + ' *',
                               readOnly: true,
                               suffix: const Icon(
                                 Icons.keyboard_arrow_down,
@@ -367,10 +367,10 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                     blokController.text = result.displayName;
                                     selectedBlok = result;
 
-                                    lantaiController.text = "";
+                                    lantaiController.text = '';
                                     selectedLantai = null;
 
-                                    numberController.text = "";
+                                    numberController.text = '';
                                   });
                                   print(result.toJson());
                                 }
@@ -383,7 +383,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           Expanded(
                             child: LabeledInputField(
                               lantaiController,
-                              label: "txt_lantai".tr(),
+                              label: 'txt_lantai'.tr(),
                               readOnly: true,
                               suffix: const Icon(
                                 Icons.keyboard_arrow_down,
@@ -403,12 +403,12 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                                 if (result != null) {
                                   setState(() {
                                     lantaiController.text = result == -1
-                                        ? "txt_all_floor".tr()
-                                        : "txt_floor_num"
+                                        ? 'txt_all_floor'.tr()
+                                        : 'txt_floor_num'
                                             .tr(args: [result.toString()]);
                                     selectedLantai = result;
 
-                                    numberController.text = "";
+                                    numberController.text = '';
                                   });
                                 }
                               },
@@ -420,7 +420,7 @@ class _WaterFormScreenState extends State<WaterFormScreen> {
                           Expanded(
                             child: LabeledInputField(
                               numberController,
-                              label: "txt_nomor".tr(),
+                              label: 'txt_nomor'.tr(),
                             ),
                           ),
                         ],

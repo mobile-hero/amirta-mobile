@@ -39,7 +39,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
   @override
   void initState() {
     isConditionGood = widget.meterStatus == 0;
-    noteController.text = "txt_periode_recorded"
+    noteController.text = 'txt_periode_recorded'
         .tr(args: [widget.month.toString(), widget.year.toString()]);
     super.initState();
   }
@@ -85,14 +85,14 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
           if (state is WaterAddReportSuccess) {
             context.showCustomToast(
               type: CustomToastType.success,
-              message: "txt_data_saved".tr(),
+              message: 'txt_data_saved'.tr(),
             );
             Navigator.pop(context);
           }
           if (state is WaterAddReportSuccessLocal) {
             context.showCustomToast(
               type: CustomToastType.success,
-              message: "txt_data_saved_local".tr(),
+              message: 'txt_data_saved_local'.tr(),
             );
             Navigator.pop(context);
           }
@@ -124,7 +124,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                       onChanged: (value) {
                         setState(() {
                           isConditionGood = value;
-                          numberController.text = "";
+                          numberController.text = '';
                         });
                       },
                       activeColor: waterfall,
@@ -141,7 +141,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                     Expanded(
                       child: TitleValueBox(
                         title: 'txt_name'.tr(),
-                        value: widget.rusunUnit.residentName ?? "-",
+                        value: widget.rusunUnit.residentName ?? '-',
                       ),
                     ),
                     Expanded(
@@ -255,7 +255,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                     double.tryParse(numberController.text) ?? 0,
                                 notes: isConditionGood
                                     ? noteController.text.trim()
-                                    : "",
+                                    : '',
                                 statusNote: isConditionGood
                                     ? null
                                     : noteController.text.trim(),
@@ -280,7 +280,7 @@ class _WaterInputBottomSheetState extends State<WaterInputBottomSheet> {
                                     double.tryParse(numberController.text) ?? 0,
                                 notes: isConditionGood
                                     ? noteController.text.trim()
-                                    : "",
+                                    : '',
                                 statusNote: isConditionGood
                                     ? null
                                     : noteController.text.trim(),
