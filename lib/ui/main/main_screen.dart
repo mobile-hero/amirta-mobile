@@ -30,48 +30,54 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDark;
     return Scaffold(
       body: bodies[bodyPos],
-      bottomNavigationBar: BottomNavigationBarTheme(
-        data: BottomNavigationBarThemeData(
-          backgroundColor: white,
-          type: BottomNavigationBarType.fixed,
-          elevation: 10,
-          showUnselectedLabels: true,
-          selectedItemColor: egyptian,
-          unselectedItemColor: grease.withOpacity(0.7),
-          selectedLabelStyle: context.styleCaption,
-          unselectedLabelStyle: context.styleCaption,
-        ),
-        child: BottomNavigationBar(
-          currentIndex: bodyPos,
-          onTap: (position) {
-            setState(() {
-              bodyPos = position;
-            });
-          },
-          items: [
-            _createNavBarItem(
-              icon: 'ic_navbar_home_outline.png',
-              selectedIcon: 'ic_navbar_home_filled.png',
-              label: 'title_home'.tr(),
-            ),
-            _createNavBarItem(
-              icon: 'ic_navbar_air_outline.png',
-              selectedIcon: 'ic_navbar_air_filled.png',
-              label: 'title_air'.tr(),
-            ),
-            _createNavBarItem(
-              icon: 'ic_navbar_pengaduan_outline.png',
-              selectedIcon: 'ic_navbar_pengaduan_filled.png',
-              label: 'title_pengaduan'.tr(),
-            ),
-            _createNavBarItem(
-              icon: 'ic_navbar_panik_outline.png',
-              selectedIcon: 'ic_navbar_panik_filled.png',
-              label: 'title_panik'.tr(),
-            ),
-          ],
+      bottomNavigationBar: ShadowedContainer(
+        shadowOffset: isDark ? const Offset(0, -2) : Offset.zero,
+        shadowColor: isDark ? borderColor.withOpacity(0.3) : null,
+        child: BottomNavigationBarTheme(
+          data: BottomNavigationBarThemeData(
+            backgroundColor: isDark ? darkBackground : white,
+            type: BottomNavigationBarType.fixed,
+            elevation: 10,
+            showUnselectedLabels: true,
+            selectedItemColor: isDark ? borderColor : egyptian,
+            unselectedItemColor:
+                isDark ? darkerGrey.withOpacity(0.7) : grease.withOpacity(0.7),
+            selectedLabelStyle: context.styleCaption,
+            unselectedLabelStyle: context.styleCaption,
+          ),
+          child: BottomNavigationBar(
+            currentIndex: bodyPos,
+            onTap: (position) {
+              setState(() {
+                bodyPos = position;
+              });
+            },
+            items: [
+              _createNavBarItem(
+                icon: 'ic_navbar_home_outline.png',
+                selectedIcon: 'ic_navbar_home_filled.png',
+                label: 'title_home'.tr(),
+              ),
+              _createNavBarItem(
+                icon: 'ic_navbar_air_outline.png',
+                selectedIcon: 'ic_navbar_air_filled.png',
+                label: 'title_air'.tr(),
+              ),
+              _createNavBarItem(
+                icon: 'ic_navbar_pengaduan_outline.png',
+                selectedIcon: 'ic_navbar_pengaduan_filled.png',
+                label: 'title_pengaduan'.tr(),
+              ),
+              _createNavBarItem(
+                icon: 'ic_navbar_panik_outline.png',
+                selectedIcon: 'ic_navbar_panik_filled.png',
+                label: 'title_panik'.tr(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -87,7 +93,9 @@ class _MainScreenState extends State<MainScreen> {
         padding: const EdgeInsets.only(bottom: 3),
         child: ImageIcon(
           AssetImage(imageRes(icon)),
-          color: grease.withOpacity(0.7),
+          color: context.isDark
+              ? darkerGrey.withOpacity(0.7)
+              : grease.withOpacity(0.7),
           size: 20,
         ),
       ),
