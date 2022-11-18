@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
       body: bodies[bodyPos],
       bottomNavigationBar: ShadowedContainer(
         shadowOffset: isDark ? const Offset(0, -2) : Offset.zero,
-        shadowColor: isDark ? borderColor.withOpacity(0.3) : null,
+        shadowColor: isDark ? borderColor.withOpacity(0.7) : null,
         child: BottomNavigationBarTheme(
           data: BottomNavigationBarThemeData(
             backgroundColor: isDark ? darkBackground : white,

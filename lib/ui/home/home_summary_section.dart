@@ -49,9 +49,7 @@ class HomeSummarySection extends StatelessWidget {
                         if (state is LatestPanicLoading) {
                           return const Expanded(
                             child: Center(
-                              child: CircularProgressIndicator(
-                                color: egyptian,
-                              ),
+                              child: MyProgressIndicator(),
                             ),
                           );
                         }

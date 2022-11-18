@@ -40,7 +40,11 @@ class ShadowedContainer extends StatelessWidget {
     final _backgroundColor = isDark ? darkBackground : backgroundColor;
     final _shadowColor = isDark ? lightGrey : (shadowColor ?? shadowBoxColor);
     final _shadowOffset = isDark ? const Offset(0, 3) : shadowOffset;
-    final _shadowBlur = isDark ? 4.0 : shadowBlur;
+    final _shadowBlur = isDark
+        ? shadowBlur > 4.0
+            ? 4.0
+            : shadowBlur
+        : shadowBlur;
     return Container(
       padding: padding,
       margin: margin,
@@ -51,7 +55,7 @@ class ShadowedContainer extends StatelessWidget {
         borderRadius: borderRadiusObject ?? BorderRadius.circular(borderRadius),
         color: _backgroundColor,
         boxShadow: hideShadow
-            ? []
+            ? null
             : [
                 BoxShadow(
                   color: _shadowColor,

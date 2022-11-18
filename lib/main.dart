@@ -343,7 +343,7 @@ class _MyAppState extends State<MyApp> {
         primaryColor: egyptian,
         backgroundColor: backgroundColor,
         scaffoldBackgroundColor: white,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         appBarTheme: const AppBarTheme(
           backgroundColor: egyptian,
         ),
